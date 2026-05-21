@@ -1,0 +1,269 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 10}
+\def\TypeTitle{Derivatives of Exponential \& Logarithmic Functions \\ Solutions }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{ {\bf \color{ForestGreen}D2} , {\bf \color{ForestGreen}D3} }
+
+\usepackage{preambleDJ}
+
+
+
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vs{.65}
+
+\blue{\bf \em Derivative of the General Exponential Function}
+
+
+\reversemarginpar\marginnote{\fbox{\bf\color{ForestGreen}D3}} 
+{\bf \textcolor{blue}{Mini-lecture.}} \mod The derivative of the general exponential function $f(x)=a^x$, with $a>0$ and $a\neq1$, is very closely related to the derivative of the natural exponential function. To see this relationship, you will need to know:\\
+
+\tasksI{3}{
+\task {\bf Derivative of $e^x$}\\
+$\dfrac{d}{dx}[e^x] = \blue{e^x}$
+
+\task {\bf Inverse Property}\vs{.1}\\
+$e^{\ln(a)} = \blue{a}$ 
+
+\task {\bf Chain Rule}\\
+$\dfrac{d}{dx}[f(g(x))] = \blue{f^{\prime}(g(x))\cdot g^{\prime}(x)}$ 
+}
+\blue{
+\al{
+\frac{d}{dx}\left[a^x \right]&= \frac{d}{dx}\left[\left(e^{\ln(a)}\right)^x \right]\\
+&= \frac{d}{dx}\left[e^{x\ln(a)} \right] \qquad \text{Outer = $f(x)=e^x$.  Inner =$g(x)=x\ln(a)$}\\
+&=\underbrace{e^{x\ln(a)}}_{f^{\prime}(g(x))}\cdot  \underbrace{\ln(a)}_{g^{\prime}(x)}\qquad \text{$f^{\prime}(x)=e^x$.  $g^{\prime}(x)=\ln(a)$}\\
+&=a^x\cdot \ln(a)
+}
+}
+
+{\em Conclusion:}
+\tasksI{2}{
+\task $\dfrac{d}{dx}[a^x] =\blue{a^x \cdot \ln(a)}$
+\task $\dfrac{d}{dx}[e^x] =\blue{e^x \cdot \ln(e)=e^x\cdot 1=e^x}$
+}
+
+~\\\\
+
+\example{\color{ForestGreen}D2} Find $\displaystyle\frac{d}{dy}\left[2^{y^2/7}\right]$.
+
+\sol{
+Outer: $f(y)=2^y \Rightarrow f^{\prime}(y)=2^y\cdot \ln(2)$.  Inner: $g(y)=y^2/7 \Rightarrow g^{\prime}(y)=2y/7$.\\\\
+ $\ds\frac{d}{dy}\left[2^{y^2/7}\right] = 2^{y^2/7}\cdot \ln(2)\cdot \frac{2y}{7}$
+}
+
+\exercise{\color{ForestGreen}D2} Find $h'(t)$ given $h(t)=\left(\displaystyle\frac23\right)^{1-t^2}$, where $t>0$.
+
+\sol{
+Outer: $\ds f(t)=\left(\frac{2}{3}\right)^t \Rightarrow f^{\prime}(t)=\left(\frac{2}{3}\right)^t\cdot \ln(2/3)$.  Inner: $g(t)=1-t^2 \Rightarrow g^{\prime}(t)=-2t$.\\\\
+ $\ds h^{\prime}(t) = \left(\frac{2}{3}\right)^{1-t^2}\cdot \ln(2/3)\cdot (-2t)$
+}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+\exercise{\color{ForestGreen}D2} The half-life formula $\displaystyle N(t) = N_0\left(\frac12\right)^{t/h}$ gives the amount $N(t)$ of a decaying, radioactive quantity at a time $t$ in terms of the initial amount $N_0$ of the radioactive quantity and the half-life $h$ of the decaying quantity. You will need this formula to address the following prompt. You may find a calculator useful when doing so.\\
+
+Many smoke detectors function by using a radioisotope, typically americium-241, to ionize air; an alarm sounds when a difference due to smoke is detected. Thus, the rate at which americium-241 decays is of critical importance in the function of a smoke detector. Given americium-241 has a half-life of approximately $432.2$ years, at what rate does a $10$ gram sample placed in a smoke detector decay $1$ year after the smoke detector is manufactured? Round your answers to 3 decimal places, and include the units of measurement.
+\tasksA{3}{
+\task What are we asked to find?\\
+\blue{
+The rate of decay of a $10$ gram sample of americium-241.\\ $N^{\prime}(t)$ represents this quantity.
+}
+\task At what {\em time} are we asked to find this quantity?\\
+\blue{
+$1$ year after the smoke detector is manufactured, i.e. $t=1$.
+}
+\task What's $N_0?$ \\
+\blue{
+$N_0=10$ grams.
+}
+\task What's $h$?\\
+\blue{
+$h=432.2$
+}
+\task* Put everything together to answer the prompt above.\\
+\blue{
+$\ds N(t)=10\left( \frac{1}{2} \right)^{t/432.2}$\\
+$\ds N^{\prime}(t)=10\left( \frac{1}{2} \right)^{t/432.2}\cdot \ln(1/2)\cdot\frac{1}{432.2}$\\
+$\ds N^{\prime}(1)=10\left( \frac{1}{2} \right)^{1/432.2}\cdot \ln(1/2)\cdot\frac{1}{432.2}\approx -0.016\; g/year$
+}
+}
+
+
+\blue{\bf \em Derivative of the General Logarithmic Function}
+
+
+\reversemarginpar\marginnote{\fbox{\bf\color{ForestGreen}D3}} {\bf \textcolor{blue}{Mini-lecture.}} \mod The derivative of the general logarithmic function $f(x)=\log_a(x)$, with $a>0$ and $a\neq1$, is very closely related to the derivative of the general exponential function. To see this relationship, you will need to know:\\
+
+\tasksI{3}{
+\task {\bf Derivative of $a^x$}\\
+$\dfrac{d}{dx}[a^x] =\blue{a^x\cdot \ln(a)} $
+
+\task {\bf Inverse Property} \vs{.1}\\
+$\ds a^{\log_a(x)} = \blue{x}$
+
+\task {\bf Chain Rule}\\
+$\dfrac{d}{dx}[f(g(x))] = \blue{f^{\prime}(g(x))\cdot g^{\prime}(x)}$ 
+}
+\sol{
+\al{
+a^{\log_a(x)}&=x\\
+\frac{d}{dx}\left[ a^{\log_a(x)}\right]&=\frac{d}{dx}\left[x \right]\\
+a^{\log_a(x)}\cdot \ln(a)\cdot \frac{d}{dx} \left[ \log_a(x) \right]&=1\\
+\frac{d}{dx} \left[ \log_a(x) \right]&=\frac{1}{a^{\log_a(x)}\cdot \ln(a)}\\
+\frac{d}{dx} \left[ \log_a(x) \right]&=\frac{1}{x\, \ln(a)}
+}
+}
+{\em Conclusion:}
+\tasksI{2}{
+\task $\ds \frac{d}{dx}[\log_a(x)] =\blue{\frac{1}{x\, \ln(a)}}$
+\task $\ds \frac{d}{dx}[\ln(x)] =\blue{ \frac{d}{dx}[\log_e(x)] =\frac{1}{x\, \ln(e)}=\frac{1}{x\cdot 1}=\frac{1}{x}}$
+}
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+\blue{\bf \em Summary of Exponential and Logarithmic Derivative Rules} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D3}} \\
+\fbox{$\dfrac{d}{dx}[e^x]=e^x$} \hfill \fbox{$\dfrac{d}{dx}[a^x]=a^x\ln(a)$ }\hfill \fbox{$\dfrac{d}{dx}[\ln(x)]=\dfrac{1}{x}$}\hfill \fbox{$\dfrac{d}{dx}[\log_a(x)]=\dfrac{1}{x \ln(a)}$}
+
+
+\vs{.1}
+\exercise{\color{ForestGreen}D2} Find the following derivative: $\ds \frac{d}{dx}\left[ \log_7(x^9+e^x) \right]$\\
+
+\sol{
+The function can be written as a function-within-a-function:\\
+Outer: $f(x)=\log_7(x)$ and Inner: $g(x)=x^9+e^x$. We're going to use the Chain Rule
+\al{
+\frac{d}{dx}\left[ \log_7(x^9+e^x) \right]&=f^{\prime}(g(x)\cdot g^{\prime}(x)
+\intertext{Since $f(x)=\log_7(x)$, $\ds f^{\prime}(x)=\frac{1}{x \;\ln(7)}$ }
+\frac{d}{dx}\left[ \log_7(x^9+e^x) \right]&=\frac{1}{(x^9+e^x)\;\ln(7)} \cdot g^{\prime}(x)
+\intertext{Since $g(x)=x^9+e^x$, $g^{\prime}(x)=9x^8+e^x$ }
+\frac{d}{dx}\left[ \log_7(x^9+e^x) \right]&=\frac{1}{(x^9+e^x)\;\ln(7)} \cdot (9x^8+e^x)
+}
+}
+
+\exercise{\color{ForestGreen}D2}  Find the following derivative: $\ds \frac{d}{dx}\left[\Big(2^{3x+2}\cdot   \log_7(x^9+e^x)\right]$\\
+\mpageT{.4}{.6}{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}
+}{
+}\\
+
+\sol{
+We have two functions multiplied together which means we will use the Product Rule.\\First: $f(x)=2^{3x+2}$. Second: $\ds g(x)=\log_7(x^9+e^x) $.
+\al{
+\frac{d}{dx}\left[\Big(2^{3x+2}\cdot   \log_7(x^9+e^x)\right]&=f^{\prime}(x)\cdot g(x) +f(x) \cdot g^{\prime}(x)
+\intertext{Since $f(x)=2^{3x+2}$, we use the Chain Rule to find $ f^{\prime}(x)=2^{3x+2}\cdot \ln(2)\cdot (3+0)$}
+\frac{d}{dx}\left[\Big(2^{3x+2}\cdot   \log_7(x^9+e^x)\right]&=2^{3x+2}\cdot \ln(2)\cdot 3 \cdot \log_7(x^9+e^x) + 2^{3x+2} \cdot g^{\prime}(x)
+\intertext{Since $\ds g(x)=\log_7(x^9+e^x)$ is the function from the previous problem we use prior solution: 
+$$\ds g^{\prime}(x)=\frac{1}{(x^9+e^x)\;\ln(7)} \cdot (9x^8+e^x)=\frac{9x^8+e^x}{(x^9+e^x)\;\ln(7)} $$ }
+\frac{d}{dx}\left[\Big(2^{3x+2}\cdot   \log_7(x^9+e^x)\right]&=2^{3x+2}\cdot \ln(2)\cdot 3 \cdot \log_7(x^9+e^x) + 2^{3x+2} \cdot \frac{9x^8+e^x}{(x^9+e^x)\;\ln(7)} 
+}
+}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Discussion.} Ari, a former Math 1210 LA, makes the following claim. Do you agree or disagree with Ari? Why or why not?
+\begin{center}{\em  The derivative of $\ln(f(x))$ is always $\dfrac{1}{f(x)}$} \end{center}
+\sol{
+I disagree! We would need to use the Chain Rule and would get $$\frac{d}{dx} \ln(f(x))=\frac{1}{f(x)}\cdot f^{\prime}(x) $$
+}
+
+\vs{.2}
+
+
+{\bf\color{blue} Extra Practice 1.} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D2}} 
+
+
+Find the following derivative: $\dfrac{d}{dt}\left[\dfrac{3^t\ln(1-t^2)}{\sqrt[4]{t^5+1}}\right]$\\
+\mpageT{.5}{.6}[\hs{.1}]{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}\\
+\sol{ Quotient Rule since function can be described as $\ds \frac{\hi(t)}{\lo(t)}$ with $\hi(t)=3^t\ln(1-t^2)$ and $\lo(t)=\sqrt[4]{t^5+1}$.\\\\
+Since $\hi(t)=3^t\ln(1-t^2)$ is the product of two functions, $f(t)=3^t$ and 
+$g(t)=\ln(1-t^2)$, we will use the Product Rule to find $$\hi^{\prime}(t)=f^{\prime}(t)\cdot g(t)+f(t)\cdot g^{\prime}(t)$$  
+$f^{\prime}(t)=3^t\cdot \ln(3)$. $g^{\prime}(t)$ requires the Chain Rule: $$\ds g^{\prime}(t)=\frac{1}{1-t^2}\cdot(-2t)$$ Thus $$\hi^{\prime}(t)=3^t\cdot \ln(3)\cdot \ln(1-t^2)+ 3^t\cdot \frac{-2t}{1-t^2} $$
+}
+}{
+\blue{
+\vs{.3}
+\al{
+\dfrac{d}{dt}\left[\dfrac{3^t\ln(1-t^2)}{\sqrt[4]{t^5+1}}\right]&=\frac{\hi^{\prime}\cdot \lo-\hi\cdot \lo^{\prime} }{\lo^2}\\
+&=\frac{\hi^{\prime}\cdot \sqrt[4]{t^5+1} -3^t\ln(1-t^2) \cdot \lo^{\prime} }{(\sqrt[4]{t^5+1})^2}\\
+}
+}
+}
+\blue{
+$$\dfrac{d}{dt}\left[\dfrac{3^t\ln(1-t^2)}{\sqrt[4]{t^5+1}}\right]=\frac{\Big(3^t\cdot \ln(3)\cdot \ln(1-t^2)+ 3^t\cdot \frac{-2t}{1-t^2}  \Big)\cdot \sqrt[4]{t^5+1} -3^t\ln(1-t^2) \cdot \lo^{\prime} }{(\sqrt[4]{t^5+1})^2}$$
+}
+\mpageT{.5}{.6}[\hs{.1}]{
+\blue{
+Now $\lo(t)=\sqrt[4]{t^5+1}=(t^5+1)^{1/4}$ requires Chain Rule to find the derivative.
+$$\lo^{\prime}(t)=\frac{1}{4}(t^5+1)^{-3/4}\cdot(5t^4)=\frac{5t^4}{4}(t^5+1)^{-3/4}$$
+}
+}{
+}\\
+\blue{Finally! We have:
+$$\dfrac{d}{dt}\left[\dfrac{3^t\ln(1-t^2)}{\sqrt[4]{t^5+1}}\right]=\frac{\Big(3^t\cdot \ln(3)\cdot \ln(1-t^2)+ 3^t\cdot \frac{-2t}{1-t^2}  \Big)\cdot \sqrt[4]{t^5+1} -3^t\ln(1-t^2) \cdot \frac{5t^4}{4}(t^5+1)^{-3/4} }{(\sqrt[4]{t^5+1})^2}$$
+}
+\newpage
+{\bf\color{blue} Extra Practice 2.} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D2}} Let $h(t)=2^t\sqrt{\dfrac{\log_3(t)}{t^4+1}}$. Find $h^{\prime}(t)$.\\\\
+\mpageT{.4}{.6}[\hs{.1}]{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}\\
+\sol{ Start with Product Rule first since $h$ can be thought of as product of two functions: $h(t)=f(t)g(t)$ with $f(t)=2^t$ and $\ds g(t)=\sqrt{\dfrac{\log_3(t)}{t^4+1}}$.
+}
+}{\vs{-.2}
+\blue{
+\al{
+h^{\prime}(t)&=f^{\prime}(t)g(t)+f(t)g^{\prime}(t)
+\intertext{Since $f(t)=2^t$,  $f^{\prime}(t)=2^t\cdot \ln(2)$}
+h^{\prime}(t)&=2^t\cdot \ln(2) \sqrt{\dfrac{\log_3(t)}{t^4+1}}+2^t \cdot g^{\prime}(t)
+\intertext{Since $\ds g(t)=\sqrt{\frac{\log_3(t)}{t^4+1}}=\left( \frac{\log_3(t)}{t^4+1} \right)^{1/2} $ we use the Chain Rule.\newline \hs{.2} $ \ds g^{\prime}(t)=\frac{1}{2} \left( \frac{\log_3(t)}{t^4+1} \right)^{-1/2} \cdot \frac{d}{dt} \left[ \frac{\log_3(t)}{t^4+1} \right]$}
+h^{\prime}(t)&=2^t\cdot \ln(2) \sqrt{\dfrac{\log_2(t)}{t^2+1}}+2^t \cdot \frac{1}{2} \left( \frac{\log_2(t)}{t^2+1} \right)^{-1/2} \cdot \frac{d}{dt} \left[ \frac{\log_2(t)}{t^2+1} \right]
+\intertext{The last derivative requires the Quotient Rule with $\hi(t)=\log_3(t)$ and $\lo(t)=t^4+1$.  Note that 
+$\ds \hi^{\prime}(t)=\frac{1}{t \ln(3)}$ and $\lo^{\prime}(t)=4t^3+0$. \newline
+$\ds \frac{d}{dt} \left[ \frac{\log_2(t)}{t^2+1} \right] =\frac{ \hi^{\prime}\cdot \lo-\hi\cdot \lo^{\prime} }{\lo^2}=\frac{\frac{1}{t\cdot \ln(3)}\cdot (t^4+1)-\log_3(t)\cdot 4t^3 }{(t^4+1)^2} $ }
+}
+}
+}
+\blue{
+At long last: $$h^{\prime}(t)=2^t\cdot \ln(2) \sqrt{\dfrac{\log_2(t)}{t^2+1}}+2^t \cdot \frac{1}{2} \left( \frac{\log_2(t)}{t^2+1} \right)^{-1/2} \cdot \frac{\frac{1}{t\cdot \ln(3)}\cdot (t^4+1)-\log_3(t)\cdot 4t^3 }{(t^4+1)^2}$$
+}
+
+
+
+\newpage
+{\bf\color{blue} Extra Practice 3.} If you deposit \$1000 in a bank account earning 5\% annual interest compounded continuously, then the amount $A(t)$ of money in the account after $t$ years is $A(t) = 1000e^{0.05 t}$, assuming that you make no withdrawals and no additional deposits.  How quickly is the account balance growing initially? Include units in your final answer. 
+    
+   \sol{
+   The phrase ``How quickly is the account balance growing initially?" means we are looking for $A^{\prime}(t)$ when $t=0$.
+   \al{
+   A(t)&=1000e^{0.05 t}\\
+   A^{\prime}(t)&=1000e^{0.05 t}\cdot 0.05 \text{ (Chain Rule)}\\
+&=50e^{0.05 t}\\
+    A^{\prime}(0)&=50e^{0.05 \cdot 0}\\
+  &=50e^{0}\\ 
+  &=50 \cdot 1\\
+  &=50
+   }
+   Units are $\$/yr$ so balance is initially growing at $\$ 50/yr$.
+   }
+\end{document}

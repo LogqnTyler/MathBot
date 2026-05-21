@@ -1,0 +1,200 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonDJ}
+\def\TypeNum{Workshop Week 13} %Lesson #
+\def\TypeTitle{FTOC and Intro to Probability} %Lesson Title
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190}%Course number and name
+\def\Targets{    \target{I2}, \target{I3}, \target{F3} }
+
+\usepackage{preambleDJ} 
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+
+
+\vs{.6}
+
+\section{Warm-Up}
+\begin{enumerate}
+    \item Find the following anti-derivatives 
+    \begin{enumerate}
+        \item $\ds \int x^3 \;dx$
+        \item $\ds \int \frac{1}{2x} \;dx$
+        \item $\ds  \int 4\cdot3^x\;dx$
+    \end{enumerate}
+    \item Compute the following definite integral
+    \[\int_2^5 \frac{x^4+1 + x3^x}{2x}dx\]
+    \item Compute the following definite integrals:
+    \begin{enumerate}
+        \item $\ds \int_0^3 (2x+1)^2\,dx.$
+         \item $\ds \int_1^4 \left(\frac 1x + 2\right)\left(3x + 1\right)\,dx.$
+    \end{enumerate}    
+
+\end{enumerate}
+
+\newpage
+ \section{More Definite Integrals}
+   \begin{enumerate}
+    \item Consider the following integral:
+    \[\int_{-1}^3\frac{1}{x^4}dx\]
+    Does the fundamental theorem of calculus apply? If not, explain why not. If so, find the definite integral.\\
+    \item Consider the function $v(t) = 4t^3-16t^2+16t$ shown below:
+    \begin{center}
+        \begin{tikzpicture}
+          \begin{axis}[
+            xmin=-2.5,        % Minimum x-value
+            xmax=2.5,         % Maximum x-value
+            ymin=-8,         % Minimum y-value
+            ymax=8,          % Maximum y-value
+            axis lines=middle, % Draw the x and y axes in the middle
+            x label style={anchor=west},
+            xlabel={$t$},     % Label for the x-axis
+            ylabel={$v(t)$},     % Label for the y-axis
+            xtick       = {-2,-1,1,2},
+            ytick       = {-8,-4,4,8},
+            %yticklabels = {$2$,$4$,$6$,$8$},
+            axis line style={thick, <->}, % Add arrows at the end of the axes
+            width = 2in, height=2in,
+            %restrict y to domain=-6.5:6.5
+          ]
+          %\addplot[domain=-2.5:2.5, samples=400, blue, ultra thick] {x^3};
+              \addplot[name path=f1, domain=-2.5:2.5, blue, ultra thick, <->] {4*x^3-16*x^2+16*x};
+%  \path[name path=axis] (axis cs:-2.5,0) -- (axis cs:2.5,0);
+%     \addplot [
+%        thick,
+%        color=blue,
+%        fill=blue, 
+%        fill opacity=0.1
+%    ]
+%    fill between[
+%        of=f1 and axis,
+%        soft clip={domain=-1:2},
+%   ];
+          \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{enumerate}
+        \item[a)] What is the area bounded by $v$ and the $t$-axis from $t = 1$ to $t = 2$?
+        \item[b)] What is the net area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 1$?
+        \item[c)] What is the net area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 2$?
+    \end{enumerate}
+
+    \item Suppose $v$ represented the velocity of a car as a function of time. What do the quantities you calculated in the previous part represent?
+    
+\end{enumerate}
+
+\newpage
+\section{Probability}
+\begin{enumerate}
+\item Peter T, a pre-dentist student,  is a Lawn resident and was excited to participate in this year's Trick-or-Treating on the Lawn. He decided to offer Trick-or-Treaters his favorite candy bar, Snickers, as well as something, um, ``more practical"-- toothbrushes.   He put $2$ Snicker bars and $3$ toothbrushes into a grab bag and asked each Trick-or-Treater to pick two items without looking and without the ability to put any back. What's the chance a Trick-or-Treater  walked away crying because they got two $0$ Snickers (i.e $2$ toothbrushes?  What's the chance the Trick-or-Treater walked away jumping for joy because they got $2$ Snickers? What's the chance they walked away confused because they got $1$ Snickers (and thus $1$ toothbrush)?
+
+Being a part of the famed Math $1190$ crew, you decide to create a histogram to figure out these probabilities.  
+\begin{enumerate}
+\item What is the sample space for pulling two items out of the bag?
+\item You  let $X$ be a random variable that describes how many Snickers the Trick-or-Treater received.  What are the possible outcomes for $X$?
+\item What is $P(X=0)$?  This is the chance the Trick-or-Treater gets $0$ Snickers (and thus  $2$ toothbrushes) and bursts out in tears. The next $3$ steps will help you find  $P(X=0)$.
+\enum{
+\item What's the chance the Trick-or-Treater will get a toothbrush on the first grab?
+\item Now think about how many Snickers and how many toothbrushes remain in the bag after the first grab. What's the chance to get a toothbrush on the 2nd grab?
+\item Multiply these two results together to find $P(X=0)$
+}
+\item What is $P(X=2)$? This is the probability the Trick-or-Treater will jump for joy because they received $2$ Snickers. The next $3$ steps will help you find  $P(X=2)$.
+\enum{
+\item What is the chance the Trick-or-Treater will get a Snickers on the first grab?
+\item Now think about how many Snickers and how many toothbrushes remain in the bag after the first grab. What's the chance to get a Snickers on the 2nd grab?
+\item Multiply these two results together to find $P(X=2 )$
+}
+\item What is $P(X=1)$? This is the chance that the Trick-or-Treater walked away confused because they got one Snickers and one toothbrush. {\em Hint:} There are at least 2 different approaches to come up with this probability.
+\item Create a histogram that represents all of this information.\\
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar=0, % Specifies vertical bars
+        ymin=0, % Ensures bars start from zero
+        xtick=data, % Places x-axis ticks at data points
+        xticklabels={,,}, 
+                  %   xticklabels={0,1,2}, % Custom x-axis labels
+                %   ytick       = {0.1,0.3,0.6},
+            %yticklabels =  {$0.1$, $0.3$, $0.6$},
+        enlarge x limits={0.2}, % Adjusts spacing between bars and axis limits
+            y label style={anchor=south west},
+            ylabel={$p(x)$},
+                        xlabel = {$x$},
+		x label style={anchor=west},
+		 ymin = 0, ymax = .6,
+        bar width=20pt, % Adjusts the width of the bars
+                    width = 2.5in, height=1.4in,
+       % legend style={at={(0.5,-0.15)},anchor=north,legend columns=-1} % Legend positioning
+    ]
+  \addplot[fill=blue!40] coordinates {(1,0)  (2,0)  (3,0) };
+  %   \addplot[fill=blue!40] coordinates { (1,0.3)  (2,0.6)  (3,0.1) };
+    \end{axis}
+\end{tikzpicture}
+\end{enumerate}
+
+
+    \item Suppose two standard dice are rolled and the result is recorded.
+\begin{enumerate}
+    \item[a)] Let $X$ be the difference of first die minus the second die. 
+    \enum{
+    \item Construct a table of all possible combinations of rolls of dice and the resulting difference similar to the one we used in class.
+    \item Find the probability for all possible outcomes for $X$
+    \item Sketch a histogram
+    }
+    \end{enumerate}
+    \mpageT{.5}{.5}[\hs{.2}]{
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar, % Specifies vertical bars
+        bar shift=0,
+        ymin=0, % Ensures bars start from zero
+        xtick=data, % Places x-axis ticks at data points
+                     xticklabels={,,,,,,,,,}, % Custom x-axis labels
+                     ytick=\empty,
+%                    ytick       = {1/36, 2/36, 3/36, 4/36, 5/36, 6/36},
+%            yticklabels =  {$1/36$,$2/36$,$3/36$, $4/36$,$5/36$,$6/36$},
+        enlarge x limits={0.2}, % Adjusts spacing between bars and axis limits
+            y label style={anchor=south west},
+            ylabel={$p(x)$},
+                        xlabel = {$x$},
+		x label style={anchor=west},
+		 ymin = 0, ymax = .17,
+        bar width=17pt, % Adjusts the width of the bars
+                    width = 4in, height=1.4in,
+                    %enlarge x limits={1.2}
+       % legend style={at={(0.5,-0.15)},anchor=north,legend columns=-1} % Legend positioning
+    ]
+ \addplot[fill=blue!40] coordinates {(1,0)  (2,0)  (3,0) (4,0) (5,0) (6,0) (7,0) (8,0) (9,0) (10,0) (11,0)};
+ %\addplot[fill=blue!40] coordinates {(1,0.027)  (2,0.055)  (3,0.083) (4,0.11) (5,0.139) (6,0.167) (7,0.139) (8,0.11) (9,0.083) (10,0.055) (11,0.027)};
+    \end{axis}
+\end{tikzpicture}
+    }{
+    \begin{enumerate}
+    \item[b)] Compute $P(X \geq 2)$.
+    \item[c)] Compute $P(X \leq -2)$.
+    \item[d)] Compute $P(-1\leq X \leq 1)$.
+    \item[e)] Compute $P(X \text{ is even})$.
+    \end{enumerate}
+    }
+
+
+%\item Suppose in your sock drawer, you have a pair of red socks, a pair of black socks, and a pair of brown socks. On your way to school, you randomly pull out single socks (without replacement), until you have picked two of the same color. 
+%\begin{enumerate}
+%    \item[a)] What is the sample space?
+%    \item[b)] Let $X$ be the number of socks you have to pull. Write down the probability mass function for $X$. 
+%\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+\end{document}

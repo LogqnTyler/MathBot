@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+%\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+
+% record goals here to create sense of transparency
+
+\fancyhead[l]{%
+  \ifcase\value{page}
+  % empty test for page = 0
+  \or {}% 
+  \or
+  \or {\bf\color{ProcessBlue} F1: Lines \& Slope}% page=1
+  \or {\bf\color{RoyalBlue} L1: Limits and Continuity}% page = 2
+  \or {\bf\color{RoyalBlue} L2: Evaluating Limits Using Continuity and Forms}% page = 3
+  \or {\bf\color{ForestGreen} D1: Meaning of a Derivative}% page = 4
+  \or {\bf\color{ProcessBlue} F2: Exponential and Logarithmic Functions}% page = 5
+  \or {\bf\color{ForestGreen} D2: Compute Derivatives}% page = 6
+  \or {\bf\color{ForestGreen} D3: Derivatives of Basic Functions}% page = 7
+  \or {\bf\color{RedOrange} A1: Derivatives and Graphing}% page = 8
+  \or
+  \else
+  % Empty chead here!
+  \fi
+}
+
+\thispagestyle{empty} % don't display that this is page 0
+
+\Heading{MATH 1190/1210 Survey of Calculus I}{Quiz \\Learning Target P2\\Fall 2025}
+
+\vspace{0.1in}
+
+\textbf{Name} \hrulefill \, \begin{minipage}{0.16\textwidth}\begin{center}\textbf{UVA ID\\ (e.g. hdj4nd)} \end{center}\end{minipage}\hrulefill\\
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM A1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This problem is based on Lesson 22. Questions about Mean and Variance would not appear on the KC4, but will appear on the final!
+
+Let $f(x)=x  + \dfrac{1}{x}$. You may take as given that $f'(x) = 1-\dfrac{1}{x^2} = \dfrac{x^2-1}{x^2}$ and $f''(x)=\dfrac{2}{x^3}$.
+
+\begin{enumerate}
+    \item Find all critical numbers of $f$. Find intervals where $f(x)$ is increasing. 
+    \vfill
+    \item Find $x$-coordinates of all inflection points.
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM A1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

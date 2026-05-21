@@ -1,0 +1,652 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{tasks}
+\newcommand{\tasksA}[2]{\begin{tasks}(#1) #2 \end{tasks}} %use alpha labels
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+%\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+
+% record goals here to create sense of transparency
+
+\fancyhead[c]{%
+  \ifcase\value{page}
+  % empty test for page = 0
+  \or {}% 
+  \or
+  \or {\bf\color{RedOrange} A2: Local and Absolute Extreme Values}% page=1
+  \or {\bf\color{RedOrange} A3: Applied Optimization}% page = 2
+  \or {\bf\color{Fuchsia} I1: Meaning of an Integral}% page = 3
+  \or {\bf\color{Fuchsia} I2: Properties of Definite Integrals}% page = 4
+  \or {\bf\color{Fuchsia} I3: Antiderivatives and Indefinite Integrals}% page = 5
+  \or {\bf\color{Fuchsia} I4: Compute Definite Integrals}% page = 6
+  \or {\bf\color{ProcessBlue} F3: Summations}% page = 7
+  \or {\bf\color{Orange} P1: Discrete Random Variables}% page = 8
+  \or {\bf\color{Orange} P2: Continuous Random Variables}% page = 9
+  \or
+  \else
+  % Empty chead here!
+  \fi
+}
+
+\thispagestyle{empty} % don't display that this is page 0
+
+\Heading{MATH 1190/1210 Survey of Calculus I}{Knowledge Checkpoint 4\\Make-Up\\Fall 2025}
+
+\vspace{0.1in}
+
+\textbf{Name} \hrulefill \, \begin{minipage}{0.16\textwidth}\begin{center}\textbf{UVA ID\\ (e.g. hdj4nd)} \end{center}\end{minipage}\hrulefill\\
+
+\begin{minipage}{0.2\textwidth}\begin{center}\textbf{Course \&\\ Section Number} \end{center}\end{minipage} \hrulefill\,\,\textbf{Date} \hrulefill  \\
+
+\hrulefill
+\paragraph*{Course \& Section Numbers:}
+
+{\small
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-100\\
+J. Rolf\\
+(11:00 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-200\\
+J. Rolf\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-100\\
+Mikhail\\
+(8 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-200\\
+Raul\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-300\\
+Sherman\\
+(11 AM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-400\\
+Sherman\\
+(12:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-500\\
+Michael\\
+(2 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-600\\
+J. Bowling\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-700\\
+Josh\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-800\\
+Mason\\
+(2 PM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-900\\
+Caelan\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-920\\
+Caelan\\
+(5 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-940\\
+Mitchell\\
+(10 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-950\\
+Mitchell\\
+(11 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-960\\
+Mitchell\\
+(noon)
+\end{center}\end{minipage}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+{%\small
+
+\paragraph*{Instructions:}
+
+\begin{itemize}
+    
+    \item The regular time allowed for completing this assessment is \fbox{$90$} minutes.
+    %\item This assessment is out of 50 points.\\
+    \item This assessment contains one single-part or multi-part problem for each of the following targets:  {\bf\color{RedOrange}A2}, {\bf\color{RedOrange}A3}, {\bf\color{Fuchsia}I1}, {\bf\color{Fuchsia}I2}, {\bf\color{Fuchsia}I3}, {\bf\color{Fuchsia}I4}, {\bf\color{ProcessBlue}F3}, {\bf\color{Orange}P1}, {\bf\color{Orange}P2}.
+    %\item On each problem, you will receive a score of Exceeds Expectations (5), Proficient (4), Almost (3), Developing (2), Emerging (1), or Not Yet (0). {\bf Please do not interpret your score as a percentage.}
+    %\item You will have opportunities to reassess on the targets appearing on this assessment after the next {\bf 2} assessments.\\
+    \item You may NOT use calculators, dictionaries, notes, phones, or any other kind of aid.
+    \item Please write neatly. What cannot be read, cannot be graded.
+    \item Carefully work out each problem and clearly indicate your final answer to every problem.
+    \item Throughout, give the most descriptive answer possible. \textbf{For instance, ``DNE" will not be accepted when ``$=\infty$" is applicable.}
+    %\item Please provide the most specific answer possible. For instance, if a limit does not exist because it goes to $\infty$ or $-\infty$, then specify this.
+    \item Please use the methods discussed up to this point in the course. For example, any work based on l'H\^opital's Rule will not receive credit.
+    \item \textbf{All work must be shown unless otherwise specified.} Partial credit will not be given if appropriate work is not shown.
+    \item In particular, {\bf any answer appearing with no justification will receive no credit regardless of whether the answer was correct}, unless otherwise specified.
+    \item Please first respond to the prompts on which you feel most proficient, then respond to others later.
+    \item This booklet is printed double-sided. It contains 14 pages and 9 numbered problems.
+    \item There's a formula sheet on the second-to-last page of common area/volume formulas and optimization concepts in case you need them.
+    \end{itemize}
+    
+    }
+
+\vfill
+
+
+%%%%%%%%%
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage%
+%%%%%%%%%
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM A2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Consider the following function $f(x)$ and its derivative.
+
+\[f(x)=-(x-1)^4(15x^2+18x+7)\]
+
+\[f'(x)=10(1-x)^3(3x+1)^2\]
+
+You are required to use methods we've learned in our course, such as the first derivative test, the second derivative test, the close interval method, or the first derivative test for absolute extrema, to solve this problem. In addition, you need to make sure the method you use is suitable for the question.
+
+\begin{enumerate}
+    \item Find all critical numbers of $f(x)$.
+
+    \vfill
+
+    \item For each critical number found in part (a), classify it as a local minimum, a local maximum, or neither. Fully justify your work.
+
+    \vfill
+    \vfill
+    \vfill
+
+    \item Find the $x$-values of all absolute extrema of $f(x)$ on the interval $[0, 2]$.
+
+    \vfill
+    \vfill
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM A2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM A3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item A company manufactures $n$ computers per week. They price their computers strategically so that the unit price $p$ is a function of the number of computers made per week, with $p(n)=300-\dfrac{1}{2}n$.
+
+How many computers should the company manufacture to maximize the revenue?
+
+To receive full credit, make sure to clearly state the objective function, a domain/interval for optimization, and fully justify why price you've found maximizes the revenue. 
+
+You are required to use a method we've learned in our course, such as the first derivative test, the second derivative test, the close interval method, or the first derivative test for absolute extrema, to solve this problem. In addition, you need to make sure the method you use is suitable for the question.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM A3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item 
+
+\begin{enumerate}
+    \item Let $x$ be the depth in cm below sea level, and let $s(x)$ be rate of change of the salt concentration, in grams/(liter$\cdot$cm), of the water at depth $x$.
+
+    \begin{enumerate}
+        \item[(i)] What is the unit of $\displaystyle\int_0^{12} s(x)\, dx$?
+
+        \vfill
+
+        \item[(ii)] Explain the meaning of $\displaystyle\int_0^{12} s(x)\, dx$ in this context.
+
+        \vfill 
+    \end{enumerate}
+
+    \vfill
+
+    \item A radioactive iodine is emitting radiation out at the positive rate of $R(t)$ millirems per hour, where $t$ represents the number of hours since we started measuring the emission. Over time, the rate of the emission decreases, although the radioactive iodine would still be emitting radiation out.
+
+    \begin{enumerate}
+        \item[(i)] Based on this scenario, is $\displaystyle \int_0^9 R(t)\, dt$ positive, negative, or 0? No justification required.
+
+        \vfill
+
+        \item[(ii)] Write down an expression representing the amount of radiation emission 1 hour after the start of of measurement to 8 hours after the start of the measurement.
+
+        \vfill
+    \end{enumerate}
+
+    \vfill
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item The graph of $f(x)$ is given below. And we know that $\displaystyle\int_{3}^{9}3g(x)-4f(x)\,dx=-5$.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.25]
+          \begin{axis}[
+            xlabel={$x$},
+            %grid = major,
+            xtick       = {1,2,3,4,5,6,7,8,9},
+            xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            ytick       = {-3, -2, -1, 0,1,2,3,4},
+            yticklabels = {$-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$},
+            samples     = 320,
+            domain      = -1:9.5,
+            restrict y to domain=-3.5:2.5,
+            xmin = -0.5, xmax = 9.5,
+            ymin = -3.5, ymax = 4.5,
+            height=2.1in, width=2.7in,
+            grid=both, grid style=dashed
+          ]
+          \draw[ultra thick, red,--] (0,2) -- (3,2) -- (4,4) -- (7, -2) -- (9, -2);
+          \node at (2,3) {$f(x)$};
+          \end{axis}
+    \end{tikzpicture}
+    \end{center}
+
+Find the value of the following definite integrals.
+
+\begin{enumerate}
+    \item $\displaystyle\int_3^9 f(x)\,dx$
+
+    \vfill
+
+    \item $\displaystyle\int_{9}^{3}g(x)\,dx$
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Assume $x>0$. Write down the indefinite integrals of the following expressions. 
+
+Although no work is required, you are encouraged to include any work that shows your thought process. 
+
+%constant, power, exponential, log, +C, algebraic manipulation
+
+\begin{center}
+        \begin{tabular}{l c r l c r}
+            %
+            $\displaystyle\int 2x^3-\log_7(5)\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} &
+            %
+            %$\displaystyle\int \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            %$\displaystyle\int 15\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %%%%%
+            $\displaystyle\int \dfrac{6}{x^4} \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[1in]
+            %%%%%
+            $\displaystyle\int \left(\dfrac{1}{4}\right)^x\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}&
+            %
+            $\displaystyle\int \dfrac{1}{4x}\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[1in]
+            %%%%%
+            $\displaystyle\int 4e^x+ \sqrt[3]{x^4}\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %
+            $\displaystyle\int \dfrac{1}{2\sqrt{x}} \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+        \end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I4 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item For each of the following definite integrals, determine whether the Fundamental Theorem of Calculus can be applied to evaluate. 
+
+If so, evaluate the integral using the FTC. There's no need to simplify your final answer.
+
+If not, clearly indicate that and explain why.
+
+\begin{enumerate}
+    \item $\displaystyle\int_{-2}^{-1}\sqrt[5]{x}+\dfrac{1}{x^3}-e^x\, dx$
+
+    \vfill
+
+    \item $\displaystyle\int_{-2}^1\sqrt[5]{x}+\dfrac{1}{x^3}-e^x\, dx$
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I4 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM F3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item 
+
+\begin{enumerate}
+    \item Find the value of the following expressions. Simplify as much as possible so that your final answer is a number.
+
+    \begin{enumerate}
+        \item[(i)] $\displaystyle\sum_{j=3}^5(3j-(j-1)^2)$
+
+        \vfill
+
+        \item[(ii)] $\displaystyle\sum_{i=2}^610$
+
+        \vfill
+    \end{enumerate}
+
+    \item Write the following sum in summation notation. 
+
+    \[\dfrac{\sqrt[3]{4}}{3}+\dfrac{\sqrt[3]{9}}{5}+\dfrac{\sqrt[3]{16}}{7}+\dfrac{\sqrt[3]{25}}{9}\] 
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM F3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM P1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item For each football game you play, there are three possible outcomes: you win (W), you lose (L), or you tie (T).
+
+In an experiment where you play two football games in a row, the results of the two games are recorded.
+
+\begin{enumerate}
+    \item Write down the sample space $S$ of this experiment.
+
+    (You can denote each outcome using notations like W, L, or T, as appropriate.)
+    
+    \vfill
+
+    \item Suppose that for each game, all three outcomes are equally likely. Find the probability that you win exactly once out of these two games.
+
+    \vfill
+
+    \item Let $X$ be the discrete random variable representing the number of times you win out of these two games. Find the probability mass function $p(x)$ for $X$.
+
+    \vfill
+
+    \item Sketch a histogram of the probability mass function $p(x)$ found in part (c).
+
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        x label style={anchor=west},
+        xlabel={$x$},
+        xtick       = {1,2,3,4},
+        xticklabels = {,,,},
+        %xticklabels = {$0$,$1$,$2$,$3$},
+        xticklabel style={anchor=north},
+        y label style={anchor=south},
+        ylabel={$p(x)$},
+        ytick={1/4,2/4,3/4},
+        yticklabels = {,,},
+        enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+        samples     = 320,
+        xmin =0, xmax = 4.5,
+        ymin = 0, ymax = 1,
+        axis line style = { ultra thick, -},
+        every major tick/.append style={ultra thick, black, major tick length=5pt},
+        width=4in, height=2.1in
+        ]
+        %\addplot[ybar, bar shift=0,   bar width=18pt,  fill=blue!50] plot coordinates { (1,0.125)  (2,0.375) (3,0.375) (4,0.125) };
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM P1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM P2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Let $X$ be a continuous random variable with its cumulative distribution function $C(x)$ given below.
+
+\[C(x)=\begin{cases}
+    a \qquad x<1\\\\
+    \dfrac{1}{4}x-\dfrac{1}{4} \qquad 1\le x\le 5\\\\
+    1\qquad x>5
+\end{cases}\]
+
+\begin{enumerate}
+    \item For $C(x)$ to be a valid cumulative distribution function, What should the value of $a$ be?
+
+    \vfill
+
+    \item What is the support of $X$?
+
+    \vfill
+
+    \item Find $P(X<2)$.
+
+    \vfill
+
+    \item Find $P(2\le X\le 4)$
+
+    \vfill
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM P2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{center}
+{\bf DO NOT REMOVE THIS SHEET FROM YOUR EXAM PACKET}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ r | c | l }
+    {\bf Description} & {\bf Formula} & {\bf Variables}\\
+    \hline
+    area of a square & $A=s^2$ & $s=$ side length\\
+    \hline
+    area of a rectangle & $A=lw$ & $l=$ length, $w=$ width\\
+    \hline
+    area of a triangle & $A=\frac12bh$ & $b=$ base, $h=$ height\\
+    \hline
+    area of a circle & $A=\pi r^2$ & $r=$ radius\\
+    \hline
+    volume of a rectangular box & $V=lwh$ & $l=$ length, $w=$ width, $h=$ height\\
+    \hline
+    %volume of a circular cylinder & $V=\pi r^2 h$ & $r=$ radius, $h=$ height\\
+    %\hline
+    %volume of a sphere & $V=\frac43\pi r^3$ & $r=$ radius\\
+    %\hline
+    revenue & $R(x) = p\cdot x = p\cdot Q$ & $p=$ unit price, $x=Q=$ quantity sold\\
+    \hline
+    profit & $P(x) = R(x) - C(x)$ & $R(x)=$ revenue, $C(x)=$ cost\\
+    \hline
+    average cost & $\overline C(x) = \frac{C(x)}{x}$ & $C(x)=$ cost\\
+    \end{tabular}
+\end{center}
+
+\begin{center}
+{\bf DO NOT REMOVE THIS SHEET FROM YOUR EXAM PACKET}
+\end{center}
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+
+\end{enumerate}
+
+\end{document}

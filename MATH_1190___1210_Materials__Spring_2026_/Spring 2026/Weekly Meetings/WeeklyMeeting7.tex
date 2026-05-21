@@ -1,0 +1,580 @@
+\documentclass[dvipsnames]{beamer}
+
+\usepackage{hyperref}
+
+\title{MATH 1190 \& 1210 Meeting for Week 7}
+\author{Josh}
+\date{23 February 2026}
+
+\newcommand{\transition}[1]{\frame{{}\begin{center}\fbox{#1}\end{center}}}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Logistics}
+
+\transition{Logistics}
+
+\frame{{Logistics}
+
+{\bf Where are folks in the lessons right now?} 
+
+\
+
+\
+
+Pacing has been a challenge in MATH 1190 \& 1210 in previous academic years. {\bf How difficult has it been to keep pace this semester relative to previous semesters?}
+
+}
+
+\frame[t]{{Logistics}
+
+\begin{itemize}
+\item Upcoming schedule:
+    \begin{itemize}
+    \item week 7 of class (23 February - 27 February)
+        \begin{itemize}
+        \item lesson 11 (First Derivative)
+        \item lesson 12 (absolute extrema)
+        \end{itemize}
+    \item spring break (28 February - 8 March)
+    \item week 8 of class (9 March - 13 March)
+        \begin{itemize}
+        \item KC 2 on Tuesday, March 10
+        \item application day 2 (absolute extrema/optimization)
+        \item lesson 13 absolute extreme values
+        \end{itemize}
+    \end{itemize}
+\item \textbf{Note:} KC 2 covers content through and including lesson 12. 
+    \begin{itemize}
+    \item In particular, last semester KC 2 had questions about concavity and the second derivative test
+    \item Optimization is {\bf not} included on assessment 2.
+    \end{itemize}
+\item I have reserved rooms with UREG to potentially push KC 2 (and maybe due to the push KC 3) to Thursdays. What do you all think?
+\item Another option - We could assess A1 on intervals of increasing/decreasing rather than concavity.
+\end{itemize}
+}
+%------------------------------------------------
+
+\frame[t]{{Logistics}
+\begin{itemize}
+\item KC 1 exam wrappers \& preparing for KC 2
+    \begin{itemize}
+    \item These usually contain valuable information about how students prepare for assessments.
+    \item For those who have read some of their students' responses, what are some broad themes you're seeing? Based on what you've seen, how might we support students in preparing for KC 2?
+    \item Written component on lesson 11.
+    \item Note: KC 2 contains two ``core" targets -- {\bf\color{ForestGreen}D2: Computing Derivatives} \& {\bf\color{ForestGreen}D3: Derivatives of Basic Functions}.
+    \end{itemize}
+\item Assessment 1 regrade requests are now closed. So, please try to get to them as soon as possible. 
+\end{itemize}
+}
+
+%------------------------------------------------
+\begin{frame}{Lesson 11: Local Extrema and the First Derivative Test}
+Related to targets {\bf\color{RedOrange} A1: Derivatives \& Graphing} 
+\& {\bf\color{RedOrange} A2: Local \& Absolute Extrema}
+
+\vspace{0.5em}
+
+\begin{itemize}
+    \item Identify increasing/decreasing intervals and critical numbers from a graph or formula.
+    \item Represent derivatives, local extrema, and critical numbers graphically.
+    \item Apply the First Derivative Test (graphically and algebraically).
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{How students have felt in the past}
+\begin{itemize}
+\item ``Critical Points are still kind of confusing to me.''
+\item ``I didn't understand why 0 and 2 weren't critical points even though $f'$ DNE there.''
+\item ``Fermat's Theorem was interesting and helped me find critical points.''
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Clarifying a Common Confusion}
+Pre-class function:
+\[
+f(x)=\ln(2x-x^2)
+\quad \Rightarrow \quad
+f'(x)=\frac{2-2x}{2x-x^2}
+\]
+
+\vspace{0.5em}
+
+\begin{itemize}
+\item $f'$ DNE at $x=0$ and $x=2$
+\item BUT $f$ is not defined at $x=0$ or $x=2$
+\item Therefore: \textbf{They are NOT critical numbers}
+\end{itemize}
+
+\alert{Student Reminder: A critical number must be in the domain of $f$.}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Handout Structure: Page 1 (Pre-Class Review)}
+
+\textbf{\color{blue}Warm-Up 1}
+\begin{itemize}
+\item Complete definition of a critical number
+\item Does $f(x)=\frac{1}{x}$ have exactly one critical number?
+\end{itemize}
+
+\vspace{0.5em}
+
+\textbf{\color{blue}Warm-Ups 2 \& 3}
+\begin{itemize}
+\item State First Derivative Test
+\item Interpret what $f' >0$, $f'<0$, $f'=0$, $f'$ DNE mean graphically
+\item Activates prior knowledge: {\bf\color{ForestGreen} D1}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Group Work Suggestion}
+\begin{itemize}
+\item Assign each group 1 warm-up exercise
+\item 3 minutes discussion
+\item One group presents per exercise
+\end{itemize}
+
+
+
+\textbf{Alternative:} Fill in together if short on time.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Example 1: Applying the Concepts}
+\[
+g(x)=x-\ln(x^2+1)
+\]
+
+\textbf{Goals:}
+\begin{itemize}
+\item Find critical numbers
+\item Determine where $g$ is increasing/decreasing
+\item Apply the First Derivative Test
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Example 1: Teaching Focus}
+
+\textbf{Part (a): Common Issues}
+\begin{itemize}
+\item $\frac{d}{dx}[\ln(f(x))] \neq \frac{1}{f(x)}$
+\item Solve:
+\[
+g'(x)=1-\frac{2x}{x^2+1}=0
+\]
+\item Check where denominator = 0
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Example 1: Sign Analysis}
+
+\begin{itemize}
+\item $g'$ is only ever $+$ or $0$
+\item Therefore $g$ is increasing or temporarily not
+\item Emphasize: 
+\[
+g'<0 \Rightarrow g \text{ is decreasing}
+\]
+\item Students should use a sign line!
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Modeling Mathematical Conclusions}
+
+Example conclusion:
+
+\medskip
+
+\emph{``$g'$ does not change signs at $x=1$, so $g$ has neither a local maximum nor local minimum there by the First Derivative Test.''}
+
+\medskip
+
+\alert{Students should try to connect conclusions to established theorems.}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Exercise A}
+\begin{itemize}
+\item Similar structure to Example 1
+\item This function has both:
+\begin{itemize}
+\item Local Maximum
+\item Local Minimum
+\end{itemize}
+\item Support students in showing full work
+\item Keep Example 1 visible for scaffolding
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Exercise B: Graphical Reasoning}
+\begin{itemize}
+\item Identify critical numbers from a graph
+\item Connect behavior of $f$ and $f'$
+\item Emphasize reasoning over final answer
+\item Move fluently between algebraic and graphical representations
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Extra Practice}
+
+\textbf{\color{blue}Extra Practice 1}
+\begin{itemize}
+\item Critical numbers can occur where $f'$ DNE
+\item Not only where $f'=0$
+\end{itemize}
+
+\vspace{0.5em}
+
+\textbf{\color{blue}Extra Practice 2 \& 3}
+\begin{itemize}
+\item Repeats of Example 1 and Exercise A
+\item Reinforce structure and reasoning
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Key Takeaways}
+\begin{itemize}
+\item Critical numbers must be in the domain of $f$
+\item $f'>0$ increasing, $f'<0$ decreasing
+\item Sign changes determine local extrema
+\item Always justify using the First Derivative Test
+\end{itemize}
+\end{frame}
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+%------------------------------------------------
+\begin{frame}{Lesson 12: Concavity \& Second Derivative Test}
+
+\textbf{\color{RedOrange} A1: Derivatives and Graphing}
+
+\begin{itemize}
+\item Use calculus tools to:
+\begin{itemize}
+    \item Describe concave up/down graphically and using $f''$
+    \item Identify concavity intervals and inflection points (graph or formula)
+    \item Represent second derivative, concavity, and inflection points graphically
+\end{itemize}
+\item Use graphs of $f$, $f'$, and/or $f''$ to determine:
+\begin{itemize}
+    \item Increasing/decreasing
+    \item Concave up/down
+    \item Inflection points
+    \item Critical numbers
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Targets}
+
+\textbf{\color{RedOrange} A2: Local and Absolute Extrema}
+
+\begin{itemize}
+\item Apply the \textbf{Second Derivative Test}
+\begin{itemize}
+    \item Graphically
+    \item Algebraically
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Students Should Be Able To...}
+
+\begin{itemize}
+\item Interpret $f''$ in terms of concavity
+\item Identify candidates for inflection points:
+\[
+f''(x)=0 \quad \text{or} \quad f''(x) \text{ DNE}
+\]
+\item Identify intervals of concavity and actual inflection points
+\item Use graphs of $f$, $f'$, and/or $f''$ to determine concavity
+\item Apply the Second Derivative Test to classify critical numbers
+\item Know when the Second Derivative Test \emph{cannot} be used
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{How Students Have Felt in the Past}
+
+\begin{itemize}
+\item Many students found the examples helpful.
+\item Some students needed practice computing $f''$:
+\[
+f''(x)=\frac{d}{dx}\big[f'(x)\big]
+\]
+\item Conceptual confusion:
+\begin{itemize}
+    \item Inflection points occur when \textbf{sign of $f''$ changes}
+    \item Not merely when $f''=0$
+\end{itemize}
+\item Some confusion using a sign line.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Warm-Up Exercise 1 Goals}
+
+Reinforce key ideas:
+
+\begin{itemize}
+\item Concavity determines whether tangent lines lie above/below graph
+\item If $f'$ is increasing $\Rightarrow f$ is concave up
+\item If $f'$ is decreasing $\Rightarrow f$ is concave down
+\item Inflection points occur when \textbf{sign} of $f''$ changes
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Warm-Up Exercise 2}
+
+\begin{itemize}
+\item Students are given graphs of:
+\begin{itemize}
+    \item $f$
+    \item $f'$
+    \item $f''$
+\end{itemize}
+\item Infer:
+\begin{itemize}
+    \item Concavity
+    \item Inflection points
+\end{itemize}
+\end{itemize}
+
+\alert{Challenging but excellent conceptual practice.}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Mini-Lecture Focus}
+
+Connect geometry to the \textbf{Second Derivative Test}:
+
+\[
+\text{If } f''(c) > 0 \Rightarrow \text{local minimum}
+\]
+\[
+\text{If } f''(c) < 0 \Rightarrow \text{local maximum}
+\]
+
+\medskip
+
+Explain \emph{why} curvature determines the classification.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Example 1 and Exercise A}
+
+\begin{itemize}
+\item Emphasize use of a sign line/chart
+\item Compute:
+\[
+f'(x), \quad f''(x)
+\]
+\item Identify:
+\begin{itemize}
+    \item Critical numbers
+    \item Concavity
+    \item Classification via Second Derivative Test
+\end{itemize}
+\end{itemize}
+
+\alert{Model organized sign-line reasoning.}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Exam Practice 1}
+
+Similar to Warm-Up 2:
+
+\begin{itemize}
+\item Given graphs of $f$, $f'$, and $f''$
+\item Identify inflection points
+\item Justify reasoning clearly
+\end{itemize}
+
+\medskip
+
+\alert{Challenging but excellent exam preparation.}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Extra Practice}
+
+\textbf{Extra Practice 1}
+\begin{itemize}
+\item More implementation of the Second Derivative Test
+\item Focus on:
+\begin{itemize}
+    \item Correct computation of $f''$
+    \item Correct interpretation of sign
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Core Focus for This Lesson}
+
+\begin{itemize}
+\item Warm-Up Exercise 2
+\item Example 1 / Exercise A
+\item Sign-line reasoning with $f''$
+\item Connecting geometry and algebra
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Pedagogy}
+
+\transition{Pedagogy}
+\section{Active Learning}
+
+\transition{And Now - An Active Learning Discussion with Aaratrick!}
+\frame[t]{{Pedagogy}
+
+From {\color{blue}\href{https://gradingforgrowth.com/p/taming-the-snowball}{Taming the snowball}}:
+
+\
+
+{\small
+
+``In alternative grading systems, [students have] reattempts without penalty so that they can take the helpful feedback they receive from us, process it, and iterate on it. It's crucial to have this feedback loop at the heart of our grading and assessment, because {\it learning takes time}.
+
+\
+
+{\bf But what happens if we use an alternative grading setup and a student gets stuck on an early topic?} It may be difficult or impossible to halt the flow of the course to wait for the student to catch up, and so the availability of reattempts turns into a snowball: The student is still trying to demonstrate skill on earlier topics while new ones are coming into the queue. So the student not only has to demonstrate skill on the old topics but also the new ones, and every time a new one enters the queue it makes it harder to demonstrate skill on any of them."
+
+}
+
+\
+
+Have folks observed this phenomenon in any course? When in that course was this phenomenon observed?
+
+}
+
+\frame{{Pedagogy}
+
+The article frames the snowball effect as a challenge of both traditional and alternative grading systems, but made more apparent by alternative grading systems. So, communicating with growth-based students is important. 
+
+\
+
+{\bf What are some suggestions for communicating about the snowball effect with students in a productive way?}
+
+}
+
+\frame{{Pedagogy}
+
+Some suggestions from the article:
+
+\begin{itemize}
+\item {\bf Normalize nonlinearity}: Let them know that, if topics accumulate, it's normal and not sign of deficiency in their intellect.
+\item {\bf Provide concrete ways for students to optimize their time on the older topics.} Make sure students understand how to demonstrate proficiency on accumulated targets. {\it You may need to explain how to practice.}
+\item {\bf Help students appreciate the value of revisiting old learning targets while embracing new ones.} Make meaningful connections between the content of old learning targets with new ones.
+\end{itemize}
+
+}
+
+%------------------------------------------------
+\begin{frame}{Discussion: ``Taming the Snowball'' in Coordinated Calculus}
+
+\textbf{Context:} In a coordinated UVA Calculus course with common pacing and assessments.
+
+\vspace{0.5em}
+
+\begin{itemize}
+\item Where do we see the ``snowball effect''?
+\begin{itemize}
+    \item Limits $\rightarrow$ derivatives $\rightarrow$ applications?
+    \item Algebra gaps compounding in differentiation/integration?
+\end{itemize}
+
+\item In a coordinated system, how much flexibility do we realistically have to
+\begin{itemize}
+    \item Pause?
+    \item Reassess?
+    \item Loosen coupling between topics?
+\end{itemize}
+
+\item What would ``loosely coupled'' standards look like in 1190-1210?
+\begin{itemize}
+    \item Can we assess derivatives without re-assessing algebra fluency?
+    \item Can we assess optimization without re-assessing product/chain rule?
+\end{itemize}
+
+\item How do we normalize nonlinear learning without lowering expectations?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Logistically: 
+\begin{itemize}
+    \item Where is the non-exam reassessment occuring for students (provided it exists)?
+    \item Office hours? Reflection week? Structured checkpoint days?
+\end{itemize}
+
+\item What trade-offs are we willing to make:
+\begin{itemize}
+    \item Coverage vs. feedback loops?
+    \item Coordination vs. instructor autonomy?
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame[t]{{Pedagogy}
+
+The article frames that the snowball effect as a challenge made more prominent by alternative grading systems, but not a bug: 
+
+\
+
+``I think this experience, where you have to move on to concept N+1 before you have fully mastered concept N, is normal in our own experiences as learners. Sometimes we can’t fully grasp a concept or topic until we move on to something higher, requiring us to put that earlier concept on the back burner for a while...The lesson here is that while the “snowball effect” might be inevitable in situations where you get more than one opportunity to demonstrate learning, and while it might be ideal for you while it happens, it’s not a critical flaw in alternative grading – it’s just a normal part of the nonlinear nature of learning things."
+
+\
+
+Traditional methods almost by definition do not have this snowball effect (unless you count studying for a final exam). But this is because they don’t have feedback loops. By removing the loop, you remove the snowballing. That is a partial win for students, because they never have to deal with shoring up skill on old topics while new ones are emerging; but it’s also a big loss, for the same reason. On balance, students are better off having feedback loops with the possibility of a snowball than they are without feedback loops and no snowball."
+
+}

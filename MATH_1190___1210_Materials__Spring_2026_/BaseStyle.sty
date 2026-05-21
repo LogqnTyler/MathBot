@@ -1,0 +1,232 @@
+\usepackage[a4paper, hmargin={1.5 cm,1.5cm},
+  top=2cm, marginpar=3.5cm, bottom=3cm
+]{geometry}
+\setlength{\parindent}{0ex}
+\usepackage{microtype}
+\usepackage{physics}
+\usepackage[most]{tcolorbox}
+\usepackage{xparse}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tikz-cd}
+% \usepackage{quiver}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = cyan, citecolor = blue}
+
+% The Literaturnya fonts are the closest ones I could find that mimic the style of old Mir books,
+% \usepackage{literat}
+% % a new symbol font for names of operators
+% \DeclareSymbolFont{litoperators}{OT1}{\familydefault}{m}{n}
+% % tell LaTeX to use litoperators for names of operators
+% \makeatletter
+% \renewcommand{\operator@font}{\mathgroup\symlitoperators}
+% \makeatother
+% \addtolength{\textwidth}{-1.5cm} % to emulate the original
+
+\definecolor{grey}{rgb}{0.8,0.8,0.8}
+
+\newtcbtheorem{Def}{Definition}{
+  breakable, enhanced,
+  attach boxed title to top left={xshift=3mm, yshift=-3mm, yshifttext=-1mm},
+  coltitle=black,
+  colbacktitle=black!5,
+  % fonttitle=\sffamily,
+  colback=white,
+  colframe=black,
+  leftrule=0.5mm,
+  rightrule=0.2mm,
+  toprule=0.2mm,
+  bottomrule=0.2mm,
+  arc=2.5mm,
+  separator sign={\ $\blacktriangleright$},
+  description delimiters none,
+description font=\mdseries}{def}
+
+\newtcbtheorem[no counter]{Quote}{}{
+  breakable, enhanced,
+  attach boxed title to bottom right={xshift=-3mm, yshift=3mm, yshifttext=1mm},
+  % fonttitle=\sffamily,
+  coltitle=black,
+  colbacktitle=white,
+  colback=black!10!white,
+  colframe=black,
+  arc=2.5mm,
+  separator sign none,
+  description delimiters none,
+description font=\mdseries}{quote}
+
+\newtcbtheorem{Thm}{\textbf{Theorem}}{
+  breakable, enhanced,
+  attach boxed title to top left={xshift=3mm, yshift=-3mm, yshifttext=-1mm},
+  % fonttitle=\symlitoperators,
+  coltitle=black,
+  colbacktitle=white,
+  colback=white,
+  colframe=black,
+  separator sign none, description delimiters parenthesis,
+description font=\mdseries}{th}
+
+\newtcbtheorem[no counter]{ThmN}{\textbf{Theorem}}{
+  breakable, enhanced,
+  attach boxed title to top left={xshift=3mm, yshift=-3mm, yshifttext=-1mm},
+  % fonttitle=\sffamily,
+  coltitle=black,
+  colbacktitle=white,
+  colback=white,
+  colframe=black,
+  separator sign none, description delimiters parenthesis,
+description font=\mdseries}{th}
+
+\newtcbtheorem{Lem}{\textbf{Lemma}}{
+  breakable, enhanced,
+  % fonttitle=\sffamily,
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  % titlerule = 0mm,
+  arc = 0mm,
+  % leftrule = 0mm,
+  % rightrule = 0mm,
+  % toprule = 0mm,
+  % bottomrule = 0mm,
+separator sign none, description delimiters parenthesis}{lem}
+
+\newtcbtheorem[no counter]{LemN}{\textbf{Lemma}}{
+  breakable, enhanced,
+  % fonttitle=\sffamily,
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  % titlerule = 0mm,
+  arc = 0mm,
+  % leftrule = 0mm,
+  % rightrule = 0mm,
+  % toprule = 0mm,
+  % bottomrule = 0mm,
+separator sign none, description delimiters parenthesis}{lem}
+
+\newtcbtheorem[no counter]{Cor}{\textbf{Corollary}}{
+  breakable, enhanced,
+  % fonttitle=\sffamily,
+  coltitle = black,
+  colbacktitle = white,
+  colback = white,
+  colframe = black,
+  % titlerule = 0mm,
+  arc = 4mm,
+  sharp corners = southwest,
+  sharp corners = northeast,
+separator sign none, description delimiters parenthesis,
+theorem style = plain}{cor}
+
+
+\newtcbtheorem{Eg}{\textbf{Example}}{
+  breakable, enhanced,
+  % attach boxed title to top left={xshift=3mm, yshift=-3mm, yshifttext=-1mm},
+  % fonttitle=\sffamily,
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  separator sign none, description delimiters parenthesis,
+description font=\mdseries}{eg}
+
+\newtcolorbox{clm}{
+  title = \sbold{Claim},
+  coltitle = black,
+  colbacktitle = white,
+  colback = white,
+  colframe = black,
+  titlerule = 0.5mm,
+  halign title = flush left,
+  halign = flush left,
+  arc = 2mm
+}
+\newtcolorbox{notn}{
+  title = \sbold{ Notation},
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  titlerule = 0.5mm,
+  halign title = flush left,
+  halign = flush left,
+arc = 2mm}
+
+\newtcolorbox{note}{
+  title = \sbold{ Note},
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  titlerule = 0.5mm,
+  halign title = flush left,
+  halign = flush left,
+arc = 2mm}
+
+\newtcolorbox{acknow}{
+  title = \sbold{ Acknowledgement},
+  coltitle = white,
+  colbacktitle = black,
+  colback = white,
+  colframe = black,
+  titlerule = 0.5mm,
+  halign title = flush left,
+  halign = flush left,
+arc = 2mm}
+
+\newtcolorbox{probBox}{
+  coltitle = black,
+  colbacktitle = white,
+  colback = white,
+  colframe = black,
+  arc = 1.5mm,
+  leftrule = 1mm,
+  rightrule = 0.1mm,
+  toprule = 0.3mm,
+bottomrule = 0.3mm}
+
+\theoremstyle{definition}
+\newtheorem{prob}{Problem}
+
+\newenvironment{problem}{
+  \begin{probBox}
+  \begin{prob}}{
+    \end{prob}
+\end{probBox}}
+\newenvironment{soln}{\vspace{0.1cm}\emph{Solution.}}{}
+
+\newcommand{\sbold}[1]{\textsf{\textbf{#1}}}
+\newcommand{\bb}[1]{\mathbbm{#1}} % DON'T USE
+\newcommand{\N}{\mathbbm{N}}
+\newcommand{\Z}{\mathbbm{Z}}
+\newcommand{\Q}{\mathbbm{Q}}
+\newcommand{\R}{\mathbbm{R}}
+\newcommand{\C}{\mathbbm{C}}
+\newcommand{\msk}{\medskip} % DON'T USE
+\newcommand{\ssk}{\smallskip} % DON'T USE
+\newcommand{\bsk}{\bigskip} % DON'T USE
+\newcommand{\Qed}{\quad \blacksquare} % DON'T USE
+% \renewcommand{\qed}{\quad $ \blacksquare $}
+\newcommand{\contra}{\rightarrow \leftarrow} % DON'T USE
+
+% More math commands
+\newcommand{\ltag}[2]{\label{#1} \tag{#2}} % DON'T USE
+\newcommand{\floor}[1]{\left\lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil {#1} \right\rceil}
+\newcommand{\inp}[2]{\left\langle {#1}, {#2} \right\rangle} % DON'T USE
+\newcommand{\vphi}{\varphi} % DON'T USE
+\newcommand{\veps}{\varepsilon} % DON'T USE

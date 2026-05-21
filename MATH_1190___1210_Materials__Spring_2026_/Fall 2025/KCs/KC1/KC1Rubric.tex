@@ -1,0 +1,225 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+\subsection*{Important Ideas for Problem 1}
+
+\begin{enumerate}
+    \item \textbf{Average Rate of Change (AROC).}  
+    The student should use the correct formula for the average rate of change, substitute the given values correctly.
+
+    \item \textbf{Net Change.}  
+    The student should use the correct formula for net change, substitute the given values correctly.
+
+    \item \textbf{Interpretation of the Average Rate.}  
+    The student should explain the meaning of the average rate in clear, everyday language. The explanation should connect to the context of U.S. imports and avoid mathematical jargon (e.g.,“rate of change” or “slope”).
+    \item \textbf{Units.} Student must include the proper units in billions of dollars per year in the final answer.
+\end{enumerate}
+
+\subsection*{Rubric (5-point scale)}
+
+\begin{itemize}
+    \item \textbf{5 (Exceeds Expectations = 100\%):} 
+    All four important ideas are fully correct: 
+    net change and average rate of change formulas are used correctly with proper substitution and units, 
+    and the interpretation is clear, contextual, and avoids mathematical jargon.
+
+    \item \textbf{4 (Proficient = 90\%):} 
+    All four ideas are present with minor mistakes (such as a small arithmetic slip, minor unit mistake, or slight wording issue in the interpretation).
+
+    \item \textbf{3 (Almost = 80\%):} 
+    Three important ideas are present, but the others contain more significant errors or are incomplete. 
+    For example, formulas may be written but not evaluated correctly, or interpretation may be vague.
+
+    \item \textbf{2 (Developing = 70\%):} 
+    Two important idea is present. Some attempt at formulas or interpretation is made, but major errors exist in substitution, units, or explanation.
+
+    \item \textbf{1 (Emerging = 60\%):} 
+    Minimal attempt is made, but work shows a little understanding of the key ideas.
+
+    \item \textbf{0 (Not Yet = 50\%):} 
+    No ideas present, but an attempt has been made.
+\end{itemize}
+\vspace{2in}
+\newpage
+\subsection*{Important Ideas for Problem 2}
+
+\begin{enumerate}
+    \item \textbf{Identifying where the limit exists.}  
+    The student correctly determines that $\displaystyle{\lim_{x\to -2}f(x)}$ exists, and $\displaystyle{\lim_{x\to 2}f(x)}$ fails to exist.
+
+    \item \textbf{Explaining why the limit fails at the infinite discontinuity, but does exist at the removable discontinuity.}  
+    The student clearly states that when $x = 2$, the function approaches $\infty$, so the limit does not exist in the finite sense, but when $x = -2$ the limit does exists since both sides of the limit agree.
+
+    \item \textbf{Identifying where the function is not continuous.}  
+    The student correctly lists all values where the function is not continuous, including both the infinite discontinuity and the removable discontinuity.
+
+    \item \textbf{Explaining why the function is not continuous at the removable discontinuity.}  
+    The student explains that even though the limit exists at $x = -2$, the function’s defined value does not match the limit thus violating the definition of continuity.
+\end{enumerate}
+
+\subsection*{Rubric (5-point scale)}
+
+\begin{itemize}
+    \item \textbf{5 (Exceeds Expectations = 100\%):}  
+    All four important ideas are fully correct: correct identification of where limits exist and fail, correct identification of continuity, and accurate explanations for both types of discontinuities.
+
+    \item \textbf{4 (Proficient = 90\%):}  
+    Four important ideas are fully correct, with only a minor mistakes(e.g., small wording slip or slightly incomplete explanation).
+
+    \item \textbf{3 (Almost = 80\%):}  
+    Three important ideas are correct, while the others contain major errors or are incomplete.
+
+    \item \textbf{2 (Developing = 70\%):}  
+    Two important ideas are correct, but the rest show significant misunderstandings.
+
+    \item \textbf{1 (Emerging = 60\%):}  
+    An attempt is made, but only one of the important ideas are developed correctly.
+
+    \item \textbf{0 (Not Yet = 50\%):}  
+    No ideas present, but an attempt has been made.
+\end{itemize}
+\newpage
+\subsection*{Important Ideas for Problem 3}
+
+\begin{enumerate}
+    \item \textbf{Correctly identifies the form of the continuous limit.}  
+    The student states that \(\displaystyle \lim_{x\to -2}\frac{3x+5}{\sqrt{x+4}}\) is continuous (with some phrasing like “n/a” or ``continuous" for the form) and gives a reasonable explanation for why the function is continuous. (i.e there are no domain issues since we are not dividing by zero and we are not taking negative values in the square root)\\
+    \item \textbf{Appropriately uses continuity.}  
+    Values are substituted into the continuous function, and the student concludes that the value of the function is the limit since the function is continuous at $x = -2$.\\
+    \item \textbf{Correctly identifies the $\frac{c}{0}$ form.}
+    The student correctly identifies the form of \(\displaystyle \lim_{x\to -2}\frac{3x+5}{\sqrt{x+2}}\) as $\frac{c}{0}$ and correctly explains why this is the correct form (i.e. the numerator approaches a constant and the denominator approaches 0).\\
+    \item \textbf{States the final limit of the $\frac{c}{0}$ form with some justification.}  
+    With some justification, (i.e. numerator is negative and denominator is approaching zero through positive values and $\sqrt{x+2}$ is not defined for values to the left of $x = -2$.) the student concludes that the $\frac{c}{0}$ DNE since the right-hand approaches $-\infty$ and left-hand limit does not exist.
+\end{enumerate}
+
+\subsection*{Rubric (5-point scale)}
+
+\begin{itemize}
+    \item \textbf{5 (Exceeds Expectations = 100\%):}  
+    All four important ideas are demonstrated correctly and completely. Work is clear and well justified.
+
+    \item \textbf{4 (Proficient = 90\%):}  
+    Four important ideas are fully correct, and with only minor errors (e.g., small arithmetic slip, incomplete wording, or slightly unclear justification).
+
+    \item \textbf{3 (Almost = 80\%):}  
+    Three important ideas are correct, while the others contain significant errors or are incomplete.
+
+    \item \textbf{2 (Developing = 70\%):}  
+    Two important ideas are  correct, but most of the solution shows misunderstandings.
+
+    \item \textbf{1 (Emerging = 60\%):}  
+    One important idea is present.
+
+    \item \textbf{0 (Not Yet = 50\%):}  
+    No ideas are present, but an attempt has been made.
+\end{itemize}
+\newpage
+\subsection*{Important Ideas for Problem 4}
+\begin{enumerate}
+    \item \textbf{Units and meaning} The units and the meaning of each of 15, 50000, and -8000 should be present.
+
+    \item \textbf{Interpreting a function value in context.}  
+    The student correctly explains what $p(15)=50000$ means, including units and context, without using mathematical jargon like “limit” or “slope.”
+
+    \item \textbf{Instance} Point out $p'(15)$ is about something when the wind speed is at 15 m/sec.
+
+
+    \item \textbf{Interpreting a derivative in context.}  
+    The student correctly explains what $p'(15)=-8000$ means in the context of the wind turbine, including units for both power and wind speed, and uses appropriate language relevant to the problem. For full credit, student should mention the word rate (not mentioning ``decreasing" should be counted as a minor mistake).
+
+    \item \textbf{Identifying derivative at a point of discontinuity.}  
+    The student correctly determines that $p'(10)=DNE$ and justifies it by referencing the discontinuity in the derivative either by the fact that the slopes of the approaching secant lines do not converge to the same value from either side or the fact that the graph has a cusp or corner when $w = 10$.
+\end{enumerate}
+
+\subsection*{Rubric (5-point scale)}
+
+\begin{itemize}
+    \item \textbf{5 (Exceeds Expectations = 100\%):}  
+    All three key ideas are fully addressed, with correct interpretation, units, and clear reasoning.
+
+    \item \textbf{4 (Proficient = 90\%):}  
+    Three key ideas are fully correct, and with only minor errors (slight wording issue, minor unit omission, or partially unclear reasoning).
+
+    \item \textbf{3 (Almost = 80\%):}  
+    Two key ideas are correct; others contain significant errors or are incomplete.
+
+    \item \textbf{2 (Developing = 70\%):}  
+    One key idea is correct, but the rest show major misunderstandings.
+
+    \item \textbf{1 (Emerging = 60\%):}  
+    No key ideas are present, but at least one key idea is almost there.
+
+    \item \textbf{0 (Not Yet = 50\%):}  
+    No ideas are present, but an attempt has been made.
+\end{itemize}
+
+\end{document}

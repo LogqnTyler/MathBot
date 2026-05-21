@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 19}
+\def\TypeTitle{Summations}
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{  \bf\color{Fuchsia}I3, \bf\color{Fuchsia}I4 }
+
+\usepackage{preambleDJ}
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vs{.3}
+
+\textbf{Intended Learning Outcomes}
+After this lesson, you will be able to 
+
+\begin{itemize}
+    \item Compute expressions involving summation notation. (\target{F3})
+    \item Write sums concisely using summation notation. (\target{F3})
+    \item Understand and apply the linearity properties of summation (\target{F3})
+    %\item Use summation properties to expand and simplify sums (\target{F3})
+\end{itemize}
+
+\vspace{-0.6cm}
+
+\hrulefill\\
+
+%Some important properties of probability rely on being able to add several, similarly-formatted quantities together. For example, one important property of probability is that when we sum together the probabilities of each outcome in the sample space, we should get 1 since there is a 100\% chance that {\it something} in the sample space will happen:
+%\[ \text{If }S=\{outcome_1,outcome_2,\ldots,outcome_n\},\text{ then }P(\{outcome_1\}) + P(\{outcome_2\}) + \ldots + P(\{outcome_n\}) = 1.\]
+%As we'll see in the coming lessons, the above statement can be more succinctly written as a summation:
+%\[ \sum_{i=1}^{n} P(\{outcome_n\}) = 1 \quad\text{ or }\quad \sum_{outcome\in S} P(outcome) = 1\]
+In this class, we'll practice using notation for expressing sums using summation so that we will be able to use it in our upcoming probability lessons.
+
+{\example / \exercise}\ltrm{\bf\color{ProcessBlue}F3} Expand and compute the following sums:
+    \begin{enumerate}
+    \item[(a)] ({\bf\color{blue}Example}) $\displaystyle\sum_{i=0}^2 \frac{2i+1}{i+1}$
+        \vfill
+    \item[(b)] ({\bf\color{blue}Exercise}) $\displaystyle\sum_{j=1}^4 \log_2\left( 2j\right)$
+        \vfill
+    \item[(c)] ({\bf\color{blue}Exercise}) $\displaystyle\sum_{k=0}^3 k(-1)^k$
+        \vfill
+    \end{enumerate}
+    
+{\example / \exercise}\ltrm{\bf\color{ProcessBlue}F3} Write - but don't compute - the following sums using summation notation:
+    \begin{enumerate}
+    \item[(a)] ({\bf\color{blue}Example}) $2+3+4+5+6$
+        \vfill
+    \item[(b)] ({\bf\color{blue}Exercise}) $\displaystyle\frac12+\frac14+\frac16+\frac18+\frac1{10}+\frac1{12}$
+        \vfill
+    \item[(c)] ({\bf\color{blue}Exercise}) $\displaystyle-\frac15+\frac2{25}-\frac3{125}+\frac4{625}$
+        \vfill
+    \end{enumerate}
+    
+\newpage
+
+\important{Summation Properties}
+{
+Let $c$ be any constant, and let $m$ and $n$ be whole numbers with $m<n$.
+\begin{itemize}
+\item $\displaystyle\sum_{i=m}^n(a_i+b_i) = \sum_{i=m}^n a_i + \sum_{i=m}^n b_i$ \hfill (linearity property \#1)
+\item $\displaystyle\sum_{i=m}^n ca_i = c\sum_{i=m}^n a_i$  \hfill (linearity property \#2)
+\item $\displaystyle\sum_{i=1}^n c = cn$
+\end{itemize}
+}
+
+{\example}\ltrm{\bf\color{ProcessBlue}F3} Use the properties of summations exhaustively to decompose the following summation: \[\sum_{j=1}^n (a_j-3b_j+7c_j-4)\]
+
+    \vfill
+    
+{\exercise}\ltrm{\bf\color{ProcessBlue}F3} Use the properties of summations exhaustively to decompose the following summations:
+    \begin{enumerate}
+    \item[(a)] $\displaystyle\sum_{i=1}^n (2a_i+3b_i-1)$
+        \vfill
+    \item[(b)] $\displaystyle\sum_{k=1}^n \left(\frac{a_k\cdot k}4+9b_k^2-2c_k\cdot d_k\right)$\quad(\emph{Hint:} be careful - this is a bit of a trap.)
+        \vfill
+    \end{enumerate}
+
+\end{document}

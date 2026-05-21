@@ -1,0 +1,908 @@
+\documentclass[dvipsnames]{beamer}
+\usepackage{comment}
+\usepackage{hyperref}
+
+\title{MATH 1190 \& 1210 Meeting for Week 13}
+\author{Josh}
+\date{6 April 2026}
+
+\newcommand{\transition}[1]{\frame{{}\begin{center}\fbox{#1}\end{center}}}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Logistics: Pacing}
+
+\transition{Logistics}
+
+\frame{{Logistics: Pacing}
+
+{\bf Where are folks in the lessons right now?}
+
+}
+
+\frame[t]{{Logistics: Upcoming Schedule}
+
+    \begin{itemize}
+     \item week 13 of class (6 April - 10 April)
+        \begin{itemize}
+        \item lesson 20 (Discrete RVs)
+        \item Application Day 3: Gradient Descent
+        \end{itemize}
+         \item week 14 of class (13 April - 17 April)
+        \begin{itemize}
+        \item lesson 21 (Continuous RVs)
+        \item lesson 22 (Expectation and Variance) -- {\footnotesize\color{red} last topic on assessment 4}
+        \end{itemize}
+    \end{itemize}
+
+}
+
+\frame[t]{{Logistics: Upcoming Deadlines}
+
+{\bf Assessment-related Logistics}
+\begin{itemize}
+\item KC2 Reflections
+\item The KC3 Grading (done by end of day Thursday 9 April)
+\item KC2 Regrade requests some still need finished F1 (not on KC3)
+\item KC3 Regrade requests open on Saturday 11 April due by Thursday 16 April
+\item KC4 Week after next 23 April
+    \begin{itemize}
+    \item reassessment targets: {\color{RedOrange}A2},{\color{RedOrange}A3}, {\color{Fuchsia}I1}, {\color{Fuchsia}I2}, 
+    \item new targets:{\color{Fuchsia}I3},{\color{Fuchsia}I4},{\color{ProcessBlue}F3}, {\color{Orange}P1}, {\color{Orange}P2} (5 targets!)
+    \item Thursday, 23 April, 7:00 PM; 80 minutes
+    \item Room assignments same as KC1 this time. No switching dates!
+    \end{itemize}
+\end{itemize}
+
+}
+
+
+
+
+\section{Content}
+
+\transition{Content}
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Learning Objectives: P1: Introduction to Probability }
+After this lesson, students will be able to:
+\begin{itemize}
+    \item Describe sample spaces and events
+    \item Identify discrete random variables
+    \item Compute probabilities from finite sample spaces
+    \item Understand and use probability mass functions (PMFs)
+    \item Interpret and sketch histograms of PMFs
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Basic Terminology}
+\begin{itemize}
+    \item \textbf{Experiment}: A repeatable process with uncertain outcomes
+    \item \textbf{Outcome}: A single result of an experiment
+    \item \textbf{Sample Space ($S$)}: Set of all possible outcomes
+    \item \textbf{Event}: A subset of the sample space
+\end{itemize}
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}{Discrete Random Variables}
+\begin{itemize}
+    \item Warmup: Exercise A: Drawing Marbles
+    \item \textbf{Definition of a random variable} assigns a number to each outcome
+    \item \textbf{Difference between discrete and continuous} takes on a finite number of values
+    \item Definition of uniform probability calculation
+    \item Definition of histogram
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Discrete Random Variables}
+
+\textbf{Example 1:Random variable on sample space of Exercise A}
+\begin{itemize}
+    \item Create histogram
+    \item Build intuition for random variables
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Properties of Probability Mass Function}
+
+\begin{itemize}
+    \item $0 \le p(x) \le 1$
+    \item $\sum p(x) = 1$
+\end{itemize}
+
+\textbf{Exercise B}
+\begin{itemize}
+    \item Fill in table of values
+    \item Create histogram
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Histograms of PMFs}
+\begin{itemize}
+    \item Exercise C: Histogram visually represents a PMF
+    \item $x$-axis: possible values
+    \item $y$-axis: probabilities
+\end{itemize}
+
+
+
+\begin{block}{Interpretation}
+Height of each bar = $P(X = x)$
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Exercise D: Classic two dice example}
+\begin{itemize}
+    \item Let $X =$ sum of two dice
+    \item Possible values: $2,3,\dots,12$
+\end{itemize}
+
+\textbf{Key idea:}
+\begin{itemize}
+    \item Not all sums are equally likely!
+    \item Example:
+    \[
+    P(X=7) = \frac{6}{36}, \quad P(X=2)=\frac{1}{36}
+    \]
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Applications: Age Distribution}
+\begin{itemize}
+    \item Discrete random variable can model real data
+    \item Example: Age groups of a population
+\end{itemize}
+
+
+\begin{block}{Key Idea}
+Probabilities represent proportions of a population
+\end{block}
+
+\begin{itemize}
+    \item Histograms help visualize distributions
+    \item Area corresponds to total probability
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Summary}
+\begin{itemize}
+    \item Sample space = all possible outcomes
+    \item Events = subsets of outcomes
+    \item Discrete random variables take finite values
+    \item PMF describes probabilities
+    \item Histograms visualize distributions
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Application Day 3: Gradient Descent}
+\begin{itemize}
+    \item Machine learning = optimization problem
+    \item We define a one variable loss function measuring error
+    \item Goal: Use basic calculus ideas to minimize loss when we cannot solve using algebra or exact derivatives
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Pre-Class Activity}
+
+\begin{frame}{Pre-Class: Key Idea}
+\begin{itemize}
+    \item Use derivatives to guide optimization
+    \item Move in direction of \textbf{steepest decrease}
+\end{itemize}
+
+
+
+\[
+x_{n+1} = x_n - \alpha f'(x_n)
+\]
+
+
+
+\begin{itemize}
+    \item Use a hyperparameter $\alpha$ = learning rate (step size)
+    \item Repeat until close to minimum
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Pre-Class: Intuition}
+\begin{itemize}
+    \item If $f'(x) > 0$ $\rightarrow$ move left
+    \item If $f'(x) < 0$ $\rightarrow$ move right
+    \item If $f'(x) \approx 0$ $\rightarrow$ near minimum
+\end{itemize}
+
+
+
+\begin{block}{Tradeoff}
+\begin{itemize}
+    \item Large $\alpha$ $\rightarrow$ may overshoot
+    \item Small $\alpha$ $\rightarrow$ slow progress
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Pre-Class: Example Process}
+\begin{itemize}
+    \item Start with $x_1$
+    \item Compute $f'(x_1)$
+    \item Update:
+    \[
+    x_2 = x_1 - \alpha f'(x_1)
+    \]
+ %   \item Repeat to get $x_3, x_4, \dots$
+\end{itemize}
+
+
+
+\begin{block}{Goal}
+Sequence approaches a minimum of $f(x)$
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Pre-Class: Exploration}
+Using the app:
+\begin{itemize}
+    \item Try different functions
+    \item Change starting value $x_0$
+    \item Adjust learning rate $\alpha$
+\end{itemize}
+
+
+
+\textbf{Questions to consider:}
+\begin{itemize}
+    \item Does it always find the minimum?
+    \item What happens if $\alpha$ is large?
+    \item How does the starting point matter?
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+\section{During-Class Activity}
+
+\begin{frame}{During Class: Real-World Application}
+\begin{itemize}
+    \item Model spread of disease
+    \item Early growth is approximately exponential:
+\end{itemize}
+
+\[
+I(t) = e^{\lambda t}
+\]
+
+
+
+\begin{itemize}
+    \item Take logarithm:
+\end{itemize}
+
+\[
+\ln I(t) = \lambda t
+\]
+
+
+
+\begin{block}{Goal}
+Estimate $\lambda$ using gradient descent
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{During Class: Error Function}
+We measure how well our model fits data:
+
+\[
+E(\lambda)
+\]
+
+
+\begin{itemize}
+    \item $y_i = \ln I(t_i)$
+    \item Minimize error using gradient descent
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{During Class: Gradient Descent Steps}
+\begin{enumerate}
+    \item Choose initial guess $\lambda_0$
+    \item Compute predictions $\hat{y}_i = \lambda t_i$
+    \item Compute derivative:
+    \[
+    \frac{dE}{d\lambda} 
+    \]
+    \item Update:
+    \[
+    \lambda_{\text{new}} = \lambda_{\text{old}} - \alpha \frac{dE}{d\lambda}
+    \]
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{During Class: Interpretation}
+Once we estimate $\lambda$, we compute:
+
+$R_0$  = ``how many people, on average, one infected person will infect." 
+
+
+
+
+\begin{itemize}
+    \item $R_0 > 1$ $\rightarrow$ disease spreads
+    \item $R_0 = 1$ $\rightarrow$ stable
+    \item $R_0 < 1$ $\rightarrow$ dies out
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{During Class: Exploration}
+Using the app:
+\begin{itemize}
+    \item Run gradient descent on real data
+    \item Record $\lambda$, error, and $R_0$
+\end{itemize}
+
+
+
+\textbf{Investigate:}
+\begin{itemize}
+    \item Effect of learning rate $\alpha$
+    \item Effect of number of steps
+    \item Best parameter choices
+    \item Calculate $R_0$ 
+    \item Suggest course of action to epidimiologist
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+
+%------------------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Pedagogy}
+
+\transition{Pedagogy}
+
+
+\transition{Active Learning}
+\transition{And Now - An Active Learning Discussion with Jim B.!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%------------------------------------------------
+
+
+
+%------------------------------------------------
+\section{Motivation}
+
+\begin{frame}{Today's Paper}
+``Interventions to reduce burnout in students: A systematic
+review and meta‑analysis" Madigan et al. (2024)
+
+\begin{itemize}
+    \item Student burnout is increasing in higher education
+    \item Linked to:
+    \begin{itemize}
+        \item Lower academic performance
+        \item Reduced engagement
+        \item Mental health challenges
+    \end{itemize}
+\end{itemize}
+
+
+
+\begin{block}{Key Question}
+What interventions actually reduce burnout in students?
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+\section{What is Burnout?}
+
+\begin{frame}{Defining Student Burnout}
+Burnout consists of three dimensions:
+\begin{itemize}
+    \item \textbf{Emotional exhaustion}
+    \item \textbf{Cynicism / disengagement}
+    \item \textbf{Reduced academic efficacy}
+\end{itemize}
+
+
+
+\begin{block}{Important Distinction}
+Burnout is not just stress — it is chronic, cumulative, and affects identity as a student
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+\section{Study Overview}
+
+\begin{frame}{Study Design}
+\begin{itemize}
+    \item Type: Systematic review + meta-analysis
+    \item Synthesizes many intervention studies
+    \item Focus: What works to reduce student burnout?
+\end{itemize}
+
+
+
+\begin{block}{Goal}
+Estimate the effectiveness of different intervention types
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Data and Methods}
+\begin{itemize}
+    \item Collected studies from multiple academic databases
+
+    \begin{itemize}
+    \item The authors did not recruit students
+    \item They did not run interventions themselves
+    \item Experimental or quasi-experimental designs
+    \item Measured burnout outcomes
+    \end{itemize}
+    \item Compared:
+    \begin{itemize}
+        \item Intervention vs. control groups
+        \item paper asks “Across all studies, how well do interventions work?”
+    \end{itemize}
+\end{itemize}
+
+
+\begin{block}{Analysis}
+Meta-analysis to compute overall effect sizes
+\end{block}
+
+\end{frame}
+
+
+%------------------------------------------------
+\section{Measuring Burnout}
+
+\begin{frame}{How is Burnout Measured?}
+\begin{itemize}
+    \item Burnout is not directly observable
+    \item Measured using validated survey instruments
+    \item Students respond to statements using a Likert scale
+    \begin{itemize}
+        \item Example: 1 = Never, 5 = Always
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Common Burnout Scales}
+\textbf{Maslach Burnout Inventory -- Student Survey (MBI-SS)}
+\begin{itemize}
+    \item Emotional exhaustion
+    \item Cynicism / disengagement
+    \item Academic efficacy (reverse-coded)
+\end{itemize}
+
+
+
+\textbf{Oldenburg Burnout Inventory (Student Version)}
+\begin{itemize}
+    \item Exhaustion
+    \item Disengagement
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Example Survey Items}
+Students rate statements such as:
+
+\begin{itemize}
+    \item ``I feel emotionally drained by my studies''
+    \item ``I have become less interested in my coursework''
+    \item ``I feel capable of succeeding in my classes''
+\end{itemize}
+
+
+
+\begin{block}{Interpretation}
+Higher exhaustion + disengagement + lower efficacy = higher burnout
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{From Surveys to Data}
+\begin{itemize}
+    \item Each student receives a burnout score
+    \item Studies compare:
+    \begin{itemize}
+        \item Intervention group vs. control group
+        \item Before vs. after intervention
+    \end{itemize}
+\end{itemize}
+
+
+
+\begin{itemize}
+    \item Results converted into effect sizes
+\end{itemize}
+
+
+
+
+\end{frame}
+%------------------------------------------------
+\section{Key Results}
+
+\begin{frame}{Main Findings}
+\begin{itemize}
+    \item Interventions \textbf{do reduce burnout overall}
+    \item Effects are:
+    \begin{itemize}
+        \item Small to moderate
+        \item Statistically significant
+    \end{itemize}
+\end{itemize}
+
+
+
+
+
+\end{frame}
+%------------------------------------------------
+\section{Intervention Strategies}
+
+\begin{frame}{Examples of Burnout Interventions}
+Studies in the paper implemented interventions such as:
+
+
+
+\textbf{Cognitive / Behavioral}
+\begin{itemize}
+    \item Mindfulness and meditation exercises
+    \item Cognitive Behavioral Therapy (CBT) techniques
+    \item Stress-reframing strategies
+\end{itemize}
+
+
+
+\textbf{Academic Skills}
+\begin{itemize}
+    \item Time management training
+    \item Study skills workshops
+    \item Goal-setting and planning exercises
+\end{itemize}
+\end{frame}
+\begin{frame}
+
+
+\textbf{Wellness and Physical Activity}
+\begin{itemize}
+    \item Exercise programs
+    \item Relaxation techniques (breathing, stretching)
+\end{itemize}
+
+
+
+\textbf{Social Support}
+\begin{itemize}
+    \item Peer discussion groups
+    \item Counseling or mentoring programs
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+%------------------------------------------------
+
+
+
+%------------------------------------------------
+
+%------------------------------------------------
+\begin{frame}{Techniques for Reducing Burnout}
+
+\textbf{Core Idea: Thoughts influence feelings and behavior}
+
+
+
+\begin{itemize}
+    \item Cognitive Restructuring
+    \begin{itemize}
+        \item Identify and challenge negative thoughts
+    \end{itemize}
+    
+    
+    
+    \item Thought Records
+    \begin{itemize}
+        \item Write situation $\rightarrow$ thought $\rightarrow$ alternative thought
+    \end{itemize}
+    
+    
+    
+    \item Behavioral Activation
+    \begin{itemize}
+        \item Take small actions even without motivation
+    \end{itemize}
+    \end{itemize}
+
+    \end{frame}
+    \begin{frame}
+    \begin{itemize}
+
+    
+    \item Task Breakdown
+    \begin{itemize}
+        \item Divide large tasks into manageable steps
+    \end{itemize}
+    
+    
+    
+    \item Gradual Exposure
+    \begin{itemize}
+        \item Start with easier tasks, build up difficulty
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Stress-Reframing Strategies}
+
+\textbf{Core Idea: Stress depends on interpretation}
+
+
+
+\begin{itemize}
+    \item Stress-as-Enhancing Mindset
+    \begin{itemize}
+        \item Stress can improve focus and performance
+    \end{itemize}
+    
+    
+    
+    \item Challenge vs. Threat
+    \begin{itemize}
+        \item View tasks as opportunities, not dangers
+    \end{itemize}
+    
+    
+    
+    \item Normalization
+    \begin{itemize}
+        \item Burnout is common at the end of the semester
+    \end{itemize}
+    
+    
+    
+    \item Process Focus
+    \begin{itemize}
+        \item Focus on effort (e.g., complete 5 problems)
+    \end{itemize}
+    
+    
+    
+    \item Growth Framing
+    \begin{itemize}
+        \item Replace “I can’t” with “I’m still learning”
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+\begin{frame}{What Works Best?}
+\begin{itemize}
+    \item Strongest effects:
+    \begin{itemize}
+        \item Structured programs (not one-time activities)
+        \item Repeated practice over time
+    \end{itemize}
+\end{itemize}
+
+
+
+\begin{itemize}
+    \item Less effective:
+    \begin{itemize}
+        \item One-off workshops
+        \item Passive information delivery
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Mechanisms}
+Why do interventions work?
+
+
+
+\begin{itemize}
+    \item Improve coping strategies
+    \item Increase sense of control
+    \item Reduce cognitive overload
+    \item Rebuild engagement
+\end{itemize}
+
+
+
+\begin{block}{Key Idea}
+Burnout is reduced when students feel capable and supported
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+\section{Pedagogical Implications}
+
+\begin{frame}{Implications for Teaching}
+\begin{itemize}
+    \item Build structure into our remaining lessons 
+    \item Use frequent, low-stakes activities
+    \item Emphasize process over performance
+\end{itemize}
+
+
+
+\begin{itemize}
+    \item Normalize struggle and fatigue
+    \item Provide clear pathways for progress
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{What Instructors Can Do}
+\begin{itemize}
+    \item Break large assignments into milestones
+    \item Include short reflection activities
+    \item Encourage peer interaction
+\end{itemize}
+
+
+
+\begin{itemize}
+    \item Integrate small wellness practices
+    \item Provide timely feedback
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{End-of-Semester Strategies}
+\begin{itemize}
+    \item Focus on completion over perfection
+    \item Highlight progress already made
+    \item Reduce unnecessary cognitive load
+\end{itemize}
+
+
+
+\begin{block}{Key Pedagogical Shift}
+Help students "get over the hump" rather than optimize performance
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+\section{Discussion}
+
+\begin{frame}{Discussion Questions}
+\begin{itemize}
+    \item Which type of intervention aligns most with your teaching?
+    \item What barriers prevent implementing these strategies?
+    \item How can we build ongoing support rather than one-time fixes?
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Discussion Questions (Continued)}
+\begin{itemize}
+    \item How do we balance rigor with burnout prevention?
+    \item What small change could you implement next semester?
+    \item How can departments (not just individuals) support this work?
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}{Takeaways}
+\begin{itemize}
+    \item Burnout is common and measurable
+    \item Interventions work — especially when sustained
+    \item Structure + support + engagement are key
+\end{itemize}
+
+
+
+\begin{block}{Final Thought}
+Reducing burnout is not lowering standards — it is enabling students to meet them
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+\end{document}
+
+

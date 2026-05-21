@@ -1,0 +1,51 @@
+{
+    "name": "Slopes and Rates of Change",
+    "week": 1,
+    "learning_objectives": [
+        "Find and distinguish the net change and average rate of change",
+        "Interpret the average rate of change graphically as the slope the respective linear function"
+    ],
+    "contents:" {
+        "problems": [
+            {
+                "name" : "Exercise A_a",
+                "context": "A predator-prey model describes how the sizes of two populations -- predator $P_1$ and prey $P_2$ -- are related. Suppose two points describing a predator prey model are given by $(P_1,P_2)=(100,1000)$ and $(P_1,P_2)=(300,300)$.",
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "What is the net change of the predator population as the prey population changes from 1000 to 300?",
+                            "answer": "Delta P_2=300-1000=-700 when P_1 changes from 100 to 300"
+                        },
+                        "latex": {
+                            "question": "What is the net change of the prey population as the predator population changes from $100$ to $300$?",
+                            "answer": "{\\Large $\\Delta P_2=$\\unline{1.5}{\\col{$300-1000=-700$}} when $P_1$ changes from\\unline{.5}{\\col{$100$}} to  \\unline{.5}{\\col{$300$}} }"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "What is the average rate of change of the prey population with respect to the predator population?",
+                            "answer": "AROC = Delta P_2 / Delta P_1 = (300-1000)/(300-100) = -7/2"
+                        },
+                        "latex": {
+                            "question": "What is the average rate of change of the prey population with respect to the predator population?",
+                            "answer": "{\\Large $\\frac{\\Delta P_2}{\\Delta P_1} = \\frac{-700}{200} = -3.5$}"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "Assuming the predator-prey model is linear, what is the slope of the graph describing the relationship between the predator and prey populations?",
+                            "answer": "m = -7/2"
+                        },
+                        "latex": {
+                            "question": "Assuming the predator-prey model is linear, what is the slope of the graph describing the relationship between the predator and prey populations?.",
+                            "answer": "{\\Large $m=$\\unline{.5}{ \\col{$-\\frac{7}{2}$}  }{.25}}"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

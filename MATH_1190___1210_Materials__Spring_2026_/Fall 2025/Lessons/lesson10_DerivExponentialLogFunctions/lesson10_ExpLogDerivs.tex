@@ -1,0 +1,176 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 10}
+\def\TypeTitle{Derivatives of Exponential \& Logarithmic Functions }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{ {\bf \color{ForestGreen}D2} , {\bf \color{ForestGreen}D3} }
+
+\usepackage{preambleDJ}
+
+%\usepackage{ragged2e}
+
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vs{.6}
+
+\textbf{Intended Learning Outcomes}
+After this lesson, you will be able to 
+
+\begin{itemize}
+    \item Take the derivatives of general exponential and logarithmic functions. (\target{D3})
+    \item Use the derivatives of exponential and logarithmic functions in combinations of differentiation rules, such as the product rule, the quotient rule, and the chain rule. (\target{D2})
+\end{itemize}
+
+\vspace{-0.5cm}
+
+\hrulefill
+
+
+\blue{\bf \em Derivative of the General Exponential Function}
+
+
+\reversemarginpar\marginnote{\fbox{\bf\color{ForestGreen}D3}} 
+{\bf \textcolor{blue}{Mini-lecture.}} The derivative of the general exponential function $f(x)=a^x$, with $a>0$ and $a\neq1$, is very closely related to the derivative of the natural exponential function. To see this relationship, you will need to know:
+
+\tasksI{3}{
+\task {\bf Derivative of $e^x$}\\
+$\dfrac{d}{dx}[e^x] =e^x $
+
+\task {\bf Inverse Property} \vs{.1}\\
+$\ds e^{\ln(a)} = a$
+
+\task {\bf Chain Rule}\\
+$\ds \frac{d}{dx}[f(g(x))] =f^{\prime}(g(x))\,g^{\prime}(x) $
+}
+\vs{.1}
+$\dfrac{d}{dx}[a^x] =$
+
+\vspace{2.5in}
+{\em Conclusion:}
+\tasksI{2}{
+\task $\dfrac{d}{dx}[a^x] =$
+\task $\dfrac{d}{dx}[e^x] =$
+}
+
+~\\
+
+\example{\color{ForestGreen}D2} Find $\displaystyle\frac{d}{dy}\left[2^{y^2/7}\right]$.
+
+\vfill
+
+\exercise{\color{ForestGreen}D2} Find $h'(t)$ given $h(t)=\left(\displaystyle\frac23\right)^{1-t^2}$, where $t>0$.
+
+\vfill
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+\exercise{\color{ForestGreen}D2} The half-life formula $\displaystyle N(t) = N_0\left(\frac12\right)^{t/h}$ gives the amount $N(t)$ of a decaying, radioactive quantity at a time $t$ in terms of the initial amount, $N_0$, of the radioactive quantity and the half-life, $h$, of the decaying quantity. You will need this formula to address the following prompt. You may find a calculator useful when doing so.\\
+
+Many smoke detectors function by using a radioisotope, typically americium-241, to ionize air; an alarm sounds when a difference due to smoke is detected. Thus, the rate at which americium-241 decays is of critical importance in the function of a smoke detector. Given americium-241 has a half-life of approximately $432.2$ years, at what rate does a $10$ gram sample placed in a smoke detector decay $1$ year after the smoke detector is manufactured? Round your answers to 3 decimal places, and include the units of measurement.
+\tasksA{3}{
+\task What are we asked to find?\vs{.75}\\
+\task At what {\em time} are we asked to find this quantity?
+\task What's $N_0?$ 
+\task What's $h$?
+\task* Put everything together to answer the prompt above.
+}
+
+\vfill
+
+\blue{\bf \em Derivative of the General Logarithmic Function}
+
+\reversemarginpar\marginnote{\fbox{\bf\color{ForestGreen}D3}} {\bf \textcolor{blue}{Mini-lecture.}} The derivative of the general logarithmic function $f(x)=\log_a(x)$, with $a>0$ and $a\neq1$, is very closely related to the derivative of the general exponential function. To see this relationship, you will need to know:
+
+\tasksI{3}{
+\task {\bf Derivative of $a^x$}\\
+$\dfrac{d}{dx}[a^x] = $
+
+\task {\bf Inverse Property} \vs{.1}\\
+$\ds a^{\log_a(x)} = $
+
+\task {\bf Chain Rule}\\
+$\ds \frac{d}{dx}[f(g(x))] =f^{\prime}(g(x))\,g^{\prime}(x) $
+}
+
+
+\vspace{3in}
+{\em Conclusion:}
+\tasksI{2}{
+\task $\dfrac{d}{dx}[\log_a(x)] =$
+\task $\dfrac{d}{dx}[\ln(x)] =$
+}
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+ \blue{\bf \em Summary of Exponential and Logarithmic Derivative Rules} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D3}} \\
+\fbox{$\dfrac{d}{dx}[e^x]=e^x$} \hfill \fbox{$\dfrac{d}{dx}[a^x]=a^x\ln(a)$ }\hfill \fbox{$\dfrac{d}{dx}[\ln(x)]=\dfrac{1}{x}$}\hfill \fbox{$\dfrac{d}{dx}[\log_a(x)]=\dfrac{1}{x \ln(a)}$}
+
+
+\exercise{\color{ForestGreen}D2} Find the following derivative: $\dfrac{d}{dx}\left[ \log_7(x^9+e^x) \right]$\\
+\mpageT{.4}{.6}{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}
+}{
+}
+\vfill
+
+
+
+
+\exercise{\color{ForestGreen}D2} Find the following derivative: $\ds \frac{d}{dx}\left[\Big(2^{3x+2}\cdot   \log_7(x^9+e^x) \right]$\\
+\mpageT{.4}{.6}{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}
+}{
+}
+
+
+    \vfill
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Discussion.} Ari, a former Math 1210 LA, makes the following claim. Do you agree or disagree with Ari? Why or why not?
+\begin{center}{\em  The derivative of $g(x)=\ln(f(x))$ is always $\ds g^{\prime}(x)=\frac{1}{f(x).}$} \end{center}
+
+
+
+\vspace{2in}
+
+{\bf\color{blue} Extra Practice 1.} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D2}}  Find the following derivative:  $\dfrac{d}{dt}\left[\dfrac{3^t\ln(1-t^2)}{\sqrt[4]{t^5+1}}\right]$\\
+\mpageT{.4}{.6}{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}
+}{
+}
+
+\newpage
+\vfill
+{\bf\color{blue} Extra Practice 2.} \reversemarginpar \marginnote{\fbox{\bf\color{ForestGreen}D2}}  Let $h(t)=2^t\sqrt{\dfrac{\log_3(t)}{t^4+1}}$. Find $h^{\prime}(t)$.\\\\
+\mpageT{.4}{.6}{
+{\em Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?}
+}{
+}
+\vs{5.5}
+   
+
+{\bf\color{blue} Extra Practice 3.} If you deposit \$1000 in a bank account earning 5\% annual interest compounded continuously, then the amount $A(t)$ of money in the account after $t$ years is $A(t) = 1000e^{0.05 t}$, assuming that you make no withdrawals and no additional deposits.  How quickly is the account balance growing initially? Include units in your final answer. 
+    
+        
+\end{document}

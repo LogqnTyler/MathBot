@@ -1,0 +1,77 @@
+\documentclass[10pt]{article}
+
+    
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 0}
+\def\TypeTitle{Modeling Change and Uncertainty }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{\bf Intro to the course!}
+\def\desmosClassCode{{\bf ZAJ$3$AZ}}
+
+\usepackage{preambleDJ} 
+
+\begin{document}
+\pagestyle{otherpages}
+%\thispagestyle{empty}
+\thispagestyle{firstpage}
+
+
+
+\vs{.75}
+
+{\bf\color{blue}Welcome }
+ \\
+ \mpage{.6}{.5}{\em A bit about me...}{
+ \em Now, about you...
+ }\\ \vs{1.5}
+
+ {\em We've got a Learning Assistant!} 
+ ~\\\\\\\\\\
+ {\em Here's where we're headed:}\\
+\mpage{.6}{.5}{
+I.C.E}{
+Growth Based Assessments (if time)
+}\vs{2.5} \\
+
+
+
+\newpage
+{\bf What's the story so far?}  \\
+\mpageT{.4}{.6}[\hs{.1}]{
+The Keeling Curve is the record of atmospheric CO2 in parts per million (ppm). This data set is named after Charles Keeling who started collecting this data at Mauna Loa Observatory, starting in 1958.  A sample of atmospheric CO$_2$ is shown below in five-year intervals from starting in 1965 through 2010.  Note that ``year" means ``years since 1965."  For example, $t=10$ represents the year 1975.
+}{
+\graphicsC{keelingDataMMA}{3.5}
+}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+year & 0 & 5 & 10 & 15 & 20 & 25 & 30 & 35 & 40 & 45 \\
+\hline
+CO$_2$ level & 320 & 325 & 331 & 338 & 345 & 354 & 360 & 369 & 379 & 389 \\
+\hline
+\end{tabular}
+\end{center}
+
+{\bf How much  CO$_2$ is in the atmosphere in the year 2025?}
+\enum{
+\item \pe Let's start with some intuition.  What's your best guess for the amount of CO$_2$ in the atmosphere in the year 2025?  
+\vs{2}
+\item \pe On a scale of $0-100$, how confident are you in your estimate? 
+$0$  = ``not at all confident" and $100=$``$100\%$ confident."
+\newpage
+\item (In groups) What decisions did you make and/or questions did you have when you made your best guess? 
+\vs{3}
+\item  (In groups) Work together to brainstorm at least two strategies to refine your estimate and/or increase your confidence in your estimate. You might find it helpful to use Desmos widget ``First Day of Class: The Keeling Curve"  to implement your ideas. This can be found on the ToDo tab at \url{https://student.desmos.com} using code \desmosClassCode (You might need to create a free account at Amplify). 
+\vs{3}
+\item (In groups) In what ways would you describe how the amount of CO$_2$ is changing each year?\newpage
+\item (Extra, if time. In groups) What other information might be helpful to further  improve your estimate and/or build confidence in your estimate? What mathematical tools might be helpful?
+}
+\vs{3}
+\bblue{Key Questions for the semester}
+%\vs{1} \\
+%\pe Based on this data, what do you think is a reasonable guess for the amount of CO$_2$ in the atmosphere in January 2024?
+
+\end{document}

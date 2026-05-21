@@ -1,0 +1,127 @@
+\documentclass[10pt]{article}
+
+    
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 0}
+\def\TypeTitle{Modeling Change}
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1210}
+\def\Targets{\bf Intro to the course!}
+\def\desmosClassCode{{\bf ZAJ$3$AZ}}
+
+\usepackage{preambleDJ} 
+
+\begin{document}
+\pagestyle{otherpages}
+%\thispagestyle{empty}
+\thispagestyle{firstpage}
+
+
+\vs{.75}
+
+{\bf\color{blue}About this class}
+
+\vfill
+
+{\bf\color{blue}Introduction}
+
+A \textit{function} is a deterministic rule for transforming one sort of thing into another. The collection of things which can go into the function is called the \textit{domain} of the function, and the collection of things which can come out is called the \textit{range}.
+
+The \textit{real numbers} comprise everything on the number line, both positive and negative.
+
+\begin{enumerate}
+    \item (In groups) Give some examples of functions.\\[0.5cm]
+    \begin{tabular}{c | c | c}
+         \parbox{0.3\textwidth}{
+            Domain: Real numbers\\[7pt]
+            Range: Real numbers
+            \vspace{4cm}
+         }
+         &
+         \parbox{0.3\textwidth}{
+            Domain: \underline{\hspace{3cm}}\\[7pt]
+            Range: Real numbers
+            \vspace{4cm}
+         }
+         &
+         \parbox{0.3\textwidth}{
+            Domain: \underline{\hspace{3cm}}\\[7pt]
+            Range: \underline{\hspace{3cm}}
+            \vspace{4cm}
+         }
+    \end{tabular}
+\end{enumerate}
+\vspace{0.5cm}
+
+\newpage
+
+{\bf What is Calculus?}
+\vspace{8cm}
+
+{\bf Calculus and Geometry}
+
+\vspace{6.5cm}
+
+
+
+{\bf\color{blue} Application: Environmental Science}\\
+\mpageT{.4}{.6}[\hs{.1}]{
+The Keeling Curve is the record of atmospheric CO$_2$ in parts per million (ppm). This data set is named after Charles Keeling who started collecting this data at Mauna Loa Observatory, starting in 1958.  A sample of atmospheric CO$_2$ is shown below in five-year intervals from starting in 1965 through 2010, each measurement taken on January 15th of that year.  Note that ``year" means ``years since 01/15/1965."  For example, $t=10$ represents the data collected on 01/15/1975.
+}{
+\graphicsC{keelingDataMMA}{3.5}
+}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+year & 0 & 5 & 10 & 15 & 20 & 25 & 30 & 35 & 40 & 45 \\
+\hline
+CO$_2$ level & 320 & 325 & 331 & 338 & 345 & 354 & 360 & 369 & 379 & 389 \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\enum{
+\setcounter{enumi}{1}
+\item (In groups)  What's your best guess for the concentration of CO$_2$ in the atmosphere on 01/15/2025?
+\vspace{3cm}
+\item (In groups) What about 01/15/2030?
+\vspace{3cm}
+\item (In groups) On average, how much did the concentration of CO$_2$ change each year between 1965 and 2000?
+
+\vfill
+
+\item (In groups) Now, let's take a more detailed look at the Keeling data. You can access it directly at \url{https://scrippsco2.ucsd.edu/data/atmospheric_co2/primary_mlo_co2_record.html} from the Scripps Institution of Oceanography. You can access a copy of the monthly data that has already been loaded into Desmos at \url{https://www.desmos.com/calculator/o2knft7vce}.
+
+How did your guess for Question 2 compare to the true answer?
+\vfill
+\newpage
+\item (In groups) How would you describe atmospheric CO$_2$ concentration as a function of time?
+
+Try using Desmos to fit various functions to the data.
+\vfill
+\item (In groups) Should you amend your answer to Question 3?
+\vfill
+\item (In groups) What 10-year period has had the highest average rate of change of CO$_2$ concentration?
+\vfill
+\item (In groups) Choose a member of your group. Estimate how atmospheric CO$_2$ levels changed over the 24 hours of their most recent birthday.
+\vfill
+}
+% \newpage
+
+
+
+% \item  (In groups) Work together to brainstorm at least two strategies to refine your estimate and/or increase your confidence in your estimate. You might find it helpful to use Desmos widget ``First Day of Class: The Keeling Curve"  to implement your ideas. This can be found on the ToDo tab at \url{https://student.desmos.com} using code \desmosClassCode (You might need to create a free account at Amplify). 
+% \vs{3}
+% \item (In groups) In what ways would you describe how the amount of CO$_2$ is changing each year?\newpage
+% \item (Extra, if time. In groups) What other information might be helpful to further  improve your estimate and/or build confidence in your estimate? What mathematical tools might be helpful?
+% }
+% \vs{3}
+% \bblue{Key Questions for the semester}
+%\vs{1} \\
+%\pe Based on this data, what do you think is a reasonable guess for the amount of CO$_2$ in the atmosphere in January 2024?
+
+\end{document}

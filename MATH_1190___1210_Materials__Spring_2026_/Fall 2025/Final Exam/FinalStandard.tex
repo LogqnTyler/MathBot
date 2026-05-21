@@ -1,0 +1,709 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+%\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+
+% record goals here to create sense of transparency
+
+\fancyhead[c]{%
+  \ifcase\value{page}
+  % empty test for page = 0
+  \or {}% 
+  \or
+  \or {\bf\color{ForestGreen} FE1(D1): Meaning of a Derivative}% page=1
+  \or {\bf\color{ForestGreen} FE2(D3): Derivatives of Basic Functions}% page = 2
+  \or {\bf\color{ForestGreen} FE3(D2): Compute Derivatives}% page = 3
+  \or {\bf\color{Fuchsia} FE4(I1): Meaning of an Integral}% page = 4
+  \or {\bf\color{Fuchsia} FE5(I3): Antiderivatives and Indefinite Integrals}% page = 5
+  \or {\bf\color{Fuchsia} FE6(I4): Compute Definite Integrals}% page = 6
+  \or {\bf\color{ProcessBlue} FE7(F3): Summations}% page = 7
+  \or {\bf\color{RoyalBlue} FE8(L1): Limits and Continuity}% page = 8
+  \or {\bf\color{Orange} FE9(P1): Discrete Random Variables}
+  \or {\bf\color{Orange} FE10(P2): Continuous Random Variables}
+  \else
+  % Empty chead here!
+  \fi
+}
+
+\thispagestyle{empty} % don't display that this is page 0
+
+\Heading{MATH 1190/1210 Survey of Calculus I}{Final Exam\\Standard\\Fall 2025}
+
+\vspace{0.1in}
+
+\textbf{Name} \hrulefill \, \begin{minipage}{0.16\textwidth}\begin{center}\textbf{UVA ID\\ (e.g. hdj4nd)} \end{center}\end{minipage}\hrulefill\\
+
+\begin{minipage}{0.2\textwidth}\begin{center}\textbf{Course \&\\ Section Number} \end{center}\end{minipage} \hrulefill\,\,\textbf{Date} \hrulefill  \\
+
+\hrulefill
+\paragraph*{Course \& Section Numbers:}
+
+{\small
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-100\\
+J. Rolf\\
+(11:00 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-200\\
+J. Rolf\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-100\\
+Mikhail\\
+(8 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-200\\
+Raul\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-300\\
+Sherman\\
+(11 AM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-400\\
+Sherman\\
+(12:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-500\\
+Michael\\
+(2 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-600\\
+J. Bowling\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-700\\
+Josh\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-800\\
+Mason\\
+(2 PM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-900\\
+Caelan\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-920\\
+Caelan\\
+(5 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-940\\
+Mitchell\\
+(10 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-950\\
+Mitchell\\
+(11 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-960\\
+Mitchell\\
+(noon)
+\end{center}\end{minipage}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+{\small
+
+\paragraph*{Instructions:}
+
+\begin{itemize}
+    
+    \item The regular time allowed for completing this assessment is \fbox{$100$} minutes.
+    %\item This assessment is out of 50 points.\\ 
+    \item This assessment contains one single-part or multi-part problem for each of the following targets: \textbf{FE1(D1), FE2(D2), FE3(D3), FE4(I1), FE5(I3), FE6(I4), FE7(F3), FE8(L1), FE9(P1), FE10(P2)}.
+    \item Each problem is worth 10 points.
+    %\item \textbf{It is to your best interest to complete all problems on this exam and not leave anything black.} The Final Exam learning targets count separately. If a problem is skipped, you will earn a Not Yet (0) on the corresponding Final Exam learning target, which could impact your final negatively and significantly.
+    %\item Your performance on each of the Final Exam targets can replace your scores on corresponding targets from Knowledge Checkpoints given during the semester, if your performance on the Final Exam is higher.
+    %\item You will have opportunities to reassess on the targets appearing on this assessment after the next {\bf 2} assessments.\\
+    \item You may NOT use calculators, dictionaries, notes, phones, or any other kind of aid.
+    \item Please write neatly. What cannot be read, cannot be graded.
+    \item Carefully work out each problem and clearly indicate your final answer to every problem.
+    \item Throughout, give the most descriptive answer possible. \textbf{For instance, ``DNE" will not be accepted when ``$=\infty$" is applicable.}
+    %\item Please provide the most specific answer possible. For instance, if a limit does not exist because it goes to $\infty$ or $-\infty$, then specify this.
+    \item Please use the methods discussed up to this point in the course. For example, any work based on l'H\^opital's Rule will not receive credit.
+    \item \textbf{All work must be shown unless otherwise specified.} Partial credit will not be given if appropriate work is not shown.
+    \item In particular, {\bf any answer appearing with no justification will receive no credit regardless of whether the answer was correct}, unless otherwise specified.
+    \item Please first respond to the prompts on which you feel most proficient, then respond to others later.
+    \item This booklet is printed double-sided. It contains 14 pages and 10 numbered problems.
+    \end{itemize}
+    
+    }
+
+\vfill
+
+
+%%%%%%%%%
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage%
+%%%%%%%%%
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item 
+
+\begin{enumerate}
+    \item The function $C(r)$ is the total cost, in dollars, of paying off a car loan borrowed at an interest rate of r\% per year.
+    
+    Explain the meaning of $C'(3)$ in this context. 
+
+    To receive full credit, please include units for all quantities discussed, and do not include any mathematical terms such as ``derivative", ``limit" or ``instantaneous rate of change".
+
+    \vfill
+
+    %\item Generally speaking, is $C'(3)$ positive, negative, or zero? No work required. Correct answer receives full credit.
+
+    \item Suppose the graph of $g(x)$ is given below. Write down the values of the following derivatives. No work required.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1.25]
+          \begin{axis}[
+            xlabel={$x$},
+            ylabel={\empty},
+            %grid = major,
+            xtick       = {-4, -3, -2, -1, 0,1, 2, 3, 4, 5},
+            xticklabels = {$-4$, $-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$,$5$},
+            ytick       = {0,1, 2, 3, 4, 5},
+            yticklabels = {$0$, $1$, $2$, $3$, $4$, $5$},
+            samples     = 320,
+            domain      = 0:101,
+            restrict y to domain=-2:5,
+            xmin = -4.5, xmax = 3.5,
+            ymin = -0.5, ymax = 5.5,
+            height=2.1in, width=2.7in,
+            grid=both, grid style=dashed]
+            %\addplot[domain=0:4, blue, ultra thick, mark=none] {4-4/2^x};
+            %\addplot[domain=5:8, blue, ultra thick, mark=none] {};
+            \node at (3,3) {$g(x)$};
+            \draw[ultra thick, blue,--] (0,0) -- (1, 1)--(3, 5);
+            \draw[ultra thick, blue,--] (-4,2) -- (-2, 0);
+            \addplot[domain=-2:0, blue, ultra thick, mark=none] {1-(x+1)^2};
+        \end{axis}
+        
+        
+    \end{tikzpicture}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{l c r l c r}
+            %
+            $g'(0)$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} &
+            %
+            $g'(-1)$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $g'(2)$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %%%%%
+            $g'(-3)$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+        \end{tabular} 
+\end{center}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Write down the derivatives of the following functions. No work required. No need to simplify.
+
+If you need to write down your work, please do so at the bottom half of this page, not in the answer space.
+
+\begin{center}
+        \begin{tabular}{l c r l c r}
+            %
+            $\displaystyle\frac{d}{dx}\left[ 10x^7 \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} &
+            %
+            $\displaystyle\frac{d}{dx}\left[ 3^x-\dfrac{5}{x^4} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ \left(\dfrac{2}{5}\right)^9 \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ \sqrt[3]{x^4}-e^x+4\ln(x)\right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ 3\log_5(x) \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}&
+            %
+            $\displaystyle\frac{d}{dx}\left[ \dfrac{-7x^4+3x^3-2x}{x^2} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+        \end{tabular}
+        
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Find the derivative of the following expressions. 
+
+A correct final answer receives full credit. Nevertheless, you are encouraged to write down the steps so that you will be able to receive partial credit if you final answer is not fully correct. There's no need to simplify your final answer
+
+\begin{enumerate}
+\item $e^x\cdot\dfrac{x^2}{\ln(x)+2}$
+
+\vfill
+
+\item $e^{\sqrt{4x+5}}$
+
+\vfill 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item The rate at which antibodies are made is $r(t)$ thousand antibodies per hour, where $t$ is the number of hours after a foreign substance is introduced into a person's blood.
+
+Below is a graph of $r(t)$.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.25]
+          \begin{axis}[
+            xlabel={$t$},
+            ylabel={$r(t)$},
+            %grid = major,
+            xtick       = {1,2,3,4,5,6,7,8,9},
+            xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            ytick       = {-2,-1,0,1,2,3,4,5,6},
+            yticklabels = {$-2$, $-1$, $0$,$1$,$2$,$3$,$4$, $5$, $6$},
+            samples     = 320,
+            domain      = 0:9,
+            restrict y to domain=-2:5,
+            xmin = -0.5, xmax = 9.5,
+            ymin = -2.5, ymax = 4.5,
+            height=2.1in, width=2.7in,
+            grid=both, grid style=dashed]
+            \addplot[domain=0:4, blue, ultra thick, mark=none] {4-4/2^x};
+        %\addplot[domain=5:8, blue, ultra thick, mark=none] {};
+        %\node at (4,3) {$r(t)$};
+        \draw[ultra thick, blue,--] (4,4-4/2^4) -- (8, -2);
+        \end{axis}
+        
+    \end{tikzpicture}
+    \end{center}
+
+\begin{enumerate}
+
+    \item \begin{enumerate}
+    \item What is the meaning of $\displaystyle\int_{3}^5r(t)\, dt=8$ in this context? Make sure to include units in your explanation.
+
+    \vfill
+    \vfill
+
+    \item Suppose that $r(t)$ is positive and decreasing from 4 hours to 6 hours after the substance is introduced into the blood. Based on this, is $\displaystyle\int_{4}^6r(t)\, dt$ positive, negative, or zero? No justification required.
+
+    \vfill
+
+    \end{enumerate}
+
+    \item A stamp collector has 500 stamps in his collection on January 1, 2022, and is collecting more stamps at a rate of $r(t)$ stamps per week, where t is time in weeks since January 1, 2022. Assuming a year has 52 weeks, write down an expression representing the number of stamps this collector has at the end of 2022.
+
+    \vfill
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Assume $x>0$. Write down the indefinite integrals of the following expressions. 
+
+Although no work is required, you are encouraged to include any work that shows your thought process. 
+
+%constant, power, exponential, log, +C, algebraic manipulation
+
+\begin{center}
+        \begin{tabular}{l c r l c r}
+            %
+            $\displaystyle\int 8x^2\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} &
+            %
+            $\displaystyle\int \dfrac{2}{3x^4} \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[1in]
+            %%%%%
+            $\displaystyle\int \dfrac{1}{x}+10\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}&
+            %
+            $\displaystyle\int 5^x\,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[1in]
+            %%%%%
+            $\displaystyle\int e^x-2 \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %
+            $\displaystyle\int \sqrt[7]{x^6} \,dx$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+        \end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM I4 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item For each of the following definite integrals, determine whether the Fundamental Theorem of Calculus (FTC) can be applied to evaluate. 
+
+If so, evaluate the integral using the FTC. There's no need to simplify your final answer.
+
+If not, clearly indicate that and explain why.
+
+\begin{enumerate}
+    \item $\displaystyle\int_{-2}^{1}x^{-2}+4x^3-e^x\, dx$
+
+    \vfill
+
+    \item $\displaystyle\int_{-2}^1x^2+4x^3-1\, dx$
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM I4 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM F3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item \begin{enumerate}
+    \item Find the value of the following expressions. \textbf{Show all work.} Simplify as much as possible so that your final answer is a number.
+
+    \begin{enumerate}
+        \item[(i)] $\displaystyle\sum_{i=4}^6\dfrac{2i}{i-3}$
+
+        \vfill
+
+        \item[(ii)] $\displaystyle\sum_{j=2}^54$ 
+
+        \vfill
+    \end{enumerate}
+
+    \item Rewrite the following in summation notation. 
+
+    \[e^2+3e^3+5e^4+7e^5\]
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM F3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM L1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item \begin{enumerate}
+    
+    \item Write down the three continuity conditions:
+    
+    \
+    
+        \begin{itemize}
+        \item[i.] \hrulefill\\[0.1in]
+        \item[ii.] \hrulefill\\[0.1in]
+        \item[iii.] \hrulefill\\
+        \end{itemize}
+
+    \item On each set of axes below, sketch an example of a function that satisfies the provided statement; if the given statement cannot be satisfied, then simply write DNE.\\
+
+    \end{enumerate}
+
+    \,\hfill
+    %
+    \begin{minipage}[t]{0.45\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+              \begin{axis}[
+            %    axis y line = left,
+            %    axis x line = bottom,
+                xlabel={$x$},
+                xtick       = {-1,1,2,3,4},
+                xticklabels = {$-1$,1,2,3,4},
+                ytick       = {1,2,3,4},
+                yticklabels = {1,2,3,4},
+                samples     = 160,
+                domain      = -1:5,
+                restrict y to domain=-1:5,
+                xmin = -1.5, xmax = 3.5,
+                ymin = -0.5, ymax = 4.5,
+                grid=both, grid style=dashed,
+                width=2in, height=2in
+              ]
+            \end{axis}
+        \end{tikzpicture}
+        
+        $\lim\limits_{x\to 1}f(x)=2$\\
+        $f(1)=1$
+        \end{center}
+    \end{minipage}
+    %
+    \hfill
+    %
+    \begin{minipage}[t]{0.45\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+              \begin{axis}[
+            %    axis y line = left,
+            %    axis x line = bottom,
+                xlabel={$x$},
+                xtick       = {-1,1,2,3,4},
+                xticklabels = {$-1$,1,2,3,4},
+                ytick       = {1,2,3,4},
+                yticklabels = {1,2,3,4},
+                samples     = 160,
+                domain      = -1:5,
+                restrict y to domain=-1:5,
+                xmin = -1.5, xmax = 3.5,
+                ymin = -0.5, ymax = 4.5,
+                grid=both, grid style=dashed,
+                width=2in, height=2in
+              ]
+            \end{axis}
+        \end{tikzpicture}
+        
+        $\lim\limits_{x\to 1^-}f(x)$ DNE\\ $\lim\limits_{x\to 1^+}f(x)$ exists
+        \end{center}
+    \end{minipage}
+
+    \begin{enumerate}
+    
+    \item[(c)] For each of the two graphs you've sketched above, which continuity conditions(s) are violated at $x=1$? No justification required. Simply write down the violated conditions for each sketch to earn full credit.
+    
+    \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM L1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM P1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Each lottery ticket has a 1\% chance of paying out \$100 and a 10\% chance of paying out \$10. Otherwise the payout is \$0.
+
+Let $X$ be a discrete random variable representing the amount a lottery ticket pays out.
+
+\begin{enumerate}
+    \item What are the possible values of $X$?
+
+    \vfill
+
+    \item Write down the probability mass function $p(x)$ of $X$ using either a table or a piecewise function.
+
+    \vfill
+    \vfill
+
+    \item Find the expectation of $X$.
+
+    \vfill
+    \vfill
+
+    \item Find the variance of $X$.
+
+    \vfill
+    \vfill
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM P1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM P2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Let $X$ be a continuous random variable with the following probability density function.
+
+\[p(x)=\begin{cases}cx^2\qquad -1\le x\le 2\\ 0 \qquad \text{otherwise}\end{cases}\]
+
+\begin{enumerate}
+    \item What is the support of $X$?
+
+    \vfill
+
+    \item Find the value of $c$ that makes $p(x)$ a valid probability density function.
+
+    \vfill
+    
+    \item Find the formula of the cumulative distribution function $C(x)$ of $X$ on the support of $X$.
+
+    \vfill
+
+    \item Find $P(0<X<2)$.
+
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM P2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{enumerate}
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\end{document}
