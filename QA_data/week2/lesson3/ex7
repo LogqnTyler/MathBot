@@ -1,0 +1,11 @@
+Q:
+lim as x -> 0 of 1/sqrt(x-1)
+
+A:
+We have square root of a negative number when x = 0.
+
+1/sqrt(0-1) = 1/sqrt(-1)
+
+Thus x = 0 is not in the domain and theorem cannot be used.
+
+KEYWORDS: limits, domain, square roots, real-valued functions

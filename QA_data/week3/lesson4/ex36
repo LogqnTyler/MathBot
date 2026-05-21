@@ -1,0 +1,15 @@
+Q:
+Find the following limit using either forms or continuity: lim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x))
+
+A:
+1
+
+e^x grows while e^(-x) decays as x -> infinity.
+
+lim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x)) ~ lim as x -> infinity of e^x/e^x
+
+lim as x -> infinity of e^x/e^x = lim as x -> infinity of 1 = 1
+
+Thus lim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x)) = 1
+
+KEYWORDS: limits, infinity, dominant terms, exponential functions, end behavior

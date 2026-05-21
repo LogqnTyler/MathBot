@@ -1,0 +1,9 @@
+Q:
+lim as x -> infinity of -1/(e^x+x^1000)
+
+A:
+0
+
+Both e^x -> infinity and x^1000 -> infinity, so e^x+x^1000 -> infinity. Form is 1/infinity which approaches 0.
+
+KEYWORDS: limits, infinity, exponential functions, denominator growth, approaching zero

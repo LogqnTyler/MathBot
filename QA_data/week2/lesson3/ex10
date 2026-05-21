@@ -1,0 +1,7 @@
+Q:
+lim as x -> 2 of (x-2)/(e^x-1)
+
+A:
+All components are continuous: x, 2, e^x, 1. x = 2 is in the domain. Thus lim as x -> 2 f(x) = f(2) = (2-2)/(e^2-1) = 0/(e^2-1) = 0
+
+KEYWORDS: limits, continuity, direct substitution, exponential functions

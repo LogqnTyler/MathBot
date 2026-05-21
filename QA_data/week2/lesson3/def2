@@ -1,0 +1,10 @@
+DEF: Continuity
+
+The function f is continuous at the number a provided the limit as x approaches a of f(x) equals f(a).
+This short definition can be broken up into three continuity conditions. The function f is continuous at a provided:
+
+1. f(a) is defined.
+
+2. The limit as x approaches a of f(x) exists.
+
+3. The two values are equal. In other words, the limit as x approaches a of f(x) equals f(a).

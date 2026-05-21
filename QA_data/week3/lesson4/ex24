@@ -1,0 +1,17 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (1000-x^1000)/(x^e-e^x)
+
+A:
+0
+
+Dominant term in numerator: -x^1000.
+
+Dominant term in denominator: -e^x.
+
+lim as x -> infinity of (1000-x^1000)/(x^e-e^x) ~ lim as x -> infinity of (-x^1000)/(-e^x)
+
+Form is infinity/infinity with slower/much faster -> 0.
+
+lim as x -> infinity of (-x^1000)/(-e^x) = 0 => lim as x -> infinity of (1000-x^1000)/(x^e-e^x) = 0
+
+KEYWORDS: limits, infinity, dominant terms, polynomial functions, exponential functions

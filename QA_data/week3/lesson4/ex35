@@ -1,0 +1,17 @@
+Q:
+Find the following limit using either forms or continuity: lim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x)
+
+A:
+0
+
+lim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x) ~ lim as x -> infinity of x^2/((x^7+1)^(1/3))
+
+This simplifies further:
+
+lim as x -> infinity of x^2/((x^7)^(1/3)-x) = lim as x -> infinity of x^2/x^(7/3) = lim as x -> infinity of 1/x^(7/3 - 2) = lim as x -> infinity of 1/x^(7/3 - 6/3) = lim as x -> infinity of 1/x^(1/3)
+
+This is form 1/infinity.
+
+Thus lim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x) = 0
+
+KEYWORDS: limits, infinity, dominant terms, fractional exponents, logarithms

@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of 1/x^5
+
+A:
+0
+
+Since x^5 -> infinity, we have form 1/infinity. We know this approaches 0.
+
+KEYWORDS: limits, infinity, denominator growth, end behavior, approaching zero

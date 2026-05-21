@@ -1,0 +1,9 @@
+Q:
+
+f(x) = (x^2+1)/(x-2) is continuous at x = 3. Find lim_{x -> 3} (x^2+1)/(x-2).
+
+A:
+
+We are told that f(x) = (x^2+1)/(x-2) is continuous at x = 3. Thus, lim_{x -> 3} f(x) = f(3) = (3^2+1)/(3-2) = 10/1 = 10
+
+KEYWORDS: limits, continuity, direct substitution, rational functions

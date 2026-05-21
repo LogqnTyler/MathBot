@@ -1,0 +1,22 @@
+Q:
+This table now includes x = 0 and f(0) = 3. However, f(0) = 3 is not relevant when finding limits.
+
+x    | -0.1 | -0.01 | -0.001 | 0 | 0.001 | 0.01 | 0.1
+f(x) | 1.889 | 1.989 | 1.999 | 3 | 1.999 | 1.99 | 1.9
+
+Based on the updated table, which real value (if any) does f(x) appear to approach as...
+
+1. x approaches 0 through values strictly less than 0?
+
+2. x approaches 0 through values strictly greater than 0?
+
+3. x approaches 0?
+
+A:
+1. x approaches 0 through values strictly less than 0: 2
+
+2. x approaches 0 through values strictly greater than 0: 2
+
+3. x approaches 0: 2
+
+KEYWORDS: limits, one-sided limits, function values, table

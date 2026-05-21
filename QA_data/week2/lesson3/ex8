@@ -1,0 +1,7 @@
+Q:
+lim as x -> 4 of (sqrt(x^2-4)+1)/(x-7)
+
+A:
+All components are continuous: x^2-4, sqrt(x^2-4), 1, x, 7. x = 4 is in the domain, so lim as x -> 4 f(x) = f(4) = (sqrt(4^2-4)+1)/(4-7) = (sqrt(12)+1)/(-3)
+
+KEYWORDS: limits, continuity, direct substitution, square roots

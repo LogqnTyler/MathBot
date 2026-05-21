@@ -1,0 +1,11 @@
+Q:
+lim as x -> 1 of 1/sqrt(x-1)
+
+A:
+When x = 1, we have a division by 0.
+
+1/sqrt(1-1) = 1/0
+
+Thus x = 1 is not in the domain and theorem cannot be used.
+
+KEYWORDS: limits, domain, division by zero

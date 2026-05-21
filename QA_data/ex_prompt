@@ -1,0 +1,231 @@
+You are converting LaTeX math course materials into clean plain text for a calculus problem bank.
+
+Convert the LaTeX input into the following exact structure:
+
+Q:
+[question text only, including any tables needed to understand the question]
+
+A:
+[answer text only]
+
+KEYWORDS: [2-4 comma-separated calculus keywords]
+
+Core rules:
+
+1. Preserve the mathematical meaning exactly.
+   - Do not rename variables.
+   - Do not change numbers.
+   - Do not rewrite the problem unless required to remove LaTeX formatting.
+   - Do not add missing information.
+   - Do not invent examples, labels, or context.
+   - Preserve any table that is needed to answer the question.
+
+2. For the Q: section:
+   - Keep question text that appears directly after each \item command.
+   - Keep question text that appears outside \item commands if it is needed to understand the items that follow.
+   - Keep introductory prose before a table if it explains the table.
+   - Keep tables that appear before, between, or after question items if they are part of the problem statement.
+   - Remove all original LaTeX item labels and markers.
+     - Remove labels such as:
+       \item[(a)]
+       \item[(b)]
+       \item[i.]
+       \item[ii.]
+       \item[iii.]
+       \item[1.]
+       \item[Step 1]
+     - Do not preserve labels such as (a), i., ii., iii., A., B., etc.
+   - If the question has multiple parts, relabel the parts using plain Arabic numerals:
+     1.
+     2.
+     3.
+     etc.
+   - Only number actual question parts.
+   - Do not number introductory context, tables, definitions, notes, or explanatory sentences unless they are themselves separate question parts.
+   - Include the prose/question text that immediately follows each \item.
+   - Stop including text when the item’s answer/work/formatting begins.
+   - Do not include answer prompts, fill-in blanks, \unline material, \Large blocks, \hfill blocks, \dotfill, or solution expressions in the Q: section.
+   - Preserve meaningful line breaks between major parts/items.
+   - Remove excess indentation and blank spacing.
+
+3. Tables:
+   - Always preserve LaTeX tabular tables if they are part of the problem statement.
+   - Convert tables into clean plain-text tables.
+   - Remove table formatting commands such as:
+     \begin{center}, \end{center}, \begin{tabular}, \end{tabular}, \hline
+   - Remove column-formatting syntax such as:
+     {| c || c c c |}
+   - Convert & into column separators.
+   - Convert \\ into row breaks.
+   - Remove dollar signs and LaTeX math formatting inside table cells.
+   - Preserve all row labels, column labels, values, signs, decimals, and variables exactly.
+   - Use a readable plain-text table format.
+
+   Preferred table format:
+
+   x    | -0.1 | -0.01 | -0.001 | 0 | 0.001 | 0.01 | 0.1
+   f(x) | 1.889 | 1.989 | 1.999 | 3 | 1.999 | 1.99 | 1.9
+
+   - Do not omit a table merely because it is not inside an \item.
+   - Do not move table values into the answer section unless the table itself is part of the answer.
+   - If a question refers to “the table,” “the graph,” “above,” “below,” “updated table,” or values shown in a tabular environment, the table must appear in Q:.
+
+4. For the A: section:
+   - Extract the worked answers or final answer expressions from the non-item formatted answer blocks.
+   - Remove all LaTeX formatting commands.
+   - Match answers to the relabeled question numbers in Q:.
+   - If the question has multiple numbered parts in Q:, label the answers with the same numbers:
+     1.
+     2.
+     3.
+   - Remove all original LaTeX labels from the answer section.
+   - If an answer is embedded in commands such as \unline, \col, \blue, \Large, or dollar signs, keep only the mathematical/text content inside them.
+   - If an item contains a question followed by \unline{...}{answer}, extract the answer into A:.
+   - If no answer is present for an item, omit that item from A: unless the source clearly includes a filled answer prompt.
+   - Do not include empty blanks.
+
+5. Remove LaTeX formatting:
+   - Remove commands such as:
+     \begin, \end, \Large, \vs, \hs, \hfill, \dotfill, \\, \,, \%, \rule, \unline, \col, \blue, \color, \em, \itemC, \mpageT
+   - Remove curly braces used only for grouping.
+   - Remove dollar signs.
+   - Remove comments beginning with %, unless the percent sign is mathematically meaningful.
+   - Remove empty formatting artifacts.
+   - Remove fill-in blanks created by \unline when they contain no answer.
+   - Keep the readable content inside formatting commands when that content is part of the problem or answer.
+
+6. Convert common LaTeX math into readable plain text:
+   - \Delta P_2 becomes Delta P_2
+   - \frac{a}{b} becomes a / b
+   - \frac{300-1000}{300-100} becomes (300-1000)/(300-100)
+   - -\frac{7}{2} becomes -7/2
+   - $P_1$ becomes P_1
+   - $(P_1,P_2)=(100,1000)$ becomes (P_1,P_2)=(100,1000)
+   - $x=0$ becomes x = 0
+   - $f(0)=3$ becomes f(0) = 3
+
+7. Spacing rules:
+   - Use spaces around equals signs and division signs when helpful:
+     AROC = Delta P_2 / Delta P_1 = (300-1000)/(300-100) = -7/2
+   - Use spaces around equals signs in prose:
+     x = 0 and f(0) = 3
+   - Do not add unnecessary spaces inside coordinate pairs:
+     (P_1,P_2)=(100,1000)
+   - Remove double spaces.
+   - Preserve paragraph breaks between items.
+   - Preserve table rows on separate lines.
+
+8. Keywords:
+   - Put keywords at the bottom of the document, after the A: section.
+   - Use this exact label:
+     KEYWORDS:
+   - Generate exactly 2-4 concise keywords.
+   - Keywords must focus on the calculus concept being practiced.
+   - Prefer concept names from calculus instruction, such as:
+     limit, one-sided limit, continuity, average rate of change, instantaneous rate of change, derivative, tangent line, secant line, slope, difference quotient, function behavior, infinite limit, limit from a table, limit from a graph
+   - Do not use context-only keywords unless they are mathematically essential.
+     - Avoid keywords such as predator-prey model, rabbits, coyotes, table, population, word problem, unless the context is the actual mathematical topic.
+   - Do not use generic non-calculus keywords such as equation, expression, algebra, graph, table, or function values unless no more specific calculus concept applies.
+   - Use lowercase unless a proper noun or acronym is needed.
+   - Put all keywords on one line after:
+     KEYWORDS:
+
+9. Output only the converted plain text.
+   - Do not explain your process.
+   - Do not include markdown code fences.
+   - Do not include the original LaTeX.
+
+Example conversion behavior with multiple parts:
+
+Input:
+\begin{enumerate}
+\item[(a)] A predator-prey model describes how the sizes of two populations -- predator $P_1$ and prey $P_2$ -- are related. Suppose two points describing a predator-prey model are given by $(P_1,P_2)=(100,1000)$ and $(P_1,P_2)=(300,300)$.
+    \begin{enumerate}
+    \item[i.] What is the net change of the prey population as the predator population changes from $100$ to $300$?\\
+
+        {\Large $\Delta P_2=$\unline{1.5}{\col{$300-1000=-700$}} when $P_1$ changes from\unline{.5}{\col{$100$}} to  \unline{.5}{\col{$300$}} } 
+
+    \item[ii.] What is the average rate of change of the prey population with respect to the predator population?\\    
+
+        {\Large AROC $=\frac{\Delta P_2}{\Delta P_1}=$\unline{1.1}{ \col{$\frac{300-1000}{300-100}=-\frac{7}{2}$}  }{.25} }
+
+    \item[iii.] Assuming the predator-prey model is linear, what is the slope of the graph describing the relationship between the predator and prey populations?
+
+        {\Large $m=$\unline{.5}{ \col{$-\frac{7}{2}$}  }{.25}  }
+    \end{enumerate}
+\end{enumerate}
+
+Output:
+Q:
+A predator-prey model describes how the sizes of two populations -- predator P_1 and prey P_2 -- are related. Suppose two points describing a predator-prey model are given by (P_1,P_2)=(100,1000) and (P_1,P_2)=(300,300).
+
+1. What is the net change of the prey population as the predator population changes from 100 to 300?
+
+2. What is the average rate of change of the prey population with respect to the predator population?
+
+3. Assuming the predator-prey model is linear, what is the slope of the graph describing the relationship between the predator and prey populations?
+
+A:
+1. Delta P_2 = 300-1000 = -700 when P_1 changes from 100 to 300
+
+2. AROC = Delta P_2 / Delta P_1 = (300-1000)/(300-100) = -7/2
+
+3. m = -7/2
+
+KEYWORDS: average rate of change, slope
+
+Example conversion behavior with a table:
+
+Input:
+\exercise{\color{RoyalBlue}L1} The table from the previous problem has been updated below to include the value of $f(x)$ when $x=0$.
+\blue{
+\itemC{
+\item This table now includes $x=0$ and $f(0)=3$. However, $f(0)=3$ {\em is not relevant} when finding limits.
+}
+}
+\begin{center}
+\begin{tabular}{| c || c c c c c c c |}
+\hline
+ $x$  & $-0.1$ & $-0.01$ & $-0.001$ & $0$ & $0.001$ & $0.01$ & $0.1$\\ 
+ \hline
+ $f(x)$ & $1.889$ & $1.989$  & $1.999$ & $3$ & $1.999$   & $1.99$  & $1.9$\\
+ \hline
+\end{tabular}
+\end{center}
+
+\mpageT{.725}{.4}{
+Based on the updated table, which real value (if any) does $f(x)$ appear to approach as... 
+\begin{itemize}
+\item $x$ approaches $0$ through values strictly less than $0$?$\dotfill$ \unline{.5}{\blue{$2$} }\\
+\item $x$ approaches $0$ through values strictly greater than $0$?$\dotfill$ \unline{.5}{\blue{$2$}} \hs{-.13} \\
+\item $x$ approaches $0$?$\dotfill$ \unline{.5}{\blue{$2$}}\\
+\end{itemize}
+
+Output:
+Q:
+The table from the previous problem has been updated below to include the value of f(x) when x = 0.
+
+This table now includes x = 0 and f(0) = 3. However, f(0) = 3 is not relevant when finding limits.
+
+x    | -0.1 | -0.01 | -0.001 | 0 | 0.001 | 0.01 | 0.1
+f(x) | 1.889 | 1.989 | 1.999 | 3 | 1.999 | 1.99 | 1.9
+
+Based on the updated table, which real value (if any) does f(x) appear to approach as...
+
+1. x approaches 0 through values strictly less than 0?
+
+2. x approaches 0 through values strictly greater than 0?
+
+3. x approaches 0?
+
+A:
+1. 2
+
+2. 2
+
+3. 2
+
+KEYWORDS: limit, one-sided limit
+
+Now convert the following LaTeX:
+

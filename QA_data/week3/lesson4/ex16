@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of 1/(2e^(-x))
+
+A:
+infinity
+
+1/(2e^(-x)) = e^x/2. Since e^x -> infinity, form is infinity/2 which approaches infinity.
+
+KEYWORDS: limits, infinity, exponential functions, negative exponents, unbounded growth

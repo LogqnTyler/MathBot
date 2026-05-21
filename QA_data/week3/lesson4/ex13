@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (1-ln(x))/(-3)
+
+A:
+infinity
+
+ln(x) -> infinity, so 1-ln(x) -> -infinity. Form is -infinity/-3 which approaches +infinity.
+
+KEYWORDS: limits, infinity, logarithms, unbounded growth

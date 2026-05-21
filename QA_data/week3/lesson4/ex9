@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of e^(-x)/x^2
+
+A:
+0
+
+e^(-x)/x^2 = 1/(e^x · x^2). Both e^x -> infinity and x^2 -> infinity. Thus e^x · x^2 -> infinity and form is 1/infinity which approaches 0.
+
+KEYWORDS: limits, infinity, exponential functions, denominator growth, approaching zero

@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of 5x^(-3)
+
+A:
+0
+
+5x^(-3) = 5/x^3. Since x^3 -> infinity, form is 5/infinity which approaches 0.
+
+KEYWORDS: limits, infinity, negative exponents, denominator growth, approaching zero

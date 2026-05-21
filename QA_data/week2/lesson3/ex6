@@ -1,0 +1,7 @@
+Q:
+lim as x -> 3 of (x^3+1)/(x-3)
+
+A:
+When x = 3 we have division by 0. Thus x = 3 is not in the domain and the Continuity Theorem does not apply.
+
+KEYWORDS: limits, domain, division by zero, continuity theorem

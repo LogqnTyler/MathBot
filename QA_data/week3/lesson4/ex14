@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of -sqrt(x)/5
+
+A:
+-infinity
+
+sqrt(x) -> infinity, so form is -infinity/5 which approaches -infinity.
+
+KEYWORDS: limits, infinity, negative infinity, square roots, unbounded growth

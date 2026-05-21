@@ -1,0 +1,11 @@
+Q:
+Give 1 example of an interval on which g(x) = 1/sqrt(x-1) is continuous, and 1 example of an interval where g is not continuous. Explain why your examples are correct.
+
+A:
+There are many reasonable answers to this question. We go back to our 3 Practical Rules on previous page and note that we have two potential issues:
+
+1. Division by 0 when x = 1: 1/sqrt(1-1) = 1/0. In order to be continuous, our domain must be at least x != 1.
+
+2. Square root of a negative number. In particular the x values that cause problems are x - 1 < 0 => x < 1. We must avoid these problems so for our function to be continuous our domain is at least x >= 1.
+
+KEYWORDS: continuity, intervals, domain, square roots, division by zero

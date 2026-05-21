@@ -1,0 +1,17 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (7^x-x)/x^7
+
+A:
+infinity
+
+Dominant term in numerator: 7^x
+
+Dominant term in denominator: x^7.
+
+lim as x -> infinity of (7^x-x)/x^7 ~ lim as x -> infinity of 7^x/x^7
+
+Form is infinity/infinity with much faster/slower -> infinity.
+
+Thus lim as x -> infinity of 7^x/x^7 = infinity => lim as x -> infinity of (7^x-x)/x^7 = infinity
+
+KEYWORDS: limits, infinity, dominant terms, exponential functions, polynomial functions

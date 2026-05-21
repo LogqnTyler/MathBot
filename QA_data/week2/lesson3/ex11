@@ -1,0 +1,21 @@
+Q:
+On which of the following intervals is f(x) = ln(x)/(x-4) continuous? Circle all that apply, and explain below.
+
+1. [5,8]
+
+2. [0,2]
+
+3. [1,5]
+
+4. [-7,-1]
+
+A:
+We note that when x = 4, we have a division by 0: ln(4)/(4-4) = ln(4)/0. So x = 4 is not in the domain. This is the only one of our 3 Practical Rues for determining what is not in the domain that is relevant.
+
+We eliminate any interval above that contains 1. That leaves us with three intervals that do not contain x = 4:
+
+[5,8], [0,2], and [-7,-1]
+
+ln(x) is not continuous for x <= 0 so we eliminate any interval that contains 0 or a negative value. This leaves the interval [5,8] as the only option where f(x) is continuous.
+
+KEYWORDS: continuity, intervals, domain, logarithms, division by zero

@@ -1,0 +1,11 @@
+Q:
+lim as x -> 0 of (x-2)/(e^x-1)
+
+A:
+We have division by 0 when x = 0.
+
+(0-2)/(e^0-1) = -2/(1-1) = -2/0
+
+Thus x = 0 is not in the domain and theorem cannot be used.
+
+KEYWORDS: limits, domain, division by zero, exponential functions

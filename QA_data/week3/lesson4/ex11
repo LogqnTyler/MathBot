@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (e^x+1)/2
+
+A:
+infinity
+
+e^x+1 -> infinity, so form is infinity/2 which approaches infinity.
+
+KEYWORDS: limits, infinity, exponential functions, unbounded growth

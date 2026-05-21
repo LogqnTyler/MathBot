@@ -1,0 +1,15 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4)
+
+A:
+-1/2
+
+Dominant term in numerator: -sqrt(x)
+
+Dominant term in denominator: 2sqrt(x). The +5 portion of 2sqrt(x+5) is not growing.
+
+lim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4) ~ lim as x -> infinity of -sqrt(x)/(2sqrt(x)) = lim as x -> infinity of -1/2 = -1/2
+
+Thus lim as x -> infinity of -sqrt(x)/(2sqrt(x)) = -1/2 => lim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4) = -1/2
+
+KEYWORDS: limits, infinity, dominant terms, logarithms

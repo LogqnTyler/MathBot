@@ -1,0 +1,21 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of sqrt(x+1)/(4-x-ln(x))
+
+A:
+0
+
+Dominant term in numerator: sqrt(x). The +1 is not growing.
+
+Dominant term in denominator: -x.
+
+lim as x -> infinity of sqrt(x+1)/(4-x-ln(x)) ~ lim as x -> infinity of sqrt(x)/(-x)
+
+This simplifies further:
+
+lim as x -> infinity of x^(1/2)/(-x) = 1/(-x^(1/2))
+
+Form is 1/(-infinity) which approaches 0.
+
+lim as x -> infinity of sqrt(x)/(-x) = 0 => lim as x -> infinity of sqrt(x+1)/(4-x-ln(x)) = 0
+
+KEYWORDS: limits, infinity, dominant terms, square roots, logarithms

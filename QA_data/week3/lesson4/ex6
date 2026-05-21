@@ -1,0 +1,9 @@
+Q:
+lim as x -> infinity of 6e^(-x)
+
+A:
+0
+
+6e^(-x) = 6/e^x. Since e^x -> infinity, form is 6/infinity which approaches 0.
+
+KEYWORDS: limits, infinity, exponential functions, denominator growth, approaching zero

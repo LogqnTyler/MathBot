@@ -1,0 +1,20 @@
+Q:
+x | 3.9 | 3.99 | 3.999 | 4 | 4.001 | 4.01 | 4.1
+f(x) | 4.89 | 198.99 | 25,147.13 | 2 | -1,000,000 | -10,000 | -100
+
+Which real value (if any) does h(x) appear to approach as...
+
+1. x approaches 4 through values strictly less than 4?
+
+2. x approaches 4 through values strictly greater than 4?
+
+3. x approaches 4?
+
+A:
+1. x approaches 4 through values strictly less than 4: infinity -> DNE
+
+2. x approaches 4 through values strictly greater than 4: -infinity -> DNE
+
+3. x approaches 4: DNE
+
+KEYWORDS: limits, one-sided limits, infinite limits, DNE

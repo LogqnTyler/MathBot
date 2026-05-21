@@ -1,0 +1,9 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of x^5/(2x)
+
+A:
+infinity
+
+x^5/(2x) = x^4/2. Since x^4 -> infinity, form is infinity/2 which approaches infinity.
+
+KEYWORDS: limits, infinity, polynomial functions, unbounded growth

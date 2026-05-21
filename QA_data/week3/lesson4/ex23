@@ -1,0 +1,21 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x))
+
+A:
+-1/3
+
+Dominant term in numerator: sqrt(x^2). The +1 is not growing.
+
+Dominant term in denominator: -3x.
+
+lim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x)) ~ lim as x -> infinity of sqrt(x^2)/(-3x)
+
+This simplifies:
+
+lim as x -> infinity of sqrt(x^2)/(-3x) = lim as x -> infinity of x/(-3x) = lim as x -> infinity of 1/(-3) = -1/3
+
+sqrt(x^2) = x for x > 0
+
+lim as x -> infinity of sqrt(x^2)/(-3x) = -1/3 => lim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x)) = -1/3
+
+KEYWORDS: limits, infinity, dominant terms, square roots, logarithms

@@ -1,0 +1,7 @@
+Q:
+lim as x -> -1 of (x+1)/(x-1)
+
+A:
+All components of function are continuous: x, 1, and -1. x = -1 is in domain, so lim as x -> -1 f(x) = f(-1) = (-1+1)/(-1-1) = 0/(-2) = 0
+
+KEYWORDS: limits, continuity

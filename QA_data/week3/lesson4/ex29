@@ -1,0 +1,13 @@
+Q:
+Find the following limit using forms: lim as x -> 0^+ of (1+x)/x^2
+
+A:
+infinity
+
+Since x -> 0^+, 1+x -> 1 and x^2 -> 0^+.
+
+Form is 1/0^+ which approaches infinity.
+
+Thus lim as x -> 0^+ of (1+x)/x^2 = infinity.
+
+KEYWORDS: limits, one-sided limits, infinite limits, denominator behavior

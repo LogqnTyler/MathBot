@@ -1,0 +1,19 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6)
+
+A:
+5
+
+Dominant term in numerator: 5e^(2x).
+
+Dominant term in denominator: e^(2x).
+
+lim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6) ~ lim as x -> infinity of 5e^(2x)/e^(2x)
+
+This simplifies further:
+
+lim as x -> infinity of 5e^(2x)/e^(2x) = lim as x -> infinity of 5/1 = 5
+
+lim as x -> infinity of 5e^(2x)/e^(2x) = 5 => lim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6) = 5
+
+KEYWORDS: limits, infinity, dominant terms, exponential functions, end behavior

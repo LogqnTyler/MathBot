@@ -1,0 +1,17 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (4^x+ln(x))/(1-x^(1/3))
+
+A:
+-infinity
+
+Dominant term in numerator: 4^x
+
+Dominant term in denominator: -x^(1/3).
+
+lim as x -> infinity of (4^x+ln(x))/(1-x^(1/3)) ~ lim as x -> infinity of 4^x/(-x^(1/3))
+
+Form is infinity/-infinity with much faster/-slower -> -infinity.
+
+Thus lim as x -> infinity of 4^x/(-x^(1/3)) = -infinity => lim as x -> infinity of (4^x+ln(x))/(1-x^(1/3)) = -infinity
+
+KEYWORDS: limits, infinity, dominant terms, exponential functions, logarithms

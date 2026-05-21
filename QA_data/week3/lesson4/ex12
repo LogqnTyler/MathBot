@@ -1,0 +1,11 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of (-2x^2)/(3x^(1/4))
+
+A:
+-infinity
+
+(-2x^2)/(3x^(1/4)) = (-2x^2)/(3x^(1/4)) = (-2x^2 · x^(-1/4))/3 = (-2x^(2-1/4))/3 = (-2x^(7/4))/3.
+
+-2x^(7/4) -> -infinity, so form is -infinity/3 which approaches -infinity.
+
+KEYWORDS: limits, infinity, negative infinity, fractional exponents, unbounded growth

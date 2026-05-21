@@ -1,0 +1,17 @@
+Q:
+Find the following limit using forms: lim as x -> infinity of log_2(x)/(x^3+4x-1)
+
+A:
+0
+
+Dominant term in numerator: log_2(x)
+
+Dominant term in denominator: x^3.
+
+lim as x -> infinity of log_2(x)/(x^3+4x-1) ~ lim as x -> infinity of log_2(x)/x^3
+
+Form is infinity/infinity with slower/much faster -> 0.
+
+Thus lim as x -> infinity of log_2(x)/x^3 = 0 => lim as x -> infinity of log_2(x)/(x^3+4x-1) = 0
+
+KEYWORDS: limits, infinity, dominant terms, logarithms, polynomial functions

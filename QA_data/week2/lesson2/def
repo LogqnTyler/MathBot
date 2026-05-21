@@ -1,0 +1,3 @@
+DEF: Limit of a Function
+
+We write “the limit as x approaches a of f(x) equals L” and say “the limit as x approaches a of f(x) exists and is equal to L” provided we can make f(x) as close to L as we like by choosing x to be as close to a as needed, without ever actually reaching or equaling a.

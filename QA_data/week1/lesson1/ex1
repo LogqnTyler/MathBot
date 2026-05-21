@@ -1,0 +1,17 @@
+Q:
+(a) A predator-prey model describes how the sizes of two populations -- predator C (e.g. Coyotes) and prey R (e.g. Rabbits) -- are related. Suppose two points describing this predator-prey model are given by (C_1,R_1)=(100,1000) and (C_2,R_2)=(300,300).
+
+1. What is the net change of the prey population as the predator population changes from 100 to 300?
+
+2. What is the average rate of change of the prey population with respect to the predator population?
+
+3. Assuming the predator-prey model is linear, what is the slope of the graph describing the relationship between the predator and prey populations?
+
+A:
+1. Delta P_2=300-1000=-700 when P_1 changes from 100 to 300
+
+2. AROC = Delta P_2 / Delta P_1 = (300-1000)/(300-100) = -7/2
+
+3. m = -7/2
+
+KEYWORDS: rate of change, predator-prey model, slope

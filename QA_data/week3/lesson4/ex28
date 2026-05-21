@@ -1,0 +1,19 @@
+Q:
+Find the following limit using forms: lim as x -> 3 of (x^2-2x)/(3-x)
+
+A:
+DNE
+
+Since x -> 3, we must consider the two-sided limit.
+
+lim as x -> 3^- of (x^2-2x)/(3-x) -> (3^2-2 · 3)/0^+
+
+Form is 3/0^+ which approaches infinity. Thus lim as x -> 3^- of (x^2-2x)/(3-x) = infinity.
+
+lim as x -> 3^+ of (x^2-2x)/(3-x) -> (3^2-2 · 3)/0^-
+
+Form is 3/0^- which approaches -infinity. Thus lim as x -> 3^+ of (x^2-2x)/(3-x) = -infinity.
+
+Since lim as x -> 3^- of (x^2-2x)/(3-x) = infinity does not equal lim as x -> 3^+ of (x^2-2x)/(3-x) = -infinity, lim as x -> 3 of (x^2-2x)/(3-x) DNE.
+
+KEYWORDS: limits, two-sided limits, one-sided limits, infinite limits, DNE

@@ -1,0 +1,9 @@
+Q:
+
+f(x) = sqrt(x+5)/(x+2) is continuous at x = 4. Find lim_{x -> 4} sqrt(x+5)/(x+2).
+
+A:
+
+We are told that f(x) = (x^2+1)/(x-2) is continuous at x = 4. Thus, lim_{x -> 4} f(x) = f(4) = sqrt(4+5)/(4+2) = 3/6 = 1/2
+
+KEYWORDS: limits, continuity, direct substitution, square root functions

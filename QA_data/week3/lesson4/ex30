@@ -1,0 +1,15 @@
+Q:
+Find the following limit using forms: lim as x -> 5 of (1+x)/(x^2-25)
+
+A:
+DNE
+
+We must consider the two-sided limit.
+
+lim as x -> 5^- of (1+x)/(x^2-25). Since x -> 5^-, 1+x -> 6 and x^2-25 -> 0^-. Form is 6/0^- which approaches -infinity. That is lim as x -> 5^- of (1+x)/(x^2-25) = -infinity.
+
+lim as x -> 5^+ of (1+x)/(x^2-25). Since x -> 5^+, 1+x -> 6 and x^2-25 -> 0^+. Form is 6/0^+ which approaches +infinity. That is lim as x -> 5^+ of (1+x)/(x^2-25) = +infinity.
+
+Since lim as x -> 5^- of (1+x)/(x^2-25) does not equal lim as x -> 5^+ of (1+x)/(x^2-25), lim as x -> 5 of (1+x)/(x^2-25) = DNE.
+
+KEYWORDS: limits, two-sided limits, one-sided limits, infinite limits, DNE

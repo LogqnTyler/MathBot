@@ -1,0 +1,11 @@
+Q:
+Find the following limit using forms: lim as x -> 1^- of (sqrt(x)+1)/(x-1)
+
+A:
+-infinity
+
+Since x -> 1^-, x-1 -> 0^-. Form is 2/0^- which approaches -infinity.
+
+Thus lim as x -> 1^- of (sqrt(x)+1)/(x-1) = -infinity
+
+KEYWORDS: limits, one-sided limits, infinite limits, square roots, denominator behavior

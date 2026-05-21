@@ -1,0 +1,15 @@
+Q:
+Find the following limit using either forms or continuity: lim as x -> infinity of (1-x)^(-3)
+
+A:
+0
+
+As x -> infinity, 1-x -> -infinity.
+
+Thus lim as x -> infinity of (1-x)^(-3) = lim as x -> infinity of 1/(1-x)^3.
+
+This is form 1/-infinity which approaches 0.
+
+Thus lim as x -> infinity of (1-x)^(-3) = 0.
+
+KEYWORDS: limits, infinity, negative exponents, denominator behavior, end behavior

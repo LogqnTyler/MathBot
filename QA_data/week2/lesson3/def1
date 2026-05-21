@@ -1,0 +1,9 @@
+DEF: Continuity Theorem
+
+Any function that is some combination, using addition, subtraction, multiplication, division, powers, or compositions, of other continuous functions is continuous on its domain.
+
+Examples of continuous functions include polynomials, roots, trigonometric functions, exponentials, logarithms, and absolute value functions.
+
+Examples include:
+
+x^7 - 1, 6x + 2x^2, square root of x, cube root of x, sin(x), cos(x), 2^x, e^x, ln(x), log base 10 of x, and |x|.
