@@ -1,0 +1,235 @@
+[
+  {
+    "name": "Warm-up Exercise 1: powers to radicals/fractions",
+    "learning_tag": "D3",
+    "context_plain": "Rewrite the following powers of x as radical and/or fraction expressions.",
+    "context_latex": "Rewrite the following powers of $x$ as radical and/or fraction expressions.",
+    "keywords": ["power functions", "radical expressions", "fractional exponents", "negative exponents"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "x^(3/5) =", "answer": "fifth root of x^3"},
+        "latex": {"question": "$x^{3/5} =$", "answer": "$\\sqrt[5]{x^3}$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "x^(5/3) =", "answer": "cube root of x^5"},
+        "latex": {"question": "$x^{5/3} =$", "answer": "$\\sqrt[3]{x^5}$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "x^(-4) =", "answer": "1/x^4"},
+        "latex": {"question": "$x^{-4} =$", "answer": "$\\dfrac{1}{x^4}$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "x^(-5/3) =", "answer": "1 / (cube root of x^5)"},
+        "latex": {"question": "$x^{-5/3} =$", "answer": "$\\dfrac{1}{\\sqrt[3]{x^5}}$"}
+      }
+    ]
+  },
+  {
+    "name": "Warm-up Exercise 1: radicals/fractions to powers",
+    "learning_tag": "D3",
+    "context_plain": "Re-write the following as a power of x.",
+    "context_latex": "Re-write the following as a power of $x$.",
+    "keywords": ["power functions", "radical expressions", "fractional exponents", "negative exponents"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "cube root of x^4 =", "answer": "x^(4/3)"},
+        "latex": {"question": "$\\sqrt[3]{x^4} =$", "answer": "$x^{4/3}$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "fourth root of x^3 =", "answer": "x^(3/4)"},
+        "latex": {"question": "$\\sqrt[4]{x^3} =$", "answer": "$x^{3/4}$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "sqrt(x) =", "answer": "x^(1/2)"},
+        "latex": {"question": "$\\sqrt{x} =$", "answer": "$x^{1/2}$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "1/x^2 =", "answer": "x^(-2)"},
+        "latex": {"question": "$\\dfrac{1}{x^2} =$", "answer": "$x^{-2}$"}
+      },
+      {
+        "part": "e",
+        "plain_text": {"question": "3/x^2 =", "answer": "3x^(-2)"},
+        "latex": {"question": "$\\dfrac{3}{x^2} =$", "answer": "$3x^{-2}$"}
+      },
+      {
+        "part": "f",
+        "plain_text": {"question": "1 / (cube root of x^4) =", "answer": "x^(-4/3)"},
+        "latex": {"question": "$\\dfrac{1}{\\sqrt[3]{x^4}} =$", "answer": "$x^{-4/3}$"}
+      }
+    ]
+  },
+  {
+    "name": "Warm-up Exercise 2: differentiation rules",
+    "learning_tag": "D3",
+    "context_plain": "Review the important differentiation rules by filling them in.",
+    "context_latex": "Review some of the important differentiation rules from the class prep activity by filling them in here.",
+    "keywords": ["power rule", "constant rule", "constant multiple rule", "sum rule", "difference rule", "derivative of e^x"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "d/dx [x^n] =", "answer": "nx^(n-1)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[x^n\\right] =$", "answer": "$nx^{n-1}$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "d/dx [c] =", "answer": "0"},
+        "latex": {"question": "$\\dfrac{d}{dx}[c] =$", "answer": "$0$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "d/dx [c*f(x)] =", "answer": "c * f'(x)"},
+        "latex": {"question": "$\\dfrac{d}{dx}[cf(x)] =$", "answer": "$c\\,f^{\\prime}(x)$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "d/dx [f(x) - g(x)] =", "answer": "f'(x) - g'(x)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[f(x) - g(x)\\right] =$", "answer": "$f^{\\prime}(x) - g^{\\prime}(x)$"}
+      },
+      {
+        "part": "e",
+        "plain_text": {"question": "d/dx [f(x) + g(x)] =", "answer": "f'(x) + g'(x)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[f(x) + g(x)\\right] =$", "answer": "$f^{\\prime}(x) + g^{\\prime}(x)$"}
+      },
+      {
+        "part": "f",
+        "plain_text": {"question": "d/dx [e^x] =", "answer": "e^x"},
+        "latex": {"question": "$\\dfrac{d}{dx}[e^x] =$", "answer": "$e^x$"}
+      }
+    ]
+  },
+  {
+    "name": "Exercise D3: basic derivative practice",
+    "learning_tag": "D3",
+    "context_plain": "Practice using the differentiation rules by finding the following derivatives.",
+    "context_latex": "Practice using the rules on the first page by finding the following derivatives.",
+    "keywords": ["power rule", "constant rule", "constant multiple rule", "negative exponents", "fractional exponents", "derivative of e^x"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "d/dx [x^4] =", "answer": "4x^3"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\Big[x^{4}\\Big] =$", "answer": "$4x^3$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "d/dx [x^(-3)] =", "answer": "-3x^(-4)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\Big[x^{-3}\\Big] =$", "answer": "$-3x^{-4}$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "d/dx [-7] =", "answer": "0"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\Big[-7\\Big] =$", "answer": "$0$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "d/dx [x^(-2/5)] =", "answer": "(-2/5)x^(-7/5)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\Big[x^{-2/5}\\Big] =$", "answer": "$-\\dfrac{2}{5}x^{-7/5}$"}
+      },
+      {
+        "part": "e",
+        "plain_text": {"question": "d/dx [2x^5] =", "answer": "10x^4"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\Big[2x^5\\Big] =$", "answer": "$10x^4$"}
+      },
+      {
+        "part": "f",
+        "plain_text": {"question": "d/dx [3/7] =", "answer": "0"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[\\dfrac{3}{7}\\right] =$", "answer": "$0$"}
+      },
+      {
+        "part": "g",
+        "plain_text": {"question": "d/dx [3e^x] =", "answer": "3e^x"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[3e^x\\right] =$", "answer": "$3e^x$"}
+      },
+      {
+        "part": "h",
+        "plain_text": {"question": "d/dx [1 / (cube root of x^4)] =", "answer": "(-4/3)x^(-7/3)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[\\dfrac{1}{\\sqrt[3]{x^4}}\\right] =$", "answer": "$-\\dfrac{4}{3}x^{-7/3}$"}
+      },
+      {
+        "part": "i",
+        "plain_text": {"question": "d/dx [3/x^2] =", "answer": "-6x^(-3)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[\\dfrac{3}{x^2}\\right] =$", "answer": "$-6x^{-3}$"}
+      },
+      {
+        "part": "j",
+        "plain_text": {"question": "d/dx [2x^5 - 3/x^2 + 3e^x + 1/(cube root of x^4) - 3/7] =", "answer": "10x^4 + 6x^(-3) + 3e^x - (4/3)x^(-7/3)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[2x^5-\\dfrac{3}{x^2}+3e^x+\\dfrac{1}{\\sqrt[3]{x^4}}-\\dfrac{3}{7}\\right] =$", "answer": "$10x^4+6x^{-3}+3e^x-\\dfrac{4}{3}x^{-7/3}$"}
+      },
+      {
+        "part": "k",
+        "plain_text": {"question": "d/dx [(x^3 + 5x^2 - 1) / (cube root of x)] =", "answer": "(8/3)x^(5/3) + (25/3)x^(2/3) + (1/3)x^(-4/3)"},
+        "latex": {"question": "$\\dfrac{d}{dx}\\left[\\dfrac{x^3+5x^2-1}{\\sqrt[3]{x}}\\right] =$", "answer": "$\\dfrac{8}{3}x^{5/3}+\\dfrac{25}{3}x^{2/3}+\\dfrac{1}{3}x^{-4/3}$"}
+      }
+    ]
+  },
+  {
+    "name": "Exercise D1: tangent line slope",
+    "learning_tag": "D1",
+    "context_plain": "Are there any points on the graph of f(x) = (1/3)x^3 - (5/2)x^2 + 5x - 11 at which the tangent line to the graph has a slope of -1? If so, find all such points. If not, explain why.",
+    "context_latex": "Are there any points on the graph of $\\ds f(x) = \\frac{1}{3}x^3 - \\frac{5}{2}x^2 + 5x - 11$ at which the tangent line to the graph has a slope of $-1$? If so, then find all such points. If not, then explain why.",
+    "keywords": ["tangent line", "slope", "derivative", "power rule", "solving equations"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Find all points on f(x) = (1/3)x^3 - (5/2)x^2 + 5x - 11 where the tangent line has slope -1.", "answer": "Set f'(x) = -1. f'(x) = x^2 - 5x + 5 = -1, so x^2 - 5x + 6 = 0, giving (x-3)(x-2) = 0. At x=3: y = -19/2. At x=2: y = -25/3. Points: (3, -19/2) and (2, -25/3)."},
+        "latex": {"question": "Find all points on $f(x) = \\frac{1}{3}x^3 - \\frac{5}{2}x^2 + 5x - 11$ where the tangent line has slope $-1$.", "answer": "Set $f^{\\prime}(x)=-1$: $x^2-5x+5=-1 \\Rightarrow x^2-5x+6=0 \\Rightarrow (x-3)(x-2)=0$. Points: $\\left(3,-\\frac{19}{2}\\right)$ and $\\left(2,-\\frac{25}{3}\\right)$."}
+      }
+    ]
+  },
+  {
+    "name": "Extra Practice 1: linearization of sqrt(x)",
+    "learning_tag": "D1",
+    "context_plain": "The graph of f(x) = sqrt(x) is given.",
+    "context_latex": "The graph of $f(x)=\\sqrt{x}$ is depicted to the right.",
+    "keywords": ["linearization", "tangent line", "derivative", "approximation", "power rule"],
+    "subproblems": [
+      {
+        "part": "i",
+        "plain_text": {"question": "Find an equation y = L(x) of the tangent line to the graph at the point (4, 2). This function L is called the linearization of f at 4.", "answer": "f'(x) = 1/(2*sqrt(x)), so m = f'(4) = 1/4. Tangent line: L(x) = (1/4)(x - 4) + 2 = (1/4)x + 1."},
+        "latex": {"question": "Find an equation $y=L(x)$ of the tangent line to the graph at the point $(4,2)$. This function $L$ is called the linearization of $f$ at $4$.", "answer": "$f^{\\prime}(x)=\\frac{1}{\\sqrt{x}}$, so $m=f^{\\prime}(4)=\\frac{1}{4}$. Thus $L(x)=\\frac{1}{4}(x-4)+2=\\frac{1}{4}x+1$."}
+      },
+      {
+        "part": "ii",
+        "plain_text": {"question": "Calculate f(4.1) using a calculator and L(4.1) by hand. What do you notice? How does the picture reflect your observation?", "answer": "f(4.1) = 2.0248... and L(4.1) = (1/4)(4.1) + 1 = 2.025. These are very close, showing that L(x) approximates f(x) well near x = 4. Zooming in on the graph, L(x) and f(x) are nearly indistinguishable near x = 4."},
+        "latex": {"question": "Calculate $f(4.1)$ using a calculator and $L(4.1)$ by hand. What do you notice about these two quantities?", "answer": "$f(4.1)=2.0248\\ldots$ and $L(4.1)=\\frac{1}{4}(4.1)+1=2.025$. These are very close, confirming $f(x)\\approx L(x)$ for $x$ near $4$."}
+      }
+    ]
+  },
+  {
+    "name": "Extra Practice 2: optimization of printed page area",
+    "learning_tag": "D1",
+    "context_plain": "A book page has 1-in. margins at top and bottom, 1/2-in. margins on the sides, and total area 50 in^2. The area of the printed region as a function of page width x is f(x) = 52 - 2x - 50/x, for 1 < x < 25.",
+    "context_latex": "A book designer decided that the pages of a book should have $1$-in.\\ margins at the top and bottom and $\\frac{1}{2}$-in.\\ margins on the sides, with each page having area $50$ in$^2$. The printed area is $f(x)=52-2x-\\dfrac{50}{x}$, $\\;1<x<25$.",
+    "keywords": ["optimization", "derivative", "power rule", "critical points", "applied calculus"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Using the plot of f, what value of x appears to maximize the printed area? Call this value x_0.", "answer": "x_0 = 5"},
+        "latex": {"question": "Using the plot of $f$, what value of $x$ appears to maximize the area of the printed region? Call this value $x_0$.", "answer": "$x_0 = 5$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "Based on the graph, what appears to be the value of f'(x_0)?", "answer": "f'(x_0) = 0 (the tangent line appears flat at x_0 = 5)"},
+        "latex": {"question": "Based on the graph, what seems to be the value of $f'(x_0)$?", "answer": "$f'(x_0)=0$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "Find f'(x).", "answer": "f(x) = 52 - 2x - 50x^(-1), so f'(x) = -2 + 50/x^2"},
+        "latex": {"question": "Find $f'(x)$.", "answer": "$f^{\\prime}(x)=-2+\\dfrac{50}{x^2}$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "Use f' to confirm your guess in part (b).", "answer": "f'(5) = -2 + 50/25 = -2 + 2 = 0. Confirmed."},
+        "latex": {"question": "Use your answer for $f'$ to confirm your guess in part (b).", "answer": "$f^{\\prime}(5)=-2+\\dfrac{50}{25}=-2+2=0$ \\checkmark"}
+      }
+    ]
+  }
+]

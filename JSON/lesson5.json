@@ -1,0 +1,190 @@
+[
+  {
+    "name": "Warm-up: average velocity and limits",
+    "learning_tag": "D1",
+    "context_plain": "Let f(t) represent the distance travelled (in meters) by a skater around a track at time t in minutes. Data points: f(1)=588.17, f(2)=893.72, f(3)=1052.44, f(4)=1134.9, f(5)=1177.74, f(6)=1200.",
+    "context_latex": "Let $f(t)$ represent the distance travelled (in meters) by a skater around a track at a time $t$ in minutes. Data: $f(1)=588.17$, $f(2)=893.72$, $f(3)=1052.44$, $f(4)=1134.9$, $f(5)=1177.74$, $f(6)=1200$.",
+    "keywords": ["average velocity", "instantaneous velocity", "secant line", "tangent line", "limit definition of derivative"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Compute the skater's average velocity from 3 minutes to t minutes. Round to 2 decimal places. Fill in the table for t = 1, 2, 3, 4, 5.", "answer": "t=1: (f(1)-f(3))/(1-3) = 232.14; t=2: (f(2)-f(3))/(2-3) = 158.72; t=3: undefined; t=4: (f(4)-f(3))/(4-3) = 82.46; t=5: (f(5)-f(3))/(5-3) = 62.65"},
+        "latex": {"question": "Compute $\\dfrac{f(t)-f(3)}{t-3}$ for $t=1,2,3,4,5$. Round to 2 decimal places.", "answer": "$t=1$: $232.14$; $t=2$: $158.72$; $t=3$: undefined; $t=4$: $82.46$; $t=5$: $62.65$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "How can we represent these average velocities on the graph? Draw something that represents the average velocity from 3 minutes to 5 minutes. Label it \"(b)\".", "answer": "The average velocity from t=3 to t=5 is represented by the slope of the secant line through (3, 1052.44) and (5, 1177.74). Equation: y = 62.65(t-3) + 1052.44, or equivalently y = 62.65t + 864.49."},
+        "latex": {"question": "How can we represent these average velocities on the graph? Sketch the line representing average velocity from $t=3$ to $t=5$ and label it ``(b)''.", "answer": "Secant line through $(3, 1052.44)$ and $(5, 1177.74)$: $y=62.65(t-3)+1052.44$."}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "The table of values in part (a) could be used to estimate a limit. Which limit?", "answer": "lim as t -> 3 of (f(t) - f(3)) / (t - 3)"},
+        "latex": {"question": "Which limit could the table in part (a) be used to estimate?", "answer": "$\\displaystyle\\lim_{t\\to 3}\\frac{f(t)-f(3)}{t-3}$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "In terms of the context, what does the limit in part (c) represent?", "answer": "The instantaneous velocity of the skater 3 minutes after beginning to skate around the track."},
+        "latex": {"question": "In terms of the context, what does the limit in part (c) represent?", "answer": "The instantaneous velocity of the skater $3$ minutes after beginning to skate around the track."}
+      },
+      {
+        "part": "e",
+        "plain_text": {"question": "In terms of the graph, what does the limit in part (c) represent?", "answer": "The slope of the tangent line to the graph of f at the point t = 3."},
+        "latex": {"question": "In terms of the graph, what does the limit in part (c) represent?", "answer": "The slope of the tangent line to the graph of $f$ at the point $t=3$."}
+      }
+    ]
+  },
+  {
+    "name": "Example/Exercise D1: reading derivatives from graphs of f and g",
+    "learning_tag": "D1",
+    "context_plain": "Use the graphs of f and g to find the following derivatives.",
+    "context_latex": "Use the graphs of $f$ and $g$ below to find the following derivatives.",
+    "keywords": ["derivative", "slope of tangent line", "differentiability", "reading graphs", "DNE"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "f'(1) =", "answer": "-2"},
+        "latex": {"question": "$f'(1) =$", "answer": "$-2$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "f'(-1) =", "answer": "0"},
+        "latex": {"question": "$f'(-1) =$", "answer": "$0$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "f'(0) =", "answer": "DNE"},
+        "latex": {"question": "$f'(0) =$", "answer": "$DNE$"}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "g'(2) =", "answer": "0"},
+        "latex": {"question": "$g'(2) =$", "answer": "$0$"}
+      },
+      {
+        "part": "e",
+        "plain_text": {"question": "g'(-1) =", "answer": "DNE"},
+        "latex": {"question": "$g'(-1) =$", "answer": "$DNE$"}
+      },
+      {
+        "part": "f",
+        "plain_text": {"question": "g'(-2) =", "answer": "-2"},
+        "latex": {"question": "$g'(-2) =$", "answer": "$-2$"}
+      }
+    ]
+  },
+  {
+    "name": "Exercise D1: sketching the derivative graph",
+    "learning_tag": "D1",
+    "context_plain": "The graph of f is given (piecewise: horizontal from x=0 to 1, linear from x=1 to 2, then a curve from x=2 to 4).",
+    "context_latex": "The graph of $f$ is depicted (piecewise: horizontal on $[0,1]$, linear on $[1,2]$, curved on $[2,4]$).",
+    "keywords": ["derivative", "sketching f prime", "differentiability", "corners", "reading graphs"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Use the graph of f to record values of f' in the table: for 0 < x < 1, x = 1, 1 < x < 2, x = 2.", "answer": "f'(x) = 0 for 0 < x < 1; f'(1) = DNE; f'(x) = -1 for 1 < x < 2; f'(2) = DNE"},
+        "latex": {"question": "Record values of $f'$ in the table for $0<x<1$, $x=1$, $1<x<2$, $x=2$.", "answer": "$f'(x)=0$ for $0<x<1$; $f'(1)=DNE$; $f'(x)=-1$ for $1<x<2$; $f'(2)=DNE$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "Use the graph of f and the table from part (a) to sketch the graph of f' on 0 <= x <= 4.", "answer": "f' = 0 on (0,1) with holes at x=0 and x=1; f' = -1 on (1,2) with holes at endpoints; on (2,4) f' starts large and positive, decreasing to 0 at x=4, with holes at x=2 and x=4."},
+        "latex": {"question": "Sketch the graph of $f'$ for $0\\leq x\\leq 4$.", "answer": "$f'=0$ on $(0,1)$ (holes at $x=0,1$); $f'=-1$ on $(1,2)$ (holes at endpoints); on $(2,4)$, $f'$ decreases from a large positive value to $0$ at $x=4$ (holes at $x=2,4$)."}
+      }
+    ]
+  },
+  {
+    "name": "Exercise D1: cost curve interpretation",
+    "learning_tag": "D1",
+    "context_plain": "A cost curve gives the total cost C of producing a quantity Q of a commodity.",
+    "context_latex": "A cost curve gives the total cost $C$ of producing a quantity $Q$ of a commodity.",
+    "keywords": ["average rate of change", "instantaneous rate of change", "derivative", "units", "marginal cost"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "What does (C(400) - C(200)) / (400 - 200) represent in this context? Sketch a line whose slope represents this quantity.", "answer": "The average rate of change of total cost as quantity increases from 200 to 400 units. It is the average increase in total cost per 1 unit increase in production between Q=200 and Q=400. Geometrically, it is the slope of the secant line through (200, C(200)) and (400, C(400))."},
+        "latex": {"question": "What does $\\dfrac{C(400)-C(200)}{400-200}$ represent? Sketch the corresponding line.", "answer": "The average rate of change of total cost as $Q$ increases from $200$ to $400$. Geometrically, the slope of the secant line through $(200,C(200))$ and $(400,C(400))$."}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "What are the units of (C(400) - C(200)) / (400 - 200)?", "answer": "dollars per unit of Q"},
+        "latex": {"question": "What are the units of $\\dfrac{C(400)-C(200)}{400-200}$?", "answer": "$\\dfrac{\\$}{\\text{units of }Q}$"}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "What does lim as Q -> 200 of (C(Q) - C(200)) / (Q - 200) represent? Sketch the corresponding line.", "answer": "The instantaneous rate of change of total cost when 200 units are produced (marginal cost at Q=200). Geometrically, the slope of the tangent line to the cost curve at Q=200."},
+        "latex": {"question": "What does $\\displaystyle\\lim_{Q\\to200}\\dfrac{C(Q)-C(200)}{Q-200}$ represent? Sketch the corresponding line.", "answer": "The instantaneous rate of change of total cost at $Q=200$ (marginal cost). Geometrically, the slope of the tangent line at $Q=200$."}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "What are the units of lim as Q -> 200 of (C(Q) - C(200)) / (Q - 200)?", "answer": "dollars per unit of Q"},
+        "latex": {"question": "What are the units of $\\displaystyle\\lim_{Q\\to200}\\dfrac{C(Q)-C(200)}{Q-200}$?", "answer": "$\\dfrac{\\$}{\\text{units of }Q}$"}
+      }
+    ]
+  },
+  {
+    "name": "Extra Practice 1: particle position function",
+    "learning_tag": "D1",
+    "context_plain": "A particle travels along the x-axis. Its position (in centimeters) at time t (in seconds) is given by p(t), observed over 0 < t < 6.",
+    "context_latex": "A particle travels along the $x$-axis such that its position (in centimeters) at time $t$ (in seconds) is given by $p(t)$, over $0<t<6$.",
+    "keywords": ["derivative", "units", "instantaneous velocity", "sign of derivative", "position function"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "What are the units of p'(t)?", "answer": "centimeters per second"},
+        "latex": {"question": "What are the units of $p'(t)$?", "answer": "$\\dfrac{\\text{centimeters}}{\\text{second}}$"}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "Write a sentence describing what p'(t) represents in this context.", "answer": "p'(t) is the instantaneous velocity of the particle at time t seconds; the particle is traveling p'(t) cm/sec at time t seconds."},
+        "latex": {"question": "Write a sentence describing what $p'(t)$ represents in this context.", "answer": "$p'(t)$ is the instantaneous velocity of the particle at time $t$ seconds; the particle is traveling $p'(t)$ cm/sec at time $t$ seconds."}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "For which values of t is p'(t) positive, negative, and zero?", "answer": "Positive: 0 < t < 2 (particle moves right). Negative: 2 < t < 6 (particle moves left). Zero: t = 2 (particle changes direction)."},
+        "latex": {"question": "For which values of $t$ is $p'(t)$ positive, negative, and zero?", "answer": "Positive: $0<t<2$; Negative: $2<t<6$; Zero: $t=2$."}
+      }
+    ]
+  },
+  {
+    "name": "Extra Practice 2: ordering derivatives from a graph",
+    "learning_tag": "D1",
+    "context_plain": "The curve gives the mass m(t) (in grams) of a substance at time t (in seconds). Arrange from least to greatest: Quantity A = m'(1), Quantity B = m'(2), Quantity C = m'(3), Quantity D = 0.",
+    "context_latex": "The curve gives the mass $m(t)$ (in grams) at time $t$ (in seconds). Arrange from least to greatest: Quantity A $= m'(1)$, Quantity B $= m'(2)$, Quantity C $= m'(3)$, Quantity D $= 0$.",
+    "keywords": ["derivative", "sign of derivative", "slope of tangent line", "ordering", "reading graphs"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Arrange A = m'(1), B = m'(2), C = m'(3), D = 0 from least to greatest.", "answer": "A < D < B < C. At t=1 the tangent slope is negative, so A < 0 = D. At t=2 the slope is positive but small, and at t=3 it is positive and larger, so D < B < C."},
+        "latex": {"question": "Arrange $A=m'(1)$, $B=m'(2)$, $C=m'(3)$, $D=0$ from least to greatest.", "answer": "$A < D < B < C$. Tangent at $t=1$ has negative slope; tangent at $t=2$ has small positive slope; tangent at $t=3$ has larger positive slope."}
+      }
+    ]
+  },
+  {
+    "name": "Extra Practice 3: matching f and f' graphs",
+    "learning_tag": "D1",
+    "context_plain": "Pictured are pairs of graphs (blue solid and red dashed). Choose which pair(s) could be the graph of a function f and its derivative f'.",
+    "context_latex": "Pictured below are pairs of graphs. Choose the letter if the corresponding pair is the graph of a function $f$ and its derivative $f'$.",
+    "keywords": ["derivative", "graph of f prime", "constant function", "slope", "differentiability"],
+    "subproblems": [
+      {
+        "part": "a",
+        "plain_text": {"question": "Pair (A): blue solid line y=1, red dashed line y=x-1. Is this a valid (f, f') pair?", "answer": "YES. If f(x) = x-1 (red dashed, slope 1), then f'(x) = 1 for all x, which matches the blue solid line y=1."},
+        "latex": {"question": "Pair (A): blue $y=1$, red dashed $y=x-1$. Valid $(f,f')$ pair?", "answer": "YES. If $f(x)=x-1$, then $f'(x)=1$ for all $x$, matching the blue line $y=1$."}
+      },
+      {
+        "part": "b",
+        "plain_text": {"question": "Pair (B): blue solid line y=-1, red dashed line y=x-1. Is this a valid (f, f') pair?", "answer": "NO. If f(x)=x-1 then f'(x)=1, not -1. If f(x)=-1 (constant) then f'(x)=0, but the red dashed line is not y=0."},
+        "latex": {"question": "Pair (B): blue $y=-1$, red dashed $y=x-1$. Valid $(f,f')$ pair?", "answer": "NO. If $f(x)=x-1$ then $f'(x)=1\\neq -1$. If $f(x)=-1$ then $f'(x)=0$, but the red line is not $y=0$."}
+      },
+      {
+        "part": "c",
+        "plain_text": {"question": "Pair (C): blue solid increasing curve, red dashed line y=x-1. Is this a valid (f, f') pair?", "answer": "NO. If f(x)=x-1 then f'(x)=1, but the blue curve is not y=1. If f is the blue increasing curve, then f'(x) > 0 for all x, but the red dashed line is negative for x<1."},
+        "latex": {"question": "Pair (C): blue increasing curve, red dashed $y=x-1$. Valid $(f,f')$ pair?", "answer": "NO. If $f(x)=x-1$, $f'(x)=1$ but blue is not $y=1$. If $f$ is the blue curve (always increasing), $f'>0$ always, but red is negative for $x<1$."}
+      },
+      {
+        "part": "d",
+        "plain_text": {"question": "Pair (D): blue solid decreasing curve, red dashed curve that is the negative of the blue. Is this a valid (f, f') pair?", "answer": "NO. If f is the red dashed curve (always increasing), then f' > 0, but the blue curve becomes negative around x=1.75. If f is the blue decreasing curve, then f' < 0, but the red curve becomes positive around x=1.75."},
+        "latex": {"question": "Pair (D): blue decreasing curve, red dashed curve (its negative). Valid $(f,f')$ pair?", "answer": "NO. If $f$ is the red curve (increasing), $f'>0$ always, but blue turns negative near $x=1.75$. If $f$ is the blue curve (decreasing), $f'<0$ always, but red turns positive near $x=1.75$."}
+      }
+    ]
+  }
+]
