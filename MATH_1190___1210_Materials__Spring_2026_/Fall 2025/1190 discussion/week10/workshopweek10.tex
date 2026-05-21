@@ -1,0 +1,406 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonDJ}
+\def\TypeNum{Workshop Week 10} %Lesson #
+\def\TypeTitle{Optimization and Net Change } %Lesson Title
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190}%Course number and name
+\def\Targets{  \target{A2}, \target{I1} }
+
+\usepackage{preambleDJ} 
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+
+
+\vs{.6}
+\
+%\begin{center}
+%    \includegraphics[width=0.8\textwidth]{IMG_2891.jpeg}
+%\end{center}
+
+
+\begin{enumerate}
+
+\item {\bf Optimization} \\
+\mpageT{.5}{.6}{
+An athletic field is shaped like a rectangle with a semicircular track on each of its shorter sides (see Figure 1).  
+The total perimeter of the track is fixed at $400$ meters.   The variable $R$ represents the radius  of each semi-circle.  The variable $L$ is the length  of the straight portion of the track.\\\\
+Find the dimensions that enclose the largest possible area.
+}{ \centering
+\begin{tikzpicture}[scale=1.2, thick]
+  % Parametri
+  \def\R{1.5} % raggio dei semicerchi
+  \def\L{4}   % lunghezza del rettangolo
+%
+  % Parte rettangolare (linee orizzontali)
+  \draw (0,\R) -- (\L,\R);
+  \draw (0,-\R) -- (\L,-\R);
+  \draw[dotted] (0,\R) -- (0,0);
+  \draw[dotted] (\L,\R) -- (\L,0);
+  \node[circle, fill=black, inner sep=1pt] at (0,0) {};
+  \node[circle, fill=black, inner sep=1pt] at (\L,0) {};
+%
+%
+  % Semicerchi alle estremità
+  \draw (0,-\R) arc[start angle=270, end angle=90, radius=\R];
+  \draw (\L,\R) arc[start angle=90, end angle=-90, radius=\R];
+%
+  % Etichette
+  \node at (\L/2, \R-0.4) {$L$};
+  \node at (-\R+1.3, \R/2) {$R$};
+  \node at (\L+\R-1.3, \R/2) {$R$};
+  \node at (\L/2, -\R-0.4) {};
+  %\node at (-0.3, \R+0.8) {Figure 1: Track shape};
+%
+\end{tikzpicture}
+\vs{-.3}\captionof{figure}{Track Shape}
+%\captionof{figure}{Track Shape}
+}
+
+{\bf Modeling Phase}
+\tasksA{2}{
+\task Write an expression for the total area enclosed by the track in terms of $L$ and $R$. Recall that the area of a half-circle is $A=\pi R^2/2$
+\task Write an expression for the total perimeter in terms of your variables, and set it equal to $400$. Recall that the perimeter of a half-circle in $P=\pi R$\vs{.5}
+\task Use the perimeter constraint to express one variable in terms of the other, and substitute it into the area formula.
+}
+
+
+
+\vs{.5}
+
+{\bf Calculus Phase}
+ Think about the process you have been using to optimize other quantities. Use that process here to find the dimensions that maximize the area of the athletic field.
+ \vs{.5}
+\\Solution: (a): The total area enclosed by the track is the sum of the area of the two semicircles plus the rectangular area in the middle, so it is 
+\[
+A= L(2R)+ 2(\pi R^2/2)=2LR+\pi R^2
+\]
+\vs{.5}
+(b:) The perimeter of the track is the perimeter of the two semicircles plus the two straight segments, so it is
+\[
+P=2(\pi R)+2L=400
+\]
+\vs{.5}
+(c): From the perimeter formula
+\[
+400=2\pi R + 2L \implies 400-2\pi R = 2L \implies L=200-\pi R
+\]
+thus the area formula becomes
+\[
+A=2R(200-\pi R)+ \pi R^2=400R-\pi R^2
+\]
+\vspace{.5}
+(Calculus phase): To maximize the Area of the track we want to find its critical points. To do so, compute its derivative and set it to 0:
+\[
+A'=400-2\pi R=0 \implies R=200/\pi
+\]
+Now if we evaluate the {\bf DERIVATIVE} at a point before $200/\pi$ (like 0) and at a point greater than $200/\pi$ (like 100) we can understand the sign chart for the {\bf ORIGINAL }function $A$:
+\[
+A'(0)=200-0=200>0
+\]
+\[
+A'(100)=200-2 \pi 100<0
+\]
+then the function A is increasing before $200/\pi$, and decreasing after $200/\pi$. This shows that $200/\pi$ is a local maximum. We have proven that the dimensions that maximize the area of the field having the perimeter fixed to be $400$ are
+\[
+R=200/\pi
+\]
+\[
+L=200- \pi R=200-\pi 200 /\pi=200-200=0
+\]
+which means that the shape of the athletic field that maximizes the area is actually a perfect circle.
+
+
+
+\newpage
+\item {\bf Net Change and The Definite Integral} .\\
+Consider the graph below, which represents the velocity (in mi/hr) of a braking vehicle (looks like one of those ``rolling stops") over time (in seconds s). 
+%In addition, suppose this function is given by $f(x) = 10\log\left(2\pi\ x\right).$
+\graphicsC{bus_go_broooom.png}{4}
+
+%Consider the following questions:
+    \begin{enumerate}
+    \item What does the definite integral $\ds \int_5^{15} f(x) dx$ represent? In particular, what do the bounds symbolize \textbf{ and } how would you explain what the integral calculates (give units).\\    
+    Solution: the definite integral of the velocity from seconds 5 to 15 indicates the total area under the graph, between the points 5 and 15. In practice, this indicates the total space traveled by the car in those 5 seconds (from second 5 to 15), with units being miles. The bound simbolize that we are looking at the car between the seconds 5 and 15. 
+        \vs{.5}
+    \item Using at least two rectangles, what is the approximate area under this curve from $x = 5$ to $x=15$? What does this quantity represent (use units)?\\
+    Solution: (note that your solution may vary based on your choice of the points). Divide the interval from 5 to 15 in 2 intervals: $[5,10]$ and $[10,15]$. To compute the height of the rectangles, consider their value at the leftmost point of the interval: the first rectangle is going to be $f(5)=15$ tall, while the second $f(10)=18$ (look approximately from the graph to compute these heights).
+    \\ Then the approximate area under the curve between 5 and 15 is going to be the sum of the area of the 2 rectangles, which is:
+    \[
+    A_1+A_2=5 \cdot 15+5 \cdot 18=165
+    \]
+    The unit is going to be mile.
+    \graphicsC{bus_go_broooom2.jpeg}{4}
+        \vfill
+
+%    \item Using at least one rectangle, approximate 
+%        \begin{enumerate}
+%            \item $\ds \int_5^{10} f(x) dx$
+%                \vfill
+%            \item $\ds \int_{10}^{15} f(x) dx$
+%                \vfill
+%            \item $\ds \int_{15}^{20} f(x) dx$
+%                \vfill
+%        \end{enumerate}
+%    \item What can you say about the difference (using subtraction) between (i.) and (ii.). What about the difference between (ii.) and (iii.)? Which difference is greater? How do you suspect $\ds \int_{20}^{25}f(x) dx$ might relate to (iii.)?
+%                \vfill
+    \end{enumerate}
+
+\newpage
+\item {\bf Optimization} The sum of two numbers is $50$. Find the two numbers that maximizes the product. Let's use , $x$ and $y$ to represent our two numbers.
+%\[
+%f(x,y) = xy
+%\]
+%subject to the constraint
+%\[
+%x^2 + 4y^2 = 16.
+%\]
+
+{\bf Modeling Phase}
+\tasksA{2}{
+\task Write down a formula for the product, $P$ of our two numbers ($x$ and $y$)
+\task Write down a formula that represents ``The sum of two numbers is $50$." This should involve both $x$ and $y$.  This formula is called a {\em constraint}.
+\task Use the constraint to express one variable in terms of the other.
+\task Substitute your expression for the product, $P$.  \( f(x,y) \) to obtain a single-variable function.
+\task Simplify \( P \) and determine the domain of possible \(x\)-values.
+}
+
+\vs{1}
+
+{\bf Calculus Phase}
+\\ Now that you have obtained $P$ as a single-variable function, use the usual techniques to find the maximum and the minimum of $P$ (if any). 
+
+
+\vs{1}
+
+Solution: (a): The product of two numbers $x$ and $y$ is simply 
+\[
+P=xy
+\]
+\vs{.5}
+
+(b): The constraint that the sum of $x$ and $y$ is 50 can be written as
+\[
+x+y=50
+\]
+
+\vs{.5}
+
+(c): Use the sum constrainst to write
+\[
+50=x+y \implies y=50-x
+\]
+
+\vs{.5}
+
+(d): Substitute $y=50-x$ into $P=xy$
+\[
+P=xy=x(50-x)=50x-x^2
+\]
+
+\vs{.5}
+
+(e): the domain of $P=50x-x^2$ is the whole real line $\mathbb{R}$ since there is no fraction/square root/logarithm.  
+
+\vs{.5}
+
+({\bf calculus phase:}) We want to compute the derivative of P and set it to zero:
+\[
+P'=50-2x=0 \implies x=25
+\]
+Now if we evaluate the derivative at a point before $25$ (like 0) and at a point greater than $25$ (like 50) we can understand the sign chart for the function $P$:
+\[
+P'(0)=50-0=50>0
+\]
+\[
+P'(50)=50-100=-50 <0
+\]
+then the function is increasing before $25$, and decreasing after $25$. This shows that $25$ is a local maximum. We have proven that the values of $x,y$ that sum up to 50 and maximise the product are 
+\[
+x=25, \qquad y=50-25=25
+\]
+what about the minima? from the study of the derivative we didnt't find any local minima. But the function is defined on the whole real line $\mathbb{R}$, and it is decreasing always after 25, and always increasing before 25. This means that the function is never reaching a local minimum, let alone a global one! 
+
+
+
+
+
+\newpage 
+
+\mpageT{.5}{.5}{
+\item {\bf Optimization} Suppose Bob wants to build a fence to enclose some sheep with a rectangular sheep pen. Fortunately, he lives next to a river, so he only needs to build three sides of the enclosure. Bob has $30$m of fencing. What are the dimensions that will enclose the greatest amount of sheep?
+}{\graphicsC{sheepPen}{3}
+}
+{\bf Modeling Phase}
+\tasksA{2}{
+\task Create variables that describe the width and length of the sheep pen.
+\task What quantity are we going to maximize? Let's call this quantity $S$.  Use both of your new variables to write down an equation for this quantity?\vs{1}
+\task Bob's constraint is that he only has $30$m of fencing. Use your variables to write down an equation that represents this constraint.
+\task Both the quantity you are going to maximize, $S$, and your constraint contain both of your variables. Use your constraint to solve for one variable and substitute  into $S$.
+}
+\vs{1}
+{\bf Calculus Phase} Think about the process you have been using to optimize other quantities. Use that process here to find the dimension that maximize the area of the sheep pen?
+ \vs{1}
+
+ Solution: (a): The variables are going to be the width $W$ and the length $L$
+
+ \vs{.5}
+
+ (b): We want to maximise the are of the sheep pen, which is
+ \[
+ S=W \cdot L
+ \]
+ \vs{.5}
+
+ (c): The constrain is that the 3 meters of fencing must be used to build the one side parallel to the river, of length $L$, and the two other sides of length $W$, so
+ \[
+ 30=2W+L
+ \]
+
+ \vs{.5}
+
+ (d): We want to use the constrain to find a relation between $W$ and $L$. 
+ \[
+ 30=2W+L \implies L=30-2W
+ \]
+ Now we can substitute back into $S$; 
+ \[
+ S=W(30-2W)=30W-2 W^2
+ \]
+
+\vs{.5}
+
+({\bf calculus phase:}) We want to compute the derivative of S and set it to zero:
+\[
+S'=30-4W=0 \implies 4W=30 \implies W=7.5
+\]
+Now if we evaluate the derivative at a point before $7.5$ (like 7) and at a point greater than $7.5$ (like 8) we can understand the sign chart for the function $S$:
+\[
+S'(7)=30-4\cdot 7=2>0
+\]
+\[
+S'(8)=30-8 \cdot 4=-2 <0
+\]
+then the function is increasing before $7.5$, and decreasing after $7.5$. This shows that $7.5$ is a local maximum. We have proven that the dimension of the sheep pen that maximise S are
+\[
+W=7.5, \qquad L=30-2W=30-15=15
+\]
+
+
+
+
+
+
+
+\newpage
+\item {\bf Optimization} Suppose John is standing next to a river that is 1 mile wide. His house is on the opposite of the river 3 miles down. John can swim at 5 miles per hour but he can run at 8 miles per hour. What is the shortest amount of time it can take John to reach his house? You will find this by finding the best choice for $d$ where John stops running and starts swimming.\\
+\mpageT{.4}{.6}[\hs{.1}]{
+{\bf Modeling Phase} We first need to develop a model of the total time: $$T_{total}=T_{run}+T_{swim}$$
+The total horizontal distance to the house is $3$ miles.  Once John starts to swim, the remaining horizontal distance is $d$ miles (see Figure 1). 
+}{\graphicsC{runSwim}{4}{Figure 1}
+}
+\tasksA{2}{
+\task What is the distance John ran? Your answer should contain $d$.
+\task How long does it take for John to run this distance? This is $T_{run}$.  Your answer should contain $d$.\vs{.5}
+\task What is the distance John swam?  {\em Hint}: You will want to utilize Pythagorean's Theorem to find this distance. Your answer should contain $d$.
+\task How long does it take for John to swim this distance? This is $T_{swim}$.  Your answer should contain $d$. \vs{.75}
+\task* What is $T_{total}$? Your answer will contain $d$\vs{.25}
+}
+{\bf Calculus Phase} Think about the process you have been using to optimize quantities. Use that process to find the minimum time it takes for John to get home. You will definitely want to use technology for the last part of finding critical numbers.
+\vs{.5}
+
+(a): Of the total of 3 miles that John had to run, he run all but $d$ miles, so he ran $3-d$ miles.
+\vs{.5}
+
+(b): John can run at 8 miles per hour so to run $3-d$ miles it takes him
+\[
+T_{run}=space/velocity=\frac{3-d}{8}
+\]
+
+\vs{.5}
+
+(c): He has to swim 1 mile vertically and d miles horizontally, so by pytaghorean theorem,
+\[
+distance \, swam= \sqrt{1^2+d^2}
+\]
+\vs{.5}
+
+(d): John can swim at 5 miles per hour so to swim $ \sqrt{1+d^2}$ miles it takes him
+\[
+T_{swim}=space/velocity=\frac{ \sqrt{1+d^2}}{5}
+\]
+\vs{.5}
+
+(e):The total time is the sum of the two times so it is
+\[
+T_{tot}=T_{run}+T_{swim}=\frac{3-d}{8}+\frac{ \sqrt{1+d^2}}{5}
+\]
+
+\vs{.5}
+
+({\bf calculus phase:}) We want to compute the derivative of $T_{tot}$ and set it to zero:, so among the critical points we hope to find the minimum of $T_{tot}$: 
+\[
+T_{tot}'=(\frac{3-d}{8}+\frac{ \sqrt{1+d^2}}{5})'=(\frac{3}{8})'+(\frac{-d}{8})'+(\frac{\sqrt{1+d^2}}{5})'=0-1/8+\frac{1}{5}(\sqrt{1+d^2})'
+\]
+recall that you have to use the {\bf chain rule} to compute this derivative ($(\sqrt{1+d^2})'$). Let's do it
+\[
+(\sqrt{1+d^2})'=((1+d^2)^{1/2})'=\frac{1}{2}(1+d^2)^{-1/2} \cdot 2d
+\]
+on summary, we obtain
+\[
+T_{tot}'=-1/8+\frac{1}{5}\frac{1}{2}(1+d^2)^{-1/2} \cdot 2d=0
+\]
+\[
+\implies \frac{1}{5}(1+d^2)^{-1/2} \cdot d=1/8
+\]
+\[
+\implies \frac{d}{\sqrt{1+d^2}}=5/8
+\]
+\[
+\implies d=\frac{5}{8}\sqrt{1+d^2}
+\]
+
+which using the tecnhology we can find that has only one critical value 
+\[
+d \sim 0.8
+\]
+Now if we evaluate the derivative at a point before $0.8$ (like 0), and at a point greater than $0.8$ (like 1) we can understand the sign chart for the function $T_{tot}$:
+\[
+T_{tot}'(0) \sim -0.15 <0
+\]
+\[
+T_{tot}'(1) \sim 0.02 >0 
+\]
+then the function is decreasing before $d \sim 0.8$, and increasing after $d \sim 0.8$. This shows that $d$ is a local minimum, so the optimal choice for John is the to run $\sim 2.2$ miles, and then swim the remaining $\sqrt{1+.8^2}\sim 1.3$ miles.
+
+
+
+
+
+    \vfill
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+\end{document}

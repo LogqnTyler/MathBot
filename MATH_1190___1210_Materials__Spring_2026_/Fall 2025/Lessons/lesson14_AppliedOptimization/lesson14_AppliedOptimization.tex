@@ -1,0 +1,163 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 14}
+\def\TypeTitle{Applied Optimization }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{  {\bf\color{RedOrange}A3} }
+
+\usepackage{preambleDJ}
+
+%\usepackage{ragged2e}
+
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vs{.3}
+
+\textbf{Intended Learning Outcomes}
+After this lesson, you will be able to 
+
+\begin{itemize}
+    \item Define variables and translate assumptions with newly defined variables to model the applied context. (\target{A3})
+    \item Convert given conditions (if any) into mathematical equations/expressions. (\target{A3})
+    \item Set up objective function and convert it into a single-variable function (if needed). (\target{A3})
+    \item Determine the domain of optimization based on the scenario. (\target{A3})
+    \item Solve applied optimization problems. (\target{A3})
+\end{itemize}
+
+\vspace{-0.5cm}
+
+\hrulefill\\
+
+{\bf\color{blue}Read the Passage.} In the online pre-class activity, we saw optimization problems solved in two phases: the modeling phase and the calculus phase. We'll practice specific steps within each of those phases in this activity while re-attempting some of the same problems that appeared in the pre-class assignment - as well as while trying new problems.\\
+
+Try to work through the following problem, which appeared in the pre-class assignment (with different numbers) as example 1. You don't have to get everything right - that you are willing to try something, figure out a method, and make some mistakes along the way is far more important than feeling pressured to get everything right the very first time.\\
+
+{\bf\color{blue}Warm-up exercise 1.}\ltrm{\bf\color{RedOrange}A3} We want to build an open box (four side walls and a bottom but no top) with a square base. The volume of the box must be $256$ cm$^3$. We should build the box to spend as little on the materials as possible. What dimensions should we choose for our box?\\
+
+\textbf{Modelling Phase:}\\
+\mpageTth{.3}{.4}{.4}{
+ \graphicsL{box}{2}
+}{
+$$SA=Bottom_{area}+Sides_{area}$$
+}{
+$$V=Length \times Width \times Height$$
+}
+\vs{1}~\\
+\textbf{Calculus Phase:}
+
+\vfill
+
+%\end{document} %end here for written pre-class
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+{\bf Reflection: Modeling Phase} What steps did you take during the Modeling Phase? 
+\vfill
+{\bf Reflection: Calculus Phase} What steps did you take during the Calculus Phase? 
+\vfill
+\newpage
+{\exercise}\ltrm{\bf\color{RedOrange}A3} We want to build a closed box with a square base. The volume of the box must be 256 cm$^3$. The top of the box costs $\$1$ per cm$^2$ of material, the sides of the box costs $\$0.50$ per cm$^2$ of material, and the bottom of the box costs $\$3$ per cm$^2$ of material. What dimensions should we choose for our box to minimize its cost?\\
+
+
+\def\sz{.5}
+\textbf{Modelling Phase:}\\
+\mpageT{.335}{.8}{
+\hs{-1} \graphicsL{boxTop}{2}
+}{
+\tasksA{2}{
+\task Using the variables provided in the picture, what is an equation for the  {\em area} of {\em \bf the bottom} of the box?  
+\task What is the {\em cost} to build  {\em \bf the bottom}  of the box? You will need to use the equation you created in a) in your answer. \vs{\sz}
+}
+}
+%\vs{1}~\\
+\mpageT{.335}{.8}{\vs{-.05}
+\enumA{\setItemnumber{3}
+\item Using the variables provided in the picture, what is the {\em cost} of {\em \bf one side} of the box? Consider the approach you used in a) and b)
+}
+}{
+\tasksAS{2}{4}{
+\task What is the {\em cost} to build  {\em \bf the top}  of the box? 
+\task Use your work in parts a)-d) to find a function representing the {\em total cost} to build {\em \bf the entire box}.
+}
+}
+\vs{\sz}~\\
+\mpageT{.335}{.8}{\vs{-.05}
+\enumA{\setItemnumber{5}
+\item Find an equation that uses the variable provided in the picture and information provided in the statement of the problem  to find an equation for {\em  the volume} of {\em  \bf the box }.
+}
+}{
+\tasksAS{2}{6}{
+\task Use your answers from d) and e) to find an equation for {\em total cost} that involves only one variable. What might be an appropriate domain for this function?
+%\task  Use your answers from e) and f) to find an equation for {\em total cost} that involves only one variable. What's might be an appropriate domain for this function?
+}
+}
+\vs{1}~\\
+\textbf{Calculus Phase:}
+
+\vfill
+
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+
+\paragraph*{Applied Optimization in Economics}
+\begin{itemize}
+\item The {\bf unit selling price} is the sales price of a unit of a commodity. The unit selling price of a commodity can vary as the amount of the commodity sold varies, so unit selling price of the $x^{th}$ unit of the commodity can be regarded as a function of $x$, the number of units sold: 
+\[p=f(x)\] 
+The relationship between $p$ and $x$ is called a {\it demand equation}, the graph of which is called a {\it demand curve}.
+\item {\bf Revenue} is the income from the sales of a commodity. If $p(x)$ is the unit selling price of the $x^{th}$ unit of the commodity, then revenue from the sale of $x$ units of the commodity is: \[R(x)=x\cdot p\]
+\item {\bf Total cost} is the amount of money that must be spent to produce a commodity. We'll denote the total cost of producing $x$ units of a commodity by $C(x)$.
+\item {\bf Profit} is the difference between revenue and total cost:
+\[P(x) = R(x) - C(x)\]
+\end{itemize}
+%
+{\exercise}\ltrm{\bf\color{RedOrange}A3} Suppose the unit selling price of a commodity is $p=4-\dfrac1{100}x$ and the total cost of producing a commodity is $C(x)=\dfrac{3}{100}x^2-6x+400$, with $0\leq x\leq 200$ for both.\\
+\tasksA{2}{
+\task Find \& simplify a revenue function. \\\\ $R(x)=$
+\task Find \& simplify a profit function.\\\\ $P(x)=$
+\vs{.5}
+\task How many units of the commodity should be sold to maximize profit?
+}
+
+
+\vfill
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+
+{\bf\color{blue}Extra Practice 1.}\ltrm{\bf\color{RedOrange}A3} In economics, the actual cost incurred in producing an additional unit of a certain commodity at a certain level of operation is called the {\bf marginal cost}. Economists often define the marginal cost function to be the derivative of total cost. If the total cost of producing $x$ units of a product is $C(x)=x^2-4x^{3/2}+30$, then find the number of units to produce to minimize the marginal cost function.
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 2.}\ltrm{\bf\color{RedOrange}A3} A sheep farmer wishes to construct a rectangular pen enclosing 500 square feet partitioned into two pens using a fence parallel to one of the sides. (See the diagram below.) The fencing for the four outer sides of the pen must be heavy-duty (to keep out predators) and costs \$2 per foot. The interior (subdividing) fence costs \$1 per foot. What are the dimensions of the pen minimizing the cost?\\[0.1in]
+
+\hspace{0.2in}
+%
+\begin{tikzpicture}
+    \draw[thick] (0,0) -- (0,5) -- (3,5) -- (3,0) -- (0,0);
+    \draw[thick] (0,2.5) -- (3,2.5);
+\end{tikzpicture}
+\newpage
+{\bf\color{blue}Extra Practice 3.}\ltrm{\bf\color{RedOrange}A3} A division of the Chapman Corporation manufactures  a pager. The weekly fixed cost for the division is $\$20,000$ and the variable cost for producing $x$ pagers is $$V(x)=0.000001x^3-0.01x^2+50x$$ dollars. The company realizes a revenue of $$R(x)=-0.02x^2+150x \qquad (0\leq x \leq 7500)$$ from the sale of $x$ pagers per week. Find the level of production that will yield a maximum profit for the manufacturer.
+
+\end{document}

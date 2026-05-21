@@ -1,0 +1,185 @@
+\documentclass[10pt]{article}
+\renewcommand{\thesection}{\Roman{section}} 
+\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+\def\Type{LessonDJ}
+\def\TypeNum{Workshop Week 11} %Lesson #
+\def\TypeTitle{FTC, Definite Integrals and Summations } %Lesson Title
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190}%Course number and name
+\def\Targets{   \target{I2}, \target{I3}, \target{F3} }
+
+\usepackage{preambleDJ} 
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+
+
+\vs{.6}
+\section{Fundamental Theorem of Calculus}
+\begin{enumerate}
+\item For each of the following definite integrals, decide if the Fundamental Theorem applies.  \\If it does, evaluate the integral.
+\tasksA{2}{
+\task $\displaystyle\int_0^3 10x^2 \,dx$ \qquad FTC apply?
+\task $\displaystyle\int_{-2}^{2} \sqrt[6]{x} \,dx$ \qquad FTC apply?
+}
+\vs{.2}
+\tasksI{2}{
+\task If ``yes", \\
+
+$\displaystyle\int_0^3 10x^2 \,dx=$
+\task If ``yes", \\
+
+$\displaystyle\int_{-2}^{2} \sqrt[6]{x} \,dx=$
+}
+\vs{1}
+\tasksA{2}{
+\task[c)] $\displaystyle\int_e^{e^2} \frac{1}{x}  +5e^x\,dx$ \qquad FTC apply?
+\task[d)] $\displaystyle\int_{-5}^{5} 5e^{x}  +\frac{1}{x}\,dx$ \qquad FTC apply?
+}
+\vs{.2}
+\tasksI{2}{
+\task If ``yes", \\
+
+$\displaystyle\int_e^{e^2} \frac{1}{x} +5e^x\,dx=$
+\task If ``yes", \\
+
+$\displaystyle\int_{-5}^{5} 5e^{x} +\frac{1}{x}\,dx=$
+}
+\vs{1}
+
+\tasksA{2}{
+\task[e)] $\displaystyle \int_0^4 \left(\frac 1x + 2\right)\left(3x + 1\right)\,dx$ \qquad FTC apply?
+\task[f)] $\displaystyle\int_{-2}^{-1} \frac{1}{x+1}+\frac{1}{x+2} \,dx$ \qquad FTC apply?
+}
+\vs{.2}
+\tasksI{2}{
+\task If ``yes", \\
+
+$\displaystyle\int_0^4 \left(\frac 1x + 2\right)\left(3x + 1\right)\,dx=$
+\task If ``yes", \\
+
+$\displaystyle\int_{-2}^{-1} \frac{1}{x+1}+\frac{1}{x+2} \,dx=$
+}\end{enumerate}
+\vs{1}
+\newpage
+\section{Definite Integrals}
+\begin{enumerate}
+    \item Find the following anti-derivatives 
+    \begin{enumerate}
+        \item $\ds \int x^3 \;dx$
+        \item $\ds \int \frac{1}{2x} \;dx$
+        \item $\ds  \int 4\cdot3^x\;dx$
+    \end{enumerate}
+    \item Compute the following definite integral
+    \[\int_2^5 \frac{x^4+1 + x3^x}{2x}dx\]
+    \item Compute the following definite integrals:
+    \begin{enumerate}
+        \item $\ds \int_0^3 (2x+1)^2\,dx$
+         \item $\ds \int_1^4 \left(\frac 1x + 2\right)\left(3x + 1\right)\,dx.$
+    \end{enumerate}    
+
+\end{enumerate}
+
+\newpage
+\section{Summations}
+\begin{enumerate}
+
+    
+    \item Rewrite in summation notation -you don't need to solve!-:
+    \begin{enumerate}
+        \item $\ds 2 + 4 + 6 + 8 $
+        \item $\ds 2 - 4 + 6 - 8 + 10.$
+        \item $\ds 1-\frac{2}{3}+\frac{4}{9}-\frac{6}{27}+\frac{8}{81} $
+
+
+    \end{enumerate}
+
+    \item Knowing that $\ds \sum_{i=1}^{n}a_i=5,\sum_{i=1}^{n}b_i=0,\sum_{i=1}^{n}c_i=-1$, use the properties of summation to compute the values of the following summations:
+    \begin{enumerate}
+        \item $\ds \sum_{i=1}^n \frac{a_i+b_i}{2}$
+        \item $\ds \sum_{i=1}^n 3a_i-b_i-3c_i+10$.
+    \end{enumerate}
+        \item Compute explicitly the following sums: 
+    \begin{enumerate}
+        \item $\ds \sum_{k = 1}^4 (-1)^k k$
+        \item $\ds \sum_{k = 0}^3 (-1)^{k+1} (k+1)$
+        \item $\ds \sum_{k = 100}^{104} (-1)^{k-99} (k-99).$
+    \end{enumerate}
+    \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+    \section{More Definite Integrals}
+     \begin{enumerate}
+    
+    \item Consider the function $v(t) = 4t^3-16t^2+16t$ shown below:
+    \begin{center}
+        \begin{tikzpicture}
+          \begin{axis}[
+            xmin=-2.5,        % Minimum x-value
+            xmax=2.5,         % Maximum x-value
+            ymin=-8,         % Minimum y-value
+            ymax=8,          % Maximum y-value
+            axis lines=middle, % Draw the x and y axes in the middle
+            x label style={anchor=west},
+            xlabel={$t$},     % Label for the x-axis
+            ylabel={$v(t)$},     % Label for the y-axis
+            xtick       = {-2,-1,1,2},
+            ytick       = {-8,-4,4,8},
+            %yticklabels = {$2$,$4$,$6$,$8$},
+            axis line style={thick, <->}, % Add arrows at the end of the axes
+            width = 2in, height=2in,
+            %restrict y to domain=-6.5:6.5
+          ]
+          %\addplot[domain=-2.5:2.5, samples=400, blue, ultra thick] {x^3};
+              \addplot[name path=f1, domain=-2.5:2.5, blue, ultra thick, <->] {4*x^3-16*x^2+16*x};
+%  \path[name path=axis] (axis cs:-2.5,0) -- (axis cs:2.5,0);
+%     \addplot [
+%        thick,
+%        color=blue,
+%        fill=blue, 
+%        fill opacity=0.1
+%    ]
+%    fill between[
+%        of=f1 and axis,
+%        soft clip={domain=-1:2},
+%   ];
+          \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{enumerate}
+        
+        \item What is the net area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 1$?\\
+        
+        \item What is the area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 1$?\\
+        
+        \item What is the net area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 2$?\\
+        
+        \item What is the area bounded by $v$ and the $t$-axis from $t = -1$ to $t = 2$?
+    \end{enumerate}
+
+    \item Suppose $v$ represented the velocity of a car as a function of time.\\
+    For each part above, what does the quantity you calculated represent? (The answers should be different!)
+    
+\end{enumerate}
+
+     
+
+\end{document}

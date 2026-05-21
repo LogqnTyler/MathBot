@@ -1,0 +1,342 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+%\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+
+% record goals here to create sense of transparency
+
+\fancyhead[c]{%
+  \ifcase\value{page}
+  % empty test for page = 0
+  \or {}% 
+  \or
+  % \or {\bf\color{ProcessBlue} F1: Lines \& Slope}% page=1
+  % \or {\bf\color{RoyalBlue} L1: Limits and Continuity}% page = 2
+  % \or {\bf\color{RoyalBlue} L2: Evaluating Limits Using Continuity and Forms}% page = 3
+  % \or {\bf\color{ForestGreen} D1: Meaning of a Derivative}% page = 4
+  % \or {\bf\color{ProcessBlue} F2: Exponential and Logarithmic Functions}% page = 5
+  \or {\bf\color{ForestGreen} D3: Derivatives of Basic Functions}% page = 7
+  \or {\bf\color{ForestGreen} D2: Compute Derivatives}% page = 6
+  % \or {\bf\color{RedOrange} A1: Derivatives and Graphing}% page = 8
+  \or
+  \else
+  % Empty chead here!
+  \fi
+}
+
+\thispagestyle{empty} % don't display that this is page 0
+
+\Heading{MATH 1190/1210 Survey of Calculus I}{Knowledge Checkpoint 2\\Growth-Based\\Fall 2025}
+
+\vspace{0.1in}
+
+\textbf{Name} \hrulefill \, \begin{minipage}{0.16\textwidth}\begin{center}\textbf{UVA ID\\ (e.g. hdj4nd)} \end{center}\end{minipage}\hrulefill\\
+
+\begin{minipage}{0.2\textwidth}\begin{center}\textbf{Course \&\\ Section Number} \end{center}\end{minipage} \hrulefill\,\,\textbf{Date} \hrulefill  \\
+
+\hrulefill
+\paragraph*{Course \& Section Numbers:}
+
+{\small
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-100\\
+J. Rolf\\
+(11:00 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1190-200\\
+J. Rolf\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-100\\
+Mikhail\\
+(8 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-200\\
+Raul\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-300\\
+Sherman\\
+(11 AM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-400\\
+Sherman\\
+(12:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-500\\
+Michael\\
+(2 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-600\\
+J. Bowling\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-700\\
+Josh\\
+(9:30 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-800\\
+Mason\\
+(2 PM)
+\end{center}\end{minipage}
+\\
+%
+\hline
+%
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-900\\
+Caelan\\
+(3:30 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-920\\
+Caelan\\
+(5 PM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-940\\
+Mitchell\\
+(10 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-950\\
+Mitchell\\
+(11 AM)
+\end{center}\end{minipage}
+&
+\begin{minipage}{0.12\textwidth}\begin{center}
+1210-960\\
+Mitchell\\
+(noon)
+\end{center}\end{minipage}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+{%\small
+
+\paragraph*{Instructions:}
+
+\begin{itemize}
+    
+    \item The regular time allowed for completing this assessment is \fbox{$20$} minutes.
+    %\item This assessment is out of 50 points.\\
+    % \item This assessment contains one single-part or multi-part problem for each of the following targets: {\bf\color{ProcessBlue}F1}, {\bf\color{RoyalBlue}L1}, {\bf\color{RoyalBlue}L2}, {\bf\color{ForestGreen}D1}, {\bf\color{ProcessBlue}F2},
+    {\bf\color{ForestGreen}D3}, {\bf\color{ForestGreen}D2}
+    % {\bf\color{RedOrange}A1}.
+    \item On each problem, you will receive a score of Exceeds Expectations (5), Proficient (4), Almost (3), Developing (2), Emerging (1), or Not Yet (0). {\bf Please do not interpret your score as a percentage.}
+    %\item You will have opportunities to reassess on the targets appearing on this assessment after the next {\bf 2} assessments.\\
+    \item You may NOT use calculators, dictionaries, notes, phones, or any other kind of aid.
+    \item Please write neatly. What cannot be read, cannot be graded.
+    \item Carefully work out each problem and clearly indicate your final answer to every problem.
+    \item Throughout, give the most descriptive answer possible. \textbf{For instance, ``DNE" will not be accepted when ``$=\infty$" is applicable.}
+    %\item Please provide the most specific answer possible. For instance, if a limit does not exist because it goes to $\infty$ or $-\infty$, then specify this.
+    \item Please use the methods discussed up to this point in the course. For example, any work based on l'H\^opital's Rule will not receive credit.
+    \item \textbf{All work must be shown unless otherwise specified.} Partial credit will not be given if appropriate work is not shown.
+    \item In particular, {\bf any answer appearing with no justification will receive no credit regardless of whether the answer was correct}, unless otherwise specified.
+    \item Please first respond to the prompts on which you feel most proficient, then respond to others later.
+    \item This booklet is printed double-sided. It contains 12 pages and 8 numbered problems.
+    \end{itemize}
+    
+    }
+
+\vfill
+
+
+%%%%%%%%%
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage%
+%%%%%%%%%
+
+
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Write down the derivatives of the following functions. No work required. No need to simplify.
+
+If you need to write down your work, please do so at the bottom half of this page, not in the answer space.
+
+\begin{center}
+        \begin{tabular}{l c r l c r}
+            %
+            $\displaystyle\frac{d}{dx}\left[ 9x^{6} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} &
+            %
+            $\displaystyle\frac{d}{dx}\left[ \dfrac{1}{\sqrt[5]{x^3}} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ \left(\dfrac{3}{4}\right)^x \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ \pi^{e} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ x^5+3 \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}&
+            %
+            $\displaystyle\frac{d}{dx}\left[ \sqrt{x}-\ln(x) \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+            $\displaystyle\frac{d}{dx}\left[ \dfrac{x^3+5x^2-x}{x^4} \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt} & 
+            %
+            $\displaystyle\frac{d}{dx}\left[ \log_{2}(x) \right]$ & $=$ & \rule[-8pt]{1.5in}{0.4pt}\\[0.3in]
+            %%%%%
+        \end{tabular}
+        
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Find the derivative of the following expressions. 
+
+A correct final answer receives full credit. Nevertheless, you are encouraged to write down the steps so that you will be able to receive partial credit if you final answer is not fully correct. There's no need to simplify your final answer.
+
+\begin{enumerate}
+\item $\dfrac{\ln(x)+x^2}{x^3-2x}$
+
+\vfill
+
+\item $4\sqrt{x}\left(e^2+3x^4\right)^2$
+
+\vfill 
+\end{enumerate}
+
+%split part (a) and part (b)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\newpage
+
+This page is left blank intentionally.\\
+
+Use this page if you need additional space to write your solutions to any problem. \\
+
+If you wish this page graded, you must refer to this page on \textbf{the original page} of the problem. Otherwise, your grader will NOT consider your work on this page.
+
+\end{enumerate}
+
+\end{document}

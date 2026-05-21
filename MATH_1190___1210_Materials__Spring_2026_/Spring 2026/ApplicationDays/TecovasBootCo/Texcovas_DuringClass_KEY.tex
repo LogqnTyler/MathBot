@@ -1,0 +1,370 @@
+% XeLaTeX can use any Mac OS X font. See the setromanfont command below.
+% Input to XeLaTeX is full Unicode, so Unicode characters can be typed directly into the source.
+
+% The next lines tell TeXShop to typeset with xelatex, and to open and save the source with Unicode encoding.
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{article}
+
+
+%%%%%%%%%%%%%%%
+\def\Type{ApplicationDJ}
+\def\TypeNum{Tecovas Boot Co.: During Class \red{Solutions}}
+\def\TypeTitle{Modeling Boot Production, Profit and Business Strategy}
+\def\Semester{Fall 2024}
+\def\Course{Math 1190/1210}
+\def\Targets{{\bf\color{Goldenrod}AD1}}
+
+\usepackage{preambleDJ}
+
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vspace*{.65in}
+
+\mpageT{.7}{.4}{
+{\bf Introduction}\\
+Tecovas Boots, an Austin TX based company, was started in 2015 by Paul Hedricks to make high quality boots sold direct-to-consumer at a more affordable price.  Tecovas partners with world-renowned boot-makers in Leon, Mexico to create hand-stitched quarters, Goodyear welts and lemonwood pegged mid-soles.   Tecovas' \href{https://www.tecovas.com/best-sellers}{best selling boots} include The Annie, The Earl, The Doc and The Cartwright.  }{
+\graphicsR{tecovasSign}{2.5}
+}
+
+\mpage{.4}{.7}{
+\graphicsL{theEarlSole}{2.5}{{\bf The Earl}}
+}{
+The production process for these boots is labor-intensive and Tecovas is considering changes to their business model for their best sellers.    Your  job is to assess the proposed changes and advise Tecovas about the potential effectiveness of these changes to maximize the profit-per-hour.
+}
+
+{\bf Profit-per-hour Model}
+In our simplified model of boot production\footnote{Thanks to Kerem Cosar, Professor of Economics at the University of Virginia, for help developing this model.}, Profit per hour is determined by two components: Revenue per hour and Cost per hour:
+$$\text{\em Profit }= Revenue - Cost$$
+{\em Revenue-per-hour} is determined by the price, $p$, of a pair of boots and $Q$, the quantity  of pairs of boots produced  per hour. $$Revenue=p\cdot Q$$
+$Q$ is based on a simplified Cobb-Doug Production Function\footnote{\url{https://quickonomics.com/terms/cobb-douglas-function}}.
+$$Q=z\cdot L^{\alpha},\quad 0<\alpha<1$$ where $L$ is the number of labor hours.  The parameter $z$ is the productivity of Tecovas;  the higher it is, the more pairs of boots are produced for a given number of labor hours, $L$.  The parameter $\alpha$ captures how labor is transformed into output (i.e. $Q$ pairs of boots) per hour. Economists  refer to $\alpha$ as the ``elasticity of labor output."
+\\
+
+{\em Cost-per-hour} is determined by the wages, $w$ (in dollars), paid for each labor hour, $L$.  $$Cost=w\cdot L$$
+\newpage
+{\bf Analysis of the Profit-per-hour Model}
+\enum{
+\item Write down the Profit-per-hour function from the pre-class activity.  Your function expression will contain the parameters $p$, $L$, $\alpha$, $z$, and $w$.
+\sol{
+\al{
+Profit&=Revenue-Cost\\
+P&=p\cdot Q-w\cdot L\\
+P&=p\cdot z\cdot L^{\alpha}-w\cdot L
+}
+}
+\item Data from Grips Intelligence\footnote{\url{https://gripsintelligence.com/insights/retailers/tecovas.com}} for online sales of The Annie, The Earl, The Doc and The Cartwright  from January $1$st 2024 through August $31$st 2024 suggest productivity of Tecovas is $z=0.75$.  The average price per pair of boots was $p=\$305.83$ and the average wage-per-hour was $w= \$21.50$.  For labor-intensive companies, a good estimate of the elasticity of labor output\footnote{Economists have developed methods to estimate technologies such as this, called a \lq production function,\rq\ using data on observed levels of output, labor and other inputs such as materials---think of the leather that our Tecovas purchases. While $\alpha$ varies across industries and firms, its average is approximately $\alpha=2/3$. }  is $\alpha=\dfrac{2}{3}$. \label{param}
+
+\enum{
+\item Update your Profit-per-hour function to include these values for parameters $p$, $z$, $\alpha$, and $w$. This should result in a function involving $L$.  \label{profitL}
+\sol{
+\alnum{
+Profit&=p\cdot z\cdot L^{\alpha}-w\cdot L. \nonumber\\
+P&=305.83 \cdot 0.75 \,L^{2/3}-21.50\,L \nonumber \\
+P&=229.3725\,L^{2/3}-21.50\,L \label{profit0}
+}
+} 
+\item Find the critical number(s) for this function. Round to $2$ decimal places.
+\sol{
+\al{
+\frac{dP}{dL}&=229.3725 \cdot \frac{2}{3}L^{2/3-1}-21.50\\
+&=229.3725 \cdot \frac{2}{3}L^{-1/3}-21.50\\
+&=\frac{152.915}{L^{1/3}}-21.50
+}
+To find critical numbers we need to determine when $\ds \dfrac{dP}{dL}=0$ and when $\dfrac{dP}{dL}=DNE$.
+\al{
+\frac{dP}{dL}&=0\\
+\frac{152.915}{L^{1/3}}-21.50&=0\\
+\frac{152.915}{L^{1/3}}&=21.50
+\intertext{}
+\frac{152.915}{21.50}&=L^{1/3}\\
+\left(\frac{152.915}{21.50}\right)^3&=L\\
+359.78&\approx L \qquad\text{(rounded to $2$ decimal places)}
+}
+There is also a critical number at $L=0$ since $\ds P^{\prime}(0)=\frac{152.915}{0^{1/3}}-21.50$  Does Not Exist.
+}
+\newpage
+\item Tecovas partners with $3$ factories in Leon, Mexico to produce their boots.  There are $1500$ workers available for Tecovas' product line and thus a maximum of $1500$ labor hours (per hour) to produce boots.  How many labor hours are required to maximize profit? Round to $2$ decimal places.
+\sol{
+There are two different assumptions that can be made depending on whether or not $0$ is considered to be part of the domain.
+\enumE{
+\item Domain is $0<L\leq 1500$
+\item Domain is $0\leq L\leq 1500$
+} 
+{\bf Assumption \#$1$: Domain is $0<L\leq 1500$.}\\
+Since domain for $P(L)$ is $0<L\leq 1500$. Our critical number $L=0$ is not in the domain.  We use the First Derivative Test to determine if we have a (hoped for) local maximum.
+\itemI{
+\item We choose any value for any $0<L<359.78$, say $L=1$
+\al{
+P^{\prime}(1)&=\frac{152.915}{1^{1/3}}-21.50\\
+&=152.915-21.50\\
+&=\$131.415\\
+&>0
+}
+So $P$ is increasing on $0<L<.59.78$.
+\item We choose any $359.78<L\leq 1500$, say $L=1500$.  We found $P(1500)=\$-2193.70$ in the pre-class activity so we suspect $P$ will decrease after the critical number.
+\al{
+P^{\prime}(1500)&=\frac{152.915}{1500^{1/3}}-21.50\\
+&=13.36-21.50\qquad\text{(rounded to $2$ decimal places)}\\
+&=-8.14\\
+&<0
+}
+So $P$ is decreasing on $359.78<L\leq 1500$.
+}
+The sign chart below represents this information and we see that we have a local/relative maximum.
+\graphicsC{signChart}{3}
+The First Derivative Test for Absolute Extrema sez that if we have only one critical number in the domain, a local maximum will also be the absolute/global maximum. Thus we have an absolute max at $$L=359.78 \text{ laborer hours per hour}$$
+{\bf Assumption \#$2$: Domain is $0\leq L\leq 1500$.}\\
+We know that absolute maxima, when they exist, occur at critical numbers or endpoints of the domain (assuming the endpoints are included in the domain).  So since both $L=0$ and $L=1500$ are included and our critical numbers are $L=0$ and $L=359.78$, we will evaluate the profit-per-hour function at each of these.
+\itemI{
+\item $L=0$ is both a critical number and an endpoint.  From \eqref{profit0}, $$P(0)=229.3725\cdot 0^{2/3}-21.50\cdot 0=\$0 \text{ per hour.}$$
+\item $L=359.78$ is a critical number. From \eqref{profit0}, $$P(359.78)=229.3725\cdot (359.78)^{2/3}-21.50\cdot 359.78=\$3867.62 \text{ per hour.}$$
+\item $L=1500$ is an endpoint.  From \eqref{profit0}, $$P(1500)=229.3725\cdot (1500)^{2/3}-21.50\cdot 1500=\$-2193.70 \text{ per hour.}$$
+}
+Since $\ds P(359.78)=\$3867.62 \text{ per hour}$ is the largest  of these $3$ options, the absolute maximum occurs at $L=359.78$ and is $\ds \$3867.62 \text{ per hour}$ \\\\
+
+{\em Note:} It is also possible to use the approach in Assumption \#1 with this domain. We could have have created a sign chart to show that we have a Local Maximum at $L=359.78$ and then use the First Derivative Test for Absolute Extrema to conclude that since we have only one critical number where the derivative changes signs, then our Local Maximum is also an Absolute Maximum.
+}
+~\\
+\item What is the maximized profit-per-hour? Round to $2$ decimal places.
+\sol{
+\al{
+P(359.78)&=P(0)=229.3725\cdot (359.78)^{2/3}-21.50\cdot 359.78\\
+&=\$3867.62 \text{ per hour} \qquad\text{(rounded to $2$ decimal places)}
+}
+}
+}
+\newpage
+\item {\em Possible New Strategy \#1} Tecovas' business model is very labor intensive. They are considering automating part of the boot-construction process by purchasing state-of-the-art machinery that, when combined with artificial intelligence, will  boost productivity to $z=4.5$ and decrease of the elasticity of labor output to $\alpha=\dfrac{1}{3}$.  An additional cost is the cost of this automation which will be $\$1000$ per hour.
+\enum{
+\item Update the Profit-per-hour function of $L$ in \eqref{profitL} to include the new values of $z$ and $\alpha$ along with the new cost of automation.
+\sol{
+The per-hour cost of manufacturing boots must include the hourly cost for the automation of $1000$ per hour. Thus$$Cost=w\cdot L+1000$$ 
+and
+\alnum{
+P&=p\cdot z\cdot L^{\alpha}-\left(w\cdot L+1000\right) \nonumber\\
+&=p\cdot z\cdot L^{\alpha}-w\cdot L-1000 \nonumber\\
+&=305.83\cdot 4.5\, L^{1/3}-21.5\,L-1000\nonumber \\
+&=1376.235 \, L^{1/3}-21.50\,L-1000 \label{profit1}
+}
+}
+\item Find the number of labor hours, $L$ needed to maximize profit. You should continue to assume a maximum of $1500$ labor hours (per hour) to produce boots. Round to $2$ decimal places.
+\sol{
+Domain is $0<L\leq 1500$.
+\al{
+\frac{dP}{L}&=1376.235\cdot \frac{1}{3}L^{-2/3}-21.50\\
+&=\frac{458.745}{L^{2/3}}-21.50
+}
+If $L=0$, $\ds P^{\prime}(0)=\frac{458.75}{0^{2/3}}-21.5$ Does Not Exist. \\\\
+Thus $L=0$ is a critical number but not in the domain, so we do not consider it.
+\al{
+\frac{dP}{L}&=0\\
+\frac{458.745}{L^{2/3}}-21.50&=0\\
+\frac{458.745}{L^{2/3}}&=21.50\\
+\frac{458.745}{21.50}&=L^{2/3}\\
+\left(\frac{458.745}{21.50} \right)^{3/2}&=L\\
+98.56&=L \qquad \text{(rounded to 2 decimal places)}
+}
+
+We need to confirm that the critical number $L=98.56$ is the location of the absolute maximum. Let's assume the domain is $\ds 0\leq l \leq 1500$.  We test all critical numbers and endpoints.
+\itemI{
+\item $L=0$ is both a critical number and an endpoint.  From \eqref{profit1}, $$P(0)=1376.235 \cdot 0^{1/3}-21.50\cdot 0-1000= -\$1000 \text{ per hour.}$$
+\item $L=98.56$ is a critical number. From \eqref{profit1}, $$P(98.56)=1376.235 \cdot (98.56)^{1/3}-21.50\cdot 98.56-1000= \$3238.07 \text{ per hour.}$$
+\item $L=1500$ is an endpoint.  From \eqref{profit1}, $$P(1500)=1376.235 \cdot (1500)^{1/3}-21.50\cdot 1500-1000= -\$17,496.04 \text{ per hour.}$$
+}
+Of these three, $\ds P(98.56)= \$3238.07 \text{ per hour}$ is the greatest. Thus the absolute maximum occurs at $L=98.56$ and is $\$3238.07 \text{ per hour}$
+}
+~\\
+ \item What is the maximized profit-per-hour? Round to $2$ decimal places.
+ \sol{
+ \al{
+ P(98.56)&=305.83\cdot 4.5 \cdot (98.56)^{1/3}-21.5\cdot 98.56-1000
+ }
+$$P(98.56)=\$3238.07 \text{ per hour}$$
+}
+}
+\newpage
+\item  {\em Possible New Strategy \#2} Instead of pursuing a strategy of automation, an alternative is to invest in training workers. This will boost productivity of workers to $z=0.95$ but will cost an additional $3.00$ per laborer per hour. Since the boot-construction process remains labor-intensive, the elasticity of labor output remains $\alpha=\dfrac{2}{3}$.
+\enum{
+\item  Update the Profit-per-hour function of $L$ in \eqref{profitL} to include the new value of $z$  and the additional cost incurred by this training.
+\sol{
+The per-hour cost of manufacturing boots must include the hourly cost for the automation of $1000$ per hour. Thus$$Cost=w\cdot L+3.00\,L=24.50\,L$$ 
+and
+\alnum{
+P&=p\cdot z\cdot L^{\alpha}-\left(w\cdot L+3.00\,L\right) \nonumber \\
+&=p\cdot z\cdot L^{\alpha}-(w+3.00)\cdot L \nonumber\\
+&=305.83\cdot 0.95\, L^{2/3}-24.50\,L \nonumber\\
+&=290.5385 \, L^{2/3}-24.50\,L \label{profit2}
+}
+}
+
+\item Find the number of labor hours, $L$ needed to maximize profit. You should continue to assume a maximum of $1500$ labor hours (per hour) to produce boots. Round to $2$ decimal places.
+\sol{
+Domain is $0<L\leq 1500$.
+\al{
+\frac{dP}{L}&=290.5385\cdot \frac{2}{3}L^{-1/3}-24.50\\
+&=\frac{193.69}{L^{1/3}}-24.50 \qquad\text{(rounded to $2$ decimal places)}
+}
+If $L=0$, $\ds P^{\prime}(0)=\frac{193.69}{0^{1/3}}-24.5$ Does Not Exist. \\\\
+Thus $L=0$ is a critical number but not in the domain, so we do not consider it.
+\al{
+\frac{dP}{L}&=0\\
+\frac{193.69}{L^{1/3}}-24.50&=0\\
+\frac{193.69}{L^{1/3}}&=24.50\\
+\frac{193.69}{24.50}&=L^{1/3}\\
+\left(\frac{193.69}{24.50} \right)^{3}&=L\\
+494.11&=L \qquad \text{(rounded to 2 decimal places)}
+}
+
+%%%%%%%%%%%
+We need to confirm that the critical number $L=494.11$ is the location of the absolute maximum. Let's assume the domain is $\ds 0\leq l \leq 1500$.  We test all critical numbers and endpoints.
+\itemI{
+\item $L=0$ is both a critical number and an endpoint.  From \eqref{profit2}, $$P(0)=290.5385 \cdot 0^{2/3}-24.50\cdot 0=\$0  \text{ per hour.}$$
+\item $L=494.11$ is a critical number. From \eqref{profit2}, $$P(494.11)=290.5385 \cdot (494.11)^{2/3}-24.50\cdot 494.11=\$6053.06 \text{ per hour.}$$
+\item $L=1500$ is an endpoint.  From \eqref{profit2}, $$P(1500)=290.5385 \cdot (1500)^{2/3}-24.50\cdot 1500=\$1321.31 \text{ per hour.}$$
+}
+Of these three, $\ds P(494.11)= \$6053.06 \text{ per hour}$ is the greatest. Thus the absolute maximum occurs at $L=494.11$ and is $\$6053.06 \text{ per hour}$
+}
+
+~\\
+ \item What is the maximized profit-per-hour? Round to $2$ decimal places.
+  \sol{
+$$P(494.11)=\$6053.06 \text{ per hour}$$
+}
+}
+\newpage
+\item Do you advise Tecovas to stick with their current business model, pursue New Strategy \#1 or pursue New Strategy \#2? Why?
+\sol{
+Many reasonable answers are possible. \\\\
+One reasonable answer would be to examine maximum profit-per-hour.
+\itemI{
+\item Maximum profit for the original strategy utilizes $L=359.78$ labor hours each hour and is  $P(359.78)=\$3867.62$ per hour.
+\item Maximum profit for the Possible New Strategy \#$1$  strategy utilizes $L=98.56$ labor hours each hour and is  $P(98.56)=\$3238.07$ per hour.
+\item Maximum profit for the Possible New Strategy \#$2$  strategy utilizes $L=494.13$ labor hours each hour and is  $P(494.13)=\$6053.06$ per hour.
+}
+Possible Strategy \#$2$ produces the most profit-per-hour and thus it is reasonable to recommend this strategy.
+
+}
+}
+\newpage{\bf Expanding Further (only if time)}
+\enumR{
+\item Let's return to the first question where we identified the Profit-per-hour function in terms of $p$, $\alpha$, $z$, and $w$. For next questions we are not going to utilize specific values for these parameters.
+\enum{
+\item Find the number of labor hours $L$ needed to maximize Profit-per-hour. Your answer will contain parameters $p$, $\alpha$, $z$, and $w$. Let's call this result $L^*$ and thus $L^*$ is a function of $p$, $\alpha$, $z$, and $w$.
+\sol{
+\al{
+P&=p\cdot z\cdot L^{\alpha}-w\cdot L\\
+\frac{dP}{dL}&=p\cdot z\cdot \alpha L^{\alpha-1}-w\\
+0&=p\cdot z\cdot \alpha L^{\alpha-1}-w\\
+w&=p\cdot z\cdot \alpha L^{\alpha-1}\\
+\frac{w}{p\cdot z\cdot \alpha }&=L^{\alpha-1}\\
+\left( \frac{w}{p\cdot z\cdot \alpha }\right)^{\frac{1}{\alpha-1}}&=L\\
+}
+Thus $$\ds L=\left( \frac{w}{p\cdot z\cdot \alpha }\right)^{\frac{1}{\alpha-1}}$$
+Since $0<\alpha<1$, the exponent $\dfrac{1}{\alpha-1}<0$. We can  re-write $L$ with a positive exponent and call this critical number $L^*$.
+\alnum{\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}} \label{lstar}}
+where the exponent $\dfrac{1}{1-\alpha}>0$.
+}
+\newpage
+\item A question that Tecovas is asking is ``Are there things we can do to change the values of each of these parameters that will impact our optimal labor supply, $L^*$? in particular, they are asking ``How does Tecovas' optimal labor hours (i.e. $L^*$) change when..."
+\enum{
+\item ...the price of a pair of boots, $p$, increases? You should assume $\alpha$, $z$, and $w$  are unknown  constants with $0<\alpha<1$.
+\sol{
+There are two ways to approach this question.
+\itemI{
+\item Approach \#$1$: Find derivative of $L^*$ function.
+\item Approach \#$2$: Examine structure of $L^*$ function.
+}
+{\bf Approach \#$1$}\\
+If we assume $\alpha$, $z$, and $w$ are constants, $L^*$ is a function only of $p$ and we can find a derivative with respect to $p$. We use the Chain Rule with \eqref{lstar} to get
+\al{
+\frac{dL^*}{dp}&= \frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-1}\cdot \frac{z\cdot \alpha}{w}\\
+&=\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-\frac{1-\alpha}{1-\alpha}}\cdot \frac{z\cdot \alpha}{w}\\
+&=\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{z\cdot \alpha}{w}\\
+}
+Note that 
+\itemI{
+\item $\dfrac{1}{1-\alpha}>0$ and $\dfrac{\alpha}{1-\alpha}>0$ since $0<\alpha<1$.
+\item $p, z,\alpha,w>0$ and thus $\ds \left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}>0$
+\item $z,\alpha, w>0$ and thus $\dfrac{z\cdot \alpha}{w}>0$
+\item Thus $\ds \frac{dL^*}{dp}= \frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{z\cdot \alpha}{w}>0$
+} 
+~\\
+Thus optimal labor supply, $L^*$, will increase when the price of a pair of boots, $p$, increases and everything else remains constant, resulting in the need for Tecovas to hire more people. \\
+\\
+{\bf Approach \#$2$}\\
+We note that $p$ is in the numerator of $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$.  When $p$ increases, so does $\ds \frac{p\cdot z\cdot \alpha }{w}$.  \\\\The exponent $\ds \frac{1}{1-\alpha}$ is positive so that means $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$  increases when $\ds \frac{p\cdot z\cdot \alpha }{w}$ increases.
+\\
+
+
+Thus optimal labor supply, $L^*$, will increase when the price of a pair of boots, $p$, increases and everything else remains constant, resulting in the need for Tecovas  to hire more people. \\
+}
+\newpage
+\item ...the productivity of Tecovas, $z$, increases? You should assume  $p$, $\alpha$, and $w$  are unknown  constants with $0<\alpha<1$.
+\sol{
+There are two ways to approach this question.
+\itemI{
+\item Approach \#$1$: Find derivative of $L^*$ function.
+\item Approach \#$2$: Examine structure of $L^*$ function.
+}
+{\bf Approach \#$1$}\\
+If we assume $p$, $\alpha$, and $w$ are constants, then $L^*$ is a function only of $z$ and we can find a derivative with respect to $z$. We use the Chain Rule with \eqref{lstar} to get
+\al{
+\frac{dL^*}{dz}&= \frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-1}\cdot \frac{p\cdot \alpha}{w}\\
+&=\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-\frac{1-\alpha}{1-\alpha}}\cdot \frac{p\cdot \alpha}{w}\\
+&=\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{p\cdot \alpha}{w}\\
+}
+Note that 
+\itemI{
+\item $\dfrac{1}{1-\alpha}>0$ and $\dfrac{\alpha}{1-\alpha}>0$ since $0<\alpha<1$.
+\item $p, z,\alpha,w>0$ and thus $\ds \left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}>0$
+\item $p,\alpha, w>0$ and thus $\dfrac{p\cdot \alpha}{w}>0$
+\item Thus $\ds \frac{dL^*}{dz}= \frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{p\cdot \alpha}{w}>0$
+} 
+Thus optimal labor supply, $L^*$, will increase when the productivity, $z$, increases and everything else remains constant, resulting in the need for Tecovas  to hire more people. 
+\\
+
+{\bf Approach \#$2$}\\
+We note that $z$ is in the numerator of $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$.  When $z$ increases, so does $\ds \frac{p\cdot z\cdot \alpha }{w}$.  \\\\The exponent $\ds \frac{1}{1-\alpha}$ is positive so that means $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$  increases when $\ds \frac{p\cdot z\cdot \alpha }{w}$ increases.\\
+
+Thus optimal labor supply, $L^*$, will increase when the productivity, $z$, increases and everything else remains constant, resulting in the need for Tecovas  to hire more people. 
+}
+\newpage
+\item ...the wage level $w$ increases? You should assume $p$, $\alpha$, and $z$,  are unknown  constants with $0<\alpha<1$.
+\sol{
+There are two ways to approach this question.
+\itemI{
+\item Approach \#$1$: Find derivative of $L^*$ function.
+\item Approach \#$2$: Examine structure of $L^*$ function.
+}
+{\bf Approach \#$1$}\\
+If we assume $p$, $z$ and $\alpha$,  are constants, then $L^*$ is a function only of $w$ and we can find a derivative with respect to $w$. We use the Chain Rule with \eqref{lstar} to get
+\al{
+\frac{dL^*}{dw}&= \frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-1}\cdot \frac{d}{dw} \left[ \frac{p\cdot z \cdot \alpha}{w} \right]
+\intertext{Note that $\ds \frac{d}{dw} \left[ \frac{p\cdot z \cdot \alpha}{w}\right] =\frac{d}{dw} \left[ p\cdot z \cdot \alpha \cdot w^{-1}\right] =  p\cdot z \cdot \alpha \cdot -w^{-2}= - \frac{p\cdot z \cdot \alpha}{w^2}$}
+&=\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}-\frac{1-\alpha}{1-\alpha}}\cdot  - \frac{p\cdot z \cdot \alpha}{w^2}\\
+&=-\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{p\cdot z \cdot  \alpha}{w^2}\\
+}
+Note that 
+\itemI{
+\item $\dfrac{1}{1-\alpha}>0$ and $\dfrac{\alpha}{1-\alpha}>0$ since $0<\alpha<1$.
+\item $p, z,\alpha,w>0$ and thus $\ds \left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}>0$
+\item $p, z, \alpha, w>0$ and thus $\dfrac{p\cdot z \cdot\alpha}{w}>0$
+\item Thus $\ds \frac{dL^*}{dw}= -\frac{1}{1-\alpha}\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{\alpha}{1-\alpha}}\cdot \frac{p\cdot z \cdot  \alpha}{w^2}<0$
+} 
+Thus optimal labor supply, $L^*$, will decrease when wages, $w$, increases and everything else remains constant, resulting in the need for Tecovas to let go of some people.  \\
+
+{\bf Approach \#$2$}\\
+We note that $w$ is in the denominator of $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$.  When $w$ increases,  $\ds \frac{p\cdot z\cdot \alpha }{w}$ {\em decreases}.  \\\\The exponent $\ds \frac{1}{1-\alpha}$ is positive so that means $\ds L^*=\left( \frac{p\cdot z\cdot \alpha }{w}\right)^{\frac{1}{1-\alpha}}$  decreases when $\ds \frac{p\cdot z\cdot \alpha }{w}$ decreases.\\
+
+Thus optimal labor supply, $L^*$, will decrease when wages, $w$, increases and everything else remains constant, resulting in the need for Tecovas to let go of some people.
+}
+}
+}
+}
+
+\end{document}  

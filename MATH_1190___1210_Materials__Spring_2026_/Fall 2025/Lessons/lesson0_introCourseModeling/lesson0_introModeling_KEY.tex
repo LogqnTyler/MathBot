@@ -1,0 +1,193 @@
+\documentclass[10pt]{article}
+
+    
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 0}
+\def\TypeTitle{Modeling Change and Uncertainty\\ Notes to Instructors }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{\bf Intro to the course!}
+\def\desmosClassCode{{\bf ZAJ$3$AZ}}
+
+\usepackage{preambleDJ} 
+
+\begin{document}
+\pagestyle{otherpages}
+%\thispagestyle{empty}
+\thispagestyle{firstpage}
+
+
+\vs{.85}
+
+{\bf Before Class} \mod Think about the tone you want to set as students come to class. I'm going to be playing some songs because I will be starting Student Of The Day next class and a part of that will be playing a student's favorite songs.  So I'm starting with that today, except they are my songs instead of the students'.  {\em You should not feel any obligation to do what I'm doing here.}
+\itemC{
+\item Carmin Burina
+\item Take it to the limit (Eagles)
+\item Welcome to the Jungle (Guns N Roses)
+\item I will survive (Gloria Gaynor)
+}
+~\\
+\bblue{Welcome!} \mod \\
+ \mpageT{.5}{.5}[\hs{.1}]{
+ {\em A bit about me...}
+  \blue{
+As instructors, we are eager to get to know you and support your learning this semester.  Please come see us in Drop-In Hours! Some instructors call these Office Hours, but they are intended for you to drop by for any reason at all.
+ }
+ }{
+{ \em Now, about you...}
+ }
+~\\ \vs{.1}
+
+   {\em We've got a Learning Assistant!} \\
+    \blue{Our Learning Assistants (LAs) are terrific. They know what it's like to be in this course, struggle a bit and then learn how to succeed. We think you will find them extremely helpful.}\\\\
+ {\em Here's where we're headed...}\\
+\mpageT{.5}{.5}[\hs{.1}]{
+I.C.E\\
+ \blue{
+ You learn math best by you doing math, not by watching your instructor do math. We have set up the course to foster your learning by what we call the ICE paradigm. 
+ \itemC{
+ \item  I= Inform via watching videos or doing other work  before class
+ \item C= Confirm to yourself and your instructor what you are thinking before coming to class. These occur with short embedded quizzes in the prep work before class. 
+ \item E= Extend knowledge during and after class.
+ } 
+  }
+}{
+Growth Based Assessments (if time)
+\blue{
+\itemC{
+\item We're working hard to improve your learning experience. We hope to foster  an environment where you can grow in their learning and ``learn how to learn."
+\item You will be randomly placed in one of two categories: Growth Based or Standard for each exam.
+\item All students will see same questions on exams, but the grading will differ.  
+\item For each Learning Target, Growth-Based students will be expected to meet  proficiency in order to get credit for that Learning Target. Proficiency means {\em Your answer contains all important ideas with perhaps some minor errors.}
+\item Since proficiency is a higher standard, we give students multiple chances to become proficient.  
+\item We promise that at the end of the semester if one group has a lower GPA than the other, the lower group will be curved to meet the higher group.
+\item See syllabus for more details!
+}
+}
+}
+
+\newpage
+
+{\bf What's the story so far?} \mod \\
+\mpageT{.4}{.6}[\hs{.1}]{
+The Keeling Curve is the record of atmospheric CO2 in parts per million (ppm). This data set is named after Charles Keeling who started collecting this data at Mauna Loa Observatory, starting in 1958.  A sample of atmospheric CO$_2$ is shown below in five-year intervals from starting in 1965 through 2010.  Note that ``year" means ``years since 1965."  For example, $t=10$ represents the year 1975.
+}{
+\graphicsC{keelingDataMMA}{3.5}
+}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+year & 0 & 5 & 10 & 15 & 20 & 25 & 30 & 35 & 40 & 45 \\
+\hline
+CO$_2$ level & 320 & 325 & 331 & 338 & 345 & 354 & 360 & 369 & 379 & 389 \\
+\hline
+\end{tabular}
+\end{center}
+
+{\bf How much  CO$_2$ is in the atmosphere in the year 2025?}
+\enum{
+\item \pe Let's start with some intuition.  What's your best guess for the amount of CO$_2$ in the atmosphere in the year 2025?  
+\sol{
+There are many reasonable answers to this question. Here are a few possibilities.
+\itemI{
+\item The year $2025$ occurs when $t=60$. I  eyeballed the graph and if the dots continue it looks like they would be in the ballpark of $410$ ppm when $t=60$.
+\item The year $2025$ occurs when $t=60$. On my paper I drew a line close to all the red dots and when $t=60$, my line is n the ballpark of $410$ ppm.
+\item The graph seems to curve upward just a bit and I think if it keeps curving up, when $t=60$ it appears to be around $440$ ppm.
+\item I used the first and last data point to get a slope of $\ds m=\frac{389-320}{45-0}\approx 1.53$ and vertical intercept of $b=320$ so $c=1.53t+320$. Thus when $t=60$, $c=411.8$.
+\item It seems like every $5$ years, the CO$_2$ increases by $1$ unit. From year $0$ to year $5$, it increased by $5$ ppm. From year $5$ to year $10$, it increased by $6$ ppm. From year $40$ to $45$ it increased by $10$ ppm.  
+\itemI{
+\item So from year $45$ to $50$ it will increase by $11$ to reach $400$ ppm. 
+\item From year $50$ to $55$ it will increase by another $12$ units to reach $412$ ppm.
+\item From year $55$ to $60$ it will increase by another $13$ units to reach $425$ ppm.
+}
+Thus when $t=60$, CO$_2$ will be $425$ ppm.
+}
+}
+\item \pe On a scale of $0-100$, how confident are you in your estimate? 
+$0$  = ``not at all confident" and $100=$``$100\%$ confident."\\\\
+\blue{
+This question is asking about your certainty/uncertainty you have about your work in question \#$1$.  It's normal for there to be a wide range of answers here!  We will be working thorughout the semester to build your confidence and skill. In fact, at the end of the semester we will give you some tools to think about how to measure uncertainty when we begin the topic of Probability.  We will grow together and build both your skill and confidence this semester!  
+}
+\newpage
+\item \label{label2}(In groups) What decisions did you make and/or questions did you have when you made your best guess? 
+\sol{
+The intention of this question is to to help you begin to ``learn how to learn". This occurs when you reflect on your thought process. Thus there are many reasonable responses to this question. Here are a few.
+\itemI{
+\item Process: I needed to figure out which value of $t$ corresponds to $2025$ ($t=60$)
+\item Process: I looked at the graph and it looks like it continues to around $410$ when $t=60$
+\item Process: I noticed the data points increased every $5$ years more and more.
+\item Question: What's the equation of a line? I've forgotten this! 
+\item Question: Are there more data points closer to $t=60$ that could help me answer the first question?
+\item Question: Does the function bend up slightly or is it straight?
+\item 
+}
+}
+\vs{-.25}
+\item \label{label1} (In groups) Work together to brainstorm at least two strategies to refine your estimate and/or increase your confidence in your estimate. You might find it helpful to use Desmos widget ``First Day of Class: The Keeling Curve"  to implement your ideas. This can be found on the ToDo tab at \url{https://student.desmos.com} using code \desmosClassCode (You might need to create a free account at Amplify). 
+\sol{
+The intention of this question is to work together to further more strategies. This will be important over the course of the semester! There are again many reasonable strategies you could add to your approach.  
+Possible answers:
+\itemC{
+\item Google ``Keeling Curve" to find the site \href{https://keelingcurve.ucsd.edu}{\underline{https://keelingcurve.ucsd.edu}} and use more data points to refine your estimate.
+\item Instead of eyeballing the graph, use  Desmos to graph a function that might ``fit" the data.
+\itemI{
+\item Experiment in Desmos with different values for $m$ and $b$ to create a linear function $c(t)=mt+b$ Here's one version: $c(t)=1.5t+320$. Using Desmos to evaluate the function we get  $c(t60)=410$. 
+\item Experiment in Desmos with different values for $a$, $b$ and $c$ to create a quadratic function (i.e.a parabola) of the form $c(t)=at^2+bt+c$.  Here's one version: $c(t)=0.035t^2+320$. This predicts $c(60)=446$. 
+\item I assumed data was linear, but it might be bending up, so maybe  an exponential function ``fits" he data better? After come experimentation, one possibility is $c(t)=e^{0.095t}+320$ with $c(60)\approx618.9$
+}
+\item In a couple of weeks we will explore the idea of what functions ``best fit" our Keeling Curve data.
+}
+}
+\item (In groups) In what ways would you describe how the amount of CO$_2$ is changing each year?
+\sol{
+The intention of this question is to begin to think about how things change, i.e. the  rate of change.  Here are a  few possible reasonable answers:
+\itemI{
+\item CO$_2$ seems like it's increasing
+\item CO$_2$  increases by $5$ over first five years, so one unit per year.
+\item Every $5$ years it's increasing more and more. So CO$2$ is increasingly increasing. 
+\item If you found a linear equation in \#\ref{label1}, you can appeal to the slope of that function at various values for $t$.
+}
+Starting next class, we will begin to come up with formal ways to describe rate of change. 
+}
+\newpage
+\item (Extra, if time. In groups) What other information might be helpful to further  improve your estimate and/or build confidence in your estimate? What mathematical tools might be helpful? What remaining questions do you have (you probably have many questions!)?
+\sol{
+Our job as instructors is to help you  think about what mathematical tools might be useful  for this data. We're going to do that in a couple of weeks!  Some tools that we are going to introduce between now and then:  
+\itemI{
+\item A review of linear functions, exponential functions and logarithmic functions
+\item How to use Desmos to find functions that ``best fit" our data. 
+\item How to use Desmos to create and graph functions together with our data.
+}
+Some questions with answers that might build our confidence:
+\itemI{
+\item Where can we find more data than every 5 years? Is there more recent data?
+\item Is there evidence  CO$_2$ will continue to grow, level out, or begin to decrease?
+\item Can we estimate probability that if CO$_2$ increases over one year that it will continue to increase the next year? What's the probability that if it increases, it will stay the same the next year? Decrease the next year?
+}
+}
+}
+
+\bblue{Key Questions for the semester}
+\nti{
+In the Keeling Curve series of questions, we have a) created some kind of model to predict the amount of CO$_2$ in the atmosphere. We have also described their confidence/certainty related to this model and how much the CO$_2$ is changing year-to-year.  This points us to the $2$ Key Ideas for this course.
+\enum{
+\item How can we use mathematics to describe and understand change?
+\item How can we use mathematics to navigate uncertainty?
+}
+For example, 
+\itemC{
+\item A biologist might be interested in population variation over time.
+\item A medical researcher might be interested in a model of blood pressure as a function of body
+weight, or concentration of a drug in the bloodstream over time.
+\item A business executive might study the demand for a product as a function of its price or, perhaps,
+as it relates to the amount spent on marketing.
+\item An environmental scientist might be interested in modeling the level of a toxins in a lake over
+time.
+\item A data scientist might be interested in fitting a regression line to a data set to make predictions.
+\item An AI researcher might be interested in improving a machine learning algorithm to solve problems more accurately.
+}
+}
+
+\end{document}

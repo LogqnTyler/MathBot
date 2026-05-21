@@ -1,0 +1,79 @@
+% XeLaTeX can use any Mac OS X font. See the setromanfont command below.
+% Input to XeLaTeX is full Unicode, so Unicode characters can be typed directly into the source.
+
+% The next lines tell TeXShop to typeset with xelatex, and to open and save the source with Unicode encoding.
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{article}
+
+
+%%%%%%%%%%%%%%%
+\def\Type{ApplicationPreDJ}
+\def\TypeNum{Tecovas Boot Co. Pre-Class}
+\def\TypeTitle{Modeling Boot Production, Profit and Business Strategy}
+\def\Semester{Fall 2024}
+\def\Course{Math 1190/1210}
+\def\Targets{{\bf\color{Goldenrod}AD1}}
+
+\usepackage{preambleDJ}
+
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vspace*{.65in}
+
+\mpageT{.7}{.4}{
+{\bf Introduction}\\
+Tecovas Boots, an Austin TX based company, was started in 2015 by Paul Hedricks to make high quality boots sold direct-to-consumer at a more affordable price.  Tecovas partners with world-renowned boot-makers in Leon, Mexico to create hand-stitched quarters, Goodyear welts and lemonwood pegged mid-soles.   Tecovas' \href{https://www.tecovas.com/best-sellers}{best selling boots} include The Annie, The Earl, The Doc and The Cartwright.  }{
+\graphicsR{tecovasSign}{2.5}
+}
+
+\mpage{.4}{.7}{
+\graphicsL{theEarlSole}{2.5}{{\bf The Earl}}
+}{
+The production process for these boots is labor-intensive and Tecovas is considering changes to their business model for their best sellers.    Your  job is to assess the proposed changes and advise Tecovas about the potential effectiveness of these changes to maximize the profit-per-hour.
+}
+
+{\bf Profit-per-hour Model}
+In our simplified model of boot production\footnote{Thanks to Kerem Cosar, Professor of Economics at the University of Virginia, for help developing this model.} Profit per hour is determined by two components: Revenue per hour and Cost per hour:
+$$\text{\em Profit }= Revenue - Cost$$
+{\em Revenue-per-hour} is determined by the price, $p$, of a pair of boots and $Q$, the quantity  of pairs of boots produced  per hour. $$Revenue=p\cdot Q$$
+$Q$ is based on a simplified Cobb-Doug Production Function\footnote{\url{https://quickonomics.com/terms/cobb-douglas-function}}.
+$$Q=z\cdot L^{\alpha},\quad 0<\alpha<1$$ where $L$ is the number of labor hours.  The parameter $z$ is the productivity of Tecovas;  the higher it is, the more pairs of boots are produced for a given number of labor hours, $L$.  The parameter $\alpha$ captures how labor is transformed into output (i.e. $Q$ pairs of boots) per hour. Economists  refer to $\alpha$ as the ``elasticity of labor output."
+\\
+
+{\em Cost-per-hour} is determined by the wages, $w$ (in dollars), paid for each labor hour, $L$.  $$Cost=w\cdot L$$
+\newpage
+{\bf Analysis of the Profit-per-hour Model}
+\enum{
+\item Write down the Profit-per-hour function.  Your function expression will contain the parameters $p$, $L$, $\alpha$, $z$, and $w$.
+\vs{1}
+\item Data from Grips Intelligence\footnote{\url{https://gripsintelligence.com/insights/retailers/tecovas.com}} for online sales of The Annie, The Earl, The Doc and The Cartwright  from January $1$st 2024 through August $31$st 2024 suggest productivity of Tecovas is $z=0.75$.  The average price per pair of boots was $p=\$305.83$ and the average wage-per-hour was $w= \$21.50$.  For labor-intensive companies, a good estimate of the elasticity of labor output\footnote{Economists have developed methods to estimate technologies such as this, called a \lq production function,\rq\ using data on observed levels of output, labor and other inputs such as materials---think of the leather that our Tecovas purchases. While $\alpha$ varies across industries and firms, its average is approximately $\alpha=2/3$. }  is $\alpha=\dfrac{2}{3}$. \label{param}
+\\\\
+Current production lines utilize $200$ workers and thus $L=200$ labor hours per hour. A maximum of $1500$ workers are available for production and thus a maximum of $L=1500$ labor hours per hour. 
+\enum{
+\item   How many pairs of boots are produced per hour when $L=200$?  When $L=1500$? You should set up your work here but you will want to use technology for the final computation. Round your answer to $2$ decimal places.
+\vs{2}
+\item What is the Revenue-per-hour when $L=200$?  When $L=1500$? You should set up your work here but you will want to use technology for the final computation. Round your answer to $2$ decimal places.
+\vfill
+\newpage
+\item What is the Cost-per-hour when $L=200$?  When $L=1500$? You should set up your work here but you will want to use technology for the final computation. Round your answer to $2$ decimal places.
+\vs{3.5}
+\item What is the Profit-per-hour when $L=200$?  When $L=1500$? You should set up your work here but you will want to use technology for the final computation. Round your answer to $2$ decimal places.
+\vs{2}
+}
+\vfill
+\newpage
+\item When $L=200$, would you expect Profit-per-hour to increase, decrease, or stay the same if a new business model increases Tecovas' productivity, $z$?  {\em Hint:} Consider your Profit-per-hour function as only a function of $z$ by setting parameters to the constants described in \eqref{param} {\em except} for $z$. \\\\Techniques from this course must be included in your justification, but feel free to include additional material from other courses you may have encountered. 
+\vs{3.25}
+
+\item When $L=200$, would you expect Profit-per-hour to increase, decrease, or stay the same if a new business model changes the elasticity of labor output, $\alpha$?  {\em Hint:} Consider your Profit-per-hour function as only a function of $\alpha$ by setting parameters to the constants described in \eqref{param} {\em except} for $\alpha$.  \\\\Techniques from this course must be included in your justification, but feel free to include additional material from other courses you may have encountered. 
+}
+
+    
+
+
+\end{document}  

@@ -1,0 +1,947 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 22}
+\def\TypeTitle{Expectation and Variance: KEY}
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+
+\usepackage{preambleDJ}
+
+
+
+\begin{document}
+
+\thispagestyle{firstpage}
+\pagestyle{otherpages}
+\vs{0.4}
+
+
+
+\textbf{Intended Learning Outcomes}
+After this lesson, you will be able to 
+
+\begin{itemize}
+    \item Define and explain the meaning of expectation and variance. (\target{P1, P2})
+    \item Find the expectation and variance of a discrete random variable. (\target{P1})
+    \item Find the expectation and variance of a continuous random variable. (\target{P2})
+\end{itemize}
+
+\vspace{-0.5cm}
+
+\hrulefill
+
+{\em What's the center of a data set?}. When we have a data set, frequently we want to determine what the ``middle" or ``center" of the set is.  For example, we might ask "What was the average score on Exam 1?", or "How much should I expect to pay in rent when I move to NY City?", or "What's Jose Altuve's batting average?"  These are all questions about the center of a given data set. Two ways to determine the center are:
+\itemC{
+\item Median
+\item Mean (or Expected Value or Average).  {\em Notation} \blue{$\mu =E(X) = \bar{x}$}\\
+}
+We will use the terms {\em, mean}, {\em average} and {\em expected value} interchangeably.\\\\
+\example{\target{P1}} \hs{-.2}\blue{\bf /}\blue{\bf\minil}{\bf Expected Value} (i.e. mean) of a roll of a 6 sided die. The average value when rolling a 6-sided die is \\
+\mpageT{.65}{.35}{
+\,%%%I'm making this blank space because when I release key I have to create a mini-page below this and use negative vertical spacing to bring it here in order to avoid moving the histogram off the screen.
+\al{\mu=E(X)=\frac{1+2+3+4+5+6}{6}&=3.5\\\\
+\frac{1}{6}+\frac{2}{6}+\frac{3}{6}+\frac{4}{6}+\frac{5}{6}+\frac{6}{6}&=3.5 \text{ \small (splitting apart the fraction)}\\\\
+1\cdot \tikznode{nodeA1}{$\dfrac{1}{6}$}+2\cdot \tikznode{nodeB1}{$\dfrac{1}{6}$}+3\cdot \frac{1}{6}+4\cdot \frac{1}{6}+5 \cdot \frac{1}{6}+6\cdot \frac{1}{6}&=3.5 \text{ \small (pulling numerator out front of the fraction)}\\
+}
+}{\hs{-.75}
+\begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4,5,6},
+%xticklabels = {$\$0$,$\$40$,$\$80$,$\$120$,$\$160$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={1/6},
+yticklabels = {$1/6$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .2,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=2.5in, height=1.5in
+]
+\addplot[ybar, bar shift=0,   bar width=18pt,  fill=blue!50] plot coordinates { (1,.167)  (2,0.167) (3,0.167) (4,0.167) (5,0.167)  (6,0.167) };
+\end{axis}
+\end{tikzpicture}
+}
+\vs{-.2}
+\al{
+&1\cdot \tikznode{nodeA2}{$P(X=1)$} +2\cdot \tikznode{nodeB2}{$P(X=2)$}+3\cdot P(X=3)+4\cdot P(X=4)+5\cdot P(X=5)+6\cdot P(X=6)=3.5\\\\
+&1\cdot \tikznode{nodeA3}{$p(1)$} +2\cdot \tikznode{nodeB2}{$p(2)$}+3\cdot p(3) +4\cdot p(4)+5\cdot p(5)+6\cdot p(6)=3.5 \text{ \;\;\small (since $p(1)=P(X=1)$, etc.)}\\\\
+&E(X)=\blue{\sum_{i=1}^6 x_i \cdot p(x_i)=3.5 \text{ \;\; \small ($x_1=1$, $x_2=2$, etc.)} }
+}
+\begin{tikzpicture}[remember picture, overlay]
+    % Draw a box around nodeA (optional, can just use the node position)
+%    \draw[blue, thick, rounded corners, inner sep=2pt] ($(nodeA.south west)-(0.1, 0.1)$) rectangle ($(nodeA.north east)+(0.1, 0.1)$);
+        	\draw[blue, thick, inner sep=2pt, opacity=.5] ($(nodeA1.south west)-(0.1, 0.1)$) rectangle ($(nodeA1.north east)+(0.1, 0.1)$);
+        	\draw[blue, thick, inner sep=2pt, opacity=.5] ($(nodeA2.south west)-(0.1, 0.1)$) rectangle ($(nodeA2.north east)+(0.1, 0.1)$);
+	\draw[blue, thick, inner sep=2pt, opacity=.5] ($(nodeA3.south west)-(0.1, 0.1)$) rectangle ($(nodeA3.north east)+(0.1, 0.1)$);
+    	\draw[->, >=Stealth, blue, thick] (nodeA1.south) to[] (nodeA2.north);
+	\draw[->, >=Stealth, blue, thick] (nodeA2.south) to[] (nodeA3.north);
+    %
+%            \draw[blue, thick, inner sep=2pt] ($(nodeB1.south west)-(0.1, 0.1)$) rectangle ($(nodeB1.north east)+(0.1, 0.1)$);
+%                \draw[blue, thick, inner sep=2pt] ($(nodeB2.south west)-(0.1, 0.1)$) rectangle ($(nodeB2.north east)+(0.1, 0.1)$);
+%    \draw[->, >=Stealth, blue, thick] (nodeB1.south) to[] (nodeB2.north);
+\end{tikzpicture}
+\blue{
+\itemC{
+\item  Notice that  each line above is an equivalent way to say ``The average is $3.5$."
+\item $\dfrac16= P(X=1)$ and  $ P(X=1)=p(1)$.
+\item This allows us  to eventually arrive the general statement $\ds E(X)=\sum_{i=1}^6 x_i \cdot p(x_i)=3.5$ which will allow us to handle cases when $p(x)$ will {\em not} be a constant value.
+}
+}
+ In general, if we have a random variable $X$ for a set of $n$ outcomes $\{x_1,x_2,x_3\dots,x_n\}$, the {\em  Expected Value}   (or {\em mean} or {\em average}) is 
+ \importantV{Expected Value}{
+\parbox{4.5in}{ $$E(X)= \blue{\sum_{i=1}^n x_i P(X=x_i) =\sum_{i=1}^n x_i P(X=x_i)}$$}
+}
+
+
+\newpage
+%\importantV{Expected Value}{$\ds E(X) =\sum_{i=1}^n x_i P(X=x_i)$}
+\exercise\ltrm{\bf\color{Orange}P1} A fair coin whose sides are numbered ``$0$" and ``$1$" is flipped {\it three times}. If $X$ represents the sum of the outcome of each flip, then the PMF of $X$ and histogram are below.  Find $\mu=E[X]$ by using the equation we developed on the previous page.\\
+\hs{-.3}\mpageTth{.3}{.35}{.35}[][\hs{-.4}]{
+\[ p(x)=\begin{cases}
+\frac18 & \text{when }x=0\\
+\frac38 & \text{when }x=1\\
+\frac38 & \text{when }x=2\\
+\frac18 & \text{when }x=3\\
+0 & \text{otherwise}
+\end{cases}\]
+}{
+\begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4},
+xticklabels = {$0$,$1$,$2$,$3$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={1/8,1/4,3/8},
+yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 4.5,
+ymin = 0, ymax = .5,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=1.75in, height=1.5in
+]
+\addplot[ybar, bar shift=0,   bar width=18pt,  fill=blue!50] plot coordinates { (1,0.125)  (2,0.375) (3,0.375) (4,0.125) };
+\end{axis}
+\end{tikzpicture}
+}{
+\sol{\vs{-.2}
+\al{
+\mu=E(X)&=\sum_{i=0}^3 x_i\cdot p(x_i)\\
+&=x_0\cdot p(x_0)+x_1 \cdot p(x_1) +x_2\cdot p(x_2)+x_3\cdot p(x_3)\\
+&=0\cdot p(0)+ 1\cdot p(1)+ 2\cdot p(2)+ 3\cdot p(3)\\ 
+&=0\cdot \frac{1}{8}+1\cdot \frac{3}{8}+2\cdot \frac{3}{8}+3\cdot \frac{1}{8}\\
+&=\frac{12}{8}=1.5
+}
+}
+}
+{\bf Variance} {\em How do we determine how much data is scattered?} Let's look at two different data sets. The first data set represents the height of houses that a conservative builder builds. She takes a conservative approach and thus builds all the houses the same.  The second data set represents the height of houses  a speculative builder builds in an attempt to create more interest and income.   
+\graphicsC{buildingHeightsDiff}{5.5}
+\example{\target{P1}}
+We let $C$ be a random variable associated with heights of buildings from the conservative builder and $S$ a random variable associated with the heights of buildings from the speculative builder. The probability to build each building  is equally likely for each builder (i.e. $p(x)=\dfrac{1}{5}$).  
+\tasksA{2}{
+\task Find $\mu=E(C)$
+\sol{ Since all buildings have height $18$, the average height will be $18$ feet.
+
+}
+\task {\em Attempt $\#1$} What is the average amount each building height differs from $\mu$ for the conservative builder?%\vs{.5}
+\sol{ Since height of each building is $18$ and $\mu=18$ the difference for each building will be $0$ and thus the average differing height is 
+$$0\cdot \frac{1}{5}+ 0\cdot \frac{1}{5}+ 0\cdot \frac{1}{5}+ 0\cdot \frac{1}{5}+ 0\cdot \frac{1}{5}=0$$ %0\cdot \frac{1}{5}+0\cdot \frac{1}{5}+0\cdot \frac{1}{5}+}0\cdot \frac{1}{5}$$
+}
+\task Find $\mu=E(S)$
+\sol{\vs{-.15}
+\al{
+\mu&=E(S)\\
+&= 24\cdot \frac{1}{5}+16\cdot \frac{1}{5} +18\cdot \frac{1}{5} + 10\cdot \frac{1}{5} + 22\cdot \frac{1}{5}\\
+&=\frac{90}{5}\\
+&=18
+}
+The average height is the same! But clearly the two data sets are different. We need another way to measure the obvious variety in the housing data set created by the speculative builder. 
+}
+\task {\em Attempt $\#1$} What is the average amount each building height differs from $\mu$ for the speculative builder?\\
+\blue{
+We subtract $height-\mu$ for each building (see above diagram) and then find the average difference. Heights above $\mu=18$ will have positive differences while heights below the mean will have negative differences.
+\al{
+E[(X-\mu)]&= 6\cdot \frac{1}{5}+ (-2)\cdot \frac{1}{5}+ 0\cdot \frac{1}{5}+ (-8)\cdot \frac{1}{5}+ 4\cdot \frac{1}{5}\\
+&=\frac{6}{5}-\frac{2}{5}+0-\frac{8}{5}+\frac{4}{5}\\
+&=0
+}
+This is a problem! Our attempt to find the  {\em variance} or ``variety" in the speculative data has yielded the same answer as the conservative data when clearly there is, on average, differences in the height of speculative data.
+}
+\task* {\em Attempt $\#2$} {\em Hint: }Force the differences to be positive. We're going to call this new approach the  {\em variance} with notation $Var(X)$.
+\sol{
+We're going to square each difference to ensure that the differences will be positive.\footnotemark  This yields \al{
+ Var(X)&=(6)^2\cdot \frac{1}{5} + (-2)^2\cdot \frac{1}{5}  +(0)^2\cdot \frac{1}{5}+ (-8)^2\cdot \frac{1}{5} + (4)^2\cdot \frac{1}{5}   \\
+ &=\frac{36}{5}+\frac{4}{5}+\frac{0}{5}+\frac{64}{5}+\frac{16}{5}\\
+ &=\frac{120}{5}\\
+ &=24
+ }
+}
+}
+ \footnotetext{It is possible  to take the absolute value of each  difference to make the positive.  This approach is called {\em Mean Absolute Error} (MAE).  However, the most commonly used approach in statistics is to square the difference.  }
+%\vs{1.25}
+{\em Key Idea: Variance is \blue{ the average of differences squared.}} 
+\blue{
+We can use summation notation to capture what we just did.
+\al{
+Var(X)&=(6)^2\cdot \frac{1}{5} + (-2)^2\cdot \frac{1}{5}  +(0)^2\cdot \frac{1}{5}+ (-8)^2\cdot \frac{1}{5} + (4)^2\cdot \frac{1}{5}  \\
+&=(\tikznode{nodeC1}{$24$}-\tikznode{nodeD1}{$18$})^2 \cdot \frac{1}{5} + (16-18)^2 \cdot \frac{1}{5} + (18-18)^2 \cdot \frac{1}{5} + (10-18)^2 \cdot \frac{1}{5} + (22-18)^2 \cdot \frac{1}{5} \\
+&= (\tikznode{nodeC2}{$x_1$}-\tikznode{nodeD2}{$\mu$})^2 \cdot p(x_1) + (x_2-\mu)^2 \cdot p(x_2) + (x_3-\mu)^2 \cdot p(x_3) + (x_4-\mu)^2 \cdot p(x_4) + (x_5-\mu)^2 \cdot p(x_5)\\
+&=\sum_{i=1}^5 (x_1-\mu)^2\cdot p(x_i)
+}
+}
+\begin{tikzpicture}[remember picture, overlay]
+        	\draw[red, thick, inner sep=2pt, opacity=.5] ($(nodeC1.south west)-(0.1, 0.1)$) rectangle ($(nodeC1.north east)+(0.1, 0.1)$);
+        	\draw[red, thick, inner sep=2pt, opacity=.5] ($(nodeC2.south west)-(0.1, 0.1)$) rectangle ($(nodeC2.north east)+(0.1, 0.1)$);
+	\draw[red, thick, inner sep=2pt, opacity=.5] ($(nodeD1.south west)-(0.1, 0.1)$) rectangle ($(nodeD1.north east)+(0.1, 0.1)$);
+	\draw[red, thick, inner sep=2pt, opacity=.5] ($(nodeD2.south west)-(0.1, 0.1)$) rectangle ($(nodeD2.north east)+(0.1, 0.1)$);
+    	\draw[->, >=Stealth, red, thick] (nodeC2.north) to[] (nodeC1.south);
+	\draw[->, >=Stealth, red, thick] (nodeD2.north) to[] (nodeD1.south);
+\end{tikzpicture}
+\blue{More generally, $$ Var(X)=E[(X-\mu)^2]=\sum_{i=1}^n (x_i-\mu)^2p(x_i)$$\\
+{\em Alternative Definition}\\
+It is possible to derive the following alternative and equivalent definition of the variance.
+$$ Var(X)=E[X^2]-\mu^2=\sum_{i=1}^n \Bigg((x_i)^2\cdot p(x_i)\Bigg)-\mu^2$$
+}
+\newpage
+\exercise\ltrm{\bf\color{Orange}P1} A fair coin whose sides are numbered ``$0$" and ``$1$" is flipped {\it three times}. If $X$ represents the sum of the outcome of each flip, then the PMF of $X$ and histogram are below.  Find $Var(x)$ using $\mu$ from previous exercise..\\
+\hs{-.5}\mpageTth{.25}{.3}{.35}[][\hs{-.2}]{
+\[ p(x)=\begin{cases}
+\frac18 & \text{when }x=0\\
+\frac38 & \text{when }x=1\\
+\frac38 & \text{when }x=2\\
+\frac18 & \text{when }x=3\\
+0 & \text{otherwise}
+\end{cases}\]
+}{
+\begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4},
+xticklabels = {$0$,$1$,$2$,$3$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={1/8,1/4,3/8},
+yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 4.5,
+ymin = 0, ymax = .5,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=1.75in, height=1.5in
+]
+\addplot[ybar, bar shift=0,   bar width=18pt,  fill=blue!50] plot coordinates { (1,0.125)  (2,0.375) (3,0.375) (4,0.125) };
+\end{axis}
+\end{tikzpicture}
+}{
+\sol{ We have two equivalent definitions of variance. We will use the first version here with \\
+$\ds \mu=E(X)=\frac{12}{8}=\frac{3}{2}=1.5$.
+\al{
+Var(X)&=\left(0-\frac{3}{2}\right)^2 \cdot \frac{1}{8} + \left(1-\frac{3}{2}\right)^2 \cdot \frac{3}{8} + \left(2-\frac{3}{2}\right)^2 \cdot \frac{3}{8} + \left(3-\frac{3}{2}\right)^2 \cdot \frac{1}{8} \\
+&=\frac{9}{4}\cdot \frac{1}{8}+\frac{1}{4}\cdot \frac{3}{8}+\frac{1}{4}\cdot \frac{3}{8}+\frac{9}{4}\cdot \frac{1}{8}\\
+&=\frac{9}{32}+\frac{3}{32}+\frac{3}{32}+\frac{9}{32}\\
+&=\frac{24}{32}=\frac{3}{4}
+}
+}
+}
+
+
+\newpage
+\blue{\bf Summary: Expectation \& Variance of Discrete Random Variables}\\
+\mpageT{.5}{.5}{
+\importantV{Expected Value}{$\mu=E[X] = \displaystyle\sum_{i=1}^n x_i\cdot p(x_i)$} 
+}{
+%\importantV{Variance}{$\ds Var(X) = \sum_{i=1}^n(x_i-\mu)^2p(x_i)=E[X^2]-\mu^2= \left(\sum_{i=1}^n (x_i)^2\cdot p(x_i)\right)-\mu^2$}
+\importantV{Variance}{\vs{-.1}
+\enum{
+\item $\ds Var(X) = E[(X-\mu)^2]\sum_{i=1}^n(x_i-\mu)^2p(x_i)$
+\item $\ds Var(X)=E[X^2]-\mu^2= \left(\sum_{i=1}^n (x_i)^2\cdot p(x_i)\right)-\mu^2$
+}
+}
+}
+
+
+\exercise\ltrm{\bf\color{Orange}P1} Histograms representing the PMFs of random variables $X_1$, $X_2$, and $X_3$ (respectively) are given below.\vs{-.2}\\
+
+\mpageTth{.33}{.33}{.33}{
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4,5,6},
+xticklabels = {$0$,$1$,$2$,$3$, $4$, $5$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={0.1,0.2,0.3,0.4, 0.5},
+%yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .55,
+axis line style = {  thick, -},
+every major tick/.append style={ thick, black, major tick length=5pt},
+width=1.75in, height=1.75in
+]
+\addplot[ybar, bar shift=0,   bar width=10pt,  fill=orange] plot coordinates { (1,0.05)  (2,0.1) (3,0.35) (4,0.35) (5,0.1) (6,0.05) };
+\draw[red, dashed] (3.5,-.1)--(3.5,.48);
+\node[red] at (3.5,.5) {$\mu=2.5$};
+\end{axis}
+\end{tikzpicture}
+\parbox{1.15\textwidth}{\captionof*{figure}{Histogram for $X_1$}}
+\end{center}
+%
+%
+}{
+\begin{center}
+ \begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4,5,6},
+xticklabels = {$0$,$1$,$2$,$3$, $4$, $5$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={0.1,0.2,0.3,0.4, 0.5},
+%yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .55,
+axis line style = {  thick, -},
+every major tick/.append style={ thick, black, major tick length=5pt},
+width=1.75in, height=1.75in
+]
+\addplot[ybar, bar shift=0,   bar width=10pt,  fill=orange] plot coordinates { (1,0.3)  (2,0.05) (3,0.15) (4,0.15) (5,0.05) (6,0.3) };
+\draw[red, dashed] (3.5,-.1)--(3.5,.48);
+\node[red] at (3.5,.5) {$\mu=2.5$};
+\end{axis}
+\end{tikzpicture}
+\parbox{1.15\textwidth}{\captionof*{figure}{Histogram for $X_2$}}
+\end{center}
+%
+%
+}{
+\begin{center}
+ \begin{tikzpicture}
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,2,3,4,5,6},
+xticklabels = {$0$,$1$,$2$,$3$, $4$, $5$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick={0.1,0.2,0.3,0.4, 0.5},
+%yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .55,
+axis line style = {  thick, -},
+every major tick/.append style={ thick, black, major tick length=5pt},
+width=1.75in, height=1.75in
+]
+\addplot[ybar, bar shift=0,   bar width=10pt,  fill=orange] plot coordinates { (1,0.5)  (2,0) (3,0) (4,0) (5,0.1) (6,0.4) };
+\draw[red, dashed] (3.4,-.1)--(3.4,.48);
+\node[red] at (3.4,.5) {$\mu=2.4$};
+\end{axis}
+\end{tikzpicture}
+\parbox{1.15\textwidth}{\captionof*{figure}{Histogram for $X_3$}}
+\end{center}
+}{
+}
+\vs{-.2}
+\enumA{
+\item Before computing anything and basing your answer solely on the PMF above, put the variances of the three random variables in order from least to greatest. Explain your reasoning.
+\sol{
+$$Var(X_1)<Var(X_2)<Var(X_3)$$
+\itemI{
+\item In the histogram for $X_1$, the highest probability outcomes ($X=2$, $X=3$)are closest to the center, $\mu=2.5$ This means the variance will be smaller since there will be a smaller deviation from the center.
+\item  In the histogram for $X_3$, the highest probability outcomes ($X=0$, $X=5$)are furtherest from  the center, $\mu=2.4$ This means the variance will be bigger since there will be greater deviations from the center.
+\item In the histogram for $X_3$, the highest probability outcomes ($X=0$, $X=5$)are furtherest from the center, $\mu=2.5$.    However these probabilities are less than in histogram for $X_3$ and there are more outcomes with non-zero probabilities closer to the center. Thus variance will be in between the variances for $X_1$ and $X_2$.
+
+This means the variance will be smaller since there will be a smaller deviation from the center.
+}
+}
+%\vfill
+
+\item Sketch an example of a histogram representing the PMF of a random variable $Y$ having {\bf higher} variance than $X_3$. Sketch an example of a histogram representing the PMF of a random variable $Z$ having the same mean as $X_1$ but {\bf lower} variance than $X_1$.\vs{-.15}\\
+\mpageT{.5}{.5}{
+\centering
+\begin{tikzpicture}[scale=0.9]
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$y$},
+xtick       = {1,2,3,4,5,6},
+xticklabels = {$0$,$1$,$2$,$3$, $4$, $5$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(y)$},
+ytick={0.1,0.2,0.3,0.4, 0.5},
+%yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .61,
+axis line style = {  thick, -},
+every major tick/.append style={ thick, black, major tick length=5pt},
+width=1.75in, height=1.75in
+]
+\addplot[ybar, bar shift=0,   bar width=10pt,  fill=orange] plot coordinates { (1,0.5)  (2,0) (3,0) (4,0) (5,0) (6,0.5) };
+\draw[red, dashed] (3.5,-.1)--(3.5,.58);
+\node[red] at (3.5,.58) {$\mu=2.5$};
+\end{axis}
+\end{tikzpicture}
+}{
+\centering
+\begin{tikzpicture}[scale=0.9]
+\begin{axis}[
+x label style={anchor=west},
+xlabel={$z$},
+xtick       = {1,2,3,4,5,6},
+xticklabels = {$0$,$1$,$2$,$3$, $4$, $5$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(z)$},
+ytick={0.1,0.2,0.3,0.4, 0.5},
+%yticklabels = {$1/8$,$2/8$, $3/8$},
+enlarge x limits={.01}, % Adjusts spacing between bars and axis limits
+samples     = 320,
+xmin =0, xmax = 6.5,
+ymin = 0, ymax = .61,
+axis line style = {  thick, -},
+every major tick/.append style={ thick, black, major tick length=5pt},
+width=1.75in, height=1.75in
+]
+\addplot[ybar, bar shift=0,   bar width=10pt,  fill=orange] plot coordinates { (1,0)  (2,0) (3,0.5) (4,0.5) (5,0) (6,0) };
+\draw[red, dashed] (3.5,-.1)--(3.5,.58);
+\node[red] at (3.5,.58) {$\mu=2.5$};
+\end{axis}
+\end{tikzpicture}
+}
+}
+\vs{-.5}
+\sol{
+\itemI{
+\item %If $P(X=0)=0.5$ and $P(X=5)=0.5$ $\mu=E(X)=0\cdot 0.5+5\cdot 0.4=2.5$. 
+$Var(Y)>Var(X_3)$ because there our only two outcomes ($X=0$ and $X=5$) and these are furtherest from the center, $\mu=2.5$ while $X_3$ has an additional outcome ($X=4$) that is closer to the center at $\mu$.
+\item $Var(Z)<Var(X_1)$ since there are only two outcomes ($X=2$, $X=3$ and these are closes to the center , $\mu=2.5$ while $X_1$ has additional out comes that are farther from $\mu$.
+}
+}
+\begin{center}
+({\bf Note:} don't forget that the total probability must be exactly 1.)
+\end{center}
+\hfill
+
+\newpage
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+\label{page1}
+\blue{\bf Key Properties of  Continuous Random Variables}\\
+\mpageT{.5}{.5}[\hs{.1}]{
+\centering
+\blue{ \bf Discrete Random Variables}
+}{
+\centering
+\blue{ \bf Continuous Random Variables}\\
+}%\vs{-.2}
+\itemNIN{
+\mpageT{.5}{.5}[\hs{.2}]{
+\item {\bf Discrete Example: } The random variable $X$ is the sum from randomly rolling two $4$-sided dice
+}{
+\item {\bf Continuous Example } The random variable $T$ is the (random) wait time until the bus arrives  at the 
+amphitheater on McIntyre. Buses arrive every $30$ minutes with evenly distributed probability (a uniform distribution)
+}
+\\
+\mpageT{.5}{.5}[\hs{.2}]{
+\item The {\em Sample Space of $X$}: $S_X=\{2,3,4,5,6,7,8\}$
+}{
+\item The {\em Support of $T$}: $S_T=$  $[a,b]=[0,30]$  or $0\leq t\leq 30$
+}
+
+\mpageT{.5}{.5}[\hs{.2}]{
+\begin{tikzpicture}
+\begin{axis}[
+	xtick={1,	2,	3,	4,	5,	6,	7}, % Places x-axis ticks at data points
+	xticklabels={
+         2,	3,	4,	5,	6,	7,	8
+         }, % Custom x-axis labels
+ytick       = {1/16, 2/16, 3/16,4/16,3/16,2/16,1/16},
+yticklabels =  {$1/16$, $2/16$, $3/16$,$4/16$,$3/16$,$2/16$,$1/16$},
+enlarge x limits={.2}, % Adjusts spacing between bars and axis limits
+	y label style={anchor=south west},
+	ylabel={$p(x)$},
+	xlabel = {$x$},
+	x label style={anchor=west},
+	%xticklabel style = {font=\small}, 
+	ymin = 0, ymax = .25,
+	width = 2.5in, height=2in,
+	   axis line style={->},
+]
+\addplot[ybar, bar shift=0,   bar width=16pt,  fill=blue!20] plot coordinates {
+(1,.0625)  (2,.125) (3,.1875) (4,.25) (5,.1875) (6,.125) (7,.0625) 
+};
+\end{axis}
+\end{tikzpicture}
+}{
+\begin{tikzpicture}
+\begin{axis}[
+	x label style={anchor=west},
+xlabel={$t$},
+xtick       = {10,20,30},
+%xticklabels = {$10$,$20$,$30$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(t)$},
+%ytick=\empty,
+%ytick       = {1/30},
+ytick={0.05},
+yticklabels = {$1/30$},
+samples     = 320,
+xmin =0, xmax = 32,
+ymin = 0, ymax = .1,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=2.5in, height=1.5in
+]
+  \addplot[domain=0:30, red, ultra thick, mark=none]{.05};
+\end{axis}
+\end{tikzpicture}
+%
+%
+~\\\blue{Note that the support of a Continuous Random Variable (RV) will be an interval of the form\\ $a\leq t\leq b=[a,b]$}
+}
+~\\
+\mpageT{.5}{.5}[\hs{.2}]{
+\item {\bf Probability Mass Function}:  $p(x)$.\\
+{ \em Two Properties:}
+\enum{
+\item $0\leq p(x)\leq 1$ where $x\in S_X$\vs{.3}
+\item $\ds \sum_{k\in S_X}P[X=k] = \sum_{k=2}^8 P[X=k]=\sum_{k=2}^8 p(k)=1$
+}
+%
+}{
+\item {\bf Probability Density Function (PDF)}: $p(t)$.\\
+{ \em Two Properties:}
+\enum{
+\item $p(t)\geq0$ where $t\in S_T$. Note that this differs from discrete random variables in that there is {\em not} a requirement that $p(t)\leq 1$.
+\item $\ds \int_a^b p(t)\;dt=\ds \int_0^{30} p(t)\;dt=1$ 
+}
+\vs{-.1}~\\
+}
+\mpageT{.5}{.5}[\hs{.2}]{
+\item {\bf Cumulative Probability} $\ds P(X\leq 4)=\sum_{k=2}^4 p(k)$ \\
+%
+%
+}{
+\item {\bf Cumulative Probability:}  $P\ds (T\leq 10)= \int_0^{20}p(t)\;dt$
+%
+}\vs{-.3}\\
+\mpageT{.5}{.5}[\hs{.2}]{
+\begin{tikzpicture}
+\begin{axis}[
+	xtick={1,	2,	3,	4,	5,	6,	7}, % Places x-axis ticks at data points
+	xticklabels={
+         2,	3,	4,	5,	6,	7,	8
+         }, % Custom x-axis labels
+ytick       = {1/16, 2/16, 3/16,4/16,3/16,2/16,1/16},
+yticklabels =  {$1/16$, $2/16$, $3/16$,$4/16$,$3/16$,$2/16$,$1/16$},
+enlarge x limits={.2}, % Adjusts spacing between bars and axis limits
+	y label style={anchor=south west},
+	ylabel={$p(x)$},
+	xlabel = {$x$},
+	x label style={anchor=west},
+	%xticklabel style = {font=\small}, 
+	ymin = 0, ymax = .25,
+	width = 2.5in, height=2in,
+	   axis line style={->},
+]
+\addplot[ybar, bar shift=0,   bar width=16pt,  fill=blue!20] plot coordinates { (1,.0625)  (2,.125) (3,.1875) (4,.25) (5,.1875) (6,.125) (7,.0625) };
+\addplot[ybar, bar shift=0,   bar width=16pt,  fill=red!50] plot coordinates { (1,.0625)  (2,.125) (3,.1875)  };
+\end{axis}
+\end{tikzpicture}
+}{
+\begin{tikzpicture}
+\begin{axis}[
+	x label style={anchor=west},
+xlabel={$t$},
+xtick       = {10,20,30},
+%xticklabels = {$10$,$20$,$30$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(t)$},
+%ytick=\empty,
+%ytick       = {1/30},
+ytick={0.05},
+yticklabels = {$1/30$},
+samples     = 320,
+%domain      = -2.5:2.5,
+%restrict y to domain=-6.5:6.5,
+xmin =0, xmax = 32,
+ymin = 0, ymax = .1,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=2.5in, height=1.5in
+%  grid=both, grid style=solid
+]
+ \addplot[name path=f, domain=0:30, red, ultra thick, mark=none]{.05};
+ %\addplot[ name path=f, domain=0:26,  red, ultra thick, <->, ] {1/sqrt(2*pi*(3.85)^2)*e^(-(x-13.5)^2/(2*(3.85)^2))  };
+	   \path[name path=axis] (0,0) -- (10,0);
+	    \addplot [
+thick,
+color=red,
+fill=red, 
+fill opacity=0.35
+]
+fill between[
+of=f and axis,
+soft clip={domain=0:10},
+];
+ne]{-1/25*x+2/5};
+\end{axis}
+\end{tikzpicture}
+~\\
+%
+%
+\blue{Cumulative probability for Discrete RVS is represented by areas of histogram bars. Cumulative probability for Continuous RVs is also represented by (net) area and is thus computed via a definite integral instead of a sum.
+}
+}
+%\vs{.1}
+\mpageT{.5}{.5}[\hs{.2}]{
+\item {\bf Expected Value}  \\
+$\ds \mu= E[X]=\sum_{i=1}^n x_i\cdot p(x_i)=\sum_{k=2}^8k\cdot p(k)$
+%
+%
+}{
+\item {\bf Expected Value:}  \\
+$\ds \mu=E[T]=$\blue{$\ds \int_a^b t\,p(t)\;dt= \int_0^{30}t\cdot\frac{1}{30}\;dt=15$}
+}
+\mpageT{.5}{.5}[\hs{.2}]{
+\item {\bf Variance}    (for $n$ outcomes)\vs{-.15}
+\al{ Var(X)&=E[(X-\mu)^2]=\sum_{i=1}^n (x_i-\mu)^2p(x_i)\\
+&=E[X^2]-\mu^2=\left(\sum_{i=1}^n x_i^2\cdot p(x)\right)-\mu^2
+}
+%
+%
+}{
+\item {\bf Variance}
+\al{
+Var(T)&=E[(T-\mu)^2]=\blue{ \int_a^b (t-\mu)^2p(t)\;dt}\\
+&=\blue{E[T^2]-\mu^2=\int_a^b t^2\cdot p(t)\;dt-\mu^2}
+}
+%$\ds  Var(T)=E[(T-\mu)^2]=$\blue{$\ds \int_a^b (t-\mu)^2p(t)\;dt$ } \\
+%\blue{$\ds =E[T^2]-\mu^2=\int_a^b t^2\cdot p(t)\;dt-\mu^2$}
+%
+}
+}
+
+%\newpage
+
+\blue{\bf Summary of Expectation \& Variance of Continuous Random Variables}\\
+\mpageT{.5}{.5}{
+\importantV{Expected Value}{$\mu=E[X] = \displaystyle\int_a^b x\cdot p(x)\,dx$}
+}{
+\importantV{Variance}{
+\enum{
+\item $ \ds Var(X) = E[(X-\mu)^2]=\int_a^b(x-\mu)^2\cdot p(x)\;dx$
+\item $\ds Var(X)=E[X^2]-\mu^2=\displaystyle\int_a^b x^2\cdot p(x)\,dx-\mu^2$
+}
+}
+}
+
+
+
+\exercise\ltrm{\bf\color{Orange}P2} Let the continuous random variable $V$ have the following PDF:\\
+\mpageT{.5}{.5}{
+\[
+p(v) = 
+\begin{cases} 
+\dfrac{1}{v} & \text{for } 1 \leq v \leq e, \\
+0 & \text{otherwise}.
+\end{cases}
+\]
+}{
+\begin{tikzpicture}
+\begin{axis}[
+	x label style={anchor=west},
+xlabel={$v$},
+xtick       = {1,2.72},
+xticklabels = {$1$,$e$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(v)$},
+%ytick=\empty,
+%ytick       = {1/30},
+ytick={1},
+yticklabels = {$1$},
+samples     = 320,
+xmin =0, xmax = 3,
+ymin = 0, ymax = 1.3,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=2.5in, height=1.5in
+]
+ \addplot[name path=f, domain=1:2.7182, blue, ultra thick, mark=none]{1/x};
+\end{axis}
+\end{tikzpicture}
+}
+\begin{itemize}
+\item[(a)] Find the mean of $V$ using the definition of mean.  %\vs{2.5}
+\sol{ The support of $V$ is $1\leq v\leq e$, where $e=2.71818...$
+\al{
+\mu=E(V)&=\int_1^e v\cdot p(v)\;dv \\
+&= \int_1^e v\cdot \frac{1}{v} \;dv\\
+&= \int_1^e 1 \;dv \\
+&=v\Bigg|_1^e \text{ (The anti-derivative of $1$ is $v$)} \\
+&=e-1\approx 1.71828
+}
+}
+
+
+
+\item[(b)] Find the variance of $V$ using one of the definitions of variance.
+\sol{ There are two equivalent ways to compute the variance. Both will yield the same answer. I'm going to utilize the second version.
+\al{
+Var(V)=E(V^2)-\mu^2&= \int_1^e v^2\cdot p(v)\;dv-\mu^2\\
+&= \int_1^e v^2\cdot \frac{1}{v}\;dv-(e-1)^2\\
+&= \int_1^e v\;dv-(e-1)^2\\
+&=\frac{v^2}{2}\Bigg|_1^e -(e-1)^2\\
+&=\frac{e^2}{2}-\frac{1^2}{2}-(e-1)^2 \text{ (On an exam, there's no need to simplify further)}\\
+&=\frac{e^2}{2}-\frac{1}{2}-(e^2-2e+1)\\
+&=\frac{e^2}{2}-\frac{1}{2}-e^2+2e-1\\
+&=\frac{e^2}{2}-e^2 +2e -\frac{1}{2}-1 \text{ (re-arranging so we can combine like terms)}\\
+&=-\frac{e^2}{2}+2e-\frac{3}{2}\\
+&\approx 0.242
+}
+}
+
+\end{itemize}
+
+\newpage
+\exercise\ltrm{\bf\color{Orange}P2} The integral $\dint_1^{c} \frac12z\,dz$ represents the expected value of a random variable $Z$, where $c$ is a constant to be determined.\\
+
+\tasksA{2}{
+\task Identify the PDF of $Z$.
+\sol{
+Since 
+\al{
+ E[Z]=\int_1^c z\cdot p(z)\;dz&=\int_1^c \frac{1}{2}z\;dz \text{, then}\\
+   z\cdot p(z)&=\frac{1}{2}z\\
+\frac{z}{z} p(z)&=\frac{1}{2}\frac{z}{z} \text{ (divide both sides by $z$)}\\
+p(z)&=\frac{1}{2}
+}
+}
+\task Find the value of $c$.
+\sol{
+We will use property $\#2$ for Continuous Random Variables (see page \pageref{page1}). 
+\al{
+\int_a^b p(z)\;dz&=1\\
+\int_1^c \frac{1}{2}\;dz&=1 \text{ (we are using result from part a): $P(z)=\dfrac{1}{2}$)}\\
+\frac{1}{2}z\Bigg|_1^c&=1\\
+\frac{1}{2}c-\frac{1}{2}&=1\\
+\frac{c}{2}&=\frac{3}{2}\\
+c&=2\cdot \frac{3}{2}\\
+c&=3
+}
+}
+
+\task Find the mean $\mu=E(Z)$
+\sol{
+\al{
+\mu=E(Z)=\int_1^3 \frac{1}{2}z\;dz&=\int_1^3 \frac{z}{2}\;dz\\
+&=\frac{z^2}{4}\Bigg|_1^3\\
+&=\frac{3^2}{4}-\frac{1^2}{4}\\
+&=\frac{8}{4}=2
+}
+}
+\task Find the variance of $Z$.
+\sol{
+There are two equivalent ways to calculate the variance. I will utilize the first version.
+\al{
+Var(Z)=E[(Z-\mu)^2]&=\int_1^3(z-\mu)^2\cdot p(z)\;dz\\
+&=\int_1^3(z-2)^2\cdot \frac{1}{2}\;dz\\
+&=\frac{1}{2}\int_1^3(z^2-4z+4)\;dz\\
+&=\frac{1}{2} (\frac{z^3}{3}-4\frac{z^2}{2}+4z)\Bigg|_1^3\\
+&=(\frac{z^3}{6}-z^2+2z)\Bigg|_1^3\\
+&=\Big(\frac{3^3}{6}-3^2+2\cdot 3 \Big) - \Big(\frac{1^3}{6}-1^2+2\cdot 1 \Big)\\
+&=\Big(\frac{27}{6}-9+6 \Big) - \Big(\frac{1}{6}-1+2\Big)\\
+&=\Big(\frac{9}{6} \Big) - \Big(\frac{1}{6}+1\Big)\\
+&=\frac{2}{6}=\frac{1}{3}
+}
+}
+
+    \vfill
+    \vfill
+}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 1.}\ltrm{{\bf\color{Orange}P1}}
+Let $X$ be a discrete random variable with the following probability mass function $p(x)$.
+
+\begin{table}[h!]
+        \centering
+        \begin{tabular}{c|ccccc}
+            \hline
+           $x$  & 1 & 2 & 3 & 4 & 5\\
+           \hline\\
+           $p(x)$  & $\dfrac{3}{10}$ & $\dfrac{1}{10}$ & $\dfrac{1}{10}$ & \blue{$\dfrac{2}{10}$}& $\dfrac{3}{10}$\\\\
+           \hline
+        \end{tabular}
+    \end{table}
+
+\begin{enumerate}
+    \item[(a)] Find the missing value in the table so that $p(x)$ is a valid probability mass function. %\vs{1.5}
+    \sol{
+    We use property $\#2$ of Discrete RVs
+    \al{
+    P(X=1)+P(X=2)+P(X=3)+P(X=4)+P(X=5)&=1\\
+    \frac{3}{10}+\frac{1}{10}+\frac{1}{10}+P(X=4)+\frac{3}{10}&=1\\
+        \frac{8}{10}+P(X=4)&=1\\
+        P(X=4)=1-\frac{8}{10}=\frac{2}{10}
+    }
+    }
+    
+
+    \item[(b)] Find the expected value of $X$.
+\sol{ 
+\al{
+\mu=E(X)&=\sum_{i=1}^5 x_i\cdot p(x_i)\\
+&=1\cdot \frac{3}{10}+2\cdot \frac{1}{10}+3\cdot \frac{1}{10}+4\cdot \frac{2}{10}+5\cdot \frac{3}{10}\\
+&=\frac{3}{10}+\frac{2}{10}+\frac{3}{10}+\frac{8}{10}+\frac{15}{10}\\
+&=\frac{31}{10}
+}
+
+}
+    \vfill
+
+    \item[(c)] Find the variance of $x$.
+    \sol{
+    \al{
+\mu=E[X^2]-\mu^2&=\sum_{i=1}^5(x_i)^2\cdot p(x_i) -\mu^2\\
+&=\left( 1^2 \cdot \frac{3}{10}+2^2\cdot \frac{1}{10} +3^2\cdot \frac{1}{10}+ 4^2\cdot \frac{2}{10}+5^2 \cdot \frac{3}{10} \right)-\left(\frac{31}{10}\right)^2\\
+&=\frac{3}{10}+\frac{4}{10}+\frac{9}{10}+\frac{32}{10}+\frac{75}{10}-\frac{961}{100}\\
+&=\frac{123}{10}-\frac{961}{100}\\
+&=\frac{1230}{100}-\frac{961}{100}\\
+&=\frac{269}{100}
+}
+    }
+    \vfill
+\end{enumerate}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 2.}\ltrm{{\bf\color{Orange}P2}}
+Compute the expectation of a continuous random variable $W$ with PDF given by:
+\[
+p(w) = 
+\begin{cases} 
+2\sqrt{w} & \text{for } 0 \leq w \leq 1, \\
+0 & \text{otherwise}.
+\end{cases}
+\]
+\sol{
+\al{
+\mu=E(W)&=\int_0^1 w\cdot p(w)\;dw\\
+&=\int_0^1 w\cdot 2\sqrt{w}\;dw\\
+&=\int_0^1 w\cdot 2w^{1/2}\;dw\\
+&=\int_0^1 2w^{3/2}\;dw\\
+&=2\cdot \frac{w^{5/2}}{5/2}\Bigg|_0^1\\
+&=2\cdot\frac{2}{5}w^{5/2}\Bigg|_0^1\\
+&=\frac{4}{5}\cdot 1^{5/2}-0\\
+&=\frac{4}{5}\\
+&=0.8
+}
+}
+%\vs{2.5}
+
+{\bf\color{blue}Extra Practice 3.}\ltrm{{\bf\color{Orange}P2}} 
+Let $X$ be a continuous random variable with the following PDF and its graph.\\
+\mpageT{.5}{.5}{\centering
+\[
+p(x) = 
+\begin{cases} 
+\dfrac{1}{x\ln(10)} & \text{for } 1 \leq x \leq 10, \\
+0 & \text{otherwise}.
+\end{cases}
+\]
+}{\centering
+\begin{tikzpicture}
+\begin{axis}[
+	x label style={anchor=west},
+xlabel={$x$},
+xtick       = {1,10},
+xticklabels = {$1$,$10$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+%ytick=\empty,
+%ytick       = {1/30},
+ytick={0.5},
+%yticklabels = {$1$},
+samples     = 320,
+xmin =0, xmax = 10.5,
+ymin = 0, ymax = 0.6,
+axis line style = { ultra thick, -},
+every major tick/.append style={ultra thick, black, major tick length=5pt},
+width=2.5in, height=1.5in
+]
+ \addplot[name path=f, domain=1:10, blue, ultra thick, mark=none]{1/(x*ln(10)};
+\end{axis}
+\end{tikzpicture}
+}
+\tasksA{2}{
+    \task Compute the expectation $\mu=E[X]$.
+ \sol{ The support is $1\le x \le 10$
+ \al{
+ \mu=E(X)&=\int_1^{10} x\cdot p(x)\;dx\\
+ &=\int_1^{10} x \cdot \frac{1}{x\ln(10)}\;dx\\
+  &=\int_1^{10} x \cdot \frac{1}{\ln(10)}\;dx\\
+  &=\frac{1}{\ln(10)} x\Big|_1^{10}\\
+  &=\frac{1}{\ln(10)} \cdot(10) - \frac{1}{\ln(10)} \cdot (1)\\
+  &=\frac{10-1}{\ln(10)}\\
+  &=\frac{9}{\ln(10)}\approx3.91
+ }
+ }
+   \task Determine the variance $\text{Var}(X)$. 
+   \sol{
+   There are two equivalent definitions of variance. We will use the second version.
+   \al{
+   Var(X)&=\int_1^{10} x^2\cdot p(x)\;dx -\mu^2\\
+   &=\int_1^{10} x^2\cdot  \frac{1}{x\ln(10)}\;dx -\left( \frac{9}{\ln(10)} \right)^2\\
+    &=\int_1^{10} x\cdot  \frac{1}{\ln(10)}\;dx -\left( \frac{9}{\ln(10)} \right)^2\\
+    &=\frac{x^2}{2}\cdot \frac{1}{\ln(10)}\Bigg|_1^{10} -\left( \frac{9}{\ln(10)} \right)^2\\
+    &=\frac{10^2}{2}\cdot \frac{1}{\ln(10)}  - \frac{1^2}{2}\cdot \frac{1}{\ln(10)} -\left( \frac{9}{\ln(10)} \right)^2\\
+     &=    \frac{100-1}{2}\cdot \frac{1}{\ln(10)}  -\left( \frac{9}{\ln(10)} \right)^2\\
+          &=    \frac{9}{2\ln(10)} -\left( \frac{81}{(\ln(10))^2} \right)^2 \text{ (no need to simplify!)}\\
+          &\approx 6.22
+   }
+   }
+   
+}
+
+
+\end{document}
+%%%%%%%%%%%% END DOCUMENT %%%%%%%%%%%%%%%

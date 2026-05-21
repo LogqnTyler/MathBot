@@ -1,0 +1,755 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 20}
+\def\TypeTitle{Intro to Probability and Discrete Random Variables }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+
+\usepackage{preambleDJ}
+
+
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\thispagestyle{firstpage}
+\pagestyle{otherpages}
+\vs{0.5}
+
+
+
+\textbf{Intended Learning Outcomes}
+After this lesson, you will be able to 
+
+\begin{itemize}
+    \item List outcomes in the sample space or an event of a random process. (\target{P1})
+    \item Determine if a random variable is discrete.(\target{P1})
+    \item Find a probability of an event when the sample space is finite. (\target{P1})
+    %\item Use summations to find the probability that an event modeled by a discrete random variable occurs. (\target{P1})
+    \item Determine and use the probability mass function and its properties of a discrete random variable. (\target{P1})
+    \item Sketch the histogram representing a probability mass function. (\target{P1})
+\end{itemize}
+
+\vspace{-0.5cm}
+
+\hrulefill
+
+\vspace{0.2cm}
+
+\fbox{
+\begin{minipage}{0.95\textwidth}
+Fill in the blanks.
+\begin{itemize}
+\item An \rule[-8pt]{1.2in}{0.4pt} is a process that can be infinitely repeated by which we observe something uncertain.
+
+\item An \rule[-8pt]{1.2in}{0.4pt} is a result of one iteration of an experiment. 
+
+\item The \rule[-8pt]{1.2in}{0.4pt} of a random process is the collection of all its possible outcomes.
+
+\item An \rule[-8pt]{1.2in}{0.4pt} is a collection of outcomes from the sample space.
+\end{itemize}
+\end{minipage}
+}
+
+\exercise{\bf\color{Orange}P1} An opaque bag contains 1 {\color{red}red} marble, 1 {\color{ForestGreen}green} marble, and 1 {\color{blue}blue} marble. ({\it Hint:} For example, denote outcomes using notation like {\color{red}R}, {\color{ForestGreen}G}, or {\color{blue}B}, as appropriate!)
+    \begin{itemize}
+    \item[(a)] In an experiment where one marble is drawn randomly from the bag and the color of the marble is recorded, what is the sample space $S$?
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+
+    \item[(b)] In another experiment, one marble is drawn randomly from the bag, the color of the marble is recorded, the marble is placed back in the bag, and then a second marble is drawn, its color recorded, and then the marble is placed back in the bag. What is the sample space $S$? ({\bf Note:} we call this drawing {\bf with replacement}.)
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+
+    \item[(c)] In another experiment, one marble is drawn randomly from the bag, the color of the marble is recorded, the marble is NOT placed back in the bag, and then a second marble is drawn, its color recorded, and then the marble is NOT placed back in the bag. What is the sample space $S$? ({\bf Note:} we call this drawing {\bf without replacement}.)
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    
+    \end{itemize}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf Discrete Random Variables and Probabilities of Events}\\
+
+\fbox{
+
+\begin{minipage}{0.95\textwidth}
+\begin{itemize}
+    \item A \rule[-8pt]{2in}{0.4pt} assigns a number (not necessarily unique) to each outcome in a sample space.
+    \item A \rule[-8pt]{2in}{0.4pt} is a random variable that can only take on a finite number of values.
+\item When all outcomes in the sample space $S$ are equally likely, then the probability of an event $E$, denoted as $P(E)$, can be computed as:
+
+\[ P(E) = \dfrac{\text{size of the event}}{\text{size of the sample space}} \]
+
+\item For a discrete random variable $X$, the {\bf probability mass function} (PMF) $p(x)$ of the random variable $X$ describes the probabilities that $X$ takes on different values. Generally speaking, $p(x)=P(X=x)$.
+
+\item There are two important properties of probability mass functions.
+\begin{itemize}
+    \item Each probability in the PMF must be between \rule[-8pt]{1in}{0.4pt} and \rule[-8pt]{1in}{0.4pt}.
+    \item The sum of all probabilities in the PMF must equal to \rule[-8pt]{1in}{0.4pt}.
+\end{itemize}
+
+\item A \textbf{histogram} is a bar graph that visually represents the probability mass function of a discrete random variable. The horizontal axis lists all possible values of the discrete random variable. A bar is created for each possible value where the height of the bar is the probability of this value occurring.
+
+\end{itemize}
+
+\end{minipage}
+}
+
+\example{\bf\color{Orange}P1} Let's re-consider the experiment in Exercise A (c). Suppose $X$ is a discrete random variable where $X=0$ represents the event that neither of the two drawn marbles is blue, and $X=1$ represents the event that one of the marbles drawn is blue.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find $P(X=0)$ and $P(X=1)$.
+
+    \vfill
+
+    \item Sketch a histogram representing this probability mass function.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1.25]
+          \begin{axis}[
+            %xlabel={$x$},
+            %grid = major,
+            %xtick       = {1,2,3,4,5,6,7,8,9},
+            %xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            %ytick       = {-3, -2, -1, 0,1,2,3,4},
+            %yticklabels = {$-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$},
+            ylabel={},
+            axis lines = middle,
+            ticks=none,
+            xticklabel=\empty,
+            yticklabel=\empty,
+            domain      = -1:9.5,
+            restrict y to domain=-3.5:2.5,
+            xmin = 0, xmax = 4.5,
+            ymin = 0, ymax = 4.5,
+            height=2.1in, width=2.7in,
+            %grid=both, grid style=dashed
+          ]
+          %\draw[ultra thick, red,--] (-2/3,1/3) -- (2,3) -- (3,3) -- (7, -3) -- (9.5, -0.5);
+          %\node at (4,3) {$f(x)$};
+          \end{axis}
+    \end{tikzpicture}
+    \end{center}
+\end{enumerate}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+\exercise{\bf\color{Orange}P1}
+\begin{enumerate}[label=(\alph*)]
+    \item Fill in the missing probability in the table below to make it a valid probability mass function.
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{c|cccc}
+            \hline
+           $x$  & 1 & 2 & 3 & 4 \\
+           \hline
+           $p(x)$  & 0.1 & 0.15 & \rule[-8pt]{0.5in}{0.4pt} & 0.40\\
+           \hline
+        \end{tabular}
+    \end{table}
+
+    \item Based on the probability mass function in part (a), what is $P(X\ge 2)$?
+
+    \vfill
+
+    \item Based on the probability mass function in part (a), what is $P(X \text{ is even})$?
+
+    \vfill
+
+    \item Sketch a histogram for this probability mass function.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1]
+          \begin{axis}[
+            %xlabel={$x$},
+            %grid = major,
+            %xtick       = {1,2,3,4,5,6,7,8,9},
+            %xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            %ytick       = {-3, -2, -1, 0,1,2,3,4},
+            %yticklabels = {$-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$},
+            ylabel={},
+            axis lines = middle,
+            ticks=none,
+            xticklabel=\empty,
+            yticklabel=\empty,
+            domain      = -1:9.5,
+            restrict y to domain=-3.5:2.5,
+            xmin = 0, xmax = 10,
+            ymin = 0, ymax = 4.5,
+            height=2.1in, width=4in,
+            %grid=both, grid style=dashed
+          ]
+          %\draw[ultra thick, red,--] (-2/3,1/3) -- (2,3) -- (3,3) -- (7, -3) -- (9.5, -0.5);
+          %\node at (4,3) {$f(x)$};
+          \end{axis}
+    \end{tikzpicture}
+    \end{center}
+\end{enumerate}
+
+\exercise{\bf\color{Orange}P1} Below is a table of age distributions of the US population for different age groups. 
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{c|c|c}
+            \hline
+           Group Number & Age Group & Percentage of Population \\
+           \hline
+            1 & 0-19 & 25\% \\
+            2 & 20-39 & 27\% \\
+            3 & 40-59 & 27\% \\
+            4 & 60-79 & 17\%\\
+            5 & 80-99 & 4\%\\
+           \hline
+        \end{tabular}
+    \end{table}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Let $X$ be the discrete random variable representing the group number of a randomly selected person in the US. Write down its probability mass function.
+
+    \vfill
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+    \item Sketch a histogram for this probability mass function.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1]
+          \begin{axis}[
+            %xlabel={$x$},
+            %grid = major,
+            %xtick       = {1,2,3,4,5,6,7,8,9},
+            %xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            %ytick       = {-3, -2, -1, 0,1,2,3,4},
+            %yticklabels = {$-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$},
+            ylabel={},
+            axis lines = middle,
+            ticks=none,
+            xticklabel=\empty,
+            yticklabel=\empty,
+            domain      = -1:9.5,
+            restrict y to domain=-3.5:2.5,
+            xmin = 0, xmax = 10,
+            ymin = 0, ymax = 4.5,
+            height=2.1in, width=4in,
+            %grid=both, grid style=dashed
+          ]
+          %\draw[ultra thick, red,--] (-2/3,1/3) -- (2,3) -- (3,3) -- (7, -3) -- (9.5, -0.5);
+          %\node at (4,3) {$f(x)$};
+          \end{axis}
+    \end{tikzpicture}
+    \end{center}
+
+    \item Let's consider the following bar graph similar to the histogram, where the $x$-axis represent the age and $y$-axis represents the fraction of population per year, assuming that the individuals in each age group evenly spread out between the ages. 
+
+    For example, the age group 0-19 is 25\% of the population. Assuming the ages in this group are evenly spread out, since there are 10 ages in this group, we can say the percentage of 9-year-olds of the US population is 25\%/20=1.25\%=0.0125.
+
+    With this new graph, what is the area of the left-most rectangle, and what do you think it represents?
+
+    \begin{center}
+        \includegraphics[scale=0.4]{fractiongraph}
+    \end{center}
+
+    \vspace{-3cm}
+    
+    \item Now consider the following new table of US age distribution, which is more refined. Let $Y$ be the new group number of a randomly selected person in the US. Sketch a histogram for the probability mass function of Y.
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{c|c|c}
+            \hline
+           Group Number & Age Group & Percentage of Population \\
+           \hline
+            1 & 0-9 & 12\% \\
+            2 & 10-19 & 13\% \\
+            3 & 20-29 & 14\% \\
+            4 & 30-39 & 13\%\\
+            5 & 40-49 & 13\% \\
+            6 & 50-59 & 14\% \\
+            7 & 60-69 & 11\%\\
+            8 & 70-79 & 6\% \\
+            9 & 80-89 & 3\%\\
+            10 & 90-99 & 1\% \\
+           \hline
+        \end{tabular}
+    \end{table}
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1]
+          \begin{axis}[
+            %xlabel={$x$},
+            %grid = major,
+            %xtick       = {1,2,3,4,5,6,7,8,9},
+            %xticklabels = {$1$,$2$,$3$,$4$,$5$,$6$,$7$,$8$,$9$},
+            %ytick       = {-3, -2, -1, 0,1,2,3,4},
+            %yticklabels = {$-3$, $-2$, $-1$, $0$,$1$,$2$,$3$,$4$},
+            ylabel={},
+            axis lines = middle,
+            ticks=none,
+            xticklabel=\empty,
+            yticklabel=\empty,
+            domain      = -1:9.5,
+            restrict y to domain=-3.5:2.5,
+            xmin = 0, xmax = 10,
+            ymin = 0, ymax = 4.5,
+            height=2.1in, width=4in,
+            %grid=both, grid style=dashed
+          ]
+          %\draw[ultra thick, red,--] (-2/3,1/3) -- (2,3) -- (3,3) -- (7, -3) -- (9.5, -0.5);
+          %\node at (4,3) {$f(x)$};
+          \end{axis}
+    \end{tikzpicture}
+    \end{center}
+
+    \newpage
+
+    \item Consider the corresponding fraction-of-population vs age graph. What does the area of each rectangle represent, and what mathematical concept in this course does this remind you of?
+
+    \vfill
+\end{enumerate}
+
+\exercise{\bf\color{Orange}P1} Two fair six-sided dice are rolled and the result of each die is recorded. Below is a table of all possible outcomes.
+
+\begin{center}
+    \includegraphics[scale=0.5]{Fall 2025/Lessons/lesson20_IntroProbandDiscrete/images/sum2Dice.png}
+\end{center}
+
+\begin{enumerate}[label=(\alph*)]
+    %\item What is the size of the sample space $S$ of this experiment?
+
+    %\vfill
+
+    \item Let $X$ be the sum of the two resulting numbers. Write down the probability mass function for the random variable $X$ and sketch its histogram.
+
+    \vfill\vfill\vfill
+
+    \item Find $P(X\ge 9)$.
+
+    \vfill\vfill
+
+    \item Find $P(X\text{ is a multiple of 3})$.
+
+    \vfill\vfill
+\end{enumerate}
+
+
+
+
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue} Extra Practice 1.} \reversemarginpar\marginnote{\fbox{\bf\color{Orange} P1}}  A standard 6-sided die has been painted so that it has 2 {\color{red}red} sides, 2 {\color{ForestGreen}green} sides, and 2 {\color{blue}blue} sides.
+
+\begin{itemize}
+    \item[(a)] In an experiment where the die is rolled and the color of the upturned face is recorded, what is the sample space $S$?
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    
+    \item[(b)] In an experiment where the die is rolled twice and the color of the upturned face is recorded each time, what is the sample space $S$?
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    
+\end{itemize}
+
+{\bf\color{blue}Extra Practice 2.}\reversemarginpar\marginnote{\fbox{\bf\color{Orange} P1}} 
+The World Series is the annual championship series of Major League Baseball. Currently, its format is a direct competition between two teams of up to seven games, where the first team wins four games wins the championship.
+
+For example, if team A wins the first 3 games, team B wins the 4th game, and team A wins the 5th game, then team A wins the series. Game 6 and Game 7 will then not be played since a winner has already been determined. In this case, it took 5 games to determine the winner.
+
+    \begin{itemize}
+    \item[(a)] Let $X$ represent the number of games it takes to determine the winner of the World Series. What are all possible values of $X$?
+    \vfill
+
+    \item[(b)] Suppose team A won the first 2 games and team B won the third. For each of the remaining four games, assume each team has an equal chance of winning. 
+
+    Find $P(X\le 5)$.
+
+    \vfill
+
+    \end{itemize}
+
+\end{document}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+\begin{center}
+({\it Conditioning \& Independence})
+\end{center}
+
+\begin{itemize}
+    \item If $E$ and $F$ are both events, then the {\bf intersection} $E\cap F$ of both events is the event whose outcomes are in both $E$ and $F$; in other words, $E\cap F$ is the event that both $E$ and $F$ occur.
+    \item If $E$ and $F$ are both events, then the event $E|F$ is the event that $E$ occurs given the condition that $F$ has already occurred. The knowledge that an event has already occurred can change how we think about possible outcomes and thus probabilities.
+    \item Two events $E$ and $F$ are called {\bf independent} if knowledge that $F$ has occurred does not change the probability that $E$ occurs; that is,
+    \[P(E|F)=P(E)\]
+\end{itemize}
+
+\exercise\lt{{\bf\color{Orange}P1}} A coin is flipped three times, and the upturned face is recorded after each flip. Assume each outcome - heads or tails - is equally likely for each flip.
+    \begin{itemize}
+    \item[(a)] What is the sample space $S$ of this experiment?
+
+    {\Large
+    \[
+    S = \rule[-8pt]{5in}{0.4pt}
+    \]
+    }
+    
+    \item[(b)] Let $E_1$ be the event that the first flip lands on heads. What is $E_1$?
+
+    {\Large
+    \[
+    E_1 = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    
+    \item[(c)] Let $E_2$ be the event that the second flip lands on heads. What is $E_2$?
+
+    {\Large
+    \[
+    E_2 = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+
+    \item[(d)] What is $E_2|E_1$? Describe $E_2|E_1$ in the given context in words, as well.
+
+    {\Large
+    \[
+    E_2|E_1 = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+
+    \vfill
+
+    \item[(e)] Find the probability that $E_1$ occurs, the probability that $E_2$ occurs, and the probability that $E_2|E_1$ occurs. Are $E_1$ and $E_2$ independent? Explain.\\
+
+    \vfill
+        
+    {\large
+        \,\hfill
+        $P(E_1)=$\rule[-8pt]{1.25in}{0.4pt}
+        \hfill
+        $P(E_2)=$\rule[-8pt]{1.25in}{0.4pt}
+        \hfill
+        $P(E_2|E_1)=$\rule[-8pt]{1.25in}{0.4pt}
+        \hfill\,\\
+    }
+    
+    \end{itemize}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 3.}\lt{{\bf\color{Orange}P1}} Suppose we toss two 4-sided dice - one painted {\color{red}red} and one painted {\color{blue}blue} - and record the result as an ordered pair $(\rule[-2pt]{0.2in}{0.4pt},\rule[-2pt]{0.2in}{0.4pt})$ with the first coordinate referring to the value of the {\color{red}red} die and the second coordinate referring to the value of the {\color{blue}blue} die. Assume each outcome - 1, 2, 3, or 4 - is equally likely for both dice.
+    \begin{itemize}
+    \item[(a)] Fill in the sample space $S$:
+
+    {\Large 
+    \begin{align*}
+    S = \bigg\{ &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big),\\[0.1in]
+    &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big),\\[0.1in]
+    &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big),\\[0.1in]
+    &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big) \bigg\}
+    \end{align*}
+    }
+
+    \item[(b)] Let $E$ be the event that the sum of the displayed values is at least $7$. What is $E$? What is $P(E)$?
+
+    {\Large
+    \[
+    E = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(E) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+
+    \item[(c)] %By accident, we toss the dice so that one of the dice falls off the table onto which we tossed the dice initially, obscuring its value from our view. On the table, however, we see that the red die displays $4$.
+    Let $F$ be the event that the {\color{red}red} die displays $4$. What is $F$? What is $P(F)$?
+
+    {\Large
+    \[
+    F = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(F) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+    \item[(d)] Describe $E|F$ in the given context in words. What is $E|F$ as a set?
+
+    \vfill
+
+    {\Large
+    \[
+    E|F = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    \item[(e)] Find $P(E|F)$, and decide whether $E$ and $F$ are independent events.
+    
+    \vfill
+    
+    {\Large \hfill $P(E|F)=\rule[-8pt]{1in}{0.4pt}$}
+    \end{itemize}
+%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%
+{\bf\color{blue}Extra Practice 4.}\lt{{\bf\color{Orange}P1}} Many board games use strange dice. Suppose in one such game we toss one standard six-sided die and one four-sided die in a game. Assume each outcome - 1, 2, 3, 4, 5, or 6 - is equally likely for the six-sided die and each outcome 1, 2, 3, or 4 is equally likely for the four-sided die. Further, lets suppose we always roll the six-sided die first and the four-sided die second.
+
+    \begin{itemize}
+    \item[(a)] Fill in the sample space $S$:
+     \begin{align*}
+    S = \bigg\{
+        &(\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}) \\[5pt]
+        &(\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}) \\[5pt]
+        &(\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}) \\[5pt]
+        &(\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}), \, (\rule[-4pt]{0.3in}{0.4pt}, \rule[-4pt]{0.3in}{0.4pt}) 
+    \bigg\}
+       \end{align*}
+    
+
+    \item[(b)] Lets suppose that you are in a position to win the game, but the sum of the numbers on the upturned faces of your next dice roll must be at least $8$. Let $E$ be the event that the sum of the displayed values on your next roll is at least $8$. What is $E$? What is $P(E)$?
+
+    {\Large
+    \[
+    E = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(E) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+
+    \item[(c)] %By accident, we toss the dice so that one of the dice falls off the table onto which we tossed the dice initially, obscuring its value from our view. On the table, however, we see that the red die displays $4$.
+    Let $F$ be the event that the four-sided die displays $2$. What is $F$ as an set? What is $P(F)$?
+
+    {\Large
+    \[
+    F = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(F) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+    \item[(d)] %By accident, we toss the dice so that one of the dice falls off the table onto which we tossed the dice initially, obscuring its value from our view. On the table, however, we see that the red die displays $4$.
+    Let $G$ be the event that the four-sided die displays $4$. What is $G$ as an set? What is $P(G)$?
+
+    {\Large
+    \[
+    G = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(G) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+    \item[(e)] Describe $E|F$ in the given context in words. What is $E|F$ as a set?
+    \vspace{3in}
+
+    \vfill
+
+    {\Large
+    \[
+    E|F = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    \item[(f)] Describe $E|G$ in the given context in words. What is $E|G$ as a set?
+    \vspace{2in}
+
+    \vfill
+
+    {\Large
+    \[
+    E|G = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    \item[(g)] Find $P(E|F)$, and decide whether $E$ and $F$ are independent events.
+
+    \vfill
+
+    {\Large \hfill $P(E|F)=\rule[-8pt]{1in}{0.4pt}$}
+    \item[(h)] Find $P(E|G)$, and decide whether $E$ and $G$ are independent events.
+
+    \vfill
+
+    {\Large \hfill $P(E|G)=\rule[-8pt]{1in}{0.4pt}$}
+    \item[(i)] Which of the two events gives you a better chance of winning, $F$ or $G$? Explain.
+
+    \vfill
+
+    \end{itemize}
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+\textbf{\color{blue}Extra Practice 5.}\lt{{\bf\color{Orange}P1}} Suppose we spin two spinners - one painted {\color{red}red} and one painted {\color{blue}blue} - and record the result as an ordered pair $(\rule[-2pt]{0.2in}{0.4pt},\rule[-2pt]{0.2in}{0.4pt})$ with the first coordinate referring to the color of the {\color{red}red} spinner and the second coordinate referring to the color of the {\color{blue}blue} spinner. Each spinner has three equal-sized sectors, colored {\color{ForestGreen}green}, {\color{purple}purple}, and {\color{orange}orange}. Assume each outcome -- {\color{ForestGreen}G}, {\color{purple}P}, and {\color{orange}O} -- is equally likely for both spinners.
+
+\begin{itemize}
+    \item[(a)] Fill in the sample space $S$:
+
+    {\Large
+    \begin{align*}
+    S = \bigg\{ &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \\
+    &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \\
+    &\big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big), \, \big( \rule[-4pt]{0.5in}{0.4pt}, \rule[-4pt]{0.5in}{0.4pt} \big) \bigg\}
+    \end{align*}
+    }
+
+    \item[(b)] Let $E$ be the event that both spinners land on the same color. What is $E$? What is $P(E)$?
+
+    {\Large
+    \[
+    E = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(E) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+
+    \item[(c)] Let $F$ be the event that the {\color{red}red} spinner lands on {\color{purple}purple}. What is $F$? What is $P(F)$?
+
+    {\Large
+    \[
+    F = \rule[-8pt]{4in}{0.4pt} \quad \& \quad P(F) = \rule[-8pt]{1in}{0.4pt}
+    \]
+    }
+
+    \item[(d)] Describe $E|F$ in the given context in words. What is $E|F$ as a set?
+
+    \vfill
+
+    {\Large
+    \[
+    E|F = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+
+    \item[(e)] Find $P(E|F)$, and decide whether $E$ and $F$ are independent events.
+    
+    \vfill
+    
+    {\Large \hfill $P(E|F)=\rule[-8pt]{1in}{0.4pt}$}
+\end{itemize}
+
+
+ % lesson can be extended to include 2 more extra practice problems!
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 3.}\lt{{\bf\color{Orange}P1}} An opaque bag contains 2 {\color{red}red} marbles, 1 {\color{ForestGreen}green} marble, and 3 {\color{blue}blue} marbles. Two marbles are drawn one at a time, and the color is recorded each time.
+
+    \begin{itemize}
+    \item[(a)] What is the sample space of this experiment?\\
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+        
+    \item[(b)] Some events are given below. Please respond to the prompts that follow them.
+
+        \begin{itemize}
+        \item $E_{1R}$ is the event that the first marble is {\color{red}red}.
+        \item $E_{2R}$ is the event that the second marble is {\color{red}red}.
+        \item $E_{1G}$ is the event that the first marble is {\color{ForestGreen}green}.
+        \item $E_{2G}$ is the event that the second marble is {\color{ForestGreen}green}.
+        \item $E_{1B}$ is the event that the first marble is {\color{blue}blue}.
+        \item $E_{2B}$ is the event that the second marble is {\color{blue}blue}.
+        \end{itemize}
+
+    Find $P(E_{2R}|E_{1R})$, $P(E_{2G}|E_{1G})$, $P(E_{2B}|E_{1B})$ if the marbles are drawn {\bf with replacement}.
+
+    \vfill
+
+    Find $P(E_{2R}|E_{1R})$, $P(E_{2G}|E_{1G})$, $P(E_{2B}|E_{1B})$ if the marbles are drawn {\bf without replacement}.
+
+    \vfill
+    
+    \end{itemize}
+
+%%%%%%%%%
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 4.} In an experiment, a coin is flipped continually until a heads appears, at which point the experiment concludes.
+    \begin{itemize}
+    \item[(a)] What is the sample space of this experiment? Use $H$ to represent heads and $T$ to represent tails.
+
+    {\Large
+    \[
+    S = \rule[-8pt]{4in}{0.4pt}
+    \]
+    }
+    
+    \item[(b)] Let $E_n$ denote the event that $n$ flips are necessary to complete the experiment. What points of the sample space are contained in $E_1$? in $E_2$? in $E_3$?\\
+
+    {\large
+        \,\hfill
+        $E_1=$\rule[-8pt]{1.5in}{0.4pt}
+        \hfill
+        $E_2=$\rule[-8pt]{1.5in}{0.4pt}
+        \hfill
+        $E_3=$\rule[-8pt]{1.5in}{0.4pt}
+        \hfill\,\\
+    }
+
+    \item[(c)] Find the following probabilities:\\
+
+    {\large
+        \,\hfill
+        $P(E_1)=$\rule[-8pt]{1in}{0.4pt}
+        \hfill
+        $P(E_2|\{T\})=$\rule[-8pt]{1in}{0.4pt}
+        \hfill
+        $P(E_3|\{TT\})=$\rule[-8pt]{1in}{0.4pt}
+        \hfill\,\\
+        }
+
+    \vfill
+
+    {\large
+        \,\hfill
+        $P(E_2|E_1)=$\rule[-8pt]{1in}{0.4pt}
+        \hfill
+        $P(E_3|E_2)=$\rule[-8pt]{1in}{0.4pt}
+        \hfill
+        $P(E_3|E_1)=$\rule[-8pt]{1in}{0.4pt}
+        \hfill\,\\
+        }
+
+    \vfill
+        
+    \end{itemize}
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Deleted Section on Conditioning and Independence %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+

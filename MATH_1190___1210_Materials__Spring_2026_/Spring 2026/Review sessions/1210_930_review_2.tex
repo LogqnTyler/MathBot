@@ -1,0 +1,205 @@
+\documentclass[11pt]{article}
+
+% parameters are fairly self-explanatory here, thankfully
+\usepackage[width=7in,height=9.5in,top=0.75in,centering]{geometry}
+
+% for math-ing
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%%%%%% tables %%%%%%%%
+
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{8pt}
+
+%%%%%% plotting %%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+            
+ \pgfplotsset{compat=1.14} % sometimes, everything falls apart without this
+ 
+ %\usepgfplotslibrary{fillbetween} %for shading between curves
+
+%%%%%% commands %%%%%%
+
+% exam heading; course name is first argument, exam information is second argument
+\newcommand{\Heading}[2]{
+    \fbox{
+        {\Large\textbf{#1}}
+        }
+    \hfill
+    \fbox{
+        \begin{minipage}{0.2\textwidth}
+            \begin{center}
+            \textbf{#2}
+            \end{center}
+        \end{minipage}
+    }
+    \par\vspace{0.1in}}
+
+% for being lazy while beautifying integrals
+\newcommand{\dint}{\displaystyle\int}
+
+% for being lazy while beautifying limits
+\newcommand{\dlim}{\displaystyle\lim}
+
+%%%%%% stuff %%%%%%
+
+\usepackage{fancyhdr}
+
+%\setcounter{page}{0} % first page is page 0
+
+\parindent0pt % no indent
+
+\fboxsep=0.25cm % little space in fbox border
+
+%%%%%% BEGIN! %%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+
+% record goals here to create sense of transparency
+
+\fancyhead[c]{%
+  \ifcase\value{page}
+  % {\bf\color{ProcessBlue} F1: Lines \& Slope}% page=1
+  % \or {\bf\color{RoyalBlue} L1: Limits and Continuity}% page = 2
+  % \or {\bf\color{RoyalBlue} L2: Evaluating Limits Using Continuity and Forms}% page = 3
+  % \or {\bf\color{ForestGreen} D1: Meaning of a Derivative}% page = 4
+  \or {\bf\color{ProcessBlue} F2: Exponential and Logarithmic Functions}% page = 5
+  \or {\bf\color{ForestGreen} D3: Derivatives of Basic Functions}
+  \quad\textbf{+}\quad
+  {\bf\color{ForestGreen} D2: Compute Derivatives}% page = 6
+  \or {\bf\color{ForestGreen} D3: Derivatives of Basic Functions}
+  \quad\textbf{+}\quad
+  {\bf\color{ForestGreen} D2: Compute Derivatives}% page = 6
+  \or {\bf\color{RedOrange} A1: Derivatives and Graphing}% page = 8
+  \or
+  \else
+  % Empty chead here!
+  \fi
+}
+
+% \thispagestyle{empty} % don't display that this is page 0
+
+\Heading{MATH 1210}{Review Session 2\\Spring 2026\\
+Section 930}
+
+\vspace{0.1in}
+
+\textbf{Name} \hrulefill
+% \newpage%
+%%%%%%%%%
+
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM F2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item[\textbf{F2.}]
+For this question, you are not required to compute any powers of constants or logarithms.
+For example, if your final answer includes $2^3$ or $\log_3(6)$, you can leave it as is.
+
+\begin{enumerate}
+\item
+Simplify the expression below as much as possible so that the final result contains \textbf{only positive exponents}.
+\begin{enumerate}
+\item
+$\left(\dfrac{\sqrt[3]{25} \ a^{-3/4} \ b^{-2/3}}{\sqrt{4} \ a^{-1/2} \ b^{2/3}}\right)^3$
+\vfill
+\item
+$\left(\dfrac{49 \ m^{-1/2} \ n^{-3/5}}{7^2 \ m^{-1/4} \ n^{-1/5}}\right)^{11}$
+\end{enumerate}
+\vfill
+
+\item Solve the following equation for $x$. 
+\begin{enumerate}
+\item
+$5^{2x} + 2\cdot 5^x - 3 = 0$
+\vfill
+\item
+$\log_{5}(x) - \log_{5}(x^3-7x^2) + \log_{5}(x - 7) = 3$
+\end{enumerate}
+~~\vfill
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM F2 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D2/D3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item[\textbf{D2/D3.}]
+Write down the derivatives of the following functions.
+No need to simplify.
+\begin{enumerate}
+
+\item $\displaystyle \frac{d}{dx}\left[ \frac{\ln(x)}{x^3} \right]$
+\vfill
+\item $\displaystyle \frac{d}{dx}\left[ \frac{x e^{x^2}}{x^2+1} \right]$
+\vfill
+\item $\displaystyle \frac{d}{dx}\left[ (x^3+1)e^{-2x}\right]$
+\vfill
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D2/D3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM D2/D3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item[\textbf{D2/D3.}]
+Write down the derivative of the following function.
+No need to simplify.
+\[\displaystyle \frac{d}{dx}\left[ \ln\left(\frac{(x^2+3)e^{x}}{x} \right)\right]\]
+\vfill
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM D2/D3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BEGIN PROBLEM A1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item[\textbf{A1.}]
+Consider the function $f(x)=\frac{x^2}{4} - 2x + \ln(x-1)+11$.
+On what interval(s) is $f(x)$ increasing/decreasing?
+On what interval(s) is $f(x)$ concave up/down?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% END PROBLEM A1 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{enumerate}
+
+\end{document}

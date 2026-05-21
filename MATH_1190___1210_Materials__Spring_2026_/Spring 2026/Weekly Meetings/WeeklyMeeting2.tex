@@ -1,0 +1,390 @@
+\documentclass{beamer}
+
+\title{MATH 1190 \& 1210 Meeting for Week 2}
+\author{Josh}
+\date{12 Jan 2024}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Logistics}
+
+\frame{
+\begin{center}\fbox{Logistics}\end{center}
+}
+
+\frame[t]{{Logistics}
+
+\begin{itemize}
+\item please update your office hours \& LA name on Canvas {\bf ASAP}
+    \begin{itemize}
+    \item 3 hours/week, at least 1 hour/week common hours in the MCLC
+    \item Gilmer 490 (Academic Commons) may be available
+    \item please minimize overlap with other instructors' office hours to maximize availability for students
+    \item update LA's name; if you're not sure what your LA's name is, then your homework is to learn your LA's name :)
+    \end{itemize}
+\end{itemize}
+}
+
+\frame[t]{
+
+\begin{itemize}
+\item deadlines
+    \begin{itemize}
+    \item if you ever find you are behind or ahead of schedule, then feel free to shift deadlines of pre-class assignments for your section(s) accordingly
+    \item select the assignment, click "Edit Assignment Settings", then click "Manage Due Dates and Assign To", then find your section and change the time as needed
+    \item pre-class assignments should always be due at the start of the class during which the corresponding activity is to be introduced
+    \end{itemize}
+%\item a P2L representative should visit your classrooms during week 2 to advertise P2L for a few minutes at the beginning of class
+
+\end{itemize}
+
+}
+
+
+%-----------------------------------------------
+
+%\section{Content}
+
+\frame[t]{{Content}
+
+%\begin{center}\fbox{Content}\end{center}
+You can expect at least 75\% of your 1210 students to have already taken some version of calculus. Frequently, students who haven't taken calculus before are more likely to feel they don't belong in our classrooms when instruction isn't sufficiently scaffolded. A variety of studies have consistently demonstrated links between sense of belonging and various important outcomes, particularly for students who identify as members of minoritized groups in mathematics. So, be mindful of how you scaffold your instruction.
+}
+
+\frame[t]{{Lesson 1 Overview: Rates of Change}
+
+\textbf{Intended Learning Targets}
+
+After this lesson, students will be able to:
+\begin{itemize}
+    \item Find and distinguish \textbf{net change} and \textbf{average rate of change}. (\target{F1})
+    \item Interpret average rate of change graphically as the \textbf{slope} of the corresponding linear function. (\target{F1})
+\end{itemize}
+
+\vspace{0.3cm}
+\hrulefill
+\vspace{0.3cm}
+}
+\frame[t]{
+\textbf{Student Learning Goals}
+
+Students will be able to:
+\begin{enumerate}
+    \item Compute net change, average rate of change, and slope of a linear function.
+    \item Explain relationships among net change, average rate of change, and slope.
+    \item Interpret these quantities in context.
+    \item Create linear functions from graphs and/or data.
+    \item Explain how instantaneous rate of change relates to average rate of change.
+    \item Estimate instantaneous rate of change from graphs, tables, and equations.
+\end{enumerate}
+}
+%-----------------------------------------------
+
+\frame[t]{{Instructor Notes: Lesson Flow and Emphases}
+
+\textbf{Student Feedback from Pre-Class Assignment}
+\begin{itemize}
+    \item Students appreciated real-world applications and the explanation of net change.
+    \item Many viewed the material as a helpful refresher.
+    \item Some struggled with interpreting mathematics in context.
+    \item A few asked for review of point-slope form.
+\end{itemize}
+
+\vspace{0.3cm}
+\hrulefill
+\vspace{0.3cm}
+}
+%-----------------------------------------------
+
+
+
+
+
+
+
+
+
+%\section{Pedagogy}
+
+\frame[t]{{Pedagogy}
+
+{\bf  ``Learning From Teaching: Exploring the Relationship Between Reform Curriculum and Equity", Jo Boaler}
+
+\
+
+\begin{itemize}
+    \item Our course emphasizes:
+    \begin{itemize}
+        \item Active learning
+        \item Student sense-making
+        \item Growth-based assessment
+    \end{itemize}
+    \item This paper asks a closely related question:
+\end{itemize}
+
+\begin{block}{Central Question from this paper:}
+When instruction is open-ended and discussion-based, \emph{what teaching practices make it equitable and effective?}
+\end{block}
+}
+%-----------------------------------------------
+\frame[t]{{The Phoenix Park Study (England)}
+\begin{itemize}
+    \item Secondary school serving primarily working-class students
+    \item Mixed-ability grouping
+    \item Open-ended, project-based mathematics
+    \item Emphasis on discussion, explanation, and multiple approaches
+\end{itemize}
+
+
+
+\begin{block}{Key Outcome}
+Students at Phoenix Park:
+\begin{itemize}
+    \item Achieved at high levels
+    \item Showed reduced class-based achievement gaps
+    \item Did not exhibit gender-based differences
+\end{itemize}
+\end{block}
+}
+%-----------------------------------------------
+\frame[t]{{What Is Open-Ended Mathematics?}
+\begin{block}{Working Definition}
+Open-ended mathematics refers to tasks where students must make
+\textbf{meaningful mathematical decisions} and justify their reasoning,
+rather than follow a single prescribed procedure.
+\end{block}
+
+
+
+\begin{itemize}
+    \item Multiple valid solution paths or representations
+    \item Emphasis on explanation, interpretation, and justification
+    \item Success is not defined solely by a final answer
+    \item Students decide how to begin, proceed, and communicate
+\end{itemize}
+
+
+
+\begin{block}{Key Idea}
+Open-ended tasks support active learning and growth-based assessment
+\emph{only when students are taught how to engage with them}.
+\end{block}
+}
+%-----------------------------------------------
+%-----------------------------------------------
+\frame[t]{{From Closed to Open-Ended: A Calculus I Example}
+
+\begin{block}{Closed Task}
+Compute the derivative:
+\[
+\frac{d}{dx}\left(x^2 \sin x\right)
+\]
+\end{block}
+
+
+
+\begin{itemize}
+    \item Expected method: product rule
+    \item Success = correct derivative
+\end{itemize}
+
+
+
+\begin{block}{Open-Ended Version}
+Consider the function
+\[
+f(x) = x^2 \sin x.
+\]
+\begin{itemize}
+    \item How could you find the rate of change of this function?
+    \item Why does your method make sense?
+    \item How would your reasoning change if the function were \(x \sin x\) or \(x^2 \cos x\)?
+\end{itemize}
+\end{block}
+
+
+
+\begin{block}{What Changes?}
+\begin{itemize}
+    \item Students must choose and justify a strategy
+    \item Multiple valid explanations are possible
+    \item Assessment can value reasoning and structure, not just accuracy
+\end{itemize}
+\end{block}
+}
+
+%-----------------------------------------------
+\frame{{A Critical Contrast}
+\begin{itemize}
+    \item Comparison school used:
+    \begin{itemize}
+        \item Procedural instruction
+        \item Ability grouping
+    \end{itemize}
+    \item Result:
+    \begin{itemize}
+        \item Increased polarization
+        \item Working-class students more likely to underachieve
+    \end{itemize}
+\end{itemize}
+
+
+
+\begin{block}{Key Insight}
+Open-ended instruction did \emph{not} produce inequity on its own.
+\end{block}
+}
+
+%-----------------------------------------------
+\frame{{An Unresolved Question}
+\begin{block}{If open-ended curricula can be equitable...}
+Why do some studies report that similar approaches disadvantage certain students?
+\end{block}
+
+
+
+\begin{itemize}
+    \item Boaler’s answer:
+    \item We must look at \textbf{how teaching is enacted}
+    \item Especially: how students are introduced to learning practices
+\end{itemize}
+}
+
+%-----------------------------------------------
+\frame[t]{{What We Will Read:}
+\textbf{Pages 247--249}
+
+\medskip
+\emph{``A Focus on Teaching and Learning Practices''}
+
+\medskip
+\begin{itemize}
+    \item Introducing Activities Through Discussion
+    \item Teaching students how to engage, not just what to do
+\end{itemize}
+}
+
+%-----------------------------------------------
+\frame[t]{{Why This Section?}
+\begin{itemize}
+    \item It describes \emph{specific teaching moves}
+    \item It challenges the idea that students should “figure out” expectations
+    \item It reframes active learning as something that must be taught
+\end{itemize}
+
+
+
+\begin{block}{Connection to Calculus}
+Our students often struggle not with content, but with:
+\begin{itemize}
+    \item Knowing how to start
+    \item Knowing what counts as a good explanation
+    \item Knowing how much struggle is productive
+\end{itemize}
+\end{block}
+}
+
+%-----------------------------------------------
+\frame[t]{{Discussion Prompt 1: Task Introduction}
+\begin{block}{From the Reading}
+Teachers at Phoenix Park never left students alone to interpret tasks.
+\end{block}
+
+
+
+\begin{itemize}
+    \item What does “introducing a task” look like in our calculus classes?
+    \item What assumptions do we make about students’ readiness?
+    \item Who benefits from those assumptions?
+\end{itemize}
+}
+
+%-----------------------------------------------
+\frame[t]{{Discussion Prompt 2: Active Learning}
+\begin{block}{Key Idea}
+Active learning is not just \emph{working in groups}.
+\end{block}
+
+
+
+\begin{itemize}
+    \item What learning practices must students already know to succeed?
+    \item Which of these do we explicitly teach?
+    \item Which do we implicitly assume?
+\end{itemize}
+}
+
+%-----------------------------------------------
+\frame[t]{{Discussion Prompt 3: Growth-Based Assessment}
+\begin{block}{Reflection}
+Phoenix Park teachers valued explanation, revision, and sense-making.
+\end{block}
+
+
+
+\begin{itemize}
+    \item What kinds of growth are visible in our assessments?
+    \item What kinds remain invisible?
+    \item How might assessment reinforce (or undermine) active learning norms?
+\end{itemize}
+}
+
+%-----------------------------------------------
+\frame[t]{{A Question to Sit With}
+\begin{block}{Boaler’s Implicit Challenge}
+If students struggle in active learning environments, is the problem the task...
+\end{block}
+
+
+\centering
+\textbf{...or the way we have taught them how to participate?}
+}
+
+%-----------------------------------------------
+\frame[t]{{Purpose of Today’s Discussion}
+\begin{itemize}
+    \item Not to adopt a single method
+    \item Not to lower standards
+    \item But to ask:
+\end{itemize}
+
+\begin{block}{Guiding Question}
+How do we make the norms of active learning and growth visible, teachable, and assessable in calculus?
+\end{block}
+}
+%-----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

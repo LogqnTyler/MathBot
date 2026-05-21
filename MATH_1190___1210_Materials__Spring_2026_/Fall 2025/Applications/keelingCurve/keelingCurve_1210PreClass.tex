@@ -1,0 +1,119 @@
+
+% XeLaTeX can use any Mac OS X font. See the setromanfont command below.
+% Input to XeLaTeX is full Unicode, so Unicode characters can be typed directly into the source.
+
+% The next lines tell TeXShop to typeset with xelatex, and to open and save the source with Unicode encoding.
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{article}
+
+
+%%%%%%%%%%%%%%%
+\def\Type{ApplicationPreDJ}
+\def\TypeNum{The Keeling Curve and Climate Change.}
+\def\TypeTitle{Modeling Atmospheric CO$_2$\\Pre-Class Work}
+\def\Semester{Fall 2024}
+\def\Course{MATH 1190/1210}
+\def\Targets{{\bf\color{ProcessBlue}F1}}
+\def\desmosClassCode{{\bf ZAJ$3$AZ}}
+
+\usepackage{preambleDJ}
+
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vspace*{.85in}
+
+
+{\bf Introduction}\\
+
+In our pre-class work, we introduced the Keeling Curve, which illustrates the dramatic rise in the concentration of carbon dioxide in the earth's atmosphere over the past half-century. We  attempted to model this curve with a linear function drawn through two points on the curve. In this application we use the method of linear regression to find the ``best fit'' line for the data, i.e., the linear function that (in a precisely defined way) that matches the data as well as possible. Additionally, we will explore other types ``best-fit" functions and use them to estimate how fast our climate is changing.
+
+\vspace{0.5cm}
+
+
+{\bf The Keeling Curve, Revisited}\\
+
+
+Recall the following figure.\footnote{Monthly average CO2 concentrations (ppm) derived from flask air samples,  Mauna Loa, Hawaii. Source: R. F. Keeling and S. J. Walker, Scripps CO2 Program ( http://scrippsco2.ucsd.edu,ripps Institution of Oceanography (SIO) } 
+\footnote{ C. D. Keeling, S. C. Piper, R. B. Bacastow, M. Wahlen, T. P. Whorf, M. Heimann, and   H. A. Meijer, Exchanges of atmospheric CO2 and 13CO2 with the terrestrial biosphere and   oceans from 1978 to 2000.  I. Global aspects, SIO Reference Series, No. 01-06, Scripps   Institution of Oceanography, San Diego, 88 pages, 2001. }\.\\
+\graphicsC{keelingCurve.pdf}{5}{{\bf Figure 1:} The Keeling Curve}
+
+
+
+\vspace{0.2cm}
+
+As in the pre-class work, we are only considering the baseline concentration of CO$_2$ in parts per million (ppm), which is represented by the thick curve in Figure 1.  Baseline atmospheric CO$_2$ levels at five-year intervals from 1965 through 2010 are
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+year & 1965 & 1970 & 1975 & 1980 & 1985 & 1990 & 1995 & 2000 & 2005 & 2010 \\
+\hline
+CO$_2$ level & 320 & 325 & 331 & 338 & 345 & 354 & 360 & 369 & 379 & 389 \\
+\hline
+\end{tabular}
+\end{center}
+
+This data can be found at \href{https://student.amplify.com/}{\underline{student.amplify.com}} or \href{https://student.desmos.com/}{\underline{student.desmos.com}} using code \desmosClassCode.  You will also likely want to use this Desmos/Ampify activity to help answer the following questions.  
+\newpage
+\enum{
+
+\item Use Desmos/Amplify to find the linear function of best fit to this data.     See steps $1$ through $3$ in {\em Creating Functions of Best Fit} at the end of this document for instructions on how to find this equation and $R^2$ value.
+%
+    \tasksA{2}{
+    \task What is the equation of the line of best fit? Express your answer in slope-intercept form and round coefficients to four decimal places.
+    \task What is the $R^2$ value rounded to $4$ decimal places? 
+    }
+%
+    \vs{2}
+%
+\item Why might someone want to use linear regression (i.e. line of best fit) to model the Keeling Curve? Why not just guess a line of best fit?  
+
+\vs{3}
+
+
+}
+
+\newpage
+\input{creatingFunctionsAndFunctionsOfBestFit}
+%      \begin{center}{\bf Creating Functions  and Functions of Best Fit}\end{center}
+%  \vs{.1}
+%  {\large \em Using Desmos/Amplify for this Application}
+%  \itemC{
+%  \item Go to \href{https://student.amplify.com/}{\underline{student.amplify.com}} or \href{https://student.desmos.com/}{\underline{student.desmos.com}}.  
+%  \item You will need to  use code \desmosClassCode.
+%  \item You might need to register for an Amplify  account (it's free).  If so, please use your UVA email as this helps us keep track of what work your group does.
+%  }~\\
+%  {\large \em Creating Functions of Best Fit in Desmos/Amplify} \hs{.1} Functions of best fit are sometimes referred to as trend lines, regression functions or least squares lines of best fit.  The following steps will explain how to use Desmos to create functions of best fit and to find the R$^2$-value for a given set of data.
+%\enum{
+%\item {\em (This step has already been done for you.)} Go to desmos.com/calculator and create a table of data. Cut-paste from a spreadsheet is probably the most straightforward way to generate this table.  Other options are here: \red{\underline{\url{https://help.desmos.com/hc/en-us/articles/4405489674381-Tables}}} \vs{-.15}
+%\item {\em (This step has already been done for you.)} Find the default header for a table generated by cut-paste. It likely will be $(x_1, y_1)$. Change it to whatever you like. For example, $(t_1,c_1)$.
+%\item In another cell, create the linear function of best fit using variables from the header. For example
+%$$c_1 \sim mt_1+b$$ will create a linear best-fit function. Values for $R^2$ and   parameters $m$ and $b$ will be generated.\\
+%}
+%{\bf The following steps are not needed for pre-class activity but will be used during class.}
+%\enum{ \setItemnumber{4}
+%\item A quadratic function of best fit can be created by $\ds c_1 \sim at_1^2+bt_1+c$.  Values for $R^2$ and parameters $a$, $b$, and $c$ will be generated.
+%\item An exponential function of best fit can be created by  $\ds c_1 \sim a e^{b\, t_1} +c$.  Values for $R^2$ and parameters $a$, $b$, and $c$ will be generated.
+%\item A logarithmic function of best fit can be created by $\ds c_1 \sim a \ln(b\, t_1 +c)$. Values for $R^2$ and parameters $a$, $b$, and $c$ will be generated.
+%}
+%
+%    {\large \em Creating and Graphing Functions in Desmos/Amplify}
+%   \itemI{
+%   \item  Create expression cell by clicking on {\Large$+$} in the upper left corner.  Choose ``{\em $f(x)$ expression}".
+%   \item Type the function definition in any empty cell in left column of Desmos. For example,\\ $f(t)=3t+6$. Graphs will automatically be created while defining the function. 
+%   \item Function names in Desmos will utilize a single letter for the dependent variable For example, $f(t)$, $g(t)$, $h(t)$ are all acceptable function names. $Lin(t)$ or $Exp(t)$ will not be accepted by Desmos. 
+%   \item Subscript notation {\em can} be used in naming conventions. For example $f_{linear}(t)$ and $f_{exponential}(t)$  name two different functions.
+%   \item To evaluate functions at a specific value, say $t=10$,  use an empty expression cell to type in $f(1)$. The result is automatically displayed.
+%   }
+%{\large \em Data sets used in Desmos} \hs{.1}  Feel free to use these data sets in whatever tool is helpful.
+%\itemC{
+%  \item 1965 to 2010 data: \\ \red{\underline{\url{https://docs.google.com/spreadsheets/d/1KvLYR1DRHiRrkb1dh-qrSMRwzKPKuH1SkMDghl2fTcc/}}}
+%  \vs{-.1}
+%  \item 1960 to 2025 data:\\ \red{\underline{ \url{https://docs.google.com/spreadsheets/d/1dtNawrPd3W744p229R7WS83KKHVkyEokcsyCeyPDF4w}}}
+%  }
+
+\end{document}  

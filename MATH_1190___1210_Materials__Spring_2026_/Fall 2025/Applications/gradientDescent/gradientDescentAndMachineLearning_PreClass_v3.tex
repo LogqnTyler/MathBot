@@ -1,0 +1,390 @@
+% XeLaTeX can use any Mac OS X font. See the setromanfont command below.
+% Input to XeLaTeX is full Unicode, so Unicode characters can be typed directly into the source.
+
+% The next lines tell TeXShop to typeset with xelatex, and to open and save the source with Unicode encoding.
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt]{article}
+
+
+%%%%%%%%%%%%%%%
+\def\Type{ApplicationPreDJ}
+\def\TypeNum{Pre-class for Application Day: Gradient Descent Method}
+\def\TypeTitle{}
+\def\Semester{Fall 2025}
+\def\Course{Math 1190/1210}
+\def\Targets{{\bf\color{Goldenrod}AD1}}
+
+\usepackage{preambleDJ}
+
+
+
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vspace*{.65in}
+
+%If Ada Lovelace\footnote{\url{https://en.wikipedia.org/wiki/Ada_Lovelace}} is the ``mother of programming" then 
+{\bf Introduction}\\
+Fei-Fei Li is  known as the ``godmother of A.I" for her  groundbreaking contributions in computer vision and deep learning and as the creator of ImageNet\footnote{
+See ``Godmother of A.I." Fei-Fei Li on technology development: ``The power lies within people" at \url{https://www.cbsnews.com/news/godmother-of-a-i-on-technology-development-fei-fei-li/}\\
+ or Britannica at \url{https://www.britannica.com/biography/Fei-Fei-Li}, The Guardian \href{https://www.theguardian.com/technology/2023/nov/05/ai-pioneer-fei-fei-li-im-more-concerned-about- the-risks-that-are-here-and-now}{\underline{here}} or \url{https://en.wikipedia.org/wiki/Fei-Fei_Li} }. 
+~\\\\
+\mpageT{.35}{.65}{
+%\graphicsR{adaLovelace2}{2}
+\graphicsL{feiFeiLiWiredCropped}{2}
+}
+{In this application, we will be exploring how the Gradient Descent method can be used for a supervised machine learning model that we have already seen in the Keeling Curve application.  But before we do that, we need to learn a bit about functions of two variables, partial derivatives and vectors. Here's an example.
+\enum{
+\item A car rental company charges a $\$20$ per day base rate, and a $10$ cents per mile milage charge. If we would like to rent a car from this company for a total of  days and we drive a total of  miles, then the total cost  
+ of the car rental is  $C(d,m)=20d+0.1m$. What is the total cost of the car rental if we rent the car for 2 days and drove a total distance of 100 miles? 
+ \enum{
+ \item We start by finding the values of  $d$ and $m$:
+ \al{
+ d&=\unline{.5}{\blue{2}}{.25}\\
+  m&=\unline{.5}{\blue{100}}{.25}
+ }
+ \item Use your values of $d$ and $m$ from part a), find $C(d,m)$: $$C(d,m)=\$\unline{.5}{\blue{50}}{.25}$$
+ }
+}
+}
+ ~\\What we saw in the previous slide was a function with {\bf two input variables} and {\bf one output variable}. In particular, the two independent variables (i.e. input variables) were $d$ and $m$ and the dependent variable (i.e. output variable) was $C$. Let's practice this concept a little more! If $$z=f(x,y)=4-yx^2-y^2$$ our two independent (i.e. input) variables are $x$ and $y$ and our one dependent (i.e. output) variable is $z$.  \\\\
+\example Given $\ds z=f(x,y)=4-yx^2-y^2$, if $(x,y)=(1,2)$, $$z=f(1,2)=4-2\cdot 1^2-2^2=-2$$ This allows us to express a point in $3$D as $(x,y,z)=(1,2,-2)$.
+\newpage
+ \enumR{\setItemnumber{2}
+ \item
+ Given $z=f(x,y)=4-yx^2-y^2$, find the following values for $z$ and the associated point.
+ \tasksA{3}{
+ \task  $\ds z=f(0,0)=\unline{.5}{\blue{4}}{.25}$\\
+ $$(x,y,z)=(\unline{.25}{\blue{0}}{.25},\unline{.25}{\blue{0}}{.25},\unline{.25}{\blue{4}}{.25})$$
+  \task  $\ds z=f(0,1)=\unline{.5}{\blue{3}}{.25}$\\
+   $$(x,y,z)=(\unline{.25}{\blue{0}}{.25},\unline{.25}{\blue{1}}{.25},\unline{.25}{\blue{3}}{.25})$$
+   \task  $\ds z=f(-2,2)=\unline{.5}{\blue{-8}}{.25}$\\
+    $$(x,y,z)=(\unline{.25}{\blue{-2}}{.25},\unline{.25}{\blue{2}}{.25},\unline{.25}{\blue{-8}}{.25})$$
+   }
+   }
+
+{\bf Graphing Points and Surfaces} \\
+\mpageT{.6}{.4}{
+Go to \url{https://www.desmos.com/3d/1bwyuvhfsp}  \\
+Click on the wrench icon and check ``Reverse contrast", ``Translucent surfaces" and move the bounding box perspective slider to the far right for better viewing.
+}{
+\graphicsR{contrastTranslucentPerspective.pdf}{2.5}
+}~\\\\
+\mpageT{.6}{.4}{
+The first things we see are the axes.
+\itemC{
+\item $x$ axis (positive direction is left)
+\item $y$-axis (positive direction is towards the viewer)
+\item $z$-axis (positive direction is up)
+}
+We also see the graph of our point $(1.2,-2)$ from Example 1.  The arrows show that we move $1$ unit to the left from the origin (along the $x$-axis), then $2$ units towards the viewer (parallel to the $y$-axis) and then $2$ units down (parallel to the $z$-axis and down because $z$-value is negative).
+}{
+\graphicsR{pointInDesmos}{2.5}
+}~\\
+\enumR{
+\item In Desmos, change the value of $x$ and $y$ to $x_{point}=0$, $y_{point}=-1$.  What does the value of the $z$-coordinate appear to be? Hint: you can confirm your intuition by evaluating Example 1 function $$z=f(x,y)=4-yx^2-y^2$$\\ %\q{Should we hide calculation of $z$ in Desmos} \\ 
+$z=\unline{.25}{\blue{3}}{.25}$ 
+}
+Note that the point that's being graphed is of the form $$(x,y,z)=(x,y,f(x,y))$$ An infinite collection of these points form a {\it surface}. In Desmos, let's get an idea of what the underlying surface looks like by adding many points at once. Click on the orange rectangle (front/left part of graph) to add around $100$ points. Continue adding points a few times until you have an idea of what the surface looks like.
+\enumR{
+\item  The surface appears to be: %\q{Should we ask this multiple choice question}
+\tasksA{3}{
+\task A sphere\\
+\graphicsL{sphere.png}{1.5}
+\task A flat plane\\
+\graphicsL{plane}{1.5}
+\task \blue{A saddle}\\
+\graphicsL{saddle.png}{1.5}
+\task A {\em paraboloid} (i.e. a bowl.)
+\graphicsL{parabaloid.png}{1.5}
+\task* I have no idea, because it's a big blob of points. ({\em If you are considering this choice, you can get a better idea of the surface by clicking on the grey rectangle to see the underlying surface.  Clicking on white circle removes all the points.})
+}
+
+
+\item Graph each of the following surfaces in Desmos.  Start by clearing everything from the screen by clicking on white circle on front part of the graph.  Go to the empty cell $\#4$ and type in each of the equations below.
+\enum{
+\item  $z=x^2+y^2$. This is a {\em paraboloid}
+\item $z=x+2y-1$ This is a {\em plane}
+\item $z=xy$ This is a {\em saddle}
+\item $x^2+y^2+z^2=1$ This is a {\em sphere} and is an example of an {\em implicit} surface.
+\item  $x^2+y^2-z^2=1$ This is another example of an  implicit surface called a {\em hyperboloid}. This structure has been used in architecture in many interesting ways\footnote{Antoni Gaudi employed hyperboloids and many other mathematical objects in the amazing La Sagrada Familia in Barcelona. \href{https://pin.it/4VXkBhzih}{Here} is one example.  
+ \href{https://time.com/sagrada-familia-barcelona/}{Here's a terrific overview} of the construction (still in process).   \href{https://upload.wikimedia.org/wikipedia/commons/d/dc/Ciechanow_water_tower.jpg}{Another example} can be seen in a hyperboloid water tower with a toroidal tank in Ciechan\'ow, Poland.} 
+ ~\\\\
+Which of the surfaces is most interesting to you and why? \q{Should we ask this. It would either be graded automatically by giving everyone credit or manually graded based on reasonable effort.}
+}
+
+}
+\newpage
+{\bf Derivatives of Functions of 2 Variables} \\
+\mpageT{.6}{.4}{
+Go to \url{https://www.desmos.com/3d/0c2zwfghdx} \hfill \\
+Click on the wrench icon and check ``Reverse contrast", ``Translucent surfaces" and move the bounding box perspective slider to the far right for better viewing.
+}{
+\graphicsR{contrastTranslucentPerspective.pdf}{2.5}
+}~\\\\
+ Since there are two inputs in a function of the form $z=f(x,y)$, there are {\em two} derivatives.  We will interpret each as we have interpreted derivatives previously: ``the derivative is the slope of a tangent line at the given point". Desmos will help us visualize and interpret each of these derivatives.\\\\
+ {\bf \em Interpreting Derivatives Graphically}\\
+ In Desmos, you will see the graph of the paraboloid $z=f(x,y)=4-yx^2-y^2$ with the point $P=(x,y,f(x,y))=(1,2,-2)$.  
+\enumR{
+\item Find the derivative of $f(x,y)$ with respect to $x$ at $(1,2)$.  
+\itemI{
+\item Click on the red rectangle to toggle on/off the graphics related to the derivative of $f$ with respect to  $x$.
+\item Since $(x,y)=(1,2)$ the vertical plane $y=2$ appears and intersects the  surface to create an upside down parabola parallel to the $x$-axis.  Rotate the object to better see this parabola via click/dragging the graph.
+\item You will also see a tangent line parallel to the $x$-axis through the point $P=(1,2,-2)$. {\em The slope of this tangent line is the derivative of $f$ with respect to $x$ at $(1,2)$.}
+\item {\em Notation}:  ``The derivative of $f$ with respect to $x$ at $(1,2)$" can be denoted two different (but equivalent) ways.
+\itemI{
+\item $\ds \frac{d}{dx} f(x,y)\Big|_{(1,2)}$
+\item $\ds f_x(1,2)$
+}
+\item Use Desmos to find $\ds  f_x(1,2)$. {\em Hint}: Look for $\ds f_x(x_{point},y_{point})$.\\
+ $\ds  f_x(1,2)=$\unline{.5}{\blue{$-4$}}
+}
+\item Find the derivative of $f(x,y)$ with respect to $y$ at $(1,2)$.  
+\itemI{
+\item Click on the blue rectangle to toggle on/off the graphics related to the derivative of $f$ with respect to  $y$.
+\item Since $(x,y)=(1,2)$ the vertical plane $x=1$ appears and intersects the  surface to create an upside down parabola parallel to the $y$-axis.  Rotate the object to better see this parabola via click/dragging the graph.
+\item You will also see a tangent line parallel to the $y$-axis through the point $P=(0,-1/2,3/4)$. {\em The slope of this tangent line is the derivative of $f$ with respect to $y$ at $(1,2)$}
+\item {\em Notation}:  ``The derivative of $f$ with respect to $y$ at $(1,2)$" can be denoted two different (but equivalent) ways.
+\itemI{
+\item $\ds \frac{d}{dy} f(x,y)\Big|_{(1,2)}$
+\item $\ds f_y(1,2)$
+}
+\item Use Desmos to find $\ds  f_y(1,2)$. {\em Hint}: Look for $\ds f_y(x_{point},y_{point})$.\\
+ $\ds  f_y(1,2)=$\unline{.5}{\blue{$-5$}}
+}
+
+\item Change $x_{point}$ and $y_{point}$ in Desmos to find  the following partial derivatives.
+\enum{
+\item \makebox[15em][l]{$f_x(-1,1)=$\unline{.5}{\blue{$2$}} }   $f_y(-1,1)=$\unline{.5}{\blue{$-3$}}
+\item  \makebox[15em][l]{$f_x(0,-2)=$\unline{.5}{\blue{$0$}} }  $f_y(0,-2)=$\unline{.5}{\blue{$-4$}}
+}
+
+\item Change $x_{point}$ and $y_{point}$ in Desmos so that {\em both} $\ds f_x(x_{point},y_{point})=0$ {\em and} $\ds f_y(x_{point},y_{point})=0$.  \\\\
+This occurs at $\ds (x_{point},y_{point})=(\unline{.5}{\blue{$0$}},\unline{.5}{\blue{$0$}})$.
+}~\\
+The locations where $f_x(x,y)=0$ and $f_y(x,y)=0$ at the same time are called {\em critical points}.  They indicate the possibility of  a special property at that location. In our example, we're at a {\em saddle point}. In other instances, we might be at a {\em local maximum (i.e. a peak)} or a {\em local minimum (i.e. a valley)}
+~\\\\
+{\bf \em Interpreting Derivatives Symbolically}\\
+Our visual interpretation of derivatives suggests an algorithm to find function equations of derivatives.     When we find symbolic derivatives with respect to $x$, we're going to do the same-- assume $y$ is some constant-- and then use our derivative shortcuts to find $f_x(x,y)$.\\\\
+\example Given $f(x,y)=4-yx^2-y^2$, find $\ds f_x(1,2)$ symbolically.  
+\itemI{
+\item When we found $f_x(1,2)$ graphically in Desmos, we set $y=2$ to create a plane that sliced through our surface. This allowed us to visualize a curve and tangent line.
+\item To find $\ds f_x(1,2)$ symbolically, we again assume $y$ is some constant (it might be $y=2$ or any other constant).
+\item Since $f(x,y)=4-yx^2-y^2$,
+\al{
+f_x(x,y)&=\frac{d}{dx}4-\frac{d}{dx}yx^2-\frac{d}{dx}y^2\\
+f_x(x,y)&=\frac{d}{dx}4-y\frac{d}{dx}x^2-\frac{d}{dx}y^2 \qquad\text{\em \footnotesize  (Since $y$ is a constant, we can bring it out front of $\ds \frac{d}{dx}x^2$ }\\
+f_x(x,y)&=0-y\cdot 2x-0\qquad\text{\em \footnotesize  (Since $y$ is a constant, $(y-1)^2$ is constant and thus $\ds \frac{d}{dx}(y-1)^2=0$)}\\
+f_x(x,y)&=-2xy
+\intertext{We now have a symbolic equation for $f_x$ that we can evaluate at any point $(x,y)$. We use the point we've been dealing with: $(x,y)=(1,2)$.}
+f_x(1,2)&=-2\cdot 1 \cdot 2\\
+&=-4
+}
+}
+
+
+\example Given $f(x,y)=4-yx^2-y^2$, find $\ds f_y(1,2)$ symbolically. 
+\itemI{
+\item When we found $f_x(1,2)$ graphically in Desmos, we set $x=1$ to create a plane that sliced through our surface. This allowed us to visualize a second curve and tangent line.
+\item To find $\ds f_y(1,2)$ symbolically, we again assume $x$ is some constant (it might be $x=1$ or any other constant).
+\item Since $f(x,y)=4-yx^2-y^2$,
+\al{
+f_y(x,y)&=\frac{d}{dy}4-\frac{d}{dy}yx^2-\frac{d}{dy}y^2\\
+f_y(x,y)&=\frac{d}{dy}4-x^2\frac{d}{dy}y-\frac{d}{dy}y^2\qquad\text{\em \footnotesize  (Since $x$ is a constant, $x^2$ is constant and we can move it in front of $\ds \frac{d}{dy} y$. }\\
+&=0-x^2\cdot 1-2y \\
+&=-x^2-2y\\
+f_y(1,2)&=-(1)^2-2(2)\\
+&=-5
+}
+}
+
+{\bf \em Summary: Finding Derivatives Symbolically}
+\itemI{
+\item To find the derivative of $f$ with respect to $x$, $f_x(x,y)$, assume $y$ is constant and find the derivative with respect to $x$ using our usual derivative shortcuts.
+\item To find the derivative of $f$ with respect to $y$, $f_y(x,y)$, assume $x$ is constant and find the derivative with respect to $y$ using our usual derivative shortcuts.
+}
+~\\
+{\bf \em Let's Practice!}
+\enumR{
+\item Given $f(x,y)=3(x-1)^2+4e^y$, find $f_x(x,y)$ and $f_y(x,y)$. Note that your answers might contain both  $x$ and $y$.
+\enum{
+\item  $f_x(x,y)=$\unline{.75}{\blue{$6(x-1)$}}
+\sol{
+\al{
+f_x(x,y)&=\frac{d}{dx}3(x-1)^2-\frac{d}{dx}4e^y\\
+f_x(x,y)&=3\frac{d}{dx}(x-1)^2-\frac{d}{dx}4e^y\\
+f_x(x,y)&=3\cdot 2(x-1)^1-0 \qquad\text{\em \footnotesize Since $y$ is constant, so is $e^y$ as is $4e^y$. Thus $\ds \frac{d}{dx}4e^y=0$}\\
+f_x(x,y)&=6(x-1)\\
+}
+}\vs{-.5}
+\item  $f_y(x,y)=$\unline{.75}{\blue{$-4e^y$}}
+\sol{\al{
+f_y(x,y)&=\frac{d}{dy}3(x-1)^2-\frac{d}{dy}4e^y\\
+f_y(x,y)&=\frac{d}{dy}(x-1)^2-4\frac{d}{dy}e^y\\
+f_y(x,y)&=0-4e^y \qquad\text{\em \footnotesize Since $x$ is constant, so is $3(x-1)^2$. Thus $\ds \frac{d}{dy}3(x-1)^2=0$}\\
+f_x(x,y)&=-4e^y\\
+}
+}
+}
+
+
+\item Given $g(x,y)=x^3-xy^2$ find $g_x(x,y)$ and $g_y(x,y)$. Note that your answers will contain both $x$ and $y$.
+\enum{
+\item $g_x(x,y)=$\unline{.75}{\blue{$3x^2-y^2$}}
+\sol{
+\al{
+g_x(x,y)&=\frac{d}{dx}x^3-\frac{d}{dx}xy^2\\
+g_x(x,y)&=\frac{d}{dx}x^3-y^2\frac{d}{dx}xy^2\qquad\text{\em \footnotesize Since $y$ is constant, so is $y^2$ and $\ds \frac{d}{dx}xy^2=y^2\frac{d}{dx}x$}\\
+g_x(x,y)&=3x^2-y^2\cdot 1\\
+g_x(x,y)&= 3x^2-y^2
+}
+}
+
+\item $g_y(x,y)=$\unline{.75}{\blue{$-2xy$}}
+\sol{
+\al{
+g_y(x,y)&=\frac{d}{dy}x^3-\frac{d}{dy}xy^2\\
+g_y(x,y)&=\frac{d}{dy}x^3-x\frac{d}{dx}y^2\qquad\text{\em \footnotesize Since $x$ is constant, $\ds \frac{d}{dy}xy^2=x\frac{d}{dx}y^2$}\\
+g_y(x,y)&=0-x\cdot2y\qquad\text{\em \footnotesize Since $x$ is constant, $x^2$ is as well and $\ds \frac{d}{dy}x^2=0$}\\
+g_x(x,y)&= -2xy
+}
+}
+}
+%~\\\\
+% \q{Should we ask this question} Given $h(x,y)=e^{-(x^2-xy+y^2)}$,  find $h_x(x,y)$ and $h_y(x,y)$. Note that your answers will contain both $x$ and $y$.
+%{\em Hint:} Don't forget to use the Chain Rule! 
+%\enum{
+%\item $h_x(x,y)=$\unline{.75}{\blue{$-(2x-y)e^{-(x^2-xy+y^2)}$}}
+%\item $h_y(x,y)=$\unline{.75}{\blue{$-(-x+2y)e^{-(x^2-xy+y^2)}$}}
+%}
+}
+
+
+
+\newpage
+{\bf Vectors and the Gradient} \\
+It is common to group our two derivatives ($f_x$ and $f_y$) together to create a {\em vector} that we call the {\em gradient}. In particular the notation we use is $\nabla f(x,y)=<f_x(x,y),f_y(x,y)>$  In our previous example we saw that at the point $(1,2)$, $$\nabla f(1,2)=<f_x(1,2),f_y(1,2)>=<-4,-5>.$$ We will explore what a general vector is and then come back to considering  special properties of a gradient vector.\\
+
+{\bf \em Vector Properties} Our vectors will have two components and be in the form $<x,y>$ where  the $x$ component  describes the change in the $x$-direction and $y$ component describes the change in the $y$direction.  We graph vectors as an arrow. Each vector has two properties: {\em length} and {\em direction}.  \\
+\mpageT{.65}{.35}{
+{\em Direction of a vector}
+\itemI{
+\item To determine direction, we graph $<-4,-5>$ by starting at a base point $(0,0)$ in Figure 1) and  move $2$ units to the left and $3$ units down. The end point of the vector is at the point $(-4,-5)$.  See Figure 1.\\\\
+Note that location is {\em not} a vector property. This means that a vector can have any base point. If two vectors have identical direction and length, then they are considered the same vector. \\\\
+%
+Figure 2 shows the  vector $<3,4>$ in two different locations. In the first quadrant $<5,4>$  has a base point of $(0,0)$ and an endpoint of $(3,4)$\\\\
+\example The vector $<3,4>$ in the third quadrant has a base point of $(-4,-5)$.  We add the vector components to the base point components to find the end point.  
+get $$(x?,y?)=(-4+3,-5+4)=(-1,-1)$$ 
+} 
+}{
+\graphicsR{vector1}{2}{\bf Figure 1}
+\graphicsR{vector2}{2}{\bf Figure 2}
+}
+\enumR{
+\item Given the vector $<-2,1>$ and base point $(3,-5)$ what is the end point of this vector? \\
+Endpoint: $(x,y)=$\unline{.5}{\blue{$(1,-4)$}}
+\sol{
+$(x,y)=(3+-2,-5+1)=(1,-4)$
+}
+\item Find the vector  that connects the base point $(2,0)$ to endpoint point $(4,-3)$\\
+$<x,y>=$\unline{.5}{\blue{$<2,-3>$}}
+\sol{\blue{$<x,y>=<4-2,-3-0>=<2,-3>$}
+}
+}
+\mpageT{.65}{.35}{
+{\em Length of a vector}
+\itemI{
+\item To determine length, we can interpret the vector as the hypotenuse of a triangle with one side length $|-4|=4$ and the other side a length of $|-5|=5$. We use Pythagorean's theorem (Figure 3) to get 
+$$\text{Length}= |<-4,-5>|= \sqrt{(-4)^2+(-5)^2}=\sqrt{41}\approx6.40$$
+Note that the notation $ |<-4,-5>|$ means {\em ``find the length of $<-4,-5>$"}\\\\
+}
+}{
+\graphicsR{triangle}{2}{\bf Figure 3}
+}~\\
+\example
+Find  $|<3,4>|$.  Recall that Figure 2 show the graph of this vector in two locations.  $$|<3,4>|=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}=5$$.
+\enumR{
+\item Find the length of vector $<5,12>$.\\\\
+$|<5,12>|=$\unline{.5}{\blue{$13$}}
+\sol{
+$$|<5,12>|=\sqrt{5^2+12^2}=\sqrt{25+144}=\sqrt{169}=13$$
+}
+%\q{Do we need more questions about magnitude/length}
+}
+
+{\bf \em Gradient Vectors}\\
+Let's put together everything we've seen so far! The problem we're about to solve is this.
+\enumR{
+\item Given the surface $\ds z=f(x,y)=\frac{1}{2}\left( x^3 +x^2y+xy^2-9x\right)$, find $\ds |\nabla f(-1,3/2)|$.
+\enum{
+\item $\nabla f(-1,3/2)$ is the vector $<f_x(x,y),f_y(x,y)>$ evaluated at $(x,y)=(-1,3.2)$. Find $f_x(x,y)$ and $f_y(x,y)$. Your answer will contain both $x$ and $y$.
+\itemI{
+\item $f_x(x,y)=$\unline{1.5}{\blue{$\ds \frac{1}{2}\left( 3x^2+2xy +y^2-9 \right)$}}
+\sol{
+\al{
+f_x(x,y)&=\frac{1}{2}\left( \frac{d}{dx}\left[x^3\right]+\frac{d}{dx}\left[ x^2y \right]+\frac{d}{dx}\left[xy^2\right]-\frac{d}{dx}\left[9x\right] \right)\\
+&=\frac{1}{2}\left( \frac{d}{dx}\left[x^3\right]+y\frac{d}{dx}\left[ x^2 \right]+y^2\frac{d}{dx}\left[x\right]-\frac{d}{dx}\left[9x\right] \right)\qquad\text{\em \footnotesize We have moved constants   $y$ and $y^2$}\\
+&=\frac{1}{2}\left( 3x^2+y\cdot 2x +y^2\cdot 1-9 \right)\\
+&=\frac{1}{2}\left( 3x^2+2xy +y^2-9 \right)\\
+}
+}
+\item $f_y(x,y)=$\unline{.75}{\blue{$\ds \frac{1}{2}\left( x^2+2xy\right)$}}
+\sol{
+\al{
+f_y(x,y)&=\frac{1}{2}\left( \frac{d}{dy}\left[x^3\right]+\frac{d}{dy}\left[ x^2y \right]+\frac{d}{dy}\left[xy^2\right]-\frac{d}{dy}\left[9x\right] \right)\\
+f_y(x,y)&=\frac{1}{2}\left( \frac{d}{dy}\left[x^3\right]+x^2\frac{d}{dy}\left[ y \right]+x\frac{d}{dy}\left[y^2\right]-\frac{d}{dy}\left[9x\right] \right)\qquad\text{\em \footnotesize We have moved constants   $x$ and $x^2$}\\
+f_y(x,y)&=\frac{1}{2}\left( 0+x^2 \cdot 1+x \cdot 2y-0 \right)\qquad\text{\em \footnotesize  $x^3$ is constant so $\ds \frac{d}{dy}[x^3]=0$. $9x$ is constant so $\ds \frac{d}{dy}[9x]=0$  }\\
+f_y(x,y)&=\frac{1}{2}\left( x^2+2xy\right)
+}
+}
+}
+\item Evaluate your answers from (a)  at the point $(x,y)=(-1,3/2)$ to find the vector\\
+ $\ds \nabla f(-1,3/2)=<f_x(-1,3/2),f_y(-1,3/2)>$\\
+ \enum{
+ \item $f_x(-1,3/2)=$\unline{1}{\blue{$-\dfrac{27}{8}=-3.375$}}
+ \sol{
+ \al{
+ f_x(x,y)&=\frac{1}{2}\left( 3x^2+2xy +y^2-9 \right)\\
+ \intertext{Therefore}
+  f_x(-1,3/2)&=\frac{1}{2}\left( 3(-1)^2+2\cdot(-1)\cdot (3/2) +(3/2)^2-9 \right)\\
+  f_x(-1,3/2)&=\frac{1}{2}\left( 3-3 +\frac{9}{4}-9 \right)\\
+f_x(-1,3/2)&=\frac{1}{2}\left( -\frac{27}{4} \right)\\
+f_x(-1,3/2)&=-\frac{27}{8}=-3.375
+ }
+ }
+  \item $f_y(-1,3/2)=$\unline{1}{\blue{$ \frac{1}{2}\left( x^2+2xy\right)$}}
+  \sol{
+  \al{
+  f_y(-1,3/2)&= \frac{1}{2}\left( x^2+2xy\right)
+   \intertext{Therefore}
+  f_y(-1,3/2)&=\frac{1}{2}\left( (-1)^2+2(-1)(3/2)\right)\\
+  f_y(-1,3/2)&=\frac{1}{2}\left( 1-3)\right)\\ 
+  f_y(-1,3/2)&=\frac{1}{2}(-2)\\
+  f_y(-1,3/2)&=-1
+  }
+  }
+ }
+ $\ds \nabla f(-1,3/2)=<\unline{.5}{\blue{$-\dfrac{27}{8}$}}{.3},\unline{.5}{\blue{$-1$}}{.3}>$
+ \item Find $\left| \nabla f(-1,3/2) \right|$ Round to 2 decimal places.\\\\
+ $\left| \nabla f(-1,3/2) \right|$=\unline{1}{\blue{$\ds \sqrt{\frac{794}{64}}\approx 3.52$}}{.35}
+ \sol{
+ \al{
+ \left| \nabla f(-1,3/2) \right|&=\left|<-\frac{27}{8},-1>\right|\\
+ &=\sqrt{\left(-\frac{27}{8} \right)^2+(-1)^2}\\
+ &=\sqrt{\frac{729}{64}+1}\\
+ &=\sqrt{\frac{729}{64}+\frac{64}{64}}\\
+ &=\sqrt{\frac{794}{64}}\approx 3.52
+ }
+ }
+}
+}
+
+{\bf During Class}\\
+During class we will see how Gradient Vectors are used in a machine learning context.  We're going to see that gradient vectors act like compass and point in the direction where a surface is increasing the fastest. \\
+
+More specifically, in the Keeling Curve application we created lines of best fit of the form $$c_1\sim mt_1+b$$ where Desmos provided values for $m$ and $b$. We're going to examine a machine learning algorithm to estimate these parameters using Gradient Vectors.   
+\end{document}  

@@ -1,0 +1,502 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonDJ}
+\def\TypeNum{Workshop Week 13} %Lesson #
+\def\TypeTitle{Random Variables, PDFs, CDFs, Expected Value and Variance } %Lesson Title
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190}%Course number and name
+\def\Targets{   \target{P1}, \target{P2} }
+
+\usepackage{preambleDJ} 
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+
+
+\vs{.6}
+\section{Discrete vs Continuous}
+Determine whether each random variable is discrete or continuous. Briefly explain your reasoning.
+
+\enumA{
+        \item The exact amount of rainfall (in inches) recorded at a weather station during a 24-hour period.
+        \sol{
+        Continuous because the amount of rainfall could be any value within an interval of, say, $[0,36]$ inches.  
+        }
+        \item The number of customers who enter a store between 10:00 AM and 11:00 AM.
+        \sol{
+        Discrete because the number of customers will be an integer. We can't have $0.5$ of a person!
+        }
+        \item The weight (in grams) of a randomly selected apple from a large orchard.
+        \sol{
+        Continuous because the weight will fall in an interval of some kind like $[0,500]$ grams.
+        }
+        \item The number of heads obtained when a fair coin is flipped 10 times.
+        \sol{
+        Discrete because the number will be one of the following integers: $\{0,1,2,3,4,5,6,7,8,9,10\}$
+        }
+        \item The exact height (in centimeters) of a randomly selected student in the class.
+        \sol{
+        Continuous because the height will in an interval of, say, $[0,215]$ centimeters
+        }
+}
+
+
+\newpage
+\section{Probability Density and Cumulative Distribution Function}
+Let \( T \) be a continuous random variable with the probability density function
+    \[
+    p(t) = 
+    \begin{cases} 
+    c\cdot t^6 & -1 \leq t \leq 1, \\
+    0 & \text{otherwise}.
+    \end{cases}
+    \]
+    \enumA{
+        \item Determine the value of the constant \( c \) that makes \( p(t) \) a valid PDF.
+        
+       \begin{solution}
+ We use the property of a continuous random variable with support $[a,b]$ that $\ds \int_a^bp(t)\;dt=1$. For this example the support is $[-1,1]$.
+        
+\begin{align*}
+        \int_{-1}^1c\cdot t^6\;dt&=1\\
+                c\int_{-1}^1 t^6\;dt&=1\\
+        c\cdot \frac{t^7}{6}\Bigg|_{-1}^1&=1\\
+        c\left(\frac{1^7}{7}-\frac{(-1)^7}{7} \right)&=1\\
+        c\left(\frac{1}{7}-\frac{-1}{7} \right)&=1\\
+        \frac{2}{7}c&=1\\
+        c=\frac{7}{2}
+\end{align*}
+        
+\end{solution}        
+        \item Find the CDF (cumulative distribution function) \( F(t) \).
+
+\begin{solution}
+        The ``probability so far" function is 
+\begin{align*}
+        F(t)=P(T\leq t)&=\int_{-1}^t p(w)\;dw  \intertext{Note that since we're using $t$ as an upper bound we need to use another variable inside the integral. I chose $w$ but any variable besides $t$ can be used.}
+        &=\int_{-1}^t \frac{7}{2}w^6\;dw\\
+        &=\frac{7}{2}\cdot \frac{w^7}{7}\Bigg|_{-1}^t\\
+        &=\frac{1}{2}\cdot w^7\Bigg|_{-1}^t\\
+        &=\frac{1}{2}\left(t^7-(-1)^7 \right)\\
+        F(t)&=\frac{1}{2}\left(t^7+1 \right) 
+\end{align*}
+        
+\end{solution}
+        
+
+        \item Use $F(t)$ to compute the probability that \( T \) is greater than 0.6, i.e. $P(T>0.6)$. You will want to use technology to calculate the final step.
+\begin{solution}
+\begin{align*}
+        P(T> 0.6)&=1-P(T\leq0.6)\\
+        &=1-F(0.6)\\
+        &=1-\frac{1}{2}\left((0.6)^7+1\right)\\
+        &=0.4860032 \qquad\text{(via a calculator)}
+\end{align*}
+\end{solution}
+        
+        
+        \item Find the  \( m \) such that \( P(T \leq m) = 0.5 \). The value  $m$ is called the {\em median}.
+\begin{solution}
+We want $m$ where
+\begin{align*}
+P(T \leq m) &= 0.5\\
+F(m)&=0.5\\
+\frac{1}{2}(m^7+1)&=0.5\\
+m^7+1&=1\\
+m^7&=0\\
+m&=\sqrt[7]{0}\\
+m&=0
+\end{align*}
+\end{solution}
+}
+\newpage
+
+\section{Expected Value and Variance (Discrete)}
+Recall that in the discrete case the expected value (or mean) and the variance are defined as
+\[
+\mu=E[X]=\sum_{i=1}^nx_i \cdot p(x_i)
+\]
+\[
+Var(X)= \sum_{i=1}^n (x_i-\mu)^2\cdot p(x_i)=  \left( \sum_{i=1}^n x_i^2\cdot p(x_i)  \right) -\mu^2
+\]
+The histogram below represents the PDF of a random variable $X$. \\
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar, % Specifies vertical bars
+        bar shift=0,
+        ymin=0, % Ensures bars start from zero
+        xtick={1,2,3,4,5}, % Places x-axis ticks at data points
+	%xticklabels={,,,,,,}, % Custom x-axis labels
+	xticklabels={$1$,$2$,$3$,$4$,$5$},
+	ytick       = {0.1,0.2,0.3,0.4,0.5},
+            %yticklabels =  {$1/16$,$2/16$,$3/16$, $4/16$},
+        enlarge x limits={0.2}, % Adjusts spacing between bars and axis limits
+            y label style={anchor=south west},
+            ylabel={$p(x)$},
+                        xlabel = {$x$},
+		x label style={anchor=west},
+		 ymin = 0, ymax = .55,
+        bar width=30pt, % Adjusts the width of the bars
+                    width = 3in, height=2.5in,
+          %          enlarge x limits={1.2},
+      	axis line style={thick, ->},
+    ]
+% \addplot[fill=blue!40] coordinates {(1,0)  (2,0)  (3,0) (4,0) (5,0)};
+  \addplot[fill=blue!40] coordinates {(1,0.3)  (2,0.2)  (3,0.1) (4,0) (5,0.4)};
+    \end{axis}
+\end{tikzpicture}
+
+\enumA{
+    \item Compute the expected value of $X$, $E(X)$.
+    \begin{solution}
+\begin{align*}
+\mu=E(X)&=\sum_{k=1}^5k\cdot P(X=k)\\
+&=1(0.3)+2(0.2)+3(0.1)+4(0)+5(0.4)\\
+&=0.3+0.4+0.3+0+2.0\\
+&=3.0
+\end{align*}
+\end{solution}
+    \item Compute the variance of $X$, $Var(X)$.
+    \begin{solution}
+We have two equivalent approaches to calculate variance. 
+$$Var(X)=\sum_{k=1}^5 (k-\mu)^2P(X=k)=\left(\sum_{k=1}^5 k^2\cdot P(X=k) \right)-\mu^2$$
+I will use the second since the algebra is typically a bit easier to deal with.
+\begin{align*}
+Var(X)&=\left( \sum_{k=1}^5 k^2\cdot P(X=k) \right)-\mu^2\\
+&=\left(1^2(0.3)+2^2(0.2)+3^2(0.1)+4^2(0)+5^2(0.4)\right)-3^2\\
+&=\left(0.3+0.8+0.9+10\right)-9\\
+&=3.0
+\end{align*}
+\end{solution}
+    \item Sketch a histogram that would have the same mean as $x$ but would have a {\em higher} variance. Remember that the total probability must always be $1$.
+    \begin{solution}
+We want outcomes scattered further from the mean $\mu=0.5$ There are many reasonable examples. One example bollows
+\end{solution}
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar, % Specifies vertical bars
+        bar shift=0,
+        ymin=0, % Ensures bars start from zero
+        xtick={1,2,3,4,5}, % Places x-axis ticks at data points
+	%xticklabels={,,,,,,}, % Custom x-axis labels
+	xticklabels={$1$,$2$,$3$,$4$,$5$},
+	ytick       = {0.1,0.2,0.3,0.4,0.5},
+            %yticklabels =  {$1/16$,$2/16$,$3/16$, $4/16$},
+        enlarge x limits={0.2}, % Adjusts spacing between bars and axis limits
+            y label style={anchor=south west},
+            ylabel={$p(x)$},
+                        xlabel = {$x$},
+		x label style={anchor=west},
+		 ymin = 0, ymax = .55,
+        bar width=30pt, % Adjusts the width of the bars
+                    width = 3in, height=2.5in,
+          %          enlarge x limits={1.2},
+      	axis line style={thick, ->},
+    ]
+% \addplot[fill=blue!40] coordinates {(1,0)  (2,0)  (3,0) (4,0) (5,0)};
+  \addplot[fill=blue!40] coordinates {(1,0.5)  (2,0)  (3,0) (4,0) (5,0.5)};
+  \draw[red, dashed] (3,-.1)--(3,.5);
+\node[red] at (3,.52) {$\mu=2.5$};
+    \end{axis}
+\end{tikzpicture}
+
+
+}
+
+
+
+\newpage
+\section{Expected Value and Variance (Continuous)}
+Recall that in the continuous case the expected value (or mean) and the variance are defined as
+\[
+\mu=E[X]=\int_a^b x \cdot p(x) dx
+\]
+\[
+Var(X)=\int_a^b(x-\mu)^2 \cdot p(x) dx=\left( \int_a^b x^2 \cdot p(x) dx \right) -\mu^2
+\]
+\mpageT{.5}{.5}{
+Let $X$ be a continuous random variable with probability density function $p(x)$.
+$$
+  p(x)=\begin{cases} 
+    c (1-x^2) & -1 \leq x \leq 1, \\
+    0 & \text{otherwise}.
+    \end{cases}
+$$
+}{\centering
+\begin{tikzpicture}
+\begin{axis}[
+	x label style={anchor=west},
+xlabel={$x$},
+xtick       = {-1,1},
+xticklabels = {$-1$,$1$},
+xticklabel style={anchor=north},
+y label style={anchor=west},
+ylabel={$p(x)$},
+ytick=\empty,
+%ytick       = {1/30},
+yticklabels = {},
+samples     = 320,
+xmin =-1.5, xmax = 1.5,
+ymin = -.25, ymax = 1.,
+axis line style = {  thick, -},
+every major tick/.append style={  thick, black, major tick length=5pt},
+width=2.5in
+]
+\addplot[ultra thick, blue, domain=-1:1] {3/4*(1-x^2)};
+\addplot[ultra thick, blue, domain=-1.5:-1] {0};
+\addplot[ultra thick, blue, domain=1:1.5] {0};
+\end{axis}
+\end{tikzpicture}
+%
+%
+%
+}
+\enumA{
+    \item Find the value of $c$ that will ensure that this is a probability density function.
+    \begin{solution}
+We use second property of continuous random variables with support $[a,b]$:
+$$\int_a^bp(x)\;dx=1$$
+The support in this example is $[-1,1]$. Thus we want
+\begin{align*}
+\int_{-1}^1c(1-x^2)\;dx&=1\\
+c\int_{-1}^1(1-x^2)\;dx&=1\\
+c\left( x-\frac{x^3}{3}\right)\Bigg|_{-1}^1&=1\\
+c\left[ \left(1-\frac{1^3}{3}\right)- \left(-1-\frac{(-1)^3}{3}\right) \right] &=1\\
+c\left[ \left(1-\frac{1}{3}\right)- \left(-1-\frac{-1}{3}\right) \right] &=1\\
+c\left[ \frac{2}{3} -\frac{-2}{3} \right] &=1\\
+c\cdot \frac{4}{3} &=1\\
+c&=\frac{3}{4}
+\end{align*}
+Thus $$
+  p(x)=\begin{cases} 
+    \frac{3}{4}(1-x^2) & -1 \leq x \leq 1, \\
+    0 & \text{otherwise}.
+    \end{cases}
+$$
+\end{solution}
+    \item Compute the expected value $E[X]$;
+    \begin{solution}
+\begin{align*}
+\mu=E(X)&=\int_{-1}^1x\cdot p(x)\;dx\\
+&=\int_{-1}^1x\cdot \frac{3}{4}(1-x^2)\;dx\\
+&=\frac{3}{4}\int_{-1}^1 x-x^3\;dx\\
+&=\frac{3}{4}\left( \frac{x^2}{2}-\frac{x^4}{4}\right)\Bigg|_{-1}^1\\
+&=\frac{3}{4}\left[\left( \frac{1^2}{2}-\frac{1^4}{4}\right)-\left( \frac{(-1)^2}{2}-\frac{(-1)^4}{4}\right)  \right]\\
+&=\frac{3}{4}\left[\left( \frac{1}{2}-\frac{1}{4}\right)-\left( \frac{1}{2}-\frac{1}{4}\right)  \right]\\
+\mu&=0
+\end{align*}
+\end{solution}
+    \item Compute the variance $Var(X)$;
+    \begin{solution}
+There are two versions of variance. 
+$$Var(X)=\int_{-1}^1(x-\mu)^2 \cdot p(x) dx=\left( \int_{-1}1 x^2 \cdot p(x) dx \right) -\mu^2$$
+I will use the second version since the algebra is typically easier
+\begin{align*}
+Var(x)&=\left( \int_{-1}^1 x^2 \cdot p(x) dx \right) -\mu^2\\
+&=\left( \int_{-1}^1 x^2 \cdot \frac{3}{4}(1-x^2) dx \right) -0^2\\
+&=\left( \frac{3}{4}\int_{-1}^1 (x^2-x^4) dx \right) -0^2\\
+&=\frac{3}{4}\left(\frac{x^3}{3}-\frac{x^5}{5} \right)\Bigg|_{-1}^1\\
+&=\frac{3}{4}\left[ \left(\frac{1^3}{3}-\frac{1^5}{5} \right)-\left(\frac{(-1)^3}{3}-\frac{(-1)^5}{5} \right)\right]\\
+&=\frac{3}{4}\left[ \left(\frac{1}{3}-\frac{1}{5} \right)-\left(\frac{-1}{3}-\frac{-1}{5} \right)\right]\\
+&=\frac{3}{4}\left[ \frac{2}{3}-\frac{2}{5} \right]\\
+&=\frac{3}{4}\left[ \frac{10}{15}-\frac{6}{15} \right]\\
+&=\frac{3}{4}\cdot\frac{4}{15}\\
+&=\frac{1}{5}
+\end{align*}
+\end{solution}
+}
+
+\newpage
+
+
+\section{Probability Density Function}\label{sec}
+Consider the continuous random variable $X$ with the following probability density function p(x) and it's graph:\\
+\mpageT{.5}{.5}{\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = $x$,
+    ylabel = $p(x)$,
+    xmin = -0.5, xmax = 2.5,
+    ymin = -0.5, ymax = 1.5,
+    samples = 200,
+    domain = -0.5:2.5,
+    width=7cm,
+]
+% f(x)=x on [0,1]
+\addplot[very thick, blue, domain=0:1] {x};
+% f(x)=2-x on [1,2]
+\addplot[very thick, blue, domain=1:2] {2 - x};
+% f(x)=0 elsewhere: left part
+\addplot[very thick, blue, domain=-0.5:0] {0};
+% right part
+\addplot[very thick, blue, domain=2:2.5] {0};
+\end{axis}
+\end{tikzpicture}
+}{
+\[
+p(x) =
+\begin{cases}
+0 & x < 0, \\[6pt]
+x & 0 \le x \le 1, \\[6pt]
+2 - x & 1 \le x \le 2, \\[6pt]
+0 & x > 2.
+\end{cases}
+\]
+}
+\enumA{
+\item Check that $p(x)$ is truly a probability density function, which means that you have to check the two defining properties.
+\begin{solution}
+\itemI{
+\item {\em Property $\#1$} Given a support of $[a,b]$, $p(x)$ that $p(x)\geq 0$ for all $a\leq x\leq b$. The graph of $p(x)$ is a ``tent" above the $x$-axis which means $p(x)\geq 0$  and this property is satisfied.
+\item {\em Property $\#2$} Given a support of $[a,b]$, $\ds\int_a^b p(x)\;dx=1$. For our scenario, the support is $[0,2]$ and $\int_0^2 p(x)\;dx$ is the area between the ``tent" and the $x$-axis.  We could set up a definite integral to see if it equals $1$. But we can also use the fact that our tent is a triangle with base$=2$ and height$=1$. The area of this triangle is $$A_{triangle}=\frac{1}{2}b\cdot h=\frac{1}{2}\cdot 2\cdot 1=1.$$ Thus $$\int_0^2 p(x)\;dx=A_{triangle}=1$$
+and this property is satisfied
+}
+\end{solution}
+\item Compute $P(X \geq 0.5)$, $P(X \leq 1)$, $\ds P(X=1/3)$;
+\begin{solution}
+$\mathbf{P(X \geq 0.5)}$ There are two approaches to finding $P(X \geq 0.5)$,
+\itemI{
+\item {\em Approach $\#1$ }
+\begin{align*}
+P(X \geq 0.5)&=\int_{0.5}^2 p(x)\;dx
+\intertext{$p(x)$ is piecewise and changes definition at $x=1$ so we need to split the integral into two parts}
+&=\int_{1/2}^1 x \;dx+\int_{1}^2 2-x\;dx\\
+&=\frac{x^2}{2}\Bigg|_{1/2}^1 + (2x-\frac{x^2}{2})\Bigg|_1^2\\
+&\left( \frac{1^2}{2}-\frac{(1/2)^2}{2}\right) + \left[\left(2\cdot 2-\frac{2^2}{2} \right)-\left( 2\cdot 1-\frac{1^2}{2} \right) \right]\\
+&\left( \frac{1}{2}-\frac{1}{2^2\cdot 2}\right) + \left[\left(4-\frac{4}{2} \right)-\left( 2-\frac{1}{2} \right) \right]\\
+&=\frac{1}{2}-\frac{1}{8}+2-\frac{3}{2}\\
+&=\frac{7}{8}
+\end{align*}
+\item {\em Approach$\#2$} 
+\begin{align*}
+P(X \geq 0.5)&=1-P(X < 0.5)\\
+&=1-\int_0^{1/2} p(x)\;dx\\
+&=1-\int_0^{1/2} x\;dx\\
+&=1-\frac{x^2}{2}\Bigg|_0^{1/2}\\
+&=1-\left(\frac{(1/2)^2}{2}-\frac{(0)^2}{2}\right)\\
+&=1-\frac{1}{0}+0\\
+&=\frac{7}{8}
+\end{align*}
+}
+$\mathbf{P(X \leq 1)}$
+\begin{align*}
+P(X \leq 1)&=\int_0^1 p(x)\;dx\\
+&=\int_0^1 x\;dx\\
+&=\frac{x^2}{2}\Bigg|_0^1\\
+&=\frac{1^2}{2}-\frac{0^2}{2}\\
+P(X \leq 1)&=\frac{1}{2}
+\end{align*}
+$\mathbf{P(X = \frac{1}{3})}$
+\begin{align*}
+P(X = \frac{1}{3})&=\int_{1/3}^{1/3}p(x)\;dx=0
+\end{align*}
+\end{solution}
+\item Find an interval $[0,b]$ where $P(0\leq X \leq b)=1/8$ 
+\begin{solution}
+\begin{align*}
+P(0\leq X \leq b)&=\frac{1}{8}\\
+\int_0^b p(x)\;dx&=\frac{1}{8}\\
+\intertext{In part b), we found that $\ds P(X \leq 1)=\frac{1}{2}$ so $b$ must be less than $1$. Thus we only need to focus on the first half of the support.}
+\int_0^b x\;dx&=\frac{1}{8}\\
+\frac{x^2}{2}\Bigg|_0^b&=\frac{1}{8}\\
+\frac{b^2}{2}-\frac{0^2}{2}&=\frac{1}{8}\\
+\frac{b^2}{2}=\frac{1}{8}\\
+b^2&=\frac{2}{8}=\frac{1}{4}\\
+b&=\pm\sqrt{1/4}=\pm \frac{1}{2}\\
+\intertext{$b=-\frac{1}{2}$ is not in the support, so ignore it.}
+b&=\frac{1}{2}
+\end{align*}
+Thus $\ds P(X\leq 1/2)=\frac{1}{8}$
+\end{solution} 
+}
+
+
+
+%
+%\newpage 
+%\section{Piecewise Cumulative Distribution Function} 
+%Consider the continuous random variable from section \# \ref{sec}, which had the probability density function:
+%\\ 
+%\mpageT{.5}{.5}{\centering
+%\begin{tikzpicture}
+%\begin{axis}[
+%    axis lines = middle,
+%    xlabel = $x$,
+%    ylabel = $p(x)$,
+%    xmin = -0.5, xmax = 2.5,
+%    ymin = -0.5, ymax = 1.5,
+%    samples = 200,
+%    domain = -0.5:2.5,
+%    width=7cm,
+%]
+%% f(x)=x on [0,1]
+%\addplot[very thick, blue, domain=0:1] {x};
+%% f(x)=2-x on [1,2]
+%\addplot[very thick, blue, domain=1:2] {2 - x};
+%% f(x)=0 elsewhere: left part
+%\addplot[very thick, blue, domain=-0.5:0] {0};
+%% right part
+%\addplot[very thick, blue, domain=2:2.5] {0};
+%\end{axis}
+%\end{tikzpicture}
+%}{
+%\[
+%p(x) =
+%\begin{cases}
+%0 & x < 0, \\[6pt]
+%x & 0 \le x \le 1, \\[6pt]
+%2 - x & 1 \le x \le 2, \\[6pt]
+%0 & x > 2.
+%\end{cases}
+%\]
+%}
+%
+%\enumA{
+%    \item  Find the corresponding cumulative distribution function, $F(x)$ using steps a), b) and c) below Since $p(x)$ is a piecewise function, $F(x)$ will also be piecewise.
+%   \[
+%F(x) =
+%\begin{cases}
+%0 & x < 0, \\[6pt]
+%F_1(x) & 0 \le x \le 1, \\[6pt]
+%F_2(x) & 1 \le x \le 2, \\[6pt]
+%1 & x > 2.
+%\end{cases} 
+%     \]
+%    \enum{
+%    \item Find the cumulative distribution function over the interval $0\leq x\leq 1$. Let's call this $F_1(x)$
+%    \item Find the cumulative distribution function over the interval $1\leq x\leq 2$. Let's call this $F_2(x)$
+%    \item Check two things: Is $F_1(1)=F_2(1)$? Is $F_2(2)=1$? If one/both are not true, you probably forgot to add something to the function $F_2(x)$.
+%    }
+%    \item Now graph this cumulative distribution function;
+%    \item Use the cumulative distribution function to find the probability of $P(X \leq 1)$ and $P(X \in [0,1.5])$
+%    \item  Use the cumulative distribution function to find an interval $[c,1]$ where $P(c\leq X\leq 1)=1/8$.
+%}
+%
+%\newpage
+%\section{More Piecewise Cumulative Distribution Function}
+%Let \( X \) be a continuous random variable with the probability density function
+%    \[
+%    p(x) = 
+%    \begin{cases} 
+%    c(5 - x) &0 \leq x \leq 5, \\
+%    c(x+5) &-5\leq x\leq0,
+%    \\
+%    0 & \text{otherwise}.
+%    \end{cases}
+%    \]
+%\begin{enumerate}
+%        \item Find the support of \( X \).
+%        \item Determine the value of the constant \( c \) that makes \( p(x) \) a valid PDF.
+%        \item Compute \( P(1 < X < 3) \).
+%        \item Find the cumulative distribution function \( C(x) \) for \( -5 \leq x \leq 5 \) (You need to consider 2 different integrals for some situation).
+%\end{enumerate}
+
+\end{document}

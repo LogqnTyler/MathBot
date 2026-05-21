@@ -1,0 +1,386 @@
+\documentclass[10pt]{article}
+
+\def\Type{LessonCaelan}
+\def\TypeNum{Lesson 18}
+\def\TypeTitle{Fundamental Theorem of Calculus \\Key }
+\def\Semester{Fall 2021} %Not Used 
+\def\Course{MATH 1190 \& 1210}
+\def\Targets{  \bf\color{Fuchsia}I3, \bf\color{Fuchsia}I4 }
+
+\usepackage{preambleDJ}
+
+%\usepackage{ragged2e}
+
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\pagestyle{otherpages}
+\thispagestyle{firstpage}
+\vs{.85}
+{\bf\color{blue}Warm-up Exercise 1.}\ltrm{\bf\color{Fuchsia}I3} Find in the following indefinite integrals.
+\def\vd{.3}
+\tasksA{2}{
+\task $\ds \int e^x \,dx=$
+\sol{ $\ds \int e^x \,dx=e^x+C$}
+\task $\dint 3^x \,dx=$ 
+\sol{ $\ds \int 3^x \,dx=3^x\ln(3)+C$}
+\vs{\vd}
+\task  $\ds \int \frac{1}{x^2} \,dx =$ 
+\sol{ \\\\
+$\ds \int \frac{1}{x^2} \,dx=\dint x^{-2} \,dx=\frac{x^{-1}}{-1}+C=-\frac{1}{x}+C$}
+\task $\ds \int \frac{1}{x} \,dx =$
+\sol{$\ds \int \frac{1}{x} \,dx=\ln(x)+C$}
+ \vs{\vd}
+\task $\ds \int 2^5 \,dx =$ 
+\sol{$2^5$ is a constant. \\
+So $\ds \int 2^5 \,dx =2^5 \cdot x+C$ }
+\task $\ds \int \log(2) \,dx =$ 
+\sol{
+$\log(2) $ is a constant.\\
+So $\ds \int \log(2) \,dx = \log(2) \cdot x+C$
+}\vs{\vd}
+\task $\dint \frac23x^4 \,dx =$
+\sol{\\\\
+$\ds \int \frac23x^4 \,dx =\frac{2}{3}\cdot \frac{x^5}{5}+C=\frac{2}{15}x^5+C$
+}
+\task $\ds \int \sqrt{x^3} \,dx =$
+\sol{\\\\
+$\ds \int \sqrt{x^3} \,dx =\dint x^{3/2} \,dx =\frac{x^{5/2}}{5/2}+C=\frac{2}{5}x^{5/2}+C$
+} \vs{\vd}
+}
+\newpage
+\blue{\bf Mini-lecture:  The Fundamental Theorem of Calculus and its hypotheses}
+
+%maybe start off with several simple ones - like 4x^3, 1/x, etc. - and then build up to larger ones - sums of these kinds of functions - then incorporate simplification
+
+\begin{minipage}[t]{0.6\textwidth}
+    \important{Fundamental Theorem of Calculus (FTC)}
+    {
+    If $f$ is continuous on $[a,b]$, then
+    \vspace{-.1in}
+    
+    \[
+    \int_a^b f(x)\ dx = F(x)\Big|_{a}^{b}
+    \]
+    
+      where $F$ is any antiderivative of $f$ and\\ $F(x)\Big|_{a}^{b} = \Delta F = F(b)-F(a)$.
+    }
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}[t]{0.375\textwidth}
+\,\\[-0.4in]
+    \begin{center}
+        \begin{tikzpicture}
+          \begin{axis}[
+        %    axis y line = left,
+        %    axis x line = bottom,
+        x label style={anchor=west},
+            xlabel = {$x$},
+            y label style={anchor=south},
+            ylabel={$y$},
+            %xtick       = {0.5,4.45},
+            %xticklabels = { , },
+            ytick       = {2.5,4.5,6.5,8.5},
+            yticklabels = {$2$,$4$,$6$,$8$},
+            samples     = 160,
+            domain      = -2.5:2.5,
+            restrict y to domain=-0.5:10,
+            xmin = -2.5, xmax = 2.5,
+            ymin = -0.5, ymax = 10,
+            width = 3in, height=2in
+          ]
+          % piece 1
+            %  \addplot[name path=f1, domain=-2.5:-0.01,  white, ultra thick,mark=none] {1/x^2+.5};
+                           \addplot[name path=f1, domain=-2.5:-0.3, blue, ultra thick, <->] {1/x^2+.5};
+  \path[name path=axis] (axis cs:-2.5,0) -- (axis cs:-0.3,0);
+     \addplot [
+        thick,
+        color=blue,
+        fill=blue, 
+        fill opacity=0.1
+    ]
+    fill between[
+        of=f1 and axis,
+        soft clip={domain=-2.5:-0.3},
+   ];
+ \draw[color = blue, opacity =0.1, fill = blue, fill opacity=0.1] (-.3,0) rectangle (0,11.6);
+
+          % piece 2
+\addplot[name path=f2, domain=0.3:1, blue, ultra thick, <-] {1/x^2+.5};
+  \path[name path=axis]  (axis cs:0.3,0)--(axis cs:1,0) ;
+     \addplot [
+        thick,
+        color=blue,
+        fill=blue, 
+        fill opacity=0.1
+    ]
+    fill between[
+        of=f2 and axis,
+        soft clip={domain=0.3:1},
+   ];
+ \draw[color = blue, opacity =0.1, fill = blue, fill opacity=0.1] (.3,0) rectangle (0,11.6);
+
+ % piece 3
+\addplot[name path=f3, domain=1:2, red, ultra thick, mark=none] {1/x^2+.5};
+  \path[name path=axis]  (axis cs:1,0)--(axis cs:2,0) ;
+     \addplot [
+        thick,
+        color=red,
+        fill=red, 
+        fill opacity=0.1
+    ]
+    fill between[
+        of=f3 and axis,
+        soft clip={domain=1:2},
+   ];
+   
+   \addplot[name path=f2, domain=2:2.5, blue, ultra thick, ->] {1/x^2+.5};
+          \node at (1.5,6) {$f(x)=\dfrac1{x^2}$};
+          \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}\\
+%
+\blue{\bf Example/Exercise}\ltrm{\bf\color{Fuchsia}I4} For each of the definite integrals below, a) Decide if $\ds \int_a^b \frac{1}{x^2}\,dx$ should be positive or negative. b) Calculate each definite integral. c) Discuss if your answer to a) and b) are consistent.
+%\vs{-.2}
+\begin{minipage}[t]{0.49\textwidth}
+  \enumA{
+  \item Based on graph, should $\dint_{1}^{2} \frac{1}{x^2}\,dx$ be positive or negative?\\
+  \sol{Positive because on interval $[1,2]$ all area is above horizontal axis. See red shaded area above.}
+  \item  $\dint_{1}^{2} \frac{1}{x^2}\,dx=$
+  \sol{
+  \al{
+  \int_{1}^{2} \frac{1}{x^2}\,dx&=\int_{1}^{2} x^{-2}\,dx\\
+  &=\frac{x^{-1}}{-1} \Big|_1^2\\
+    &=\frac{-1}{x}\Big|_1^2\\
+    &=-\frac{-1}{2}-\frac{-1}{1}\\
+    &=\frac{1}{2}
+  }
+  }
+  \vs{-.3}
+  \item Is your answer to a) consistent with b)? If not, what about the FTC might help us understand why not?\\
+  \sol{Yes, a) and b) seem to be consistent with each other since both answers are positive.}
+}
+\end{minipage}
+%
+\vline\hfill
+%
+\begin{minipage}[t]{0.49\textwidth}
+  \enumA{
+  \item Based on graph, should $\dint_{-2}^{1} \frac{1}{x^2}\,dx$ be positive or negative?
+    \sol{Positive because on interval $[-2,1]$ all area is above horizontal axis. See blue shaded area above (this includes red shaded area).}
+  \item $\dint_{-2}^{1} \frac{1}{x^2}\,dx=$
+  \sol{
+  \al{
+  \int_{-2}^{1} \frac{1}{x^2}\,dx&=\int_{-2}^{1} x^{-2}\,dx\\
+  &=\frac{x^{-1}}{-1} \Big|_{-2}^1\\
+    &=\frac{-1}{x}\Big|_{-2}^1\\
+    &=-\frac{-1}{1}-\frac{-1}{-2}\\
+    &=-\frac{3}{2}
+ }
+  }
+  \vs{-.3}
+  \item Is your answer to a) consistent with b)? If not, what about the FTC might help us understand why not?\\
+  \sol{No, area should be positive from a) but in b) we found area to be negative.  The issue is that   $f(x)=\frac{1}{x^2}$ is {\em \bf not} continuous at $x=0$ due to division by $0$. Further, $x=0$ is in the domain $[-2,1]$  and thus violates FTC hypothesis that $f(x)$ must be continuous on $[-2,1]$. So {\em FTC does not apply} and we need to use other techniques to evaluate $\dint_{-2}^{1} \frac{1}{x^2}\,dx$.}
+}
+\end{minipage}
+\newpage
+\exercise \ltrm{\bf\color{Fuchsia}I4}For each of the following definite integrals, decide if the Fundamental Theorem applies.  If it does, evaluate the integral.\\
+
+\tasksA{2}{
+\task $\displaystyle\int_0^2 2x \,dx$ \qquad FTC apply? \sol{Yes! $f(x)=2x$ is continuous everywhere which means continuous on $[0,2]$. Practically speaking, we don't have a division by $0$, square root of $(-)$ values, log of $0$ or $(-)$ values, etc.}
+\task $\displaystyle\int_{-2}^{-1} \sqrt{x} \,dx$ \qquad FTC apply? \sol{No! $f(x)=\sqrt{x}$ is not continuous for negative numbers which occur on domain $[-2,1]$.   Thus we don't meet hypothesis of FTC that $f(x)=\sqrt{x}$ be continuous on $[-2,1]$ and we cannot use it.}
+}
+\tasksI{2}{
+\task If ``yes", \\$\displaystyle\int_0^2 2x \,dx$=
+\sol{\al{
+\int_0^2 2x \,dx&=x^2\Big|_0^2\\
+&=2^2-0^2\\
+&=4
+}
+}
+\task If ``yes"\\$\displaystyle\int_{-2}^{-1} \sqrt{x} \,dx=$
+}
+
+
+%%%%%%%%%    
+%\newpage
+%%%%%%%%%
+
+\example \ltrm{\bf\color{Fuchsia}I4}Evaluate the following integrals: {\em Hint:} It might be helpful to a bit of algebra first so that you can use one of our derivative rules.
+
+\begin{itemize}
+
+\item[(a)] $\ds \int_1^2 \left( \frac{2}{\sqrt[5]{t^3}} + 3^t - \frac12 \right)\,dt$
+\sol{ We note that $\ds f(t)=\dfrac{2}{\sqrt[5]{t^3}} + 3^t - \frac12$ is discontinuous at $t=0$ since we have a division by $0$.\\ \\ But $t=0$ is not in the domain $[1,2]$. Thus FTC applies since $f(t)$ is continuous on $[1,2]$.  
+\al{
+\int_1^2 \left( \dfrac{2}{t^{3/5}} + 3^t - \frac12 \right)\,dt&=\int_1^2 \left( 2t^{-3/5} + 3^t - \frac12 \right)\,dt\\
+&=2\frac{t^{2/5}}{2/5}+\frac{3^t}{\ln(3)}-\frac{1}{2} t \Big|_1^2\\
+&=\left( 2\frac{2^{2/5}}{2/5}+\frac{3^2}{\ln(3)}-\frac{1}{2}\cdot  2 \right) -\left( 2\frac{1^{2/5}}{2/5}+\frac{3^1}{\ln(3)}-\frac{1}{2} \cdot 1  \right)
+}
+{\em Note}: It's not necessary to simplify!
+}
+
+\item[(b)] $\dint_2^4 \dfrac{z^2-z-1}{2z}\,dz$
+\sol{
+We have a division by $0$ (i.e. discontinuity) when $z=0$ for $f(x)= \dfrac{z^2-z-1}{2z}$. But $z=0$ is not in the domain $[2,4]$ so FTC applies.
+\al{
+\int_2^4 \frac{z^2-z-1}{2z}\,dz&=\int_2^4 \frac{z^2}{2z}-\frac{z}{2z}-\frac{1}{2z}\,dz\\
+&=\int_2^4 \frac{z}{2}-\frac{1}{2}-\frac{1}{2}\cdot \frac{1}{z}\,dz\\
+&=\frac{1}{2}\cdot \frac{z^2}{2}-\frac{1}{2}z-\frac{1}{2}\ln|z| \Big|_2^4\\
+&= \frac{z^2}{4}-\frac{z}{2}-\frac{1}{2}\ln|z| \Big|_2^4\\
+&=\left(  \frac{4^2}{4}-\frac{4}{2}-\frac{1}{2}\ln|4|\right) - \left( \frac{2^2}{4}-\frac{2}{2}-\frac{1}{2}\ln|2| \right)
+}
+}
+
+\end{itemize}
+\newpage
+\exercise \ltrm{\bf\color{Fuchsia}I4}Evaluate the following integrals:
+
+\begin{itemize}
+
+\item[(a)] $\ds \int_{-2}^{-1} \left( \frac{4}{\sqrt[3]{u}} + e^u + 2u^3 \right) \, du$
+
+\sol{ $\ds f(u)= \frac{4}{\sqrt[3]{u}} + e^u + 2u^3$ is discontinuous at $u=0$ (division by $0$). But $u=0$ is not in the domain $[-2,-1]$ so FTC applies.
+\al{
+\int_{-2}^{-1} \left( \frac{4}{\sqrt[3]{u}} + e^u + 2u^3 \right) \, du&=\int_{-2}^{-1} \left( \frac{4}{u^{1/3}} + e^u + 2u^3 \right) \, du \\
+&=\int_{-2}^{-1} \left( 4u^{-1/3} + e^u + 2u^3 \right) \, du\\
+&=4\frac{u^{2/3}}{2/3} +e^u+2\cdot \frac{u^4}{4} \Big|_{-2}^{-1}\\
+&=6u^{2/3}+e^u +\frac{u^4}{2}   \Big|_{-2}^{-1}\\
+&=\left( 6(-1)^{2/3}+e^{-1} +\frac{(-1)^4}{2}   \right) -\left( 6(-2)^{2/3}+e^{-2} +\frac{(-2)^4}{2}   \right)
+}
+
+}
+\item[(b)] $\displaystyle\int_{1}^2 \frac{1+\sqrt[4]{y}+\sqrt{y}+y}{y} \, dy$
+\sol{
+At $y=0$, $\ds f(y)=\frac{1+\sqrt[4]{y}+\sqrt{y}+y}{y} $ is discontinuous (division by $0$).  But since $y=0$ is not in the domain $[1,2]$, we can use the FTC.
+\al{
+\int_{1}^2 \frac{1+\sqrt[4]{y}+\sqrt{y}+y}{y} \, dy&=\int_{1}^2 \frac{1}{y}+\frac{y^{1/4}}{y}+\frac{y^{1/2}}{y}+\frac{y}{y} \, dy\\
+&=\int_{1}^2 \frac{1}{y}+y^{-3/4}+y^{-1/2}+1 \, dy\\
+&=\ln|y| +\frac{y^{1/4}}{1/4}+\frac{y^{1/2}}{1/2}+y \Big|_1^2\\
+&= \ln|y|+4 y^{1/4}+2 y^{1/2}+y \Big|_1^2\\
+&= \left(   \ln|2|+4 \cdot 2^{1/4}+2\cdot  2^{1/2}+2   \right) -\left(  \ln|1|+4  \cdot1^{1/4}+2 \cdot1^{1/2}+1  \right)
+}
+}
+
+\end{itemize}
+
+%%%%%%%%%    
+\newpage%
+%%%%%%%%%
+
+{\bf\color{blue}Extra Practice 1.} Evaluate the following integrals:
+
+\begin{itemize}
+
+\item[(a)]\ltrm{\bf\color{Fuchsia}I3} $\ds \int \left(x^2+x+1\right)\,dx$ 
+\sol{ 
+\al{
+ \int \left(x^2+x+1\right)\,dx&=\frac{x^3}{3}+\frac{x^2}{2}+x+C
+}
+Note that the ``$+C$" is required because indefinite integral is asking for ``the most general anti-derivative."
+}
+
+\item[(b)] \ltrm{\bf\color{Fuchsia}I4}$\dint_0^1 \left(x^2+x+1\right)\,dx$
+\sol{
+$f(x)=x^2+x+1$ is continuous for all values of $x$ (i.e. not division by $0$, square root of $(-)$ values, no logarithms of $0$ or  $(-)$ values, etc.). So we can utilize the FTC
+\al{
+ \int \left(x^2+x+1\right)\,dx&=\frac{x^3}{3}+\frac{x^2}{2}+x\Big|_0^1\\
+ &=\left(\frac{1^3}{3}+\frac{1^2}{2}+2  \right)-\left(\frac{0^3}{3}+\frac{0^2}{2}+0  \right)
+\intertext{ It's ok to stop after previous line without further simplification.}
+ &=\left(\frac{1}{3}+\frac{1}{2}+2\right)-0\\
+ &=\frac{2}{6}+\frac{3}{6}+\frac{12}{6}\\
+ &=\frac{17}{6}
+}
+}
+\item[(c)] \ltrm{\bf\color{Fuchsia}I4}$\ds \int_{1/8}^1 \left( \frac{x^2+x+1}{\sqrt[3]{x}} \right)\,dx$
+\sol{
+$\ds f(x)=  \dfrac{x^2+x+1}{\sqrt[3]{x}}$ is discontinuous at $x=0$ (division by $0$). But $x=0$ is not in domain $[1/8,1]$ so FTC applies.
+\al{
+\int_{1/8}^1 \left( \frac{x^2+x+1}{\sqrt[3]{x}} \right)\,dx&=\int_{1/8}^1 \left( \frac{x^2}{x^{1/3}}+\frac{x}{x^{1/3}}+\frac{1}{x^{1/3}} \right)\,dx\\
+&=\int_{1/8}^1 x^{5/3}+x^{2/3}+x^{-1/3}\,dx\\
+&=\frac{x^{8/3}}{8/3}+\frac{x^{5/3}}{5/3}+\frac{x^{2/3}}{2/3} \Bigg|_{1/8}^1\\
+&=\frac{3}{8}x^{8/3}+\frac{3}{5}x^{5/3}+\frac{3}{2}x^{2/3} \Bigg|_{1/8}^1\\
+&=\left( \frac{3}{8}1^{8/3}+\frac{3}{5}1^{5/3}+\frac{3}{2}1^{2/3}  \right) -\left( \frac{3}{8}\left(\frac{1}{8}\right)^{8/3}+\frac{3}{5}\left(\frac{1}{8}\right)^{5/3}+\frac{3}{2}\left(\frac{1}{8}\right)^{2/3} \right)  
+%\intertext{ It's ok to stop after previous line without further simplification.}
+%&=\left(\frac{3}{8}+\frac{3}{5}+\frac{3}{2} \right) -\left( \frac{3}{8}\cdot\frac{1}{2^8}+\frac{3}{5}\cdot \frac{1}{2^5}+\frac{3}{2} \cdot \frac{1}{2^2} \right)
+}
+}
+\end{itemize}
+
+\newpage
+{\bf\color{blue}Extra Practice 2.} \ltrm{\bf\color{Fuchsia}I4}The graph of $f(x)=x^3$ is given below.\\
+\mpageT{.35}{.65}{    
+\begin{center}
+        \begin{tikzpicture}
+          \begin{axis}[
+       xmin=-2.5,        % Minimum x-value
+            xmax=2.5,         % Maximum x-value
+            ymin=-8,         % Minimum y-value
+            ymax=8,          % Maximum y-value
+            axis lines=middle, % Draw the x and y axes in the middle
+            xlabel={$x$},     % Label for the x-axis
+            ylabel={$y$},     % Label for the y-axis
+            xtick       = {-2,-1,1,2},
+            ytick       = {-8,-4,4,8},
+            %yticklabels = {$2$,$4$,$6$,$8$},
+            axis line style={thick, <->}, % Add arrows at the end of the axes
+            width = 2in, height=2in,
+            %restrict y to domain=-9:9
+          ]
+          %\addplot[domain=-2.5:2.5, samples=400, blue, ultra thick] {x^3};
+              \addplot[name path=f1, domain=-2.5:2.5, blue, ultra thick, <->] {x^3};
+  \path[name path=axis] (axis cs:-2.5,0) -- (axis cs:2.5,0);
+     \addplot [
+        thick,
+        color=blue,
+        fill=blue, 
+        fill opacity=0.1
+    ]
+    fill between[
+        of=f1 and axis,
+        soft clip={domain=-1:2},
+   ];
+          \end{axis}
+        \end{tikzpicture}
+    \end{center}
+}{
+%
+\begin{itemize}
+\item[(a)] Find the {\bf net area} between the graph of $f(x) = x^3$ and the portion of the horizontal axis from $x=-1$ to $x=2$.
+\sol{
+We want $\ds \int_{-1}^2 x^3\;dx$. Since $f(x)=x^3$ is continuous everywhere, FTC applies. 
+\al{
+\int_{-1}^2 x^3\;dx&=\frac{x^4}{4}\Bigg|_{-1}^{2}\\
+&=\frac{2^4}{4}-\frac{(-1)^4}{4}\\
+&=4-\frac{1}{4}\\
+&=\frac{15}{4}
+}
+}
+\end{itemize}
+}
+\begin{itemize}
+\item[(b)] Find the {\bf area} between the graph of $f(x)=x^3$ and the portion of the horizontal axis from $x=-1$ to $x=2$.
+\sol{
+We're asked for {\bf area} which assumes a positive value. Since the area on $[-1,0]$ is negative, and area on $[0,2]$ is positive, we break apart our integral into two parts and force the negative part to be positive. Here's one way to do this:
+\al{
+\Bigg| \int_{-1}^0 x^3\;dx \Bigg| +\int_{0}^2 x^3\;dx&=\Bigg[ \Bigg| \frac{x^4}{4} \Big|_{-1}^0 \Bigg|  \Bigg]\,+\, \Bigg[\frac{x^4}{4}\Big|_0^2\Bigg]\\
+&=\Bigg[ \Bigg| \frac{0^4}{4}-\frac{(-1)^4}{4}  \Bigg|  \Bigg]\,+\, \Bigg[\frac{2^4}{4} - \frac{0^4}{4}\Bigg]\\
+&=\Bigg[ \frac{1}{4}  \Bigg]+\Bigg[ 4  \Bigg]\\
+&=\frac{17}{4}
+}
+}
+\end{itemize}
+
+\end{document}\end{document}

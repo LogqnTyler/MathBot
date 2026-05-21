@@ -1,0 +1,118 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+%
+\usepackage{amssymb}
+%
+\usepackage{enumerate}
+%
+\usepackage[width=7in,height=10in,top=0.75in,centering]{geometry}
+%
+\usepackage[dvipsnames]{xcolor}
+%
+\usepackage{tikz}
+%
+\usepackage{multicol}
+%
+\usepackage{hyperref}
+%
+\usepackage{marginnote}
+%
+%%%%%%%%%%%%%%%% HEADER %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%%
+%\lfoot{Left footer}
+%\cfoot{Center of footer}
+%\rfoot{Right of footer}
+%%
+\lhead{Survey of Calculus I}
+\chead{Week 5 Workshop}
+\rhead{\thepage}
+%
+%%%%%%%%%%%%%%%% HEADER %%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%% PGFPLOTS %%%%%%%%%%%%%%%%%%%
+\usepackage{pgfplots}
+%
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->,color=black}, % arrows on the axis
+                    %xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+            }}
+%
+ \pgfplotsset{compat=1.14}
+%
+ \usepgfplotslibrary{fillbetween}
+%%%%%%%%%%%%%%%% PGFPLOTS %%%%%%%%%%%%%%%%%%%
+%
+\parindent0pt
+\fboxsep=0.25cm
+%
+\newcommand{\Heading}[2]{\fbox{{\Large\textbf{#1}}}\hfill\fbox{\textbf{#2}}\par\vspace{0.1in}}
+%
+\newcommand{\Name}[1]{\textbf{Name}:\quad#1\hrulefill}
+%
+\newcommand{\Target}[1]{\textbf{Learning Target(s):}\quad\fbox{#1}\par\medskip}
+%
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+%
+\newcounter{example}[section]
+\newcounter{exercise}[section]
+%
+\newcommand{\important}[2]{\begin{center}\fbox{\begin{minipage}{.97\textwidth}\noindent\textbf{#1}\par#2\end{minipage}}\end{center}}
+%
+\newcommand{\defn}[1]{\begin{center}\fbox{\begin{minipage}{.97\textwidth}\reversemarginpar\marginnote{\textbf{Definition}}#1\end{minipage}}\end{center}}
+%
+\newcommand{\example}[1]{\vspace{0.1in}{\textcolor{blue}{\textbf{Example \stepcounter{example}\theexample.}}}\hspace{0.1in}\reversemarginpar\marginnote{\fbox{\bf #1}}}
+%
+\newcommand{\exercise}[1]{\vspace{0.1in}{\textcolor{blue}{\textbf{Exercise \stepcounter{exercise}\Alph{exercise}.}}}\hspace{0.1in}\reversemarginpar\marginnote{\fbox{\bf #1}}}
+
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\Heading{MATH 1190 \& 1210 Survey of Calculus I}{\begin{minipage}{0.25\textwidth}\begin{center} Week 5 Workshop \end{center}\end{minipage}}
+
+\vspace{0.1in}
+
+\Name{}\hfill\\[0.4cm]
+
+For each of the Learning Targets on Knowledge Checkpoint 1, write down the score you predicted for yourself in class and the score you actually received. Then, explain what you think caused any difference between the two.
+
+Feel free to check your exam answers with a classmate to help figure this out!
+
+\vspace{1cm}
+
+{\reversemarginpar\marginnote{\fbox{\bf F1}}} Predicted score:\rule{1cm}{0.15mm} \hspace{1cm} Actual score:\rule{1cm}{0.15mm}\\
+
+Explanation:
+\vfill
+
+{\reversemarginpar\marginnote{\fbox{\bf L1}}} Predicted score:\rule{1cm}{0.15mm} \hspace{1cm} Actual score:\rule{1cm}{0.15mm}\\
+
+Explanation:
+\vfill
+
+{\reversemarginpar\marginnote{\fbox{\bf L2}}} Predicted score:\rule{1cm}{0.15mm} \hspace{1cm} Actual score:\rule{1cm}{0.15mm}\\
+
+Explanation:
+\vfill
+
+{\reversemarginpar\marginnote{\fbox{\bf D1}}} Predicted score:\rule{1cm}{0.15mm} \hspace{1cm} Actual score:\rule{1cm}{0.15mm}\\
+
+Explanation:
+\vfill
+
+
+\end{document}

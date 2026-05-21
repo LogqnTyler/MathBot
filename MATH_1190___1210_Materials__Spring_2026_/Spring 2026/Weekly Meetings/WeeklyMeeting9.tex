@@ -1,0 +1,358 @@
+\documentclass[dvipsnames]{beamer}
+
+\usepackage{hyperref}
+
+\title{MATH 1190 \& 1210 Meeting for Week 9}
+\author{Josh}
+\date{9 March 2026}
+
+\newcommand{\transition}[1]{\frame{{}\begin{center}\fbox{#1}\end{center}}}
+
+\begin{document}
+
+\maketitle
+
+\section{Logistics}
+
+\transition{Logistics}
+
+\frame{{Logistics}
+
+{\bf Where are folks in the lessons right now?} 
+
+\
+
+\
+
+
+}
+
+\frame[t]{{Logistics: Upcoming Schedule}
+
+    \begin{itemize}
+    \item week 9 of class (9 March - 13 March)
+        \begin{itemize}
+        \item finish lesson 12 (if needed); lesson 13 (Absolute Extrema)
+        \item finish lesson 13 (if needed); lesson 14 (Optimization)
+        \item KC 2 on Thursday 12 March
+        \end{itemize}
+    \item week 10 of class (16 March - 20 March)
+        \begin{itemize}
+        \item finish lesson 14 (if needed); lesson 15 (Net Change Meaning of an Integral)
+        \item Application Day 2: Texcovas Boots Company
+        \end{itemize}
+    \item week 11 of class (23 March - 27 March)
+        \begin{itemize}
+        \item lesson 16 (Properties of Integration) -- {\footnotesize\color{red} last topic on assessment 3}
+        \item lesson 17 (Antiderivatives \& Indefinite Integrals)
+        \end{itemize}
+    \item week 12 of class (30 March - 3 April)
+        \begin{itemize}
+        \item lesson 18 (FTOC) 
+        \item lesson 19 (Summations)
+        \item KC 3 on Tuesday 31 March (can change if needed)
+        \end{itemize}
+    \end{itemize}
+    }
+\frame[t]{{Logistics: Upcoming Schedule}
+    \begin{itemize}
+    \item week 13 of class (6 April - 10 April)
+        \begin{itemize}
+        \item lesson 20 (Discrete RVs)
+        \item Application Day 3: Gradient Descent
+        \end{itemize}
+    \item week 14 of class (13 April - 17 April)
+        \begin{itemize}
+        \item lesson 21 (Continuous RVs)
+        \item lesson 22 (Expectation and Variance) -- {\footnotesize\color{red} last topic on assessment 4}
+        \end{itemize}
+    \item week 15 of class (20 April - 24 April)
+        \begin{itemize}
+        \item Application Day 4: Markov Chains
+        \item Review + catch up (if needed)
+        \item KC 4 on Thursday 23 April 
+        \end{itemize}
+     \item week 16 of class (27 April - 1 May)
+            \begin{itemize}
+        \item Review
+        \item Final Exam on Friday 1 May
+        \end{itemize}
+    \end{itemize}
+
+}
+
+\frame[t]{{Logistics}
+\begin{itemize}
+\item How much time did folks feel they spent on grading their target on assessment 1? Do you feel like you're due up for a longer target, an average-length target, or a shorter target?
+\item New targets are ordered here based on the amount of time I anticipate they will take to grade, from greatest to least:
+    \begin{itemize}
+    \item {\bf\color{ProcessBlue}F2} exponents \& logs (slightly longer than average)
+    \item {\bf\color{ForestGreen}D2} computing derivatives (average, but tested more)
+    \item {\bf\color{RedOrange}A2} extreme values (average)
+    \item {\bf\color{ForestGreen}D3} basic derivatives (very short, but tested more)
+    \item {\bf\color{RedOrange}A1} derivatives \& graphing (short)    
+    \end{itemize}
+\item {\bf Self-select!} Which would you like to grade?
+\end{itemize}
+}
+
+\section{Lessons}
+\transition{Lessons}
+
+
+
+\begin{frame}{Lesson 13: Absolute Extrema}
+
+\textbf{Learning Goals}
+\begin{itemize}
+\item Distinguish between \textbf{local} and \textbf{absolute} extrema.
+\item Use derivatives to identify maxima and minima.
+\item Apply organized reasoning to justify conclusions about extrema.
+\end{itemize}
+
+\textbf{Key Concepts}
+\begin{itemize}
+\item \textbf{Local Extrema:} Max/min values within a neighborhood of a point.
+\item \textbf{Absolute Extrema:} Largest or smallest value of a function on its domain.
+\item Local extrema may or may not be absolute extrema.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Main Tools}
+\begin{itemize}
+\item \textbf{Extreme Value Theorem:}  
+Continuous functions on a closed interval $[a,b]$ attain both a max and a min.
+\item \textbf{Closed Interval Method:}  
+Evaluate $f(x)$ at
+\begin{itemize}
+\item critical points ($f'(x)=0$ or $f'$ DNE)
+\item endpoints
+\end{itemize}
+\item \textbf{First Derivative Test:}  
+Use sign changes of $f'(x)$ to determine maxima or minima.
+\end{itemize}
+
+\textbf{Important Considerations}
+\begin{itemize}
+\item Endpoints and domain restrictions matter.
+\item On non-closed intervals, extrema may \textbf{not exist}.
+\item A maximum/minimum must be \textbf{attained} in the domain.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Lesson 14: Optimization}
+
+\textbf{Learning Goal}
+\begin{itemize}
+\item Use calculus tools to find the \textbf{maximum or minimum value} of a quantity in an applied context.
+\end{itemize}
+
+\textbf{Optimization Process}
+\begin{enumerate}
+\item \textbf{Define variables} to represent quantities in the scenario.
+\item \textbf{Translate assumptions} and conditions into equations.
+\item \textbf{Create an objective function} (the quantity to maximize or minimize).
+\item \textbf{Reduce to one variable} if possible using constraints.
+\item \textbf{Determine the domain} based on the context.
+\item \textbf{Use calculus} (derivatives/critical points) to find optimal values.
+\end{enumerate}
+
+\textbf{Common Challenges}
+\begin{itemize}
+\item Choosing the correct formula for the situation.
+\item Correctly incorporating constraints into the model.
+\item Identifying the correct quantity to optimize.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\textbf{Key Takeaway}
+\begin{itemize}
+\item Optimization problems require building a mathematical model first, then applying calculus tools to analyze it.
+\end{itemize}
+
+\end{frame}
+
+
+\section{Pedagogy}
+
+\transition{Pedagogy}
+\section{Active Learning}
+
+\transition{And Now - An Active Learning Discussion with Jim R.!}
+\begin{frame}{Supporting Student Learning Strategies}
+\textbf{What Students Do}
+
+\begin{itemize}
+\item Here is a link to read at your convenience ``{\color{blue}\href{https://lse.ascb.org/evidence-based-teaching-guides/student-metacognition/supporting-student-learning-strategies/}{Supporting Student Learning Strategies}}"
+\item Many students rely on \textbf{passive review strategies}, such as rereading textbooks or memorizing notes. These surface strategies require low cognitive effort and often lead to only superficial familiarity rather than deep understanding.
+
+\item Students frequently \textbf{mass their studying (cramming)} into one or two large sessions. While this may help short-term performance, it does not support long-term retention.
+
+\item Study effort is often guided by \textbf{immediate deadlines}. Students prioritize material that will be assessed soon, which can encourage procrastination and last-minute studying.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item Some students use \textbf{self-testing}, which is an effective learning strategy. However, they often view it mainly as a way to check knowledge gaps rather than as a tool that improves retention.
+
+\item Students \textbf{rarely seek help from expert sources} such as instructors, teaching assistants, or tutors, even though these supports can improve understanding and study strategies.
+
+\item Instructors can learn about students' study habits through tools such as \textbf{study strategy reflections, weekly study diaries, and post-exam surveys}.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Supporting Student Learning Strategies}
+\textbf{What Students Should Do}
+
+\begin{itemize}
+\item \textbf{Self-Testing (Practice Testing):}  
+Use flashcards, quizzes, and practice exams to actively recall information. Retrieval strengthens memory pathways, improves retention, reveals knowledge gaps, and leads to higher academic performance—especially when feedback is provided.
+\end{itemize}
+\end{frame}
+\begin{frame}
+    
+\begin{itemize}
+\item \textbf{Spacing (Distributed Practice):}  
+Study material across multiple sessions rather than cramming. Spacing promotes long-term retention, encourages active recall, and helps consolidate knowledge over time.
+
+\item \textbf{Interleaving:}  
+Alternate practice between different types of problems or concepts instead of studying one type in a block. Interleaving supports spaced practice and helps students recognize differences among problem types, improving understanding and transfer to new situations.
+
+\item \textbf{Instructor Support:}  
+Students benefit when instructors explain why these strategies work and demonstrate how to incorporate them into study routines.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Supporting Student Learning Strategies}
+\textbf{Factors That Affect What Students Should Do}
+
+\begin{itemize}
+\item Effective study strategies depend on \textbf{context}, including the nature of the material, course learning objectives, assessment demands, and instructional methods.
+
+\item Students often choose strategies based on \textbf{how they expect to be assessed}. Course design—from objectives to assessments—can encourage the use of effective strategies.
+
+\item The effectiveness of a strategy depends on \textbf{how and when it is used}. Developing \textbf{procedural and conditional knowledge} helps students understand which strategies work best in different situations.
+
+\item Strategies such as \textbf{textbook review} can support learning when used actively (e.g., checking understanding of difficult ideas) rather than through passive rereading.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\end{frame}
+\item \textbf{Deep learning strategies} promote connecting ideas and deeper understanding, while \textbf{surface strategies} (e.g., note-taking) can help build foundational knowledge.
+
+\item As background knowledge grows, students can shift from building knowledge to \textbf{monitoring and deepening understanding} using metacognitive strategies.
+
+\item Instructors can support students by prompting them to reflect on:
+\begin{itemize}
+\item what study resources they will use,
+\item how they will use them,
+\item and why those strategies are effective.
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Supporting Student Learning Strategies}
+\textbf{Challenges Students Face Using Their Metacognition}
+
+\begin{itemize}
+\item Students often believe that the strategies that \textbf{feel effective} (e.g., cramming or massed practice) will lead to better performance, even when evidence shows that strategies like spacing work better.
+
+\item Many first-year students are \textbf{open to changing their study approaches} but may not know which strategies are most effective or how to evaluate whether their study plans are working.
+
+\item Even when students know about effective strategies, they may struggle to use them due to:
+\begin{itemize}
+\item limited knowledge of how to implement them,
+\item low confidence in using them,
+\item or reluctance to take control of their own learning.
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item Students often rely on \textbf{study habits that worked in the past}, even when those approaches are no longer effective in more advanced courses.
+
+\item Effective strategies can feel \textbf{uncomfortable} because they require more cognitive effort, reveal knowledge gaps, and demand intentional planning.
+
+\item Instructors can help by discussing \textbf{“desirable difficulties”} and encouraging students to embrace productive challenges while providing guidance and support for improving study strategies.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\frame[t]{{Pedagogy: Supporting Student Study Habits}
+
+{\small
+
+\begin{itemize}
+
+
+\item Let's discuss! 
+    \begin{itemize}
+    \item Do the items listed in the ``What Students Do" section match your experience? Would you add any math-specific practices, or take away any listed practices?
+    \item Based on what you've seen in the exam wrapper, do you feel like students do any of the practices in the ``What Students SHOULD Do" section? Where is there room for improvement?
+    \item What are your thoughts on the following quote?
+    \begin{center}
+    {\it ``Students may avoid effective learning strategies because they cause them discomfort.  This finding suggests that students need help understanding the value of discomfort while learning."}
+    \end{center}
+    \end{itemize}
+
+\item One thing that is certainly clear: students need support in using effective study practices to self-regulate their learning! The next slide contains some suggestions...
+
+\end{itemize}
+}
+}
+
+\frame{{Pedagogy: Supporting Student Study Habits}
+
+Do we do any of the following in our course already?
+
+(from {\color{blue}\href{https://lse.ascb.org/wp-content/uploads/sites/10/2020/12/Instructor-Checklist_-Four-Strategies-to-Foster-Student-Metacognition.pdf}{{\bf Four Strategies to Implement in Any Course}}}
+\begin{enumerate}
+\item Instruct students about the power of retrieval practice for improving their retention and exam
+performance.
+\item Encourage students to space their practice.
+\item Develop practice questions that help your students accurately monitor their learning.
+\item Prompt students to develop study plans and to evaluate their approaches after an exam.
+\end{enumerate}
+
+\
+
+How can we improve?
+
+}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame[t]{{Pedagogy}
+
+The article frames that the snowball effect as a challenge made more prominent by alternative grading systems, but not a bug: 
+
+\
+
+``I think this experience, where you have to move on to concept N+1 before you have fully mastered concept N, is normal in our own experiences as learners. Sometimes we can’t fully grasp a concept or topic until we move on to something higher, requiring us to put that earlier concept on the back burner for a while...The lesson here is that while the “snowball effect” might be inevitable in situations where you get more than one opportunity to demonstrate learning, and while it might be ideal for you while it happens, it’s not a critical flaw in alternative grading – it’s just a normal part of the nonlinear nature of learning things."
+
+\
+
+Traditional methods almost by definition do not have this snowball effect (unless you count studying for a final exam). But this is because they don’t have feedback loops. By removing the loop, you remove the snowballing. That is a partial win for students, because they never have to deal with shoring up skill on old topics while new ones are emerging; but it’s also a big loss, for the same reason. On balance, students are better off having feedback loops with the possibility of a snowball than they are without feedback loops and no snowball."
+
+}
