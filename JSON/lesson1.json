@@ -2,14 +2,16 @@
     "name": "Slopes and Rates of Change",
     "week": 1,
     "learning_objectives": [
-        "Find and distinguish the net change and average rate of change",
-        "Interpret the average rate of change graphically as the slope the respective linear function"
+        {"tag": 1, "description": "Find and distinguish the net change and average rate of change. Interpret the average rate of change graphically as the slope the respective linear function"}
     ],
-    "contents:" {
+    "contents": {
         "problems": [
             {
                 "name" : "Exercise A_a",
-                "context": "A predator-prey model describes how the sizes of two populations -- predator $P_1$ and prey $P_2$ -- are related. Suppose two points describing a predator prey model are given by $(P_1,P_2)=(100,1000)$ and $(P_1,P_2)=(300,300)$.",
+                "learning_tag": 1,
+                "context_plain": "A predator-prey model describes how the sizes of two populations -- predator P_1 and prey P_2 -- are related. Suppose two points describing a predator prey model are given by (P_1,P_2)=(100,1000) and (P_1,P_2)=(300,300).",
+                "context_latex": "A predator-prey model describes how the sizes of two populations -- predator $P_1$ and prey $P_2$ -- are related. Suppose two points describing a predator prey model are given by $(P_1,P_2)=(100,1000)$ and $(P_1,P_2)=(300,300)$.",
+                "keywords": ["rate of change", "predator-prey model", "slope"],
                 "subproblems": [
                     {
                         "part": "a",
@@ -45,7 +47,62 @@
                         }
                     }
                 ]
+            },
+            {
+                "name" : "Exercise A_b",
+                "learning_tag": 1,
+                "context_plain": "The equation F = 9/5 C + 32 gives the relationship between temperature in degrees Fahrenheit (F) and temperature in degrees celsius (C).",
+                "context_latex": "The equation $F=\\frac{9}{5}C+32$ gives the relationship between temperature in degrees Fahrenheit ($F$) and temperature in degrees celsius ($C$).",
+                "keywords": ["slope", "rate of change"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "What is the slope of the graph describing the relationship between F and C?",
+                            "answer": "m = 9/5"
+                        },
+                        "latex": {
+                            "question": "What is the slope of the graph describing the relationship between $F$ and $C$?",
+                            "answer": "{\\Large $m=$\\unline{.5}{\\col{$\\frac{9}{5}$}}{.25} }"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "What is the (average) rate of change of the temperature in degrees Fahrenheit with respect to the temperature in degrees Celsius?",
+                            "answer": "AROC = Delta F / Delta C = 9/5"
+                        },
+                        "latex": {
+                            "question": "What is the (average) rate of change of the temperature in degrees Fahrenheit with respect to the temperature in degrees Celsius?",
+                            "answer": "{\\Large AROC $=\\frac{\\Delta F}{\\Delta C}=$\\unline{.5}{\\col{$\\frac{9}{5}$}}{.25} }"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "What is the net change in the temperature in degrees Fahrenheit when the temperature in degrees Celsius increases by 1?",
+                            "answer": "Delta F = 9/5 when Delta C = 1"
+                        },
+                        "latex": {
+                            "question": "What is the net change in the temperature in degrees Fahrenheit when the temperature in degrees Celsius increases by $1$?",
+                            "answer": "{\\Large $\\Delta F=$\\unline{.5}{\\col{$\\frac{9}{5}$}} when $\\Delta C=$\\unline{.5}{\\col{$1$}} }"
+                        }
+                    }
+                ]
+            }
+        ],
+        "other_material":[
+            {"type": "discussion",
+             "content_plain": "Net change is the difference between two quantities; AROC and slope are mathematically the same; Both slope and AROC are computed by the quotient of net changes",
+             "content_latex": "Net change is the difference between two quantities; AROC and slope are mathematically the same; Both slope and AROC are computed by the quotient of net changes"
             }
         ]
-    }
+    },
+    "graph_dependent_excluded": [
+        {"type": "problem", "name": "Demand curve", "reason": "Requires the demand-curve graph (tikzpicture) 'given to the right'; net change, AROC, slope/equation, and interpretation are all read off the plotted line.", "location": "lines 109-199"},
+        {"type": "mini-lecture", "name": "AROC vs IROC", "reason": "Illustrated with secant- and tangent-line graphs (tikzpictures); the secant/tangent definitions reference the plotted curve.", "location": "lines 201-282"},
+        {"type": "problem", "name": "Instantaneous rate of change of y=3-(x-5/2)^2", "reason": "Refers to the graph given in the mini-lecture above and asks to sketch secant lines on provided coordinate planes (tikzpictures).", "location": "lines 283-433"},
+        {"type": "problem", "name": "Supply curve", "reason": "Requires the supply-curve graph (tikzpicture) 'given below'.", "location": "lines 504-547"},
+        {"type": "problem", "name": "Supply & demand curves", "reason": "Requires the supply & demand graph (tikzpicture).", "location": "lines 548-582"}
+    ]
 }
