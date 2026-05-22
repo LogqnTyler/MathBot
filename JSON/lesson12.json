@@ -1,0 +1,213 @@
+{
+  "name": "Concavity & The Second Derivative",
+  "week": 12,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Describe the meaning of concave up/down graphically and using the second derivative. Identify concave up/down intervals and inflection points of a function from a given graph or formula. Represent concepts such as second derivative, concavity, and inflection points graphically."
+    },
+    {
+      "tag": 2,
+      "description": "Apply the Second Derivative Test to determine the local extrema of a function graphically and algebraically."
+    }
+  ],
+  "contents": {
+    "other_material": [
+      {
+        "type": "mini-lecture",
+        "content_plain": "Concave up on interval I: f is bending up; tangent lines are below the graph of f; f'(x) is increasing; f''(x) = d/dx[f'(x)] > 0 (positive).\n\nConcave down on interval I: f is bending down; tangent lines are above the graph of f; f'(x) is decreasing; f''(x) = d/dx[f'(x)] < 0 (negative).\n\nInflection point at x: concavity changes sign; f''(x) = 0 or undefined. Note: f''(x) = 0 only provides candidates for inflection points; a change in sign of concavity must also be confirmed.",
+        "content_latex": "\\textit{Concave up} on interval $I$: $f$ is bending up; tangent lines are below the graph of $f$; $f'(x)$ is increasing; $\\displaystyle f''(x)=\\frac{d}{dx}[f'(x)] > 0$ (positive).\n\n\\textit{Concave down} on interval $I$: $f$ is bending down; tangent lines are above the graph of $f$; $f'(x)$ is decreasing; $\\displaystyle f''(x)=\\frac{d}{dx}[f'(x)] < 0$ (negative).\n\n\\textit{Inflection point} at $x$: concavity changes sign; $f''(x) = 0$ or undefined. Note: $f''(x)=0$ provides only \\textit{candidates} for inflection points; we must confirm a change in sign of concavity."
+      },
+      {
+        "type": "mini-lecture",
+        "content_plain": "Last time, we located local extrema using the First Derivative Test. Today, we locate local extrema using the Second Derivative Test. If f'(c) = 0 and f''(c) < 0, the graph is concave down near c, so we have a local maximum. If f'(c) = 0 and f''(c) > 0, the graph is concave up near c, so we have a local minimum.",
+        "content_latex": "Last time, we located local extrema using the First Derivative Test. Today, we locate local extrema using the Second Derivative Test. If $f'(c)=0$ and $f''(c)<0$, the graph is concave down near $c$, giving a local maximum. If $f'(c)=0$ and $f''(c)>0$, the graph is concave up near $c$, giving a local minimum."
+      },
+      {
+        "type": "theorem",
+        "content_plain": "Second Derivative Test: Suppose f'' is continuous near a critical number x = c (i.e. f'(c) = 0 or f'(c) = DNE).\n(a) If f'(c) = 0 and f''(c) < 0, then we have a Local Maximum at x = c.\n(b) If f'(c) = 0 and f''(c) > 0, then we have a Local Minimum at x = c.\n(c) If f'(c) = DNE, then we cannot use the Second Derivative Test (it is inconclusive).",
+        "content_latex": "\\textbf{Second Derivative Test}: Suppose $f''$ is continuous near a critical number $x=c$ (i.e.\\ $f'(c)=0$ or $f'(c)=DNE$).\n\\begin{enumerate}[(a)]\n\\item If $f'(c)=0$ and $f''(c)<0$, then we have a Local Maximum at $x=c$.\n\\item If $f'(c)=0$ and $f''(c)>0$, then we have a Local Minimum at $x=c$.\n\\item If $f'(c)=DNE$, then we cannot use the Second Derivative Test (inconclusive).\n\\end{enumerate}"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Example: g(x) = 1/(x^2+1), concavity and inflection points",
+        "learning_tag": 1,
+        "context_plain": "Let g(x) = 1/(x^2+1). You may take as given that g'(x) = -2x/(x^2+1)^2 and g''(x) = (6x^2-2)/(x^2+1)^3.",
+        "context_latex": "Let $g(x)=\\frac{1}{x^2+1}$. $g'(x)=\\frac{-2x}{(x^2+1)^2}$ and $g''(x)=\\frac{6x^2-2}{(x^2+1)^3}$.",
+        "keywords": ["concavity", "concave up", "concave down", "inflection point", "second derivative", "sign line"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the intervals on which g is concave up and on which g is concave down. Does the graph of g have any inflection points? If so, specify their x-coordinates. If not, explain.",
+              "answer": "Set g''(x) = 0: (6x^2 - 2)/(x^2+1)^3 = 0, so 6x^2 - 2 = 0, x^2 = 1/3, x = ±1/sqrt(3). Testing intervals: g''(-1) = 4/8 > 0, g''(0) = -2/1 < 0, g''(1) = 4/8 > 0. Sign line: (+) on (-infinity, -1/sqrt(3)), (-) on (-1/sqrt(3), 1/sqrt(3)), (+) on (1/sqrt(3), infinity). Concave up: (-infinity, -1/sqrt(3)) and (1/sqrt(3), infinity). Concave down: (-1/sqrt(3), 1/sqrt(3)). Since sign of g'' changes at x = -1/sqrt(3) and x = 1/sqrt(3), both are inflection points. g'' is defined everywhere, so no additional candidates."
+            },
+            "latex": {
+              "question": "Find the intervals on which $g$ is concave up and on which $g$ is concave down. Does the graph of $g$ have any inflection points? If so, then specify their $x$-coordinates. If not, then explain.",
+              "answer": "Set $g''(x)=0$: $\\frac{6x^2-2}{(x^2+1)^3}=0 \\Rightarrow 6x^2-2=0 \\Rightarrow x^2=\\frac{1}{3} \\Rightarrow x=\\pm\\frac{1}{\\sqrt{3}}$. Testing: $g''(-1)=\\frac{4}{8}>0$, $g''(0)=\\frac{-2}{1}<0$, $g''(1)=\\frac{4}{8}>0$. Sign line: $(+)$ on $\\left(-\\infty,-\\frac{1}{\\sqrt{3}}\\right)$, $(-)$ on $\\left(-\\frac{1}{\\sqrt{3}},\\frac{1}{\\sqrt{3}}\\right)$, $(+)$ on $\\left(\\frac{1}{\\sqrt{3}},\\infty\\right)$. Concave up: $\\left(-\\infty,-\\frac{1}{\\sqrt{3}}\\right)$ and $\\left(\\frac{1}{\\sqrt{3}},\\infty\\right)$. Concave down: $\\left(-\\frac{1}{\\sqrt{3}},\\frac{1}{\\sqrt{3}}\\right)$. Inflection points at $x=-\\frac{1}{\\sqrt{3}}$ and $x=\\frac{1}{\\sqrt{3}}$. Since $g''$ is defined everywhere, these are all candidates."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Recall that the only critical number of g was x = 0, with g'(0) = 0. What does the Second Derivative Test tell us about the behavior of g at its critical number?",
+              "answer": "Since g'(0) = 0, x = 0 is a candidate for a local max or min. From the sign line, g''(0) < 0, so by the Second Derivative Test we have a Local Maximum at x = 0."
+            },
+            "latex": {
+              "question": "Recall that the only critical number of $g$ was $x=0$, with $g'(0)=0$. What does the Second Derivative Test tell us about the behavior of $g$ at its critical number?",
+              "answer": "Since $g'(0)=0$, $x=0$ is a candidate for a local max or min. From the sign line, $g''(0)<0$, so by the Second Derivative Test we have a Local Maximum at $x=0$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: f(x) = x/(x^2+1), concavity, inflection points, Second Derivative Test",
+        "learning_tag": 1,
+        "context_plain": "Let f(x) = x/(x^2+1).",
+        "context_latex": "Let $f(x)=\\frac{x}{x^2+1}$.",
+        "keywords": ["critical numbers", "concavity", "inflection point", "second derivative", "sign line", "Second Derivative Test"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the critical numbers of f.",
+              "answer": "Apply the Quotient Rule with numerator x and denominator x^2+1: f'(x) = (1*(x^2+1) - x*(2x))/(x^2+1)^2 = (1-x^2)/(x^2+1)^2. Set numerator = 0: 1 - x^2 = 0, so (1-x)(1+x) = 0, giving x = 1 and x = -1. Since f'(x) is defined everywhere, the only critical numbers are x = -1 and x = 1."
+            },
+            "latex": {
+              "question": "Find the critical numbers of $f$.",
+              "answer": "Using the Quotient Rule: $f'(x)=\\frac{1\\cdot(x^2+1)-x\\cdot(2x)}{(x^2+1)^2}=\\frac{1-x^2}{(x^2+1)^2}$. Setting $1-x^2=0$: $(1-x)(1+x)=0$, so $x=1$ and $x=-1$. Since $f'(x)$ is defined everywhere, the only critical numbers are $x=-1$ and $x=1$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Given f''(x) = 2x(x+sqrt(3))(x-sqrt(3))/(x^2+1)^3, find the intervals of x-values on which f is concave up and on which f is concave down.",
+              "answer": "Set f''(x) = 0: 2x(x+sqrt(3))(x-sqrt(3)) = 0, so x = 0, x = -sqrt(3), x = sqrt(3). Testing intervals: f''(-2) < 0 (negative), f''(-1) > 0 (positive), f''(1) < 0 (negative), f''(2) > 0 (positive). Sign line: (-) on (-infinity, -sqrt(3)), (+) on (-sqrt(3), 0), (-) on (0, sqrt(3)), (+) on (sqrt(3), infinity). Concave up: (-sqrt(3), 0) and (sqrt(3), infinity). Concave down: (-infinity, -sqrt(3)) and (0, sqrt(3))."
+            },
+            "latex": {
+              "question": "Given $f''(x)=\\frac{2x(x+\\sqrt{3})(x-\\sqrt{3})}{(x^2+1)^3}$, find the intervals of $x$-values on which $f$ is concave up and on which $f$ is concave down.",
+              "answer": "Set $f''(x)=0$: $2x(x+\\sqrt{3})(x-\\sqrt{3})=0 \\Rightarrow x=0,\\,-\\sqrt{3},\\,\\sqrt{3}$. Testing: $f''(-2)<0$, $f''(-1)>0$, $f''(1)<0$, $f''(2)>0$. Sign line: $(-)$ on $(-\\infty,-\\sqrt{3})$, $(+)$ on $(-\\sqrt{3},0)$, $(-)$ on $(0,\\sqrt{3})$, $(+)$ on $(\\sqrt{3},\\infty)$. Concave up: $(-\\sqrt{3},0)$ and $(\\sqrt{3},\\infty)$. Concave down: $(-\\infty,-\\sqrt{3})$ and $(0,\\sqrt{3})$."
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "What are the x-coordinates of the inflection points of the graph of f? If there are multiple values, separate them with commas.",
+              "answer": "Based on the sign line from part b), the sign of f'' changes at x = -sqrt(3), 0, and sqrt(3). So the inflection points occur at x = -sqrt(3), 0, sqrt(3)."
+            },
+            "latex": {
+              "question": "What are the $x$-coordinates of the inflection points of the graph of $f$? If there are multiple such values, then separate them with commas.",
+              "answer": "Based on the sign line from part b), the sign of $f''$ changes at $x=-\\sqrt{3}$, $0$, and $\\sqrt{3}$. Inflection points at $x=-\\sqrt{3},\\,0,\\,\\sqrt{3}$."
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "What does the Second Derivative Test tell you about the behavior of f at its critical numbers? Explicitly use the Second Derivative Test in your response.",
+              "answer": "Critical numbers are x = -1 and x = 1 (from part a). From the sign line in part b): f''(-1) > 0, so by the Second Derivative Test, f has a local minimum at x = -1. f''(1) < 0, so by the Second Derivative Test, f has a local maximum at x = 1.",
+              "learning_tag_override": 2
+            },
+            "latex": {
+              "question": "What does the Second Derivative Test tell you about the behavior of $f$ at its critical numbers? Explicitly use the Second Derivative Test in your response.",
+              "answer": "Critical numbers are $x=-1$ and $x=1$. From the sign line in part b): $f''(-1)>0$, so by the Second Derivative Test, $f$ has a local minimum at $x=-1$. $f''(1)<0$, so by the Second Derivative Test, $f$ has a local maximum at $x=1$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 1: g(x) = x^(2/3)(x+2), concavity and Second Derivative Test",
+        "learning_tag": 1,
+        "context_plain": "Let g(x) = x^(2/3) * (x+2). You may take as given that g'(x) = (5x+4)/(3*x^(1/3)) and g''(x) = 2(5x-2)/(9*x^(4/3)).",
+        "context_latex": "Let $g(x)=x^{2/3}(x+2)$. You may take as given that $g'(x)=\\frac{5x+4}{3\\sqrt[3]{x}}$ and $g''(x)=\\frac{2(5x-2)}{9x^{4/3}}$.",
+        "keywords": ["concavity", "inflection point", "sign line", "second derivative", "Second Derivative Test", "critical numbers"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the intervals where the graph of g is concave up and concave down.",
+              "answer": "Set g''(x) = 0: 2(5x-2)/(9x^(4/3)) = 0. Focus on numerator: 2(5x-2) = 0, so x = 2/5. g'' is undefined when x = 0 (denominator = 0), so x = 0 is also a candidate. Testing intervals: g''(-1) = 2(5(-1)-2)/(9(-1)^(4/3)) = -14/9 < 0; g''(1/5) = 2(5(1/5)-2)/(9(1/5)^(4/3)) < 0 (negative/positive); g''(1) = 6/9 > 0. Sign line: (-) on (-infinity, 0), (-) on (0, 2/5), (+) on (2/5, infinity). Concave up: (2/5, infinity). Concave down: (-infinity, 0) and (0, 2/5)."
+            },
+            "latex": {
+              "question": "Find the intervals where the graph of $g$ is concave up and concave down.",
+              "answer": "Set $g''(x)=0$: $\\frac{2(5x-2)}{9x^{4/3}}=0 \\Rightarrow 2(5x-2)=0 \\Rightarrow x=\\frac{2}{5}$. Also $g''$ is undefined at $x=0$. Testing: $g''(-1)=\\frac{2(5(-1)-2)}{9(-1)^{4/3}}=\\frac{-14}{9}<0$; $g''(1/5)=\\frac{2(5(1/5)-2)}{9(1/5)^{4/3}}<0$; $g''(1)=\\frac{6}{9}>0$. Sign line: $(-)$ on $(-\\infty,0)$, $(-)$ on $(0,2/5)$, $(+)$ on $(2/5,\\infty)$. Concave up: $\\left(\\frac{2}{5},\\infty\\right)$. Concave down: $(-\\infty,0)$ and $\\left(0,\\frac{2}{5}\\right)$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Specify the x-coordinates of any inflection points on the graph of g.",
+              "answer": "From the sign line in part a), g'' changes sign only at x = 2/5 (from negative to positive). At x = 0 the sign does not change (stays negative on both sides). Therefore x = 2/5 is the only inflection point."
+            },
+            "latex": {
+              "question": "Specify the $x$-coordinates of any inflection points on the graph of $g$.",
+              "answer": "From the sign line in part a), $g''$ changes sign only at $x=\\frac{2}{5}$ (from negative to positive). At $x=0$, $g''$ does not change sign. Therefore $x=\\frac{2}{5}$ is the only inflection point."
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "What does the Second Derivative Test tell us about the behavior of g at its critical numbers?",
+              "answer": "Critical numbers: set g'(x) = 0: (5x+4)/(3*x^(1/3)) = 0, so 5x+4 = 0 giving x = -4/5. Also g' is undefined when x = 0, so x = 0 is also a critical number. From the sign line in part a): g''(-4/5) < 0, so by the Second Derivative Test, g has a local maximum at x = -4/5. Since g'(0) = DNE, we cannot use the Second Derivative Test at x = 0. Using the First Derivative Test instead: g'(-2/5) < 0 (decreasing approaching x = 0) and g'(1) > 0 (increasing after x = 0), so g has a local minimum at x = 0.",
+              "learning_tag_override": 2
+            },
+            "latex": {
+              "question": "What does the Second Derivative Test tell us about the behavior of $g$ at its critical numbers?",
+              "answer": "Critical numbers: $g'(x)=0 \\Rightarrow 5x+4=0 \\Rightarrow x=-\\frac{4}{5}$. Also $g'(0)=DNE$, so $x=0$ is a critical number. From the sign line in part a): $g''(-4/5)<0$, so by the Second Derivative Test, $g$ has a local maximum at $x=-\\frac{4}{5}$. Since $g'(0)=DNE$, the Second Derivative Test cannot be applied at $x=0$. Using the First Derivative Test: $g'(-2/5)<0$ and $g'(1)>0$, so $g$ decreases then increases through $x=0$, giving a local minimum at $x=0$."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 1: concavity box diagrams",
+      "reason": "The answer boxes contain images (concavity(1).PNG through concavity(4).PNG and inflectionpoint.PNG) illustrating concave up, concave down, and inflection point behavior; the content is inseparable from those figures.",
+      "location": "Lines 41-91"
+    },
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 2a: concavity/inflection from graph of f",
+      "reason": "Question asks to identify concave-down intervals and inflection points from a tikzpicture graph of f(x).",
+      "location": "Lines 93-205 (first column of mpageTth)"
+    },
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 2b: concavity/inflection from graph of f'",
+      "reason": "Question asks to identify concave-down intervals and inflection points from a tikzpicture graph of f'(x).",
+      "location": "Lines 126-219 (second column of mpageTth)"
+    },
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 2c: concavity/inflection from graph of f''",
+      "reason": "Question asks to identify concave-down intervals and inflection points from a tikzpicture graph of f''(x).",
+      "location": "Lines 159-236 (third column of mpageTth)"
+    },
+    {
+      "type": "mini-lecture",
+      "name": "Mini-lecture: Second Derivative Test local max/min figures",
+      "reason": "The mini-lecture includes two tikzpicture diagrams showing the local maximum and local minimum cases of the Second Derivative Test; the textual content has been captured in other_material but the diagrams are excluded.",
+      "location": "Lines 243-337"
+    },
+    {
+      "type": "problem",
+      "name": "Exam Practice 1a: inflection points from graph of f",
+      "reason": "Question asks for x-coordinates of inflection points given a tikzpicture graph of f(x).",
+      "location": "Lines 677-719"
+    },
+    {
+      "type": "problem",
+      "name": "Exam Practice 1b: inflection points from graph of f'",
+      "reason": "Question asks for x-coordinates of inflection points given a tikzpicture graph of f'(x).",
+      "location": "Lines 722-765"
+    },
+    {
+      "type": "problem",
+      "name": "Exam Practice 1c: inflection points from graph of f''",
+      "reason": "Question asks for x-coordinates of inflection points given a tikzpicture graph of f''(x).",
+      "location": "Lines 768-811"
+    }
+  ]
+}
