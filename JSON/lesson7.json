@@ -1,0 +1,202 @@
+{
+    "name": "Product & Quotient Rules",
+    "week": 4,
+    "learning_objectives": [
+        {"tag": 2, "description": "Apply the product rule and the quotient rule to take the derivative."}
+    ],
+    "contents": {
+        "problems": [
+            {
+                "name": "Warm-up Exercise 1: Product Rule",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["product rule", "derivative", "differentiation rules"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "Complete the Product Rule: d/dx[f(x)g(x)] =", "answer": "f'(x)g(x) + f(x)g'(x)"},
+                        "latex": {"question": "Complete the Product Rule: $\\frac{d}{dx}[f(x)g(x)]=$", "answer": "$f'(x)g(x)+f(x)g'(x)$"}
+                    }
+                ]
+            },
+            {
+                "name": "Example: Product rule derivative",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["product rule", "derivative", "power rule"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find d/dx[(1 - cube root of x)(x^2 - 8x)] evaluated at x = 8.",
+                            "answer": "d/dx[(1 - cube root of x)(x^2 - 8x)] = -1/3 x^(-2/3)(x^2 - 8x) + (2x - 8)(1 - cube root of x). Plug in x = 8: -1/3 * 8^(-2/3)(8^2 - 8(8)) + (2(8) - 8)(1 - cube root of 8) = -8."
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dx}\\left[(1-\\sqrt[3]{x})(x^2-8x)\\right]\\bigg|_{x=8}$",
+                            "answer": "$\\frac{d}{dx}\\left[(1-\\sqrt[3]{x})(x^2-8x)\\right]=-\\frac{1}{3}x^{-2/3}(x^2-8x)+(2x-8)(1-\\sqrt[3]{x})$. Plug in $x=8$: $-\\frac{1}{3}8^{-2/3}(8^2-8(8))+(2(8)-8)(1-\\sqrt[3]{8})=-8$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise: Product rule",
+                "learning_tag": 2,
+                "context_plain": "Find the following derivatives:",
+                "context_latex": "Find the following derivatives:",
+                "keywords": ["product rule", "derivative", "evaluating derivatives"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "d/dx[(x^2+x+1)(4-2x)]", "answer": "(2x+1)(4-2x) - 2(x^2+x+1)"},
+                        "latex": {"question": "$\\frac{d}{dx}[(x^2+x+1)(4-2x)]$", "answer": "$(2x+1)(4-2x)-2(x^2+x+1)$"}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "d/dx[(x^3-2x^2)(sqrt(x)+4)] evaluated at x = 1",
+                            "answer": "d/dx[(x^3-2x^2)(sqrt(x)+4)] = (3x^2-4x)(sqrt(x)+4) + 1/(2sqrt(x))(x^3-2x^2). Plug in x = 1: (3(1)^2-4(1))(sqrt(1)+4) + 1/(2sqrt(1))((1)^3-2(1)^2) = -11/2."
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dx}[(x^3-2x^2)(\\sqrt{x}+4)]\\bigg|_{x=1}$",
+                            "answer": "$\\frac{d}{dx}\\left[(x^3-2x^2)(\\sqrt{x}+4)\\right]=(3x^2-4x)(\\sqrt{x}+4)+\\frac{1}{2\\sqrt{x}}(x^3-2x^2)$. Plug in $x=1$: $(3(1)^2-4(1))(\\sqrt{1}+4)+\\frac{1}{2\\sqrt{1}}((1)^3-2(1)^2)=-\\frac{11}{2}$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "d/dt[t * f(t)] evaluated at t = 2, where f(2) = -3 and f'(2) = 7",
+                            "answer": "d/dt[t * f(t)] = f(t) + t * f'(t). Plug in t = 2: -3 + 2 * 7 = 11."
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dt}\\left[t\\cdot f(t)\\right]\\bigg|_{t=2}$, where $f(2)=-3$ and $f'(2)=7$",
+                            "answer": "$\\frac{d}{dt}\\left[t\\cdot f(t)\\right]=f(t)+t\\cdot f'(t)$. Plug in $t=2$: $-3+2\\cdot 7=11$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Warm-up Exercise 2: Quotient Rule",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["quotient rule", "derivative", "differentiation rules"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "Complete the Quotient Rule: d/dx[hi(x)/lo(x)] =", "answer": "(lo(x) * hi'(x) - hi(x) * lo'(x)) / (lo(x))^2"},
+                        "latex": {"question": "Complete the Quotient Rule: $\\frac{d}{dx}\\left[\\frac{hi(x)}{lo(x)}\\right]=$", "answer": "$\\frac{lo(x)hi'(x)-hi(x)lo'(x)}{(lo(x))^2}$"}
+                    }
+                ]
+            },
+            {
+                "name": "Example: Quotient rule derivative",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["quotient rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find d/dy[(y^3-y^2+1)/(1-y)] evaluated at y = 0.",
+                            "answer": "d/dy[(y^3-y^2+1)/(1-y)] = ((1-y)(3y^2-2y) - (y^3-y^2+1)(-1)) / (1-y)^2. Plug in y = 0: ((1-0)(3(0)^2-2(0)) - ((0)^3-(0)^2+1)(-1)) / (1-0)^2 = 1."
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dy}\\left[\\frac{y^3-y^2+1}{1-y}\\right]\\bigg|_{y=0}$",
+                            "answer": "$\\frac{d}{dy}\\left[\\frac{y^3-y^2+1}{1-y}\\right]=\\frac{(1-y)(3y^2-2y)-(y^3-y^2+1)(-1)}{(1-y)^2}$. Plug in $y=0$: $\\frac{(1-0)(3(0)^2-2(0))-((0)^3-(0)^2+1)(-1)}{(1-0)^2}=1$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise: Quotient rule",
+                "learning_tag": 2,
+                "context_plain": "Find the following derivatives:",
+                "context_latex": "Find the following derivatives:",
+                "keywords": ["quotient rule", "product rule", "derivative", "evaluating derivatives"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "d/dt[f(t)/g(t)] evaluated at t = 1, where f(1) = 2, f'(1) = 3, g(1) = -3, and g'(1) = -1",
+                            "answer": "d/dt[f(t)/g(t)]|_{t=1} = (f'(t)g(t) - f(t)g'(t))/(g(t))^2 |_{t=1} = (f'(1)g(1) - f(1)g'(1))/(g(1))^2 = -7/9"
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dt}\\left[\\frac{f(t)}{g(t)}\\right]\\bigg|_{t=1}$, where $f(1)=2$, $f'(1)=3$, $g(1)=-3$, and $g'(1)=-1$",
+                            "answer": "$\\frac{d}{dt}\\left[\\frac{f(t)}{g(t)}\\right]\\bigg|_{t=1}=\\frac{f'(t)g(t)-f(t)g'(t)}{(g(t))^2}\\bigg|_{t=1}=\\frac{f'(1)g(1)-f(1)g'(1)}{(g(1))^2}=-\\frac{7}{9}$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "d/dz[z^3/(1+z^2)]", "answer": "(3z^2(1+z^2) - z^3(2z))/(1+z^2)^2"},
+                        "latex": {"question": "$\\frac{d}{dz}\\left[\\frac{z^3}{1+z^2}\\right]$", "answer": "$\\frac{d}{dz}\\left[\\frac{z^3}{1+z^2}\\right]=\\frac{3z^2(1+z^2)-z^3(2z)}{(1+z^2)^2}$"}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "d/dz[z^3 g(z)/(1+z^2)] evaluated at z = 1, where g(1) = 0 and g'(1) = -2",
+                            "answer": "d/dz[z^3 g(z)/(1+z^2)]|_{z=1} = ((3z^2 g(z) + z^3 g'(z))(1+z^2) - z^3 g(z)(2z))/(1+z^2)^2 |_{z=1} = ((3(1)^2 g(1) + (1)^3 g'(1))(1+(1)^2) - (1)^3 g(1)(2))/(1+(1)^2)^2 = (-4 - 0)/4 = -1"
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dz}\\left[\\frac{z^3g(z)}{1+z^2}\\right]\\bigg|_{z=1}$, where $g(1)=0$ and $g'(1)=-2$",
+                            "answer": "$\\frac{d}{dz}\\left[\\frac{z^3g(z)}{1+z^2}\\right]\\bigg|_{z=1}=\\frac{(3z^2g(z)+z^3g'(z))(1+z^2)-z^3g(z)(2z)}{(1+z^2)^2}\\bigg|_{z=1}=\\frac{(3(1)^2g(1)+(1)^3g'(1))(1+(1)^2)-(1)^3g(1)(2)}{(1+(1)^2)^2}=\\frac{-4-0}{4}=-1$"
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "d/dt[(cube root of t + 1)/(e^t(t^2-2t+2))]",
+                            "answer": "d/dt[(cube root of t + 1)/(e^t(t^2-2t+2))] = ((1/3)t^(-2/3) e^t(t^2-2t+2) - (cube root of t + 1)(e^t(t^2-2t+2) + e^t(2t-2)) / (e^(2t)(t^2-2t+2)^2)"
+                        },
+                        "latex": {
+                            "question": "$\\frac{d}{dt}\\left[\\frac{\\sqrt[3]{t}+1}{e^t(t^2-2t+2)}\\right]$",
+                            "answer": "$\\frac{d}{dt}\\left[\\frac{\\sqrt[3]{t}+1}{e^t(t^2-2t+2)}\\right]=\\frac{(1/3)t^{-2/3}e^t(t^2-2t+2)-(\\sqrt[3]{t}+1)(e^t(t^2-2t+2)+e^t(2t-2))}{e^{2t}(t^2-2t+2)^2}$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 2: Sprinter heart rate",
+                "learning_tag": 2,
+                "context_plain": "Kinesiologists track sprinters' heart rates after completing a 400 meter sprint to get a better sense of strain on athletes' cardiovascular systems after an intense workout. Collected data suggest that the function f(t) = 120/(1 + sqrt(t)) can be used to predict how elevated a sprinter's heart rate (in beats/minute) will be above their resting heart rate t minutes after completing the 400 meter sprint.",
+                "context_latex": "Kinesiologists track sprinters' heart rates after completing a $400$ meter sprint to get a better sense of strain on athletes' cardiovascular systems after an intense workout. Collected data suggest that the function $f(t)=\\frac{120}{1+\\sqrt{t}}$ can be used to predict how elevated a sprinter's heart rate (in $\\frac{\\text{beats}}{\\text{minute}}$) will be above their resting heart rate $t$ minutes after completing the $400$ meter sprint.",
+                "keywords": ["derivative", "quotient rule", "rate of change", "derivative interpretation", "units"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find f'(4).",
+                            "answer": "f'(t) = -120(1/2)t^(-1/2)/(1+sqrt(t))^2 = -60t^(-1/2)/(1+sqrt(t))^2. f'(4) = -60(4)^(-1/2)/(1+sqrt(4))^2 = -60(1/2)/9 = -10/3."
+                        },
+                        "latex": {
+                            "question": "Find $f'(4)$.",
+                            "answer": "$f'(t)=\\frac{-120(1/2)t^{-1/2}}{(1+\\sqrt{t})^2}=\\frac{-60t^{-1/2}}{(1+\\sqrt{t})^2}$. $f'(4)=\\frac{-60(4)^{-1/2}}{(1+\\sqrt{4})^2}=\\frac{-60(1/2)}{9}=-\\frac{10}{3}$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "What are the units of measurement of f'(4)?", "answer": "beats/minute^2"},
+                        "latex": {"question": "What are the units of measurement of $f'(4)$?", "answer": "$\\frac{\\text{beats}}{\\text{minute}^2}$"}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "What does f'(4) represent in this context? (Note: 'in this context' means your answer must clearly relate to the scenario described in the problem. Answers like 'the derivative of f when t = 4' are not in context.)",
+                            "answer": "At 4 minutes after completing the 400 meter sprint, if another minute passes by, the sprinter's heart rate would change by approximately f'(4) beats/minute."
+                        },
+                        "latex": {
+                            "question": "What does $f'(4)$ represent in this context? (\\textbf{Note:} ``in this context'' means your answer must clearly relate to the scenario described in the problem. Answers like ``the derivative of $f$ when $t=4$'' are not in context.)",
+                            "answer": "At 4 minutes after completing the 400 meter sprint, if another minute passes by, the sprinter's heart rate would change by approximately $f'(4)$ $\\frac{\\text{beats}}{\\text{minute}}$."
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "problem", "name": "Extra Practice 1: p'(1) and q'(5) from graphs of f and g", "reason": "f and g are 'functions whose graphs are shown to the right'; computing p'(1)=f'(1)g(1)+f(1)g'(1) and q'(5) requires reading function values and slopes off the plotted piecewise-linear graphs of f and g (tikzpicture).", "location": "lines 141-183 (tikzpicture at 149-169)"},
+        {"type": "problem", "name": "Extra Practice 2 part (d): match f, f', f'' to plotted curves", "reason": "Multiple-choice asks which assignment of solid/dashed/dotted curves to f, f', f'' is correct; requires reading the tikzpicture plotting all three. Parts (a)-(c) (compute f'(4), its units, its interpretation) are kept in problems.", "location": "lines 223-270 (tikzpicture at 240-266)"}
+    ]
+}
