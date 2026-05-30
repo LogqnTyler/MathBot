@@ -1,0 +1,246 @@
+{
+  "name": "Net Change, Area, and Definite Integrals",
+  "week": 15,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Estimate definite integrals using rectangles of equal width."
+    },
+    {
+      "tag": 2,
+      "description": "Explain the meaning of a definite integral of a function in context, including determining the units of the integral."
+    },
+    {
+      "tag": 3,
+      "description": "Write mathematical expressions involving definite integrals to represent a given scenario."
+    }
+  ],
+  "contents": {
+    "definitions": [
+      {
+        "term": "Definite Integral",
+        "definition_plain": "Let a and b be real numbers with a < b, and suppose f is continuous on the interval [a,b]. The definite integral of f from a to b is denoted by integral from a to b of f(x) dx and represents the Net Area between the graph of f and the interval along the x-axis from a to b. If f represents the rate of change of a quantity, then the integral from a to b of f(x) dx represents the Net Change in the quantity as x varies from a to b.",
+        "definition_latex": "Let $a$ and $b$ be real numbers with $a<b$, and suppose $f$ is continuous on the interval $[a,b]$. The \\textbf{definite integral} of $f$ from $a$ to $b$ is denoted by \\[\\int_a^b f(x)\\,dx\\] and represents the \\textit{Net Area} between the graph of $f$ and the interval along the $x$-axis from $a$ to $b$. If $f$ represents the rate of change of a quantity, then $\\displaystyle \\int_a^b f(x)\\,dx$ represents the \\textit{Net Change} in the quantity as $x$ varies from $a$ to $b$."
+      }
+    ],
+    "other_material": [
+      {
+        "type": "discussion",
+        "content_plain": "During our first lesson of the semester, we asked 'how are slope, rate of change, and net change related?' So far, slope and AROC are identical in a linear relationship, and the slope of a tangent line is identical to IROC. However, we have not yet meaningfully related net change to any of these quantities. Now that we have extensively developed the derivative as a tool to measure slopes and IROC, we can begin to make better sense of the relationship between these quantities and net change. We will begin by using IROC to estimate net change, and then introduce a new tool that can measure net change directly.",
+        "content_latex": "During our first lesson of the semester, we asked ``how are slope, rate of change, and net change related?'' So far, we've discovered that slope and AROC are identical in a linear relationship, and that the slope of a tangent line is identical to IROC. However, we have not meaningfully related net change to any of these quantities.\n\nNow that we've extensively developed a tool $-$ the derivative $-$ that can measure slopes \\& IROC, we can begin to make better sense of the relationship between these quantities and net change. In this lesson, we will begin by using IROC to estimate net change, and then introduce a new tool that can measure net change directly."
+      },
+      {
+        "type": "mini-lecture",
+        "content_plain": "Net Change, Area, and the Definite Integral. To estimate the net change of a quantity over an interval [a,b] when only its rate-of-change function f(t) is known, we subdivide [a,b] into n subintervals of equal width Delta t = (b-a)/n, choose a sample point in each subinterval (left endpoint, right endpoint, or midpoint), and approximate net change as a sum of rectangle areas: Net Change ~ sum of f(t_i) * Delta t. The more rectangles used, the smaller the gaps between the graph of f(t) and the rectangles, so the estimate of Net Area / Net Change improves. Taking the limit as n -> infinity gives the Exact Net Area / Exact Net Change, denoted by the integral from a to b of f(t) dt.",
+        "content_latex": "\\textbf{Mini-lecture} (\\textit{net change, area, and the definite integral}). To estimate the net change of a quantity over an interval $[a,b]$ when only its rate-of-change function $f(t)$ is known, we subdivide $[a,b]$ into $n$ subintervals of equal width $\\Delta t=(b-a)/n$, choose a sample point in each subinterval (left endpoint, right endpoint, or midpoint), and approximate net change as a sum of rectangle areas: $\\text{Net Change}\\approx \\sum f(t_i)\\,\\Delta t$. The more rectangles that are used, the smaller the ``gaps'' between the graph of $w'(t)$ and the rectangles, so the estimate of Net Area / Net Change improves. Taking the limit as $n\\to\\infty$ gives the \\textit{Exact Net Area / Exact Net Change}:\n$$\\text{\\textit{Exact Net Area/Change}}=\\int_a^b f(t)\\,dt$$"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Estimating net change from a rate-of-change function:\n1. Choose the number of rectangles n and compute Delta t = (end - start)/n.\n2. Choose left endpoints, right endpoints, or midpoints to evaluate the rate function on each subinterval.\n3. Approximate Net Change ~ sum of f(sample point) * Delta t.\n4. Left- and right-endpoint estimates typically bracket the true value. The exact net change is the definite integral.",
+        "content_latex": "\\textbf{Estimating net change from a rate-of-change function:}\n\\begin{enumerate}\n\\item Choose the number of rectangles $n$ and compute $\\Delta t=\\frac{\\text{end}-\\text{start}}{n}$.\n\\item Choose left endpoints, right endpoints, or midpoints to evaluate the rate function on each subinterval.\n\\item Approximate $\\text{Net Change}\\approx \\sum f(\\text{sample point})\\cdot \\Delta t$.\n\\item Left- and right-endpoint estimates typically bracket the true value. The exact net change is the definite integral.\n\\end{enumerate}"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Example: Definite Integral Expression for Net Change in Infant Weight",
+        "learning_tag": 3,
+        "context_plain": "From the previous infant-weight scenario: w(t) is an infant's weight (in pounds) at t weeks after birth, and w'(t) is the growth rate in pounds per week.",
+        "context_latex": "From the previous infant-weight scenario: $w(t)$ is an infant's weight (in pounds) at $t$ weeks after birth, and $w'(t)$ is the growth rate in pounds per week.",
+        "keywords": ["definite integral", "net change", "units", "rate of change"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Based on the definition of the definite integral, write a mathematical expression representing the net change Delta w in the infant's weight from birth to 4 weeks, and indicate its units.",
+              "answer": "Delta w = integral from 0 to 4 of w'(t) dt, in pounds."
+            },
+            "latex": {
+              "question": "Based on the definition of definite integral, write a mathematical expression representing the net change $\\Delta w$ in the infant's weight from birth to $4$ weeks for the scenario in Exercise A, and indicate its units.",
+              "answer": "$$\\Delta w = \\int_0^4 w'(t)\\,dt \\text{ pounds}$$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Units and Interpretation of a Temperature Rate Integral",
+        "learning_tag": 2,
+        "context_plain": "Let T'(t) represent the (instantaneous) rate of change (in degrees Celsius per day) of temperature in Charlottesville at a time t (in days) during a particular week.",
+        "context_latex": "Let $T'(t)$ represent the (instantaneous) rate of change (in $^{\\circ}$C/day) of temperature in Charlottesville at a time $t$ (in days) during a particular week.",
+        "keywords": ["definite integral", "units", "net change", "rate of change", "temperature"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "What are the units of the integral from 1/2 to 3/2 of T'(t) dt?",
+              "answer": "Degrees Celsius (degrees C). (Rate units degrees C/day multiplied by time units days give degrees C.)"
+            },
+            "latex": {
+              "question": "What are the units of $\\displaystyle \\int_{1/2}^{3/2} T'(t)\\,dt$?",
+              "answer": "Degrees Celsius, $^\\circ$C. (Rate units $^\\circ$C/day times time units days give $^\\circ$C.)"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "What does this integral represent in the given context?",
+              "answer": "The net change in the temperature (in degrees Celsius) between noon on Day 1 (t = 1/2) and noon on Day 2 (t = 3/2)."
+            },
+            "latex": {
+              "question": "What does this integral represent in the given context?",
+              "answer": "The net change in the temperature (in degrees Celsius) between noon on Day 1 (i.e. $t=1/2$) to noon on Day 2 (i.e. $t=3/2$)."
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "If the temperature at noon on the first day of the week is 20 degrees C, then which of the following integral expressions represents the temperature at noon on the second day of the week?\nA. 20 + integral from 1/2 to 3/2 of T'(t) dt\nB. 20 - integral from 1/2 to 3/2 of T'(t) dt\nC. integral from 1/2 to 3/2 of T'(t) dt - 20\nD. integral from 0 to 3/2 of T'(t) dt\nE. None of these options.",
+              "answer": "Correct answer: A.\n\nThe temperature at noon on the second day of the week, T(3/2), equals the temperature at noon on Day 1 plus the net change in temperature:\n  T(3/2) = T(1/2) + Delta T\n         = T(1/2) + integral from 1/2 to 3/2 of T'(t) dt\n         = 20 + integral from 1/2 to 3/2 of T'(t) dt\n\nSo choice A is correct."
+            },
+            "latex": {
+              "question": "If the temperature at noon on the first day of the week is $20^\\circ$C, then which of the following integral expressions represents the temperature at noon on the second day of the week?\n\\begin{enumerate}\n\\item[A.] $20+\\displaystyle \\int_{1/2}^{3/2} T'(t)\\,dt$\n\\item[B.] $20-\\displaystyle \\int_{1/2}^{3/2} T'(t)\\,dt$\n\\item[C.] $\\displaystyle \\int_{1/2}^{3/2} T'(t)\\,dt-20$\n\\item[D.] $\\displaystyle \\int_{0}^{3/2} T'(t)\\,dt$\n\\item[E.] None of these options.\n\\end{enumerate}",
+              "answer": "Correct answer: A.\n\nThe temperature at noon on the second day of the week, $T(3/2)$, equals the temperature at noon on Day 1 plus the net change in temperature:\n\\begin{align*}\nT(3/2)&=\\text{temperature at noon on Day 1}+\\text{net change in temperature}\\\\\nT(3/2)&=T(1/2)+\\Delta T\\\\\nT(3/2)&=T(1/2)+\\int_{1/2}^{3/2}T'(t)\\,dt\\\\\nT(3/2)&=20+\\int_{1/2}^{3/2}T'(t)\\,dt\n\\end{align*}\nThus choice A is the best choice."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Population Rate Interpretation (Algebraic Parts)",
+        "learning_tag": 2,
+        "context_plain": "The population of a country changes over time as people immigrate and emigrate. Suppose f(t) gives the rate of change of the population t years after officials began keeping records, in thousands per year.",
+        "context_latex": "The population of a country changes over time as people immigrate and emigrate. Suppose $f(t)$ gives the rate of change of the population $t$ years after officials began keeping records, in thousands per year.",
+        "keywords": ["definite integral", "net change", "units", "rate of change", "population"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Interpret f(1) = 24 in terms of the context, including units.",
+              "answer": "At the end of year 1, the population is increasing at a rate of 24,000 people per year (since the units of f are thousands of people per year).\n\nAlternative description: if the population were to continue changing exactly as it did at the end of year 1, the population would increase by 24,000 people over the next year. (IROC)"
+            },
+            "latex": {
+              "question": "Interpret in words the meaning of $f(1)=24$ in terms of the context described above, including units.",
+              "answer": "At the end of year 1, the population is increasing at a rate of $24{,}000$ people per year (since the units of $f$ are thousands of people per year).\n\n\\textit{Alternative Description:} If the population were to continue to change exactly as it did at the end of year 1, then the population would increase by $24{,}000$ people over the next year. (IROC)"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Interpret the integral from 1 to 7 of f(t) dt in terms of the context, including units.",
+              "answer": "It represents the net change in the country's population, in thousands of people, from the end of year 1 to the end of year 7. (The source asserts a graph-based estimate of ~36,000 people; the value depends on reading the graph.)"
+            },
+            "latex": {
+              "question": "Interpret in words the meaning of $\\displaystyle \\int_1^7 f(t)\\,dt$ in terms of the context described above, including units.",
+              "answer": "It represents the net change in the country's population, in thousands of people, from the end of year 1 to the end of year 7. (The source asserts a graph-based estimate of $\\approx 36{,}000$ people; that value depends on reading the graph.)"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Suppose the population 1 year after officials began keeping records was 2000. Write -- but do not solve -- an integral expression representing the number of people at time t = 4.",
+              "answer": "P(4) = P(1) + Delta P\n     = P(1) + 1000 * integral from 1 to 4 of f(t) dt\n     = 2000 + 1000 * integral from 1 to 4 of f(t) dt   people (multiply by 1000 to convert thousands of people from f back to people)"
+            },
+            "latex": {
+              "question": "Suppose the population $1$ year after officials began keeping records was $2000$. Write $-$ but do not solve $-$ an integral expression representing the number of people at time $t=4$.",
+              "answer": "\\begin{align*}\nP(4)&=P(1)+\\Delta P\\\\\nP(4)&=P(1)+1000\\int_1^4 f(t)\\,dt\\\\\nP(4)&=2000+1000\\int_1^4 f(t)\\,dt\\ \\text{people}\n\\end{align*}\n(Multiply the integral by $1000$ to convert thousands of people from $f$ back to people.)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 1: Faucet and Tank Water Volume",
+        "learning_tag": 3,
+        "context_plain": "A faucet is pouring water into a tank, which has a small hole in the bottom. Suppose r(t) is the rate at which the volume of water in the tank is changing, measured in gallons per hour, t hours after the faucet is turned on.",
+        "context_latex": "A faucet is pouring water into a tank, which happens to have a small hole in the bottom. Suppose $r(t)$ is the rate at which the volume of water in the tank is changing, measured in gallons per hour, $t$ hours after the faucet is turned on.",
+        "keywords": ["definite integral", "net change", "units", "rate of change", "integral expression"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Interpret r(2) = -1 in the given context, including units.",
+              "answer": "Two hours after the faucet is turned on, the water volume is decreasing at a rate of 1 gallon per hour.\n\nAlternative description: if the volume of water were to continue to change exactly as it did two hours after the faucet is turned on, the water volume would decrease by 1 gallon per hour. (IROC)"
+            },
+            "latex": {
+              "question": "Interpret in words the meaning of $r(2)=-1$ in the given context, including units.",
+              "answer": "Two hours after the faucet is turned on, the water volume is \\textit{decreasing} at a rate of $1$ gallon per hour.\n\n\\textit{Alternative Description:} If the volume of water were to continue to change exactly as it did two hours after the faucet is turned on, then the water volume would decrease by $1$ gallon per hour. (IROC)"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Interpret the integral from 1 to 3 of r(t) dt in the given context, including units.",
+              "answer": "It represents how much the volume of water (in gallons) in the tank changed from 1 hour to 3 hours after the faucet is turned on."
+            },
+            "latex": {
+              "question": "Interpret in words the meaning of $\\displaystyle \\int_1^3 r(t)\\,dt$ in the given context, including units.",
+              "answer": "This represents how much the volume of water (in gallons) in the tank changed from $1$ hour to $3$ hours after the faucet is turned on."
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Write a mathematical expression representing the net change (in gallons) in the amount of water in the tank two hours after the faucet is turned on.",
+              "answer": "Net change from t = 0 to t = 2:\n  integral from 0 to 2 of r(t) dt"
+            },
+            "latex": {
+              "question": "Write a mathematical expression representing the net change (in gallons) in the amount of water in the bucket two hours after the faucet is turned on.",
+              "answer": "Net change from $t=0$ to $t=2$:\n$$\\int_0^2 r(t)\\,dt$$"
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "Write a mathematical expression representing the initial rate (in gallons per hour) at which the volume of water in the tank is changing.",
+              "answer": "The initial rate occurs at t = 0, so the initial rate of change is r(0)."
+            },
+            "latex": {
+              "question": "Write a mathematical expression representing the initial rate (in gallons per hour) at which the volume of water in the tank is changing.",
+              "answer": "We assume the initial rate occurs at $t=0$. The initial rate at which the volume of water in the tank is changing is\n$$r(0).$$"
+            }
+          },
+          {
+            "part": "e",
+            "plain_text": {
+              "question": "Suppose the tank initially contains 1 gallon of water. Write an integral expression representing the amount of water in the tank 2 hours after the faucet is turned on.",
+              "answer": "Volume at t = 2:\n  1 + integral from 0 to 2 of r(t) dt"
+            },
+            "latex": {
+              "question": "Suppose the tank initially contains $1$ gallon of water. Write an integral expression representing the amount of water in the bucket $2$ hours after the faucet is turned on.",
+              "answer": "Volume at $t=2$:\n$$1 + \\int_0^2 r(t)\\,dt$$"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "example",
+      "name": "Example: estimate Delta x from velocity graph (parts a, b, c)",
+      "reason": "All three parts require reading values of v(t) (v(2)=3, v(3)=2, v(4)=0) off a tikzpicture of the velocity curve over [0,4]. Part (b) asks the student to sketch rectangles on the graph; part (c) builds on the numeric estimate from (a). Cannot be reconstructed without the figure.",
+      "location": "lines 46-256"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise A: estimate infant-weight Delta w from growth-rate graph (parts a, b)",
+      "reason": "Part (a) requires reading values of w'(t) (w'(0)=-1, w'(1)=0, w'(2)=3, w'(3)=1.5, w'(4)=2.5) off a tikzpicture of the growth-rate curve over [0,4] and sketching rectangles. Part (b) builds on (a) using w(0)=7. Both depend on the graph.",
+      "location": "lines 265-407"
+    },
+    {
+      "type": "mini-lecture",
+      "name": "Mini-lecture: Riemann-sum convergence figures (4 tikzpictures showing increasing rectangle counts)",
+      "reason": "Mini-lecture content is a sequence of four tikzpictures of the growth-rate curve with progressively narrower rectangles (n=4, n=8, n=16, n -> infinity with shaded area). The conceptual takeaway is preserved in `other_material`; the figures themselves cannot be reconstructed without the source.",
+      "location": "lines 413-610"
+    },
+    {
+      "type": "problem",
+      "name": "Population Exercise: rectangle-rule estimate of integral from 1 to 7 of f(t) dt (part b)",
+      "reason": "Requires reading f(1)=24, f(3)=8, f(5)=-16, f(7)=48 off a tikzpicture of the cubic-like population-rate curve over [0,8] for left- and right-endpoint estimates with 3 rectangles, plus sketching the rectangles. Cannot be reconstructed without the figure.",
+      "location": "lines 716-814"
+    },
+    {
+      "type": "problem",
+      "name": "Population Exercise: population-rate graph figure",
+      "reason": "Referenced tikzpicture of the population-rate curve f(t) = -1 + 42t - 19t^2 + 2t^3 over [0,8]. Kept parts (a)i, (a)ii, (c) are fully self-contained algebraically given the value f(1)=24 in the question and the source's stated estimate ~36,000 in (a)ii.",
+      "location": "lines 672-695"
+    }
+  ]
+}

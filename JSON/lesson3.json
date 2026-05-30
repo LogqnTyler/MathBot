@@ -50,11 +50,11 @@
                         "part": "a",
                         "plain_text": {
                             "question": "f(x) = sqrt(x+5)/(x+2) is continuous at x = 4. Find lim_{x -> 4} sqrt(x+5)/(x+2).",
-                            "answer": "We are told that f(x) = (x^2+1)/(x-2) is continuous at x = 4. Thus, lim_{x -> 4} f(x) = f(4) = sqrt(4+5)/(4+2) = 3/6 = 1/2"
+                            "answer": "We are told that f(x) = sqrt(x+5)/(x+2) is continuous at x = 4. Thus, lim_{x -> 4} f(x) = f(4) = sqrt(4+5)/(4+2) = 3/6 = 1/2"
                         },
                         "latex": {
                             "question": "$\\displaystyle f(x)=\\frac{\\sqrt{x+5}}{x+2}$ is continuous at $x=4$. Find $\\displaystyle \\lim_{x\\to4} \\frac{\\sqrt{x+5}}{x+2}$.",
-                            "answer": "We are told that $\\displaystyle f(x)=\\frac{x^2+1}{x-2}$ is continuous at $x=4$. Thus, $$\\lim_{x\\to4} f(x)=f(4)=\\frac{\\sqrt{4+5}}{4+2}=\\frac{3}{6}=\\frac{1}{2}$$"
+                            "answer": "We are told that $\\displaystyle f(x)=\\frac{\\sqrt{x+5}}{x+2}$ is continuous at $x=4$. Thus, $$\\lim_{x\\to4} f(x)=f(4)=\\frac{\\sqrt{4+5}}{4+2}=\\frac{3}{6}=\\frac{1}{2}$$"
                         }
                     }
                 ]
@@ -167,7 +167,7 @@
                         "part": "a",
                         "plain_text": {
                             "question": "On which of the following intervals is f(x) = ln(x)/(x-4) continuous? Circle all that apply, and explain below.\n\n1. [5,8]\n\n2. [0,2]\n\n3. [1,5]\n\n4. [-7,-1]",
-                            "answer": "We note that when x = 4, we have a division by 0: ln(4)/(4-4) = ln(4)/0. So x = 4 is not in the domain. This is the only one of our 3 Practical Rues for determining what is not in the domain that is relevant.\n\nWe eliminate any interval above that contains 1. That leaves us with three intervals that do not contain x = 4:\n\n[5,8], [0,2], and [-7,-1]\n\nln(x) is not continuous for x <= 0 so we eliminate any interval that contains 0 or a negative value. This leaves the interval [5,8] as the only option where f(x) is continuous."
+                            "answer": "We note that when x = 4, we have a division by 0: ln(4)/(4-4) = ln(4)/0. So x = 4 is not in the domain. This is the only one of our 3 Practical Rues for determining what is not in the domain that is relevant.\n\nWe eliminate any interval above that contains 4. That leaves us with three intervals that do not contain x = 4:\n\n[5,8], [0,2], and [-7,-1]\n\nln(x) is not continuous for x <= 0 so we eliminate any interval that contains 0 or a negative value. This leaves the interval [5,8] as the only option where f(x) is continuous."
                         },
                         "latex": {
                             "question": "On which of the following intervals is $f(x)=\\frac{\\ln(x)}{x-4}$ continuous? Circle all that apply, and explain below.\n\n1. $[5,8]$\n\n2. $[0,2]$\n\n3. $[1,5]$\n\n4. $[-7,-1]$",
@@ -187,11 +187,11 @@
                         "part": "a",
                         "plain_text": {
                             "question": "Give 1 example of an interval on which g(x) = 1/sqrt(x-1) is continuous, and 1 example of an interval where g is not continuous. Explain why your examples are correct.",
-                            "answer": "There are many reasonable answers to this question. We go back to our 3 Practical Rules on previous page and note that we have two potential issues:\n\n1. Division by 0 when x = 1: 1/sqrt(1-1) = 1/0. In order to be continuous, our domain must be at least x != 1.\n\n2. Square root of a negative number. In particular the x values that cause problems are x - 1 < 0 => x < 1. We must avoid these problems so for our function to be continuous our domain is at least x >= 1."
+                            "answer": "There are many reasonable answers to this question. We go back to our 3 Practical Rules on previous page and note that we have two potential issues:\n\n1. Division by 0 when x = 1: 1/sqrt(1-1) = 1/0. In order to be continuous, our domain must be at least x != 1.\n\n2. Square root of a negative number. In particular the x values that cause problems are x - 1 < 0 => x < 1. We must avoid these problems so for our function to be continuous our domain is at least x >= 1.\n\nCombining these, g is continuous on any interval contained in x > 1 (e.g. [2,3] or (1, infinity)), and not continuous on any interval containing x = 1 or where x < 1 (e.g. [-2,3] or (0,1))."
                         },
                         "latex": {
                             "question": "Give 1 example of an interval on which $g(x)=\\frac{1}{\\sqrt{x-1}}$ is continuous, and 1 example of an interval where $g$ is not continuous. Explain why your examples are correct.",
-                            "answer": "There are many reasonable answers. We have two potential issues: (1) Division by $0$ when $x=1$: $\\frac{1}{\\sqrt{1-1}}=\\frac{1}{0}$, so for continuity our domain must have at least $x\\neq 1$. (2) Square root of a negative number: the values that cause problems are $x-1<0\\Rightarrow x<1$, so for continuity our domain must have at least $x\\geq 1$. Combining these, $g$ is continuous on any interval contained in $x>1$ (e.g. $[2,3]$ or $(1,\\infty)$), and not continuous on any interval containing $x=1$ or where $x<1$ (e.g. $[-2,3]$ or $(0,1)$)."
+                            "answer": "There are many reasonable answers. We have two potential issues: (1) Division by $0$ when $x=1$: $\\frac{1}{\\sqrt{1-1}}=\\frac{1}{0}$, so for continuity our domain must have at least $x\\neq 1$. (2) Square root of a negative number: the values that cause problems are $x-1<0\\Rightarrow x<1$, so for continuity our domain is at least $x\\geq 1$. Combining these, $g$ is continuous on any interval contained in $x>1$ (e.g. $[2,3]$ or $(1,\\infty)$), and not continuous on any interval containing $x=1$ or where $x<1$ (e.g. $[-2,3]$ or $(0,1)$)."
                         }
                     }
                 ]
