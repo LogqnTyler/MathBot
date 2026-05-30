@@ -47,11 +47,11 @@
                         "part": "c",
                         "plain_text": {
                             "question": "The table of values you wrote in part (a) could be used to crudely estimate a limit. Which limit could it be used to estimate? You don't need to find the value of the limit - just write it.",
-                            "answer": "lim as t -> 3 of (f(t)-f(3))/(t-3)\n\nEquivalently: lim as h -> 0 of (f(t+h)-f(3))/h = lim as Delta t -> 0 of (f(t+Delta t)-f(3))/(Delta t)"
+                            "answer": "lim as t -> 3 of (f(t)-f(3))/(t-3)\n\nEquivalently: lim as h -> 0 of (f(3+h)-f(3))/h = lim as Delta t -> 0 of (f(3+Delta t)-f(3))/(Delta t)"
                         },
                         "latex": {
                             "question": "The table of values you wrote in part (a) could be used to crudely estimate a limit. Which limit could it be used to estimate? You don't need to find the value of the limit - just write it.",
-                            "answer": "$\\displaystyle\\lim_{t\\to3}\\frac{f(t)-f(3)}{t-3}$, or equivalently $\\displaystyle\\lim_{h\\to0}\\frac{f(t+h)-f(3)}{h}=\\lim_{\\Delta t\\to0}\\frac{f(t+\\Delta t)-f(3)}{\\Delta t}$"
+                            "answer": "$\\displaystyle\\lim_{t\\to3}\\frac{f(t)-f(3)}{t-3}$, or equivalently $\\displaystyle\\lim_{h\\to0}\\frac{f(3+h)-f(3)}{h}=\\lim_{\\Delta t\\to0}\\frac{f(3+\\Delta t)-f(3)}{\\Delta t}$"
                         }
                     },
                     {
