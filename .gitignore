@@ -6,3 +6,8 @@ JSON/package.json
 JSON/skills-lock.json
 **/.ds_store
 tectonic
+**/.env
+/RAG/embedding/.env
+/.claude/worktrees
+/.vscode
+/.DS_Store
