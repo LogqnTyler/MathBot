@@ -1,0 +1,3 @@
+# Kill process: fuser -k 8080/tcp
+# Install requirements: pip install -r requirements.txt
+# Run app: uvicorn main:app --reload --port 8080
