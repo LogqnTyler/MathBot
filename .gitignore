@@ -11,3 +11,4 @@ tectonic
 /.claude/worktrees
 /.vscode
 /.DS_Store
+.env
