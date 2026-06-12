@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MATH 1191 - 1210 — Study Assistant</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
       --bg:        #0f0e0c;
@@ -318,17 +321,19 @@
       color: var(--accent);
     }
 
-    .bubble .math {
-      display: block;
-      font-family: var(--mono);
-      background: rgba(232,200,122,0.06);
-      border-left: 2px solid var(--accent);
+    .bubble .katex-display,
+    .source-card .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
       padding: 10px 14px;
       margin: 10px 0;
+      background: rgba(232,200,122,0.06);
+      border-left: 2px solid var(--accent);
       border-radius: 0 var(--radius) var(--radius) 0;
-      color: var(--accent);
-      font-size: 13px;
     }
+
+    .bubble .katex,
+    .source-card .katex { color: var(--accent); }
 
     .chunk-refs {
       display: flex;
@@ -799,6 +804,7 @@
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
       bubble.innerHTML = formatContent(content);
+      renderMath(bubble);
 
       if (chunks.length > 0) {
         const refs = document.createElement('div');
@@ -821,11 +827,35 @@
       chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 
+    function escapeHtml(text) {
+      return String(text ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     function formatContent(text) {
-      // Basic formatting — replace with MathJax/KaTeX in production
-      return text
-        .replace(/\$\$(.+?)\$\$/g, '<span class="math">$1</span>')
-        .replace(/`(.+?)`/g, '<code>$1</code>');
+      return escapeHtml(text)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.+?)`/g, '<code>$1</code>')
+        .replace(/\n/g, '<br>');
+    }
+
+    function renderMath(element) {
+      if (typeof renderMathInElement !== 'function') return;
+
+      renderMathInElement(element, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '$', right: '$', display: false }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        throwOnError: false
+      });
     }
 
     function appendTyping(id) {
@@ -884,8 +914,8 @@
         card.style.animationDelay = `${i * 0.06}s`;
 
         card.innerHTML = `
-          <div class="source-topic">${chunk.topic}</div>
-          <div class="source-text">${chunk.text}</div>
+          <div class="source-topic">${escapeHtml(chunk.topic)}</div>
+          <div class="source-text">${formatContent(chunk.text)}</div>
           <div class="source-score" aria-label="Relevance score ${Math.round(chunk.score * 100)}%">
             <div class="score-bar" aria-hidden="true">
               <div class="score-fill" style="width: ${chunk.score * 100}%"></div>
@@ -893,6 +923,7 @@
             <span class="score-label">${Math.round(chunk.score * 100)}%</span>
           </div>
         `;
+        renderMath(card);
 
         sourcesList.appendChild(card);
       });
