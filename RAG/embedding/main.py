@@ -13,7 +13,7 @@ from sqlalchemy.dialects.postgresql import JSONB, insert
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.orm import declarative_base, Session
 
-from embedding import embed_texts
+from embedding import embed_text
 
 load_dotenv()
 
@@ -167,15 +167,24 @@ def main():
         class Embeddings(Base):
             __tablename__ = "embeddings"
             id = Column(Integer, primary_key=True)
-            chunk_id = Column(Integer, ForeignKey("chunks.id"))
-            embedded_text = Column(String)
-            embedding = Vector(1024)
+            chunk_id = Column(Integer, ForeignKey("chunks.id"), unique=True)
+            text = Column(String)
+            embedding = Column(Vector(1024))
+
+        with engine.begin() as conn:
+            conn.execute(sqlalchemy.text("CREATE EXTENSION IF NOT EXISTS vector"))
 
         Base.metadata.create_all(engine)
 
+        with engine.begin() as conn:
+            conn.execute(
+                sqlalchemy.text(
+                    "ALTER TABLE embeddings ADD COLUMN IF NOT EXISTS embedding vector(1024)"
+                )
+            )
+
         # Load the JSON files into chunks
 
-        # TEST: load a row from materials
         lessons = session.execute(sqlalchemy.select(materials)).mappings().all()
 
         chunks = []
@@ -205,6 +214,40 @@ def main():
         session.commit()
 
         # compute and insert embeddings
+        saved_chunks = (
+            session.execute(sqlalchemy.select(Chunks.__table__)).mappings().all()
+        )
+
+        print("Inserting embeddings into database...")
+
+        @dataclass
+        class Embedding:
+            chunk_id: int
+            text: str
+            embedding: list[float]
+
+        rows = []
+
+        for chunk in saved_chunks:
+            chunk_id = chunk.id
+            if chunk.kind == "definition" or chunk.kind == "other_material":
+                text = chunk.content_plain
+            if chunk.kind == "problem":
+                context = chunk.problem_context_plain
+                question = chunk.Q_plain
+                text = context + "\n\n" + question
+
+            embedding = embed_text(text)
+            emb = Embedding(chunk_id=chunk_id, text=text, embedding=embedding)
+            rows.append(asdict(emb))
+
+        stmt = insert(Embeddings).values(rows)
+        stmt = stmt.on_conflict_do_nothing(index_elements=["chunk_id"])
+        result = session.execute(stmt)
+        session.commit()
+
+        print(f"Inserted embeddings for {result.rowcount} chunks into the database.")
+        print(f"{len(rows) - result.rowcount} chunks were already in the database.")
 
     finally:
         session.close()
