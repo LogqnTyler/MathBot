@@ -123,27 +123,48 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
-import psycopg2
-from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
-from google.cloud.sql.connector import Connector
+from google.cloud.sql.connector import Connector, IPTypes
+import sqlalchemy
+from sqlalchemy import create_engine
+import string
 
 load_dotenv()
 
 app = FastAPI()
 
 # ── Database connection ──
-connector = Connector()
+connector = Connector(refresh_strategy="LAZY")
 
 
-def get_connection():
-    return connector.connect(
-        os.getenv("INSTANCE_CONNECTION_NAME"),
-        "pg8000",
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        db=os.getenv("DB_NAME"),
-    )
+def connect_with_connector() -> sqlalchemy.engine.base.Engine:
+    """Initializes a SQLAlchemy connection pool for Cloud SQL Postgres."""
+    instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
+    db_user = os.environ["DB_USER"]
+    db_pass = os.environ.get("DB_PASSWORD") or os.environ["DB_PASS"]
+    db_name = os.environ["DB_NAME"]
+    ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+
+    def getconn():
+        return connector.connect(
+            instance_connection_name,
+            "pg8000",
+            user=db_user,
+            password=db_pass,
+            db=db_name,
+            ip_type=ip_type,
+        )
+
+    return create_engine("postgresql+pg8000://", creator=getconn)
+
+
+engine = connect_with_connector()
+
+
+@app.on_event("shutdown")
+def shutdown_db_connections():
+    engine.dispose()
+    connector.close()
 
 
 # ── Request/Response models ──
@@ -168,60 +189,52 @@ class Chunk(BaseModel):
 @app.post("/query")
 async def query_chunks(request: QueryRequest):
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        # Extract search terms from question
-        search_terms = request.question.lower().split()
-
-        # Build keyword array for postgres && operator, && checks whether two arrays share any elemnt
-        keyword_conditions = (
-            f"keywords && ARRAY[{",".join(["%s"] * len(search_terms))}]"
+        # Extract search terms from question, remove punctuation
+        cleaned_question = request.question.translate(
+            str.maketrans("", "", string.punctuation)
         )
-
-        # Full text search across Q_plain, A_plain, content_plain
-        text_search = " OR ".join([f"""(
-                LOWER("Q_plain") LIKE %s OR
-                LOWER("A_plain") LIKE %s OR
-                LOWER(content_plain) LIKE %s
-            )""" for _ in search_terms])
+        # DEBUG: printing the cleaned question to make sure it has no punctuation
+        print(f"Cleaned question: '{cleaned_question}'")
+        search_terms = cleaned_question.lower().split()
 
         # Build kind filter
-        kind_filter = "AND kind = %s" if request.kind else ""
+        kind_filter = "AND kind = :kind" if request.kind else ""
 
         query = f"""
             SELECT 
                 id, kind, name, keywords,
-                "Q_plain", "A_plain", content_plain,
+                "Q_plain", "A_plain", content_plain, 
                 -- Simple relevance score: keyword matches weighted higher
                 (
-                    CASE WHEN keywords && ARRAY[{','.join(['%s'] * len(search_terms))}]::varchar[] 
+                    CASE WHEN keywords && CAST(:keywords AS varchar[]) 
                     THEN 0.6 ELSE 0.0 END +
-                    CASE WHEN LOWER("Q_plain") LIKE ANY(ARRAY[{','.join(['%s'] * len(search_terms))}])
+                    CASE WHEN LOWER("Q_plain") LIKE ANY(CAST(:like_terms AS varchar[]))
                     THEN 0.4 ELSE 0.0 END
                 ) as score
             FROM chunks
-            WHERE ({keyword_conditions} OR {text_search})
+            WHERE (
+                keywords && CAST(:keywords AS varchar[])
+                OR LOWER("Q_plain") LIKE ANY(CAST(:like_terms AS varchar[]))
+                OR LOWER("A_plain") LIKE ANY(CAST(:like_terms AS varchar[]))
+                OR LOWER(content_plain) LIKE ANY(CAST(:like_terms AS varchar[]))
+                OR LOWER(problem_context_plain) LIKE ANY(CAST(:like_terms AS varchar[]))
+            )
             {kind_filter}
             ORDER BY score DESC
-            LIMIT %s
+            LIMIT :top_k
         """
 
         # Build params
         like_terms = [f"%{t}%" for t in search_terms]
-        params = (
-            search_terms  # keyword && conditions
-            + like_terms * 3  # text search LIKE
-            + search_terms  # score keyword check
-            + like_terms  # score Q_plain check
-            + ([request.kind] if request.kind else [])
-            + [request.top_k]
-        )
+        params = {
+            "keywords": search_terms,
+            "like_terms": like_terms,
+            "kind": request.kind,
+            "top_k": request.top_k,
+        }
 
-        cursor.execute(query, params)
-        rows = cursor.fetchall()
-        cursor.close()
-        conn.close()
+        with engine.connect() as conn:
+            rows = conn.execute(sqlalchemy.text(query), params).mappings().all()
 
         chunks = [
             {
@@ -247,14 +260,16 @@ async def query_chunks(request: QueryRequest):
 # ── Filter by kind ──
 @app.get("/kinds")
 async def get_kinds():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT kind, COUNT(*) as count FROM chunks GROUP BY kind ORDER BY count DESC"
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    conn.close()
+    with engine.connect() as conn:
+        rows = (
+            conn.execute(
+                sqlalchemy.text(
+                    "SELECT kind, COUNT(*) as count FROM chunks GROUP BY kind ORDER BY count DESC"
+                )
+            )
+            .mappings()
+            .all()
+        )
     return {"kinds": [{"kind": r["kind"], "count": r["count"]} for r in rows]}
 
 
@@ -270,4 +285,3 @@ async def root():
 @app.get("/health")
 async def health():
     return {"status": "ok"}
-
