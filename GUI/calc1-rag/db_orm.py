@@ -1,8 +1,10 @@
 import os
 from contextlib import contextmanager
+from typing import Any
 
 import sqlalchemy as sa
 from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 from google.cloud.sql.connector import Connector, IPTypes
 
 # load secrets
@@ -13,10 +15,12 @@ load_dotenv()
 
 connector: Connector | None = None
 engine: sa.Engine | None = None
+SessionLocal: sessionmaker | None = None
+Base = declarative_base()
 
 
 def init_db():
-    global connector, engine
+    global connector, engine, SessionLocal
 
     connector = Connector(refresh_strategy="LAZY")
 
@@ -37,21 +41,86 @@ def init_db():
             ip_type=ip_type,
         )
 
+    # start sql orm
     engine = create_engine("postgresql+pg8000://", creator=getconn)
+    SessionLocal = sessionmaker(bind=engine)
 
 
 def get_engine() -> sa.Engine:
     if engine is None:
-        RuntimeError("Database has noe been initialized yet")
+        raise RuntimeError("Database has not been initialized yet")
     return engine
 
 
+def get_sessionmaker() -> sessionmaker:
+    if SessionLocal is None:
+        raise RuntimeError("Database has not been initialized yet")
+    return SessionLocal
+
+
+def _vector_literal(values: list[float]) -> str:
+    if not values:
+        raise ValueError("Embedding vector cannot be empty")
+    return "[" + ",".join(str(float(value)) for value in values) + "]"
+
+
+def query_similar_chunks(
+    query_embedding: list[float],
+    *,
+    kind: str | None = None,
+    min_score: float = 0.0,
+) -> list[dict[str, Any]]:
+    """Return chunks with positive cosine similarity to query_embedding."""
+    stmt = sa.text("""
+        SELECT
+            id,
+            kind,
+            name,
+            keywords,
+            "Q_plain",
+            "A_plain",
+            content_plain,
+            problem_context_plain,
+            1 - (embedding <=> CAST(:embedding AS vector)) AS score
+        FROM chunks
+        WHERE embedding IS NOT NULL
+          AND (:kind IS NULL OR kind = :kind)
+          AND 1 - (embedding <=> CAST(:embedding AS vector)) > :min_score
+        ORDER BY embedding <=> CAST(:embedding AS vector)
+        """)
+
+    params = {
+        "embedding": _vector_literal(query_embedding),
+        "kind": kind,
+        "min_score": min_score,
+    }
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(stmt, params).mappings().all()
+
+    return [
+        {
+            "id": row["id"],
+            "kind": row["kind"],
+            "name": row["name"],
+            "keywords": row["keywords"] or [],
+            "Q_plain": row["Q_plain"],
+            "A_plain": row["A_plain"],
+            "content_plain": row["content_plain"],
+            "problem_context_plain": row["problem_context_plain"],
+            "score": float(row["score"]) if row["score"] is not None else 0.0,
+        }
+        for row in rows
+    ]
+
+
 def close_db() -> None:
-    global connector, engine
+    global connector, engine, SessionLocal
 
     if engine is not None:
         engine.dispose()
         engine = None
+        SessionLocal = None
 
     if connector is not None:
         connector.close()

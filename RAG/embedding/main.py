@@ -162,13 +162,6 @@ def main():
             A_plain = Column(String)
             A_latex = Column(String)
             keywords = Column(ARRAY(String))
-
-        # Make the embeddings table if it doesn't already exist
-        class Embeddings(Base):
-            __tablename__ = "embeddings"
-            id = Column(Integer, primary_key=True)
-            chunk_id = Column(Integer, ForeignKey("chunks.id"), unique=True)
-            text = Column(String)
             embedding = Column(Vector(1024))
 
         with engine.begin() as conn:
@@ -177,9 +170,10 @@ def main():
         Base.metadata.create_all(engine)
 
         with engine.begin() as conn:
+            conn.execute(sqlalchemy.text("DROP TABLE IF EXISTS embeddings"))
             conn.execute(
                 sqlalchemy.text(
-                    "ALTER TABLE embeddings ADD COLUMN IF NOT EXISTS embedding vector(1024)"
+                    "ALTER TABLE chunks ADD COLUMN IF NOT EXISTS embedding vector(1024)"
                 )
             )
 
@@ -213,41 +207,32 @@ def main():
 
         session.commit()
 
-        # compute and insert embeddings
-        saved_chunks = (
-            session.execute(sqlalchemy.select(Chunks.__table__)).mappings().all()
-        )
+        # compute and update embeddings
+        saved_chunks = session.execute(sqlalchemy.select(Chunks)).scalars().all()
 
-        print("Inserting embeddings into database...")
+        print("Updating chunk embeddings in database...")
 
-        @dataclass
-        class Embedding:
-            chunk_id: int
-            text: str
-            embedding: list[float]
-
-        rows = []
-
+        updated_count = 0
         for chunk in saved_chunks:
-            chunk_id = chunk.id
+            if chunk.embedding is not None:
+                continue
+
             if chunk.kind == "definition" or chunk.kind == "other_material":
                 text = chunk.content_plain
-            if chunk.kind == "problem":
+            elif chunk.kind == "problem":
                 context = chunk.problem_context_plain
                 question = chunk.Q_plain
                 text = context + "\n\n" + question
+            else:
+                text = chunk.content_plain
 
-            embedding = embed_text(text)
-            emb = Embedding(chunk_id=chunk_id, text=text, embedding=embedding)
-            rows.append(asdict(emb))
+            chunk.embedding = embed_text(text)
+            updated_count += 1
 
-        stmt = insert(Embeddings).values(rows)
-        stmt = stmt.on_conflict_do_nothing(index_elements=["chunk_id"])
-        result = session.execute(stmt)
         session.commit()
 
-        print(f"Inserted embeddings for {result.rowcount} chunks into the database.")
-        print(f"{len(rows) - result.rowcount} chunks were already in the database.")
+        print(f"Updated embeddings for {updated_count} chunks in the database.")
+        print(f"{len(saved_chunks) - updated_count} chunks already had embeddings.")
 
     finally:
         session.close()
