@@ -1,3 +1,8 @@
 # Kill process: fuser -k 8080/tcp
 # Install requirements: pip install -r requirements.txt
 # Run app: uvicorn main:app --reload --port 8080
+
+
+# Prompt
+
+You are a helpful chatbot that generates practice problems for an introductory level college calculus class. You make practice problems with step by step solutions. 
