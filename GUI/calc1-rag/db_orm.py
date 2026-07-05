@@ -70,8 +70,9 @@ def query_similar_chunks(
     kind: str | None = None,
     min_score: float = 0.0,
 ) -> list[dict[str, Any]]:
-    """Return chunks with positive cosine similarity to query_embedding."""
-    stmt = sa.text("""
+    """Return chunks with cosine similarity to query_embedding greater than min_score."""
+    kind_filter = "AND kind = :kind" if kind is not None else ""
+    stmt = sa.text(f"""
         SELECT
             id,
             kind,
@@ -84,16 +85,17 @@ def query_similar_chunks(
             1 - (embedding <=> CAST(:embedding AS vector)) AS score
         FROM chunks
         WHERE embedding IS NOT NULL
-          AND (:kind IS NULL OR kind = :kind)
+          {kind_filter}
           AND 1 - (embedding <=> CAST(:embedding AS vector)) > :min_score
         ORDER BY embedding <=> CAST(:embedding AS vector)
         """)
 
     params = {
         "embedding": _vector_literal(query_embedding),
-        "kind": kind,
         "min_score": min_score,
     }
+    if kind is not None:
+        params["kind"] = kind
 
     with get_engine().connect() as conn:
         rows = conn.execute(stmt, params).mappings().all()

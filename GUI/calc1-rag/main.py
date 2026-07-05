@@ -7,6 +7,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from embedding import embed_text
 import numpy as np
+from scipy.special import softmax
 
 from db_orm import db_lifespan, get_engine, query_similar_chunks
 import sqlalchemy as sa
@@ -29,19 +30,33 @@ app = FastAPI(lifespan=lifespan)
 class QueryRequest(BaseModel):
     question: str
     kind: Optional[str] = None
-    similarity_threshold: Optional[float] = 0.25
+    similarity_threshold: float = 0.25
     top_k: int = 5
 
 
 @app.post("/retrieve")
 async def retrieve(request: QueryRequest) -> list[dict[str, Any]]:
     embedding = embed_text(request.question)
-    chunks = query_similar_chunks(embedding, kind=request.kind, min_score=0.25)
+    chunks = query_similar_chunks(
+        embedding,
+        kind=request.kind,
+        min_score=request.similarity_threshold,
+    )
+    ## DEBUG
+    print(
+        f"Found {len(chunks)} chunks with similarity > {request.similarity_threshold}"
+    )
+    if not chunks:
+        return []
+
     scores = [chunk["score"] for chunk in chunks]
     # Adding some randomness to how we choose our retrival chunks, so we don't
     # end up with the same chunks every time for a request.
     chosen_chunks = np.random.choice(
-        chunks, size=request.top_k, replace=False, p=scores / np.sum(scores)
+        chunks,
+        size=min(request.top_k, len(chunks)),
+        replace=False,
+        p=softmax(scores),
     )
     return chosen_chunks.tolist()
 
