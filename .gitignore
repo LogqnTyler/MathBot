@@ -5,6 +5,7 @@ JSON/package-lock.json
 JSON/package.json
 JSON/skills-lock.json
 **/.ds_store
+**/.DS_Store
 tectonic
 **/.env
 /RAG/embedding/.env
@@ -12,3 +13,11 @@ tectonic
 /.vscode
 /.DS_Store
 .env
+**/__pycache__/**
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.cache/
