@@ -13,7 +13,7 @@ from sqlalchemy.dialects.postgresql import JSONB, insert
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.orm import declarative_base, Session
 
-from embedding import embed_text
+from embedding import embed_doc
 
 load_dotenv()
 
@@ -226,7 +226,7 @@ def main():
             else:
                 text = chunk.content_plain
 
-            chunk.embedding = embed_text(text)
+            chunk.embedding = embed_doc(text)
             updated_count += 1
 
         session.commit()
