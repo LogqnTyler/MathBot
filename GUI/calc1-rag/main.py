@@ -1,5 +1,8 @@
 from contextlib import asynccontextmanager
 from typing import Any, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -27,21 +30,27 @@ app = FastAPI(lifespan=lifespan)
 
 
 # ── Request/Response models ──
-class QueryRequest(BaseModel):
+class SimilarityQuery(BaseModel):
     question: str
-    kind: Optional[str] = None
     similarity_threshold: float = 0.25
+    kind: Optional[str] = "problem"
     top_k: int = 5
 
 
+class KeywordQuery(BaseModel):
+    keyword: str
+    kind: Optional[str] = "definition"
+
+
 @app.post("/retrieve")
-async def retrieve(request: QueryRequest) -> list[dict[str, Any]]:
+async def retrieve_similarity(request: SimilarityQuery) -> list[dict[str, Any]]:
     embedding = embed_query(request.question)
     chunks = query_similar_chunks(
         embedding,
         kind=request.kind,
         min_score=request.similarity_threshold,
     )
+
     ## DEBUG
     print(
         f"Found {len(chunks)} chunks with similarity > {request.similarity_threshold}"
@@ -49,39 +58,20 @@ async def retrieve(request: QueryRequest) -> list[dict[str, Any]]:
     if not chunks:
         return []
 
-    scores = [chunk["score"] for chunk in chunks]
+    softmax_temp = 2.0
+
+    scores = np.array([chunk["score"] for chunk in chunks])
     # Adding some randomness to how we choose our retrival chunks, so we don't
     # end up with the same chunks every time for a request.
     chosen_chunks = np.random.choice(
         chunks,
         size=min(request.top_k, len(chunks)),
         replace=False,
-        p=softmax(scores),
+        p=softmax(
+            scores * softmax_temp
+        ),  # adding temp to weight more similar chunks higher
     )
     return chosen_chunks.tolist()
-
-
-# # ── Search endpoint ──
-# async def query_chunks(request: QueryRequest):
-#     try:
-#         chunks = [
-#             {
-#                 "id": row["id"],
-#                 "kind": row["kind"],
-#                 "name": row["name"],
-#                 "keywords": row["keywords"] or [],
-#                 "Q_plain": row["Q_plain"],
-#                 "A_plain": row["A_plain"],
-#                 "content_plain": row["content_plain"],
-#                 "score": float(row["score"]) if row["score"] else 0.0,
-#             }
-#             for row in await retrieval(request)
-#         ]
-#
-#         return {"chunks": chunks, "count": len(chunks)}
-#
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
 
 
 # ── Filter by kind ──
