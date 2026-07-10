@@ -5,3 +5,4 @@ psycopg2-binary
 cloud-sql-python-connector[pg8000]
 python-dotenv
 pgvector
+sentence_transformers

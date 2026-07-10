@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from embedding import embed_text
+from embedding import embed_query
 import numpy as np
 from scipy.special import softmax
 
@@ -36,7 +36,7 @@ class QueryRequest(BaseModel):
 
 @app.post("/retrieve")
 async def retrieve(request: QueryRequest) -> list[dict[str, Any]]:
-    embedding = embed_text(request.question)
+    embedding = embed_query(request.question)
     chunks = query_similar_chunks(
         embedding,
         kind=request.kind,
