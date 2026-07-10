@@ -74,14 +74,7 @@ def query_similar_chunks(
     kind_filter = "AND kind = :kind" if kind is not None else ""
     stmt = sa.text(f"""
         SELECT
-            id,
-            kind,
-            name,
-            keywords,
-            "Q_plain",
-            "A_plain",
-            content_plain,
-            problem_context_plain,
+            *,
             1 - (embedding <=> CAST(:embedding AS vector)) AS score
         FROM chunks
         WHERE embedding IS NOT NULL
@@ -100,20 +93,20 @@ def query_similar_chunks(
     with get_engine().connect() as conn:
         rows = conn.execute(stmt, params).mappings().all()
 
-    return [
-        {
-            "id": row["id"],
-            "kind": row["kind"],
-            "name": row["name"],
-            "keywords": row["keywords"] or [],
-            "Q_plain": row["Q_plain"],
-            "A_plain": row["A_plain"],
-            "content_plain": row["content_plain"],
-            "problem_context_plain": row["problem_context_plain"],
-            "score": float(row["score"]) if row["score"] is not None else 0.0,
-        }
-        for row in rows
-    ]
+    return [dict(row) for row in rows]
+
+
+def select_chunks_by_keyword(keyword: str, kind: str):
+    kind_filter = "AND kind = :kind" if kind is not None else ""
+
+    stmt = sa.text(f"""
+        SELECT
+            id,
+            kind,
+            name,
+            content_plain
+
+        """)
 
 
 def close_db() -> None:

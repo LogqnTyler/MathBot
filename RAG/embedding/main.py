@@ -45,22 +45,24 @@ def parse_contents(contents: dict, mat_id: int, lesson_name: str) -> list[Chunk]
                 defined_term = definition["term"]
                 chunk = Chunk(
                     kind="definition",
-                    name=defined_term + f"_{idx}" + lesson_name,
+                    name=defined_term + f"_{idx}",
                     mat_id=mat_id,
                     content_plain=f"Def: {defined_term} \n"
                     + definition["definition_plain"],
                     content_latex=f"Def: {defined_term} \n"
                     + definition["definition_latex"],
-                    keywords=[defined_term],
+                    keywords = ([defined_term.lower()],)
                 )
                 chunks.append(chunk)
         elif key == "other_material":
             for idx, material in enumerate(contents[key]):
-                kind = material["type"]
+                # kind = material["type"] we comment this out so that the chunk is listed as being of kind "other material" instead of "discussion" or "mini_lecture" etc
+                kind = key
+                name = material["type"]
                 chunk = Chunk(
                     kind=kind,
-                    name=kind + f"_{idx}" + lesson_name,
                     mat_id=mat_id,
+                    name=name,
                     content_plain=material["content_plain"],
                     content_latex=material["content_latex"],
                 )
@@ -88,7 +90,7 @@ def parse_contents(contents: dict, mat_id: int, lesson_name: str) -> list[Chunk]
                         Q_latex=sub_prob["latex"]["question"],
                         A_plain=sub_prob["plain_text"]["answer"],
                         A_latex=sub_prob["latex"]["answer"],
-                        keywords=keywords,
+                        keywords=[kw.lower() for kw in keywords],
                     )
                     chunks.append(chunk)
     return chunks
@@ -217,7 +219,7 @@ def main():
             if chunk.embedding is not None:
                 continue
 
-            if chunk.kind == "definition" or chunk.kind == "other_material":
+            if chunk.kind == "definition":
                 text = chunk.content_plain
             elif chunk.kind == "problem":
                 context = chunk.problem_context_plain
