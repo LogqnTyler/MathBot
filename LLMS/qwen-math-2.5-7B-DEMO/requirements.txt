@@ -1,0 +1,3 @@
+# code_interpreter + python_executor extras give TIRMathAgent its code-running
+# backend (Jupyter kernel + sympy/numpy), so no separate math deps needed.
+qwen-agent[code_interpreter,python_executor]>=0.0.10
