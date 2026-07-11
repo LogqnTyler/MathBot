@@ -2,20 +2,27 @@ import json
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
 import sqlalchemy
 from dataclasses import dataclass, asdict
 
-from sqlalchemy import create_engine, String, Integer, Column, ForeignKey, ARRAY, Table
+from sqlalchemy import (
+    create_engine,
+    String,
+    Integer,
+    Column,
+    ForeignKey,
+    ARRAY,
+    Table,
+    UniqueConstraint,
+)
 from sqlalchemy.dialects.postgresql import JSONB, insert
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.orm import declarative_base, Session
 
 from embedding import embed_doc
 
-load_dotenv()
 
 
 @dataclass
@@ -45,20 +52,20 @@ def parse_contents(contents: dict, mat_id: int, lesson_name: str) -> list[Chunk]
                 defined_term = definition["term"]
                 chunk = Chunk(
                     kind="definition",
-                    name=defined_term + f"_{idx}",
+                    name=defined_term + f"_{idx}",  ## ensures unique name for each definition
                     mat_id=mat_id,
                     content_plain=f"Def: {defined_term} \n"
                     + definition["definition_plain"],
                     content_latex=f"Def: {defined_term} \n"
                     + definition["definition_latex"],
-                    keywords = ([defined_term.lower()],)
+                    keywords=[defined_term.lower()],
                 )
                 chunks.append(chunk)
         elif key == "other_material":
             for idx, material in enumerate(contents[key]):
                 # kind = material["type"] we comment this out so that the chunk is listed as being of kind "other material" instead of "discussion" or "mini_lecture" etc
                 kind = key
-                name = material["type"]
+                name = material["type"] + f"_{idx}"  ## ensures unique name for each material
                 chunk = Chunk(
                     kind=kind,
                     mat_id=mat_id,
@@ -148,11 +155,15 @@ def main():
 
         class Chunks(Base):
             __tablename__ = "chunks"
+            __table_args__ = (
+                UniqueConstraint("name", "mat_id", name="uq_chunks_name_mat_id"),
+            )
+
             id = Column(Integer, primary_key=True)
 
             kind = Column(String)
             mat_id = Column(Integer, ForeignKey("materials.id"))
-            name = Column(String, unique=True)
+            name = Column(String)
             learning_objective = Column(Integer)
             content_plain = Column(String)
             content_latex = Column(String)
@@ -201,7 +212,7 @@ def main():
             rows.append(row)
 
         stmt = insert(Chunks).values(rows)
-        stmt = stmt.on_conflict_do_nothing(index_elements=["name"])
+        stmt = stmt.on_conflict_do_nothing(index_elements=["name", "mat_id"])
         result = session.execute(stmt)
 
         print(f"Inserted {result.rowcount} new chunks into the database.")

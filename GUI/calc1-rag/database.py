@@ -18,6 +18,24 @@ engine: sa.Engine | None = None
 SessionLocal: sessionmaker | None = None
 Base = declarative_base()
 
+CHUNKS_COLUMNS = """
+    id,
+    kind,
+    mat_id,
+    name,
+    learning_objective,
+    content_plain,
+    content_latex,
+    problem_context_plain,
+    problem_context_latex,
+    sub_prob_part,
+    "Q_plain",
+    "Q_latex",
+    "A_plain",
+    "A_latex",
+    keywords
+"""
+
 
 def init_db():
     global connector, engine, SessionLocal
@@ -74,7 +92,7 @@ def query_similar_chunks(
     kind_filter = "AND kind = :kind" if kind is not None else ""
     stmt = sa.text(f"""
         SELECT
-            *,
+            {CHUNKS_COLUMNS},
             1 - (embedding <=> CAST(:embedding AS vector)) AS score
         FROM chunks
         WHERE embedding IS NOT NULL
@@ -96,17 +114,46 @@ def query_similar_chunks(
     return [dict(row) for row in rows]
 
 
-def select_chunks_by_keyword(keyword: str, kind: str):
-    kind_filter = "AND kind = :kind" if kind is not None else ""
+def select_all_keywords() -> list[str]:
+    """Return distinct keywords across all chunks."""
+    stmt = sa.text("""
+        SELECT DISTINCT chunk_keyword.value AS keyword
+        FROM chunks
+        CROSS JOIN LATERAL unnest(keywords) AS chunk_keyword(value)
+        WHERE chunk_keyword.value IS NOT NULL
+        ORDER BY chunk_keyword.value
+        """)
 
+    with get_engine().connect() as conn:
+        rows = conn.execute(stmt).scalars().all()
+
+    return list(rows)
+
+
+def select_chunks_by_keyword(keyword: str, kind: str | None = None) -> list[dict[str, Any]]:
+    kind_filter = "AND kind = :kind" if kind is not None else ""
     stmt = sa.text(f"""
         SELECT
-            id,
-            kind,
-            name,
-            content_plain
-
+            {CHUNKS_COLUMNS}
+        FROM chunks
+        WHERE keywords IS NOT NULL
+          {kind_filter}
+          AND EXISTS (
+              SELECT 1
+              FROM unnest(keywords) AS chunk_keyword(value)
+              WHERE lower(chunk_keyword.value) = lower(:keyword)
+          )
+        ORDER BY id
         """)
+
+    params = {"keyword": keyword}
+    if kind is not None:
+        params["kind"] = kind
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(stmt, params).mappings().all()
+
+    return [dict(row) for row in rows]
 
 
 def close_db() -> None:
