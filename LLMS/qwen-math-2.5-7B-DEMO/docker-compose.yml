@@ -2,10 +2,20 @@ services:
   vllm:
     image: vllm/vllm-openai:latest
     command:
-      - --model=Qwen/Qwen2.5-Math-7B-Instruct
+      - Qwen/Qwen2.5-Math-7B-Instruct
       - --dtype=bfloat16
-      - --max-model-len=4096
-      - --gpu-memory-utilization=0.90
+      # 7B bf16 is tight on 16GB GPUs; keep demo context modest.
+      - --max-model-len=2048
+      - --max-num-seqs=1
+      # Avoid torch.compile/autotune VRAM spikes during startup.
+      - --enforce-eager
+      - --no-enable-flashinfer-autotune
+      # 7B bf16 weights use most of a 16GB GPU; lower this only if using a
+      # smaller or quantized model.
+      - --gpu-memory-utilization=0.96
+      - --cpu-offload-gb=8
+    environment:
+      - VLLM_USE_FLASHINFER_SAMPLER=0
     ports:
       - "8000:8000"
     volumes:
@@ -20,11 +30,11 @@ services:
               count: all
               capabilities: [gpu]
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/health'); sys.exit(0)"]
+      test: ["CMD", "python3", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/health'); sys.exit(0)"]
       interval: 15s
       timeout: 5s
-      retries: 40          # weight download on first run can take a while
-      start_period: 60s
+      retries: 120         # first weight download can take 20+ minutes
+      start_period: 120s
 
   demo:
     build: .
