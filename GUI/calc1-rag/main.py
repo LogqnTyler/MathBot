@@ -1,45 +1,71 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
-from typing import Any, Optional
+
+from typing import Any, Literal
+from pydantic import BaseModel, Field
+
+import numpy as np
+from scipy.special import softmax
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from pydantic import BaseModel
-from embedding import embed_query
-import numpy as np
-from scipy.special import softmax
-
-from db_orm import db_lifespan, get_engine, query_similar_chunks
-import sqlalchemy as sa
+from language_processing import embed_query, generate_prompt_internal
+from database import (
+    db_lifespan,
+    query_similar_chunks,
+    select_all_keywords,
+    select_chunks_by_keyword,
+)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    global KEYWORDS
 
     # ── Serve frontend ──
     app.mount("/static", StaticFiles(directory="static"), name="static")
 
     with db_lifespan():
+        KEYWORDS = select_all_keywords()
         yield
 
 
 app = FastAPI(lifespan=lifespan)
 
 
+CHUNK_TYPES = ("problem", "definition", "other_material")
+ChunkKind = Literal[*CHUNK_TYPES]
+KEYWORDS: list[str] = []
+PROMPT_SIMILARITY_THRESHOLD = 0.25
+PROMPT_PROBLEM_COUNT = 3
+PROMPT_EXTRA_CONTENT_COUNT = 3
+
+
 # ── Request/Response models ──
 class SimilarityQuery(BaseModel):
     question: str
     similarity_threshold: float = 0.25
-    kind: Optional[str] = "problem"
+    kind: ChunkKind = "problem"
     top_k: int = 5
 
 
 class KeywordQuery(BaseModel):
     keyword: str
-    kind: Optional[str] = "definition"
+    kind: ChunkKind = "definition"
+
+
+class GeneratePrompt(BaseModel):
+    subject: str
+    other_details: str = Field(
+        default="",
+        min_length=0,
+        max_length=120,
+        description="Additional details for the problem",
+    )
 
 
 @app.post("/retrieve")
@@ -74,21 +100,39 @@ async def retrieve_similarity(request: SimilarityQuery) -> list[dict[str, Any]]:
     return chosen_chunks.tolist()
 
 
-# ── Filter by kind ──
-@app.get("/kinds")
-async def get_kinds():
-    engine = get_engine()
-    with engine.connect() as conn:
-        rows = (
-            conn.execute(
-                sa.text(
-                    "SELECT kind, COUNT(*) as count FROM chunks GROUP BY kind ORDER BY count DESC"
-                )
-            )
-            .mappings()
-            .all()
+@app.post("/generate_prompt")
+def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
+    if request.subject not in KEYWORDS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid subject '{request.subject}'. Must be one of: {KEYWORDS}",
         )
-    return {"kinds": [{"kind": r["kind"], "count": r["count"]} for r in rows]}
+
+    student_prompt = f"Generate a practice problem about {request.subject}."
+    if request.other_details:
+        student_prompt = f"{student_prompt} {request.other_details}"
+
+    embedding = embed_query(student_prompt)
+    practice_problems = query_similar_chunks(
+        embedding,
+        kind="problem",
+        min_score=PROMPT_SIMILARITY_THRESHOLD,
+    )[:PROMPT_PROBLEM_COUNT]
+    extra_contents = query_similar_chunks(
+        embedding,
+        kind="other_material",
+        min_score=PROMPT_SIMILARITY_THRESHOLD,
+    )[:PROMPT_EXTRA_CONTENT_COUNT]
+    definitions = select_chunks_by_keyword(request.subject, kind="definition")
+
+    return {
+        "prompt": generate_prompt_internal(
+            student_prompt=student_prompt,
+            practice_problems=practice_problems,
+            extra_contents=extra_contents,
+            definitions=definitions,
+        )
+    }
 
 
 @app.get("/")

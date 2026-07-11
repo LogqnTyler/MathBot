@@ -36,6 +36,6 @@ Definition: {definition}
 
 Now generate a practice problem as well as a step-by-step solution to the problem according to the following prompt from the student. Once you generate the problem, write the solution in a step by step format, correcting any mistakes you make along the way. When the correct solution is found, reply with "# Problem: {problem goes here} # Solution: {solution goes here}" and then immediately terminate your response.
 
-Student: Generate for me a practice problem about {term}. {other_details}
+Student: Generate a practice problem about {subject}. {other_details}
 
 Chatbot:
