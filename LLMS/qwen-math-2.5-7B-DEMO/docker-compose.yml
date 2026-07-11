@@ -1,0 +1,40 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    command:
+      - --model=Qwen/Qwen2.5-Math-7B-Instruct
+      - --dtype=bfloat16
+      - --max-model-len=4096
+      - --gpu-memory-utilization=0.90
+    ports:
+      - "8000:8000"
+    volumes:
+      # Cache weights on the host so you download once (~15GB).
+      - ${HF_HOME:-~/.cache/huggingface}:/root/.cache/huggingface
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/health'); sys.exit(0)"]
+      interval: 15s
+      timeout: 5s
+      retries: 40          # weight download on first run can take a while
+      start_period: 60s
+
+  demo:
+    build: .
+    depends_on:
+      vllm:
+        condition: service_healthy
+    environment:
+      - VLLM_URL=http://vllm:8000/v1
+      - MODEL=Qwen/Qwen2.5-Math-7B-Instruct
+      # Override the problem without rebuilding:
+      # PROBLEM: "Compute \\int_0^1 x^2 e^x dx."
+    # The model-generated Python is executed *inside this container*,
+    # isolated from your host. That isolation is the sandbox.
