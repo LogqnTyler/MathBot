@@ -1,0 +1,14 @@
+services:
+  db:
+    image: pgvector/pgvector:18
+    container_name: mathbot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRESS_USER: postgres
+      POSTGRESS_PASSWORD: postgres
+      POSTGRESS_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgress_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
