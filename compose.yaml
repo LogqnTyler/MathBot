@@ -1,14 +1,17 @@
 services:
   db:
-    image: pgvector/pgvector:18
+    image: pgvector/pgvector:pg18-trixie
     container_name: mathbot-postgres
     restart: unless-stopped
     environment:
-      POSTGRESS_USER: postgres
-      POSTGRESS_PASSWORD: postgres
-      POSTGRESS_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgress_data:/var/lib/postgresql/data
+      - postgress_data:/var/lib/postgresql
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+
+volumes:
+  postgress_data:

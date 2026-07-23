@@ -6,6 +6,7 @@ from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
 import sqlalchemy
 from dataclasses import dataclass, asdict
+from dotenv import load_dotenv
 
 from sqlalchemy import (
     create_engine,
@@ -23,6 +24,7 @@ from sqlalchemy.orm import declarative_base, Session
 
 from embedding import embed_doc
 
+load_dotenv()
 
 
 @dataclass
@@ -104,26 +106,23 @@ def parse_contents(contents: dict, mat_id: int, lesson_name: str) -> list[Chunk]
 
 
 def main():
+    connector = None
+    engine = None
+    session = None
     try:
-        connector = Connector(refresh_strategy="LAZY")
-
-        def connect_with_connector() -> sqlalchemy.engine.base.Engine:
-            """
-            Initializes a connection pool for a Cloud SQL instance of Postgres.
-
-            Uses the Cloud SQL Python Connector package.
-            """
+        database_url = os.environ.get("DATABASE_URL")
+        if database_url:
+            engine = create_engine(database_url)
+        else:
+            connector = Connector(refresh_strategy="LAZY")
             instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
             db_user = os.environ["DB_USER"]
             db_pass = os.environ["DB_PASS"]
             db_name = os.environ["DB_NAME"]
-
-            ip_type = (
-                IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-            )
+            ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 
             def getconn() -> pg8000.dbapi.Connection:
-                conn: pg8000.dbapi.Connection = connector.connect(
+                return connector.connect(
                     instance_connection_name,
                     "pg8000",
                     user=db_user,
@@ -131,14 +130,9 @@ def main():
                     db=db_name,
                     ip_type=ip_type,
                 )
-                return conn
 
-            return create_engine(
-                "postgresql+pg8000://",
-                creator=getconn,
-            )
+            engine = create_engine("postgresql+pg8000://", creator=getconn)
 
-        engine = connect_with_connector()
         session = Session(engine)
 
         # Make the chunks table if it doesn't already exist
@@ -248,9 +242,12 @@ def main():
         print(f"{len(saved_chunks) - updated_count} chunks already had embeddings.")
 
     finally:
-        session.close()
-        engine.dispose()
-        connector.close()
+        if session is not None:
+            session.close()
+        if engine is not None:
+            engine.dispose()
+        if connector is not None:
+            connector.close()
 
 
 if __name__ == "__main__":
