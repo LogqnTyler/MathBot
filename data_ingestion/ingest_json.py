@@ -7,41 +7,47 @@ from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
 import sqlalchemy
 
-
 load_dotenv()
-
 
 connector = Connector(refresh_strategy="LAZY")
 
+database_url = os.environ.get("DATABASE_URL")
 
-def connect_with_connector() -> sqlalchemy.engine.base.Engine:
-    """
-    Initializes a connection pool for a Cloud SQL instance of Postgres.
+if database_url:
 
-    Uses the Cloud SQL Python Connector package.
-    """
-    instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
-    db_user = os.environ["DB_USER"]
-    db_pass = os.environ["DB_PASS"]
-    db_name = os.environ["DB_NAME"]
+    def create_engine():
+        return sqlalchemy.create_engine(database_url)
 
-    ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+else:
 
-    def getconn() -> pg8000.dbapi.Connection:
-        conn: pg8000.dbapi.Connection = connector.connect(
-            instance_connection_name,
-            "pg8000",
-            user=db_user,
-            password=db_pass,
-            db=db_name,
-            ip_type=ip_type,
+    def create_engine() -> sqlalchemy.engine.base.Engine:
+        """
+        Initializes a connection pool for a Cloud SQL instance of Postgres.
+
+        Uses the Cloud SQL Python Connector package.
+        """
+        instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
+        db_user = os.environ["DB_USER"]
+        db_pass = os.environ["DB_PASS"]
+        db_name = os.environ["DB_NAME"]
+
+        ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+
+        def getconn() -> pg8000.dbapi.Connection:
+            conn: pg8000.dbapi.Connection = connector.connect(
+                instance_connection_name,
+                "pg8000",
+                user=db_user,
+                password=db_pass,
+                db=db_name,
+                ip_type=ip_type,
+            )
+            return conn
+
+        return sqlalchemy.create_engine(
+            "postgresql+pg8000://",
+            creator=getconn,
         )
-        return conn
-
-    return sqlalchemy.create_engine(
-        "postgresql+pg8000://",
-        creator=getconn,
-    )
 
 
 def main() -> None:
@@ -52,7 +58,7 @@ def main() -> None:
         print(f"No lesson*.json files found in {json_dir}")
         return
 
-    engine = connect_with_connector()
+    engine = create_engine()
     try:
         inserted = 0
         skipped = 0
@@ -61,8 +67,7 @@ def main() -> None:
             for lesson_file in lesson_files:
                 lesson_data = json.loads(lesson_file.read_text(encoding="utf-8"))
                 result = conn.execute(
-                    sqlalchemy.text(
-                        """
+                    sqlalchemy.text("""
                         INSERT INTO materials (type, name, data)
                         SELECT :type, :name, CAST(:data AS jsonb)
                         WHERE NOT EXISTS (
@@ -71,8 +76,7 @@ def main() -> None:
                             WHERE type = :type AND name = :name
                         )
                         RETURNING id;
-                        """
-                    ),
+                        """),
                     {
                         "type": "lesson",
                         "name": lesson_file.name,
