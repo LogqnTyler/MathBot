@@ -1,0 +1,279 @@
+{
+  "name": "Properties of Definite Integrals",
+  "week": 11,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Use the properties of definite integrals to evaluate definite integrals: interpret the definite integral as net (signed) area between a graph and the x-axis; apply the Break Apart (additivity) property, the Reverse Limits property, the Linearity properties, and the Area of a Line Segment property; and evaluate integrals from given integral values and from graphs."
+    }
+  ],
+  "contents": {
+    "definitions": [
+      {
+        "term": "Definite Integral",
+        "definition_plain": "Let a and b be real numbers with a < b, and suppose f is continuous on the interval [a,b]. The definite integral of f from a to b is denoted by integral from a to b of f(x) dx and represents the net area between the graph of f and the interval along the x-axis from a to b. If f represents the rate of change of a quantity, then integral from a to b of f(x) dx represents the net change in the quantity as x varies from a to b.",
+        "definition_latex": "Let $a$ and $b$ be real numbers with $a<b$, and suppose $f$ is continuous on the interval $[a,b]$. The \\textbf{definite integral} of $f$ from $a$ to $b$ is denoted by \\[\\int_a^b f(x)\\,dx\\] and represents the {\\it net area} between the graph of $f$ and the interval along the $x$-axis from $a$ to $b$. If $f$ represents the rate of change of a quantity, then $\\int_a^b f(x)\\,dx$ represents the {\\it net change} in the quantity as $x$ varies from $a$ to $b$."
+      }
+    ],
+    "other_material": [
+      {
+        "type": "key-idea",
+        "content_plain": "Signed/Net Area for integral from a to b of f(x) dx: Area of regions above the x-axis are positive. Area of regions below the x-axis are negative.",
+        "content_latex": "\\textbf{Signed/Net Area for $\\int_a^b f(x)\\;dx$} \\begin{itemize}\\item Area of regions above the $x$-axis are {\\em positive}\\item Area of regions below the $x$-axis are {\\em negative}\\end{itemize}"
+      },
+      {
+        "type": "theorem",
+        "content_plain": "Definite Integral \"Break Apart\" Property: integral from a to b of f(x) dx = integral from a to c of f(x) dx + integral from c to b of f(x) dx.",
+        "content_latex": "\\textbf{Definite Integral ``Break Apart'' Property:} \\[\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_c^b f(x)\\,dx\\]"
+      },
+      {
+        "type": "theorem",
+        "content_plain": "Definite Integral \"Reverse Limits\" Property: integral from a to b of f(x) dx = - integral from b to a of f(x) dx.",
+        "content_latex": "\\textbf{Definite Integral ``Reverse Limits'' Property:} \\[\\int_a^b f(x)\\,dx = -\\int_b^a f(x)\\,dx\\]"
+      },
+      {
+        "type": "theorem",
+        "content_plain": "Definite Integral \"Linearity\" Properties: integral from a to b of c*f(x) dx = c * integral from a to b of f(x) dx, and integral from a to b of (f(x) +- g(x)) dx = integral from a to b of f(x) dx +- integral from a to b of g(x) dx.",
+        "content_latex": "\\textbf{Definite Integral ``Linearity'' Properties:} \\[\\int_a^b cf(x)\\,dx = c\\int_a^b f(x)\\,dx \\quad\\text{ and }\\quad \\int_a^b(f(x)\\pm g(x))\\,dx = \\int_a^b f(x)\\,dx \\pm \\int_a^b g(x)\\,dx\\]"
+      },
+      {
+        "type": "theorem",
+        "content_plain": "Definite Integral \"Area of a Line Segment\" Property: integral from a to a of f(x) dx = 0.",
+        "content_latex": "\\textbf{Definite Integral ``Area of a Line Segment'' Property:} \\[\\int_a^a f(x)\\,dx = 0\\]"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Example: Compute integral of 1-|x|",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["definite integral", "net area", "absolute value", "triangle area", "signed area"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Compute integral from -1 to 2 of (1-|x|) dx.",
+              "answer": "Graph f(x)=1-|x| on [-1,2]. The region above the x-axis on [-1,1] is positive and the region below the x-axis on [1,2] is negative.\n\nThe region under f on [-1,0] is a triangle with Area_1 = (1/2)*b*h = (1/2)*1*1 = 1/2.\n\nThe region under f on [0,1] is a triangle with Area_2 = (1/2)*b*h = (1/2)*1*1 = 1/2.\n\nThe region under f on [1,2] is a triangle with Area_3 = -(1/2)*b*h = -(1/2)*1*1 = -1/2.\n\nThus integral from -1 to 2 of (1-|x|) dx = Area_1 + Area_2 + Area_3 = 1/2 + 1/2 - 1/2 = 1/2."
+            },
+            "latex": {
+              "question": "Compute $\\displaystyle\\int_{-1}^2 (1-|x|)\\ dx$.",
+              "answer": "After graphing $f(x)=1-|x|$ on $[-1,2]$, we note that the region above the $x$-axis on $[-1,1]$ will be positive and the region below the $x$-axis on $[1,2]$ will be negative. \\begin{itemize}\\item The region below $f$ on $[-1,0]$ is a triangle with $Area_1 =\\dfrac{1}{2}b\\cdot h=\\frac{1}{2} \\cdot 1\\cdot 1=\\frac{1}{2}$\\item The region below $f$ on $[0,1]$ is a triangle with $Area_2 =\\dfrac{1}{2}b\\cdot h=\\frac{1}{2} \\cdot 1\\cdot 1=\\frac{1}{2}$\\item The region below $f$ on $[1,2]$ is a triangle with $Area_3 =-\\dfrac{1}{2}b\\cdot h=-\\frac{1}{2} \\cdot 1\\cdot 1=-\\frac{1}{2}$\\item Thus $\\int_{-1}^2 1-|x|\\; dx=Area_1+Area_2+Area_3=\\frac{1}{2}+\\frac{1}{2}-\\frac{1}{2}=\\frac{1}{2}$.\\end{itemize}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Compute integral of x-1",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["definite integral", "signed area", "net area", "triangle area", "linear function"],
+        "subproblems": [
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Use common shapes to find the signed (i.e. net) area between f(x)=x-1 and the x-axis on [0,3].",
+              "answer": "We graph y=f(x)=x-1 and note:\n\nThe area below the x-axis on [0,1] will be negative. We have a triangle with Area_1 = -(1/2)*b*h = -(1/2)*1*1 = -1/2.\n\nThe area above the x-axis on [1,3] will be positive. We have a triangle with Area_2 = (1/2)*b*h = (1/2)*2*2 = 2.\n\nintegral from 0 to 3 of (x-1) dx = Area_1 + Area_2 = -1/2 + 2 = -1/2 + 4/2 = 3/2."
+            },
+            "latex": {
+              "question": "Use common shapes to find the signed (i.e. net) area between $f(x)=x-1$ and the $x$-axis on $[0,3]$.",
+              "answer": "We graph $y=f(x)=x-1$ and note: \\begin{itemize}\\item The area below the $x$-axis on $[0,1]$ will be negative. We have a triangle with $Area_1=-\\frac{1}{2} b\\cdot h=-\\frac{1}{2}\\cdot 1\\cdot 1=-\\frac{1}{2}$.\\item The area above the $x$-axis on $[1,3]$ will be positive. We have a triangle with $Area_2=\\frac{1}{2} b\\cdot h=\\frac{1}{2}\\cdot 2\\cdot 2=2$.\\item $\\int_0^3x-1\\;dx=Area_1+Area_2=-\\frac{1}{2}+2=-\\frac{1}{2}+\\frac{4}{2}=\\frac{3}{2}$\\end{itemize}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Break Apart property with given integral values",
+        "learning_tag": 1,
+        "context_plain": "If integral from 0 to 2 of g(t) dt = 4, integral from 2 to 5 of g(t) dt = -3, and integral from 4 to 5 of g(t) dt = -1, then compute the following:",
+        "context_latex": "If $\\int_0^2 g(t)\\,dt=4$, $\\int_2^5 g(t)\\,dt=-3$, and $\\int_4^5 g(t)\\,dt=-1$, then compute the following:",
+        "keywords": ["break apart property", "definite integral", "additivity"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "integral from 0 to 5 of g(t) dt =",
+              "answer": "Using the Break Apart property, integral from 0 to 5 of g(t) dt = integral from 0 to 2 of g(t) dt + integral from 2 to 5 of g(t) dt = 4 + (-3) = 1."
+            },
+            "latex": {
+              "question": "$\\int_0^5 g(t)\\,dt=$",
+              "answer": "Using the Break Apart property, $\\int_0^5 g(t)\\,dt=\\int_0^2 g(t)\\,dt+\\int_2^5 g(t)\\,dt=4+(-3)=1$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "integral from 0 to 4 of g(t) dt =",
+              "answer": "This one is trickier! We first observe integral from 0 to 4 of g(t) dt + integral from 4 to 5 of g(t) dt = integral from 0 to 5 of g(t) dt. We are told integral from 4 to 5 of g(t) dt = -1. In (a) we computed integral from 0 to 5 of g(t) dt = 1. Thus integral from 0 to 4 of g(t) dt + (-1) = 1, so integral from 0 to 4 of g(t) dt = 1 + 1 = 2.\n\nMore generally, we re-arranged the Break Apart property: integral from 0 to 4 of g(t) dt = integral from 0 to 5 of g(t) dt - integral from 4 to 5 of g(t) dt."
+            },
+            "latex": {
+              "question": "$\\int_0^4 g(t)\\,dt=$",
+              "answer": "This one is trickier! We first observe \\begin{align*}\\int_0^4 g(t)\\,dt+\\int_4^5 g(t)\\,dt&=\\int_0^5 g(t)\\,dt\\\\\\intertext{We are told that $\\int_4^5 g(t)\\,dt = -1$. In (a) we just computed $\\int_0^5 g(t)\\,dt=1$. Thus}\\int_0^4 g(t)\\,dt+ (-1)&=1\\\\\\int_0^4 g(t)\\,dt&=1+1\\\\\\int_0^4 g(t)\\,dt&=2\\end{align*} More generally, we re-arranged the Break Apart property: $$\\int_0^4 g(t)\\,dt=\\int_0^5 g(t)\\,dt - \\int_4^5 g(t)\\,dt$$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Reverse Limits property",
+        "learning_tag": 1,
+        "context_plain": "Use the graph of f to compute the given integrals. (Hint: reuse work in Exercise B, where integral from 1 to 2 of f(x) dx = -1/2, integral from 2 to 4 of f(x) dx = pi/2, and integral from 1 to 4 of f(x) dx = -1/2 + pi/2.)",
+        "context_latex": "Use the graph of $f$ to compute the given integrals. {\\small({\\it Hint:} reuse work in Exercise B, where $\\int_1^2 f(x)\\,dx=-\\frac{1}{2}$, $\\int_2^4 f(x)\\,dx=\\frac{\\pi}{2}$, and $\\int_1^4 f(x)\\,dx=-\\frac{1}{2}+\\frac{\\pi}{2}$.)}",
+        "keywords": ["reverse limits property", "definite integral", "swapping limits"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "integral from 2 to 1 of f(x) dx =",
+              "answer": "integral from 2 to 1 of f(x) dx = - integral from 1 to 2 of f(x) dx = -(-1/2) = 1/2. (The value -1/2 comes from Exercise B.)"
+            },
+            "latex": {
+              "question": "$\\int_2^1 f(x)\\,dx=$",
+              "answer": "$\\int_2^1 f(x)\\,dx= -\\int_1^2 f(x)\\,dx=-\\underbrace{\\frac{-1}{2}}_{\\text{Exercise B}}=\\frac{1}{2}$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "integral from 4 to 2 of f(x) dx =",
+              "answer": "integral from 4 to 2 of f(x) dx = - integral from 2 to 4 of f(x) dx = -(pi/2) = -pi/2. (The value pi/2 comes from Exercise B.)"
+            },
+            "latex": {
+              "question": "$\\int_4^2 f(x)\\,dx=$",
+              "answer": "$\\int_4^2 f(x)\\,dx=- \\int_2^4 f(x)\\,dx=-\\underbrace{\\frac{\\pi}{2}}_{\\text{Exercise B}}=-\\frac{\\pi}{2}$"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "integral from 4 to 1 of f(x) dx =",
+              "answer": "integral from 4 to 1 of f(x) dx = - integral from 1 to 4 of f(x) dx = -(-1/2 + pi/2) = 1/2 - pi/2. (The value -1/2 + pi/2 comes from Exercise B.)"
+            },
+            "latex": {
+              "question": "$\\int_4^1 f(x)\\,dx=$",
+              "answer": "$$\\int_4^1 f(x)\\,dx=- \\int_1^4 f(x)\\,dx=- \\underbrace{\\left(-\\frac{1}{2}+\\frac{\\pi}{2}\\right)}_{\\text{Exercise B}}=\\frac{1}{2}-\\frac{\\pi}{2}$$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Area of a Line Segment property",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["area of a line segment", "definite integral", "zero-width interval"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Sketch a region that could represent integral from 3 to 3 of f(x) dx, and find the value of the integral.",
+              "answer": "integral from 3 to 3 of f(x) dx = 0. The region between the x-axis and f above [3,3] is an infinitely thin line that has 0 area. This leads to the more general 'Area of a Line Segment' property: integral from a to a of f(x) dx = 0."
+            },
+            "latex": {
+              "question": "$\\int_3^3 f(x)\\,dx=$",
+              "answer": "$\\int_3^3 f(x)\\,dx=0$. The region between the $x$-axis and $f$ above $[3,3]$ is an infinitely thin line that has $0$ area. This leads to our more general ``Area of a Line Segment'' property $\\int_a^a f(x)\\,dx = 0$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exam Practice 2: Properties of definite integrals",
+        "learning_tag": 1,
+        "context_plain": "Given integral from 3 to -2 of f(x) dx = 1, integral from 0 to 3 of f(x) dx = 2, and integral from -2 to 3 of (2f(x) - g(x)) dx = 3, evaluate the following using properties of definite integrals:",
+        "context_latex": "Given $\\int_{3}^{-2} f(x)\\,dx=1$, $\\int_{0}^3 f(x)\\,dx = 2$, and $\\int_{-2}^3 \\left(2f(x)-g(x)\\right)\\,dx=3$, evaluate the following using properties of definite integrals:",
+        "keywords": ["reverse limits property", "break apart property", "linearity property", "definite integral"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "integral from -2 to 3 of f(x) dx",
+              "answer": "integral from -2 to 3 of f(x) dx = - integral from 3 to -2 of f(x) dx = -(1) = -1."
+            },
+            "latex": {
+              "question": "$\\int_{-2}^3 f(x)\\,dx$",
+              "answer": "$\\int_{-2}^3 f(x)\\,dx=- \\int_{3}^{-2} f(x)\\,dx = - (1)=-1$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "integral from -2 to 0 of f(x) dx",
+              "answer": "integral from -2 to 0 of f(x) dx + integral from 0 to 3 of f(x) dx = integral from -2 to 3 of f(x) dx. So integral from -2 to 0 of f(x) dx + 2 = -1, giving integral from -2 to 0 of f(x) dx = -1 - 2 = -3."
+            },
+            "latex": {
+              "question": "$\\int_{-2}^0 f(x)\\,dx$",
+              "answer": "\\begin{align*}\\int_{-2}^0 f(x)\\,dx+ \\int_{0}^3 f(x)\\,dx&= \\int_{-2}^3 f(x)\\,dx\\\\\\int_{-2}^0 f(x)\\,dx+ 2&= -1\\\\\\int_{-2}^0 f(x)\\,dx&= -1-2\\\\\\int_{-2}^0 f(x)\\,dx&= -3\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "integral from -2 to 3 of g(x) dx",
+              "answer": "integral from -2 to 3 of (2f(x) - g(x)) dx = 3. So integral from -2 to 3 of 2f(x) dx - integral from -2 to 3 of g(x) dx = 3, i.e. 2 * integral from -2 to 3 of f(x) dx - integral from -2 to 3 of g(x) dx = 3. Then 2(-1) - integral from -2 to 3 of g(x) dx = 3, so - integral from -2 to 3 of g(x) dx = 3 + 2 = 5, giving integral from -2 to 3 of g(x) dx = -5."
+            },
+            "latex": {
+              "question": "$\\int_{-2}^3 g(x)\\,dx$",
+              "answer": "\\begin{align*}\\int_{-2}^3 \\left(2f(x)-g(x)\\right)\\,dx&=3\\\\\\int_{-2}^3 2f(x)\\,dx - \\int_{-2}^3 g(x)\\,dx&=3\\\\2\\int_{-2}^3 f(x)\\,dx - \\int_{-2}^3 g(x)\\,dx&=3\\\\2(-1) - \\int_{-2}^3 g(x)\\,dx&=3\\\\- \\int_{-2}^3 g(x)\\,dx&=3+2\\\\\\int_{-2}^3 g(x)\\,dx&=-5\\end{align*}"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "mini-lecture",
+      "name": "Signed/Net Area illustration",
+      "reason": "tikzpicture of a cubic with shaded positive (green) and negative (red) regions illustrating signed area; the textual bullets are retained in other_material.",
+      "location": "lines 42-106"
+    },
+    {
+      "type": "problem",
+      "name": "Example: Compute integral of 1-|x| (figures)",
+      "reason": "Three tikzpictures (y=|x|, y=-|x|, y=1-|x|) illustrate the graphing/translation steps; the geometric computation is retained in problems.",
+      "location": "lines 110-209"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise: Compute integral of x-1, part (a) graph",
+      "reason": "Part (a) asks the student to graph f(x)=x-1 and a tikzpicture of the line with shaded regions is provided; the net-area computation is retained as part (b) in problems.",
+      "location": "lines 224-271"
+    },
+    {
+      "type": "example",
+      "name": "Example: integral from -1 to 1 of f(x) dx from graph",
+      "reason": "Requires reading a piecewise-defined plotted f (rectangle and triangles) off the tikzpicture to identify regions and dimensions; cannot be reconstructed without the figure.",
+      "location": "lines 287-380"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise B: integrals from graph of f",
+      "reason": "Parts (a)-(c) read triangle and half-circle areas directly off the plotted f from the previous example's graph; values cannot be determined without the figure.",
+      "location": "lines 382-407"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 1: sketch g satisfying Exercise C",
+      "reason": "Asks the student to sketch a continuous function g satisfying the Exercise C integral equations; the worked solution depends on a provided/constructed tikzpicture graph.",
+      "location": "lines 443-532"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise: Reverse Limits property (figure)",
+      "reason": "A tikzpicture of f is provided; the property computations are retained in problems and reuse the numeric values from Exercise B.",
+      "location": "lines 543-589"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise: Linearity properties, integrals from graph of f",
+      "reason": "Parts (a)-(d) read f's signed areas (quarter-circle of radius 2 below the axis, half-circle of radius 1) off the plotted f; the f-integral values cannot be obtained without the figure.",
+      "location": "lines 619-705"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise: Area of a Line Segment (figure)",
+      "reason": "A tikzpicture of f with a red vertical segment at x=3 is provided and the prompt asks to sketch a region; the value (0, by the Area of a Line Segment property) is retained in problems.",
+      "location": "lines 711-737"
+    }
+  ]
+}

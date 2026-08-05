@@ -1,0 +1,172 @@
+{
+  "name": "Applied Optimization Extra Practice",
+  "week": 14,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Translate an applied optimization word problem (Norman-window / mixed-shape geometry) into a mathematical model: identify the quantity to optimize, define variables, write objective and constraint equations, reduce the objective to a function of one variable, and identify an appropriate domain."
+    },
+    {
+      "tag": 2,
+      "description": "Apply calculus (find critical numbers; use the First Derivative Test for Absolute Extrema) to locate the absolute extremum of the model function and interpret the resulting dimensions in the context of the original problem."
+    }
+  ],
+  "contents": {
+    "problems": [
+      {
+        "name": "Exercise 1: Norman Window Maximizing Light (Fixed Perimeter)",
+        "learning_tag": 1,
+        "context_plain": "An architect is designing a large window for renovations in Clemons library. The window is composed of a rectangle and a half of a circular disc. The half-disc sits atop the rectangle so its diameter equals the width of the rectangle. Let r be the radius of the half-circle (so the rectangle has width 2r) and let h be the height of the rectangle. To keep costs down, the perimeter of the window must be exactly 30 feet. What dimensions will allow the greatest amount of light into the building?",
+        "context_latex": "An architect is designing a large window for renovations in Clemons library. The window is composed of a rectangle and a half of a circular disc. The half-disc sits atop the rectangle so its diameter equals the width of the rectangle. Let $r$ be the radius of the half-circle (so the rectangle has width $2r$) and let $h$ be the height of the rectangle. To keep costs down, the perimeter of the window must be exactly $30$ feet. What dimensions will allow the greatest amount of light into the building?",
+        "keywords": ["applied optimization", "norman window", "area maximization", "perimeter constraint", "first derivative test for absolute extrema"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Set up a function that describes the amount of light entering the window using the variables r and h. (Hint: how is the amount of light related to the shape of the window?)",
+              "answer": "The area of the window determines how much light enters the building.\n  A = A_rectangle + A_halfCircle\nSince the radius of the half-circle is half the width of the rectangle, width = 2r:\n  A_rectangle = height * width = h * 2r\n  A_halfCircle = (1/2) pi r^2\nThus:\n  A = 2 r h + (pi r^2)/2"
+            },
+            "latex": {
+              "question": "Set up a function that describes the amount of light entering the window using the variables shown in Figure 1. \\textit{Hint}: How is the ``amount of light'' related to the shape of the window?",
+              "answer": "The area of the window determines how much light enters the building.\n\\begin{align*}\nA&=A_{rectangle}+A_{halfCircle}\\\\\n\\intertext{Since the radius of the half-circle is half the width of the rectangle, $width=2r$,}\nA_{rectangle}&=height\\times width=h\\cdot 2r\\\\\nA_{halfCircle}&=\\frac{1}{2}\\pi r^2\\\\\n\\intertext{Thus,}\nA&=2rh+\\frac{\\pi r^2}{2}\n\\end{align*}"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Set up an expression that translates 'the perimeter of the window must be exactly 30 feet' into a math equation using the variables r and h.",
+              "answer": "The perimeter consists of 3 sides of the rectangle (two heights h plus the bottom of length 2r) and the boundary of the half-circle (length pi r):\n  P = h + 2r + h + pi r\n  P = 2h + 2r + pi r\nThe perimeter must be 30 feet:\n  30 = 2h + 2r + pi r"
+            },
+            "latex": {
+              "question": "Set up an expression that translates ``the perimeter of the window must be exactly $30$ feet'' into a math equation using the variables shown in Figure 1.",
+              "answer": "The perimeter consists of $3$ sides of the rectangle and the length of the boundary of the half circle:\n\\begin{align*}\nP&=h+2r+h+\\pi r\\\\\nP&=2h+2r+\\pi r\\\\\n\\intertext{The perimeter must be $30$ feet, so}\n30&=2h+2r+\\pi r\n\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Identify which quantity from (a) and (b) is being maximized or minimized. Use the other equation to solve for one variable, then substitute into the first equation to reduce it to a function of one variable.",
+              "answer": "We maximize the amount of light, i.e. maximize area. Area depends on both r and h, so reduce to one variable using the perimeter constraint. Solving for h is easier:\n  2h + 2r + pi r = 30\n  2h = 30 - 2r - pi r\n  h = (30 - 2r - pi r)/2\n  h = 15 - r - (pi r)/2\n\nSubstitute into A:\n  A = 2 r h + (pi r^2)/2\n    = 2 r (15 - r - (pi r)/2) + (pi r^2)/2\n    = 30 r - 2 r^2 - pi r^2 + (pi r^2)/2\n  A(r) = 30 r - 2 r^2 - (pi r^2)/2"
+            },
+            "latex": {
+              "question": "Identify which quantity from (a) and (b) we are trying to minimize or maximize. It will contain variables $r$ and $h$. Use the remaining quantity, solve for one of those variables, and substitute into the first equation. This reduces the objective to a function of only one variable.",
+              "answer": "We maximize the amount of light, i.e. maximize area. $A$ depends on both $r$ and $h$, so reduce to one variable using the perimeter constraint. Solving for $h$ is easier:\n\\begin{align*}\n2h+2r+\\pi r&=30\\\\\n2h &=30-2r-\\pi r\\\\\nh&=\\frac{30-2r-\\pi r}{2}\\\\\nh&=\\frac{30}{2}-\\frac{2r}{2}-\\frac{\\pi r}{2}\\\\\nh&=15-r-\\frac{\\pi r}{2}\n\\end{align*}\nSubstitute into $A$:\n\\begin{align*}\nA&=2rh+\\frac{\\pi r^2}{2}\\\\\n&=2r\\left(15-r-\\frac{\\pi r}{2}\\right)+\\frac{\\pi r^2}{2}\\\\\n&=30r-2r^2-\\pi r^2+\\frac{\\pi r^2}{2}\\\\\nA(r)&=30r-2r^2-\\frac{\\pi r^2}{2}\n\\end{align*}"
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "Find the critical number(s) of the one-variable function A(r). Your answer will involve pi.",
+              "answer": "Compute the derivative:\n  A'(r) = 30 - 4 r - pi r\n  A'(r) = 30 - r (4 + pi)\n\nCheck both conditions:\n- A'(r) DNE: requires division by 0, sqrt of a negative, or log issues. No value of r causes any of these.\n- A'(r) = 0:\n  30 - r (4 + pi) = 0\n  -r (4 + pi) = -30\n  r = 30/(4 + pi) ~ 4.2 feet\n\nOne critical number: r = 30/(4 + pi) ~ 4.2 feet."
+            },
+            "latex": {
+              "question": "Find the critical number(s) of your new function of one variable. Your answer will involve the number $\\pi$.",
+              "answer": "\\begin{align*}\nA'(r)&=30-4r-\\pi r\\\\\nA'(r)&=30-r(4+\\pi)\n\\end{align*}\nThere are two conditions that generate critical numbers:\n\\begin{itemize}\n\\item $A'(r)$ DNE: requires division by $0$, $\\sqrt{(-)}$, $\\ln(0)$, or $\\ln(-)$. No value of $r$ creates any of these.\n\\item $A'(r)=0$:\n\\begin{align*}\nA'(r)&=0\\\\\n30-r(4+\\pi)&=0\\\\\n-r(4+\\pi)&=-30\\\\\nr&=\\frac{30}{4+\\pi}\\approx 4.2\\text{ feet}\n\\end{align*}\n\\end{itemize}"
+            }
+          },
+          {
+            "part": "e",
+            "plain_text": {
+              "question": "Determine whether the critical number is an absolute maximum or minimum, and report the resulting dimensions.",
+              "answer": "Domain: r must be positive (a negative or zero radius makes no sense), so 0 < r < infinity. Only one critical number in the domain: r = 30/(4 + pi) ~ 4.2 feet.\n\nSign line for A'(r):\n- r = 3 (left of 4.2): A'(3) = 30 - 3(4 + pi) ~ +8.58 > 0\n- r = 5 (right of 4.2): A'(5) = 30 - 5(4 + pi) ~ -5.71 < 0\n\nA' goes (+) -> (-) at r ~ 4.2, so r ~ 4.2 is a local maximum by the First Derivative Test. Since it is the only critical number on the domain and is a local maximum, the First Derivative Test for Absolute Extrema gives an absolute maximum there.\n\nRadius: r = 30/(4 + pi) ~ 4.2 feet.\nHeight: h = 15 - r - (pi r)/2 = 15 - 30/(4 + pi) - (pi/2)(30/(4 + pi)) ~ 4.2 feet."
+            },
+            "latex": {
+              "question": "Determine if your critical number(s) are an absolute maximum/minimum.",
+              "answer": "Domain: $r$ must be positive (a negative or zero radius makes no sense), so $0<r<\\infty$. Only one critical number in the domain: $r=\\frac{30}{4+\\pi}\\approx 4.2$ feet.\n\nSign line for $A'(r)$:\n\\begin{itemize}\n\\item $r=3$ (left of $4.2$): $A'(3)=30-3(4+\\pi)\\approx +8.58>0$.\n\\item $r=5$ (right of $4.2$): $A'(5)=30-5(4+\\pi)\\approx -5.71<0$.\n\\end{itemize}\n$A'$ goes $(+)\\to(-)$ at $r\\approx 4.2$, so $r\\approx 4.2$ is a local maximum by the First Derivative Test. Since it is the only critical number on the domain and is a local maximum, the First Derivative Test for Absolute Extrema gives an absolute maximum there.\n\n\\begin{align*}\nr&=\\frac{30}{4+\\pi}\\approx 4.2\\text{ feet}\\\\\nh&=15-r-\\frac{\\pi r}{2}\\\\\nh&=15-\\frac{30}{4+\\pi}-\\frac{\\pi}{2}\\cdot\\frac{30}{4+\\pi}\\approx 4.2\\text{ feet}\n\\end{align*}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise 2: Norman Window Minimizing Cost (Fixed Area)",
+        "learning_tag": 2,
+        "context_plain": "An architect is designing a large window for renovations in Clemons library. The window is composed of a rectangle and a half of a circular disc. The half-disc sits atop the rectangle so its diameter equals the width of the rectangle. Let r be the radius of the half-circle (so the rectangle has width 2r) and let h be the height of the rectangle. To allow enough light into the library the window must have a total area of exactly 100 feet^2. The frame for the half-disc costs $20 per foot and the frame for the sides of the rectangle costs $10 per foot. Find the dimensions that minimize the cost.",
+        "context_latex": "An architect is designing a large window for renovations in Clemons library. The window is composed of a rectangle and a half of a circular disc. The half-disc sits atop the rectangle so its diameter equals the width of the rectangle. Let $r$ be the radius of the half-circle (so the rectangle has width $2r$) and let $h$ be the height of the rectangle. To allow enough light into the library the window must have a total area of exactly $100$ feet$^2$. The cost of materials varies:\n\\begin{itemize}\n\\item The frame for the half-disc costs $\\$20$ per foot.\n\\item The frame for the sides of the rectangle costs $\\$10$ per foot.\n\\end{itemize}\nFind the dimensions that minimize the cost.",
+        "keywords": ["applied optimization", "norman window", "cost minimization", "area constraint", "first derivative test for absolute extrema"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Set up a function that describes the cost of the window frame using the variables r and h.",
+              "answer": "Rectangular portion frame is the two heights plus the bottom (length 2r):\n  C_rectangle = $10 * (h + 2r + h) = $10 * (2h + 2r) = 20h + 20r\n\nHalf-circle frame is the curved boundary (length pi r):\n  C_halfCircle = $20 * pi r = 20 pi r\n\nTotal:\n  C = C_rectangle + C_halfCircle = 20 h + 20 r + 20 pi r"
+            },
+            "latex": {
+              "question": "Set up a function that describes the cost of the window frame using the variables shown in Figure 2.",
+              "answer": "Rectangular portion frame (two heights plus bottom of length $2r$):\n\\begin{align*}\nC_{rectangle}&=\\text{cost per foot}\\times \\#\\text{ feet}\\\\\n&=\\$10\\,(h+2r+h)\\\\\n&=\\$10\\,(2h+2r)\\\\\n&=20h+20r\n\\end{align*}\nHalf-circle frame (curved boundary of length $\\pi r$):\n\\begin{align*}\nC_{halfCircle}&=\\text{cost per foot}\\times \\#\\text{ feet}\\\\\n&=\\$20\\cdot \\pi r\n\\end{align*}\nTotal:\n\\begin{align*}\nC&=C_{rectangle}+C_{halfCircle}\\\\\nC&=20h+20r+20\\pi r\n\\end{align*}"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Set up an expression that translates 'the window must have a total area of exactly 100 feet^2' into a math equation using the variables r and h.",
+              "answer": "Width of rectangle is 2r, so:\n  A = A_rectangle + A_halfCircle = h(2r) + (pi r^2)/2\nThe area must be 100 ft^2:\n  100 = 2 h r + (pi r^2)/2"
+            },
+            "latex": {
+              "question": "Set up an expression that translates ``the window must have a total area of exactly $100$ feet$^2$'' into a math equation using the variables shown in Figure 2.",
+              "answer": "Width of rectangle is $2r$:\n\\begin{align*}\nA&=A_{rectangle}+A_{halfCircle}\\\\\n&=h(2r)+\\frac{\\pi r^2}{2}\\\\\n\\intertext{Area must be exactly $100$ ft$^2$:}\n100&=2hr+\\frac{\\pi r^2}{2}\n\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Identify which quantity from (a) and (b) is being maximized or minimized. Use the other equation to solve for one variable, then substitute into the first equation to reduce it to a function of one variable.",
+              "answer": "We minimize cost. Cost depends on both r and h, so use the area constraint to reduce to one variable. Solving for h is easier:\n  2 h r + (pi r^2)/2 = 100\n  2 h r = 100 - (pi r^2)/2\n  h = (100 - (pi r^2)/2)/(2r)\n  h = 100/(2r) - (pi r^2)/(4r)\n  h = 50/r - (pi r)/4\n\nSubstitute into C:\n  C = 20 h + 20 r + 20 pi r\n    = 20 (50/r - (pi r)/4) + 20 r + 20 pi r\n    = 1000/r - 5 pi r + 20 r + 20 pi r\n    = 1000/r + 20 r + 15 pi r"
+            },
+            "latex": {
+              "question": "Identify which quantity from (a) and (b) we are trying to minimize or maximize. It will contain variables $r$ and $h$. Use the remaining quantity, solve for one of those variables, and substitute into the first equation. This reduces the objective to a function of only one variable.",
+              "answer": "We minimize cost. $C$ depends on both $r$ and $h$, so use the area constraint to reduce to one variable. Solving for $h$ is easier:\n\\begin{align*}\n2hr+\\frac{\\pi r^2}{2}&=100\\\\\n2hr&=100-\\frac{\\pi r^2}{2}\\\\\nh&=\\frac{100-\\frac{\\pi r^2}{2}}{2r}\\\\\nh&=\\frac{100}{2r}-\\frac{\\frac{\\pi r^2}{2}}{2r}\\\\\nh&=\\frac{50}{r}-\\frac{\\pi r}{4}\n\\end{align*}\nSubstitute into $C$:\n\\begin{align*}\nC&=20h+20r+20\\pi r\\\\\n&=20\\left(\\frac{50}{r}-\\frac{\\pi r}{4}\\right)+20r+20\\pi r\\\\\n&=\\frac{1000}{r}-\\frac{20\\pi r}{4}+20r+20\\pi r\\\\\n&=\\frac{1000}{r}-5\\pi r+20r+20\\pi r\\\\\nC(r)&=\\frac{1000}{r}+20r+15\\pi r\n\\end{align*}"
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "Find the critical number(s) of the one-variable function C(r). Your answer will involve pi.",
+              "answer": "Compute the derivative:\n  C(r) = 1000/r + 20 r + 15 pi r = 1000 r^(-1) + 20 r + 15 pi r\n  C'(r) = -1000 r^(-2) + 20 + 15 pi = -1000/r^2 + 20 + 15 pi\n\nCheck both conditions:\n- C'(r) DNE: division by 0 occurs at r = 0, but r = 0 is not in the domain of C(r) (1000/0 is undefined), so ignore.\n- C'(r) = 0:\n  -1000/r^2 + 20 + 15 pi = 0\n  -1000/r^2 = -20 - 15 pi\n  -1000 = r^2 (-20 - 15 pi)\n  r^2 = -1000/(-20 - 15 pi) = 1000/(20 + 15 pi)\n  Factor 5 from numerator and denominator: 1000/(20 + 15 pi) = 200/(4 + 3 pi)\n  r = +- sqrt(200/(4 + 3 pi)) ~ +- 3.86 feet\n\nTwo critical numbers: r ~ +-3.86 feet."
+            },
+            "latex": {
+              "question": "Find the critical number(s) of your new function of one variable. Your answer will involve the number $\\pi$.",
+              "answer": "\\begin{align*}\nC(r)&=\\frac{1000}{r}+20r+15\\pi r=1000r^{-1}+20r+15\\pi r\\\\\nC'(r)&=-1000r^{-2}+20+15\\pi\\\\\n&=-\\frac{1000}{r^2}+20+15\\pi\n\\end{align*}\nCheck two conditions:\n\\begin{itemize}\n\\item $C'(r)$ DNE: division by $0$ occurs at $r=0$. However $r=0$ is not in the domain of $C(r)$ (since $\\frac{1000}{0}$ is undefined), so ignore.\n\\item $C'(r)=0$:\n\\begin{align*}\nC'(r)&=0\\\\\n-\\frac{1000}{r^2}+20+15\\pi&=0\\\\\n-\\frac{1000}{r^2}&=-20-15\\pi\\\\\n-1000&=r^2(-20-15\\pi)\\\\\n\\frac{-1000}{-20-15\\pi}&=r^2\\\\\n\\frac{-5\\cdot 200}{-5\\cdot(4+3\\pi)}&=r^2\\\\\n\\frac{200}{4+3\\pi}&=r^2\\\\\n\\pm\\sqrt{\\frac{200}{4+3\\pi}}&=r\\approx \\pm 3.86\n\\end{align*}\n\\end{itemize}\nTwo critical numbers: $r=\\pm\\sqrt{\\frac{200}{4+3\\pi}}\\approx \\pm 3.86$ feet."
+            }
+          },
+          {
+            "part": "e",
+            "plain_text": {
+              "question": "Determine whether the critical number is an absolute maximum or minimum, and report the resulting dimensions.",
+              "answer": "Domain: r must be positive (a negative or zero radius makes no sense), so 0 < r < infinity. Eliminate r = -sqrt(200/(4+3 pi)) since it is not in the domain. Test r = sqrt(200/(4 + 3 pi)) ~ 3.86.\n\nSign line for C'(r):\n- r = 1 (left of 3.86): C'(1) = -1000/1 + 20 + 15 pi ~ -932.88 < 0\n- r = 5 (right of 3.86): C'(5) = -1000/25 + 20 + 15 pi = -40 + 20 + 15 pi ~ 27.12 > 0\n\nC' goes (-) -> (+) at r ~ 3.86, so r ~ 3.86 is a local minimum by the First Derivative Test. Since it is the only critical number on the domain and is a local minimum, the First Derivative Test for Absolute Extrema gives an absolute minimum there.\n\nRadius: r = sqrt(200/(4 + 3 pi)) ~ 3.86 feet.\nHeight: h = 50/r - (pi r)/4 = 50/3.86 - (pi * 3.86)/4 ~ 9.92 feet."
+            },
+            "latex": {
+              "question": "Determine if your critical number(s) are an absolute maximum/minimum.",
+              "answer": "Domain: $r$ must be positive (a negative or zero radius makes no sense), so $0<r<\\infty$. Eliminate $r=-\\sqrt{\\frac{200}{4+3\\pi}}$ since it is not in the domain. Test $r=\\sqrt{\\frac{200}{4+3\\pi}}\\approx 3.86$.\n\nSign line for $C'(r)$:\n\\begin{itemize}\n\\item $r=1$ (left of $3.86$): $C'(1)=-\\frac{1000}{1^2}+20+15\\pi\\approx -932.88<0$.\n\\item $r=5$ (right of $3.86$): $C'(5)=-\\frac{1000}{5^2}+20+15\\pi=-40+20+15\\pi\\approx 27.12>0$.\n\\end{itemize}\n$C'$ goes $(-)\\to(+)$ at $r\\approx 3.86$, so $r\\approx 3.86$ is a local minimum by the First Derivative Test. Since it is the only critical number on the domain and is a local minimum, the First Derivative Test for Absolute Extrema gives an absolute minimum there.\n\n\\begin{align*}\nr&=\\sqrt{\\frac{200}{4+3\\pi}}\\approx 3.86\\text{ feet}\\\\\nh&=\\frac{50}{r}-\\frac{\\pi r}{4}\\\\\nh&=\\frac{50}{\\sqrt{200/(4+3\\pi)}}-\\frac{\\pi\\sqrt{200/(4+3\\pi)}}{4}\\approx 9.92\\text{ feet}\n\\end{align*}"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "problem",
+      "name": "Exercise 1: Norman-window illustration (Figure 1)",
+      "reason": "References \\graphicsL{windowKey}{1.5} as Figure 1, an external image of the Norman window with labels r and h. The algebraic setup is fully self-contained since the context explicitly defines r = half-circle radius and h = rectangle height.",
+      "location": "line 33"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise 1: sign-line diagram for A'(r)",
+      "reason": "Sign line for A'(r) shown as a tikzpicture (sign (+)/(-) around the critical number r = 30/(4+pi) ~ 4.2); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 122-154"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise 2: Norman-window illustration (Figure 2)",
+      "reason": "References \\graphicsL{windowKey}{1.5} as Figure 2, the same external image of the Norman window with labels r and h. The algebraic setup is fully self-contained since the context explicitly defines r = half-circle radius and h = rectangle height.",
+      "location": "line 178"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise 2: sign-line diagram for C'(r)",
+      "reason": "Sign line for C'(r) shown as a tikzpicture (sign (-)/(+) around the critical number r ~ 3.86); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 276-308"
+    }
+  ]
+}

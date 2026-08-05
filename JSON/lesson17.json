@@ -1,0 +1,262 @@
+{
+  "name": "Antiderivatives and Indefinite Integrals",
+  "week": 11,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Find antiderivatives of power and exponential functions."
+    },
+    {
+      "tag": 2,
+      "description": "Use algebraic simplification and/or properties of an indefinite integral to find the indefinite integral of a function."
+    }
+  ],
+  "contents": {
+    "definitions": [
+      {
+        "term": "Antiderivative",
+        "definition_plain": "A function F is called an antiderivative of f on an interval I if F'(x) = f(x) for all x in I.",
+        "definition_latex": "A function $F$ is called an \\textbf{antiderivative} of $f$ on an interval $I$ if $F'(x) = f(x)$ for all $x$ in $I$."
+      },
+      {
+        "term": "Indefinite Integral",
+        "definition_plain": "The indefinite integral of a function is the most general antiderivative of that function: integral of f(x) dx = F(x) + C.",
+        "definition_latex": "The \\textbf{indefinite integral} of a function is the most general antiderivative of that function: \\[\\int f(x)\\,dx = F(x)+C\\]"
+      }
+    ],
+    "other_material": [
+      {
+        "type": "key-idea",
+        "content_plain": "Basic Antidifferentiation Rules. Let F and G be antiderivatives of f and g, respectively, and let k be a constant. A particular antiderivative of k*f(x) is k*F(x). A particular antiderivative of f(x) +- g(x) is F(x) +- G(x).",
+        "content_latex": "Let $F$ and $G$ be antiderivatives of $f$ and $g$, respectively, and let $k$ be a constant. \\begin{itemize}\\item A particular antiderivative of $kf(x)$ is $kF(x)$.\\item A particular antiderivative of $f(x)\\pm g(x)$ is $F(x)\\pm G(x)$.\\end{itemize}"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Integral of a Constant: integral of k dx = kx + C (k any constant).",
+        "content_latex": "{\\it Integral of a Constant}: $\\int k\\, dx = kx+C$"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Integral of Power Functions: integral of x^n dx = x^(n+1)/(n+1) + C for n != -1, and integral of 1/x dx = ln|x| + C.",
+        "content_latex": "{\\it Integral of Power Functions}: $\\int x^n\\, dx = \\frac{x^{n+1}}{n+1}+C,\\ n\\neq -1$ and $\\int\\frac1x\\,dx = \\ln|x| + C$"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Integral of Exponential Functions: integral of e^x dx = e^x + C, and integral of a^x dx = a^x/ln a + C (assuming a > 0 and a != 1).",
+        "content_latex": "{\\it Integral of Exponential Functions}: $\\int e^x\\, dx = e^x + C$ and $\\int a^x\\,dx = \\frac{a^x}{\\ln a} + C$ (assuming $a>0\\,\\&\\,a\\not=1$)"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Linearity Properties of Indefinite Integrals: integral of (f(x) +- g(x)) dx = integral of f(x) dx +- integral of g(x) dx = F(x) +- G(x) + C (where F'(x) = f(x) and G'(x) = g(x)).",
+        "content_latex": "{\\it Linearity Properties of Indefinite Integrals}: $\\int \\big( f(x) \\pm g(x) \\big)\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx = F(x) \\pm G(x)+C$ (where $F'(x) = f(x)$ and $G'(x) = g(x)$)"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Linearity Properties of Indefinite Integrals: integral of k*f(x) dx = k * integral of f(x) dx = k*F(x) (where F'(x) = f(x)).",
+        "content_latex": "{\\it Linearity Properties of Indefinite Integrals}: $\\int kf(x) \\,dx = k \\int f(x)\\, dx = kF(x)$ (where $F'(x) = f(x)$)"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Warm-up Exercise 1: Derivative formulas",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["derivative formulas", "exponential function", "derivative of e^x", "derivative of a^x"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Fill in the derivative formulas: d/dx[e^x] = ? and d/dx[a^x] = ?",
+              "answer": "d/dx[e^x] = e^x, d/dx[a^x] = a^x ln a"
+            },
+            "latex": {
+              "question": "Fill in derivative formulas: $\\dfrac{d}{dx}[e^x] = $ and $\\dfrac{d}{dx}[a^x] = $",
+              "answer": "$\\dfrac{d}{dx}[e^x] = e^x$, $\\dfrac{d}{dx}[a^x] = a^x \\ln a$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Antiderivatives of Exponential Functions",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["antiderivative", "exponential function", "indefinite integral", "e^x", "a^x"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find an antiderivative of f(x)=e^x. Use the definition of an antiderivative to check your answer.",
+              "answer": "Since f(x)=e^x, integral of e^x dx = e^x + C.\n\nCheck: F'(x) = d/dx(e^x) = e^x = f(x)."
+            },
+            "latex": {
+              "question": "Find an antiderivative of $f(x)=e^x$. Use the definition of an antiderivative to check your answer.",
+              "answer": "Since $f(x)=e^x$, $\\int e^x \\, dx = e^x + C$. \\textbf{Check:} $F'(x) = \\frac{d}{dx}(e^x) = e^x = f(x)$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Find an antiderivative of f(x)=a^x, where a>0 but a != 1. Use the definition of an antiderivative to check your answer.",
+              "answer": "We have f(x)=a^x, a>0, a != 1. Since the derivative of a^x is a^x ln(a), the function whose derivative would be a^x is a^x/ln a. Hence integral of a^x dx = a^x/ln a + C.\n\nCheck: F'(x) = d/dx(a^x/ln a) = a^x ln(a)/ln(a) = a^x = f(x)."
+            },
+            "latex": {
+              "question": "Find an antiderivative of $f(x)=a^x$, where $a>0$ but $a\\not=1$. Use the definition of an antiderivative to check your answer.",
+              "answer": "We have $f(x)=a^x$, $a>0, a\\neq 1$. Since $\\frac{d}{dx}(a^x) = a^x \\ln(a)$, the function whose derivative would be $a^x$ is $\\frac{a^x}{\\ln a}$. Hence $\\int a^x \\, dx = \\frac{a^x}{\\ln a} + C$. \\textbf{Check:} $F'(x) = \\frac{d}{dx}\\left(\\frac{a^x}{\\ln(a)}\\right) = \\frac{a^x \\ln(a)}{\\ln(a)} = a^x = f(x)$"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Based on your work above, fill in the following indefinite integral formulas: integral of e^x dx = ? and integral of a^x dx = ?",
+              "answer": "integral of e^x dx = e^x + C, integral of a^x dx = a^x/ln a + C"
+            },
+            "latex": {
+              "question": "Based on your work above, fill in the following indefinite integral formulas: $\\int e^x \\, dx = $ and $\\int a^x \\, dx = $",
+              "answer": "$\\int e^x \\, dx = e^x + C$, $\\int a^x \\, dx = \\frac{a^x}{\\ln a} + C$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Antiderivatives of Power Functions and Polynomials",
+        "learning_tag": 1,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["antiderivative", "power functions", "polynomials", "power rule for antiderivatives", "natural logarithm"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find a particular antiderivative for each function in the table.",
+              "answer": "Function | Particular antiderivative\n2x | x^2\n6x | 3x^2\n3x^2 | x^3\nx^2 | x^3/3\n(3/2)x^(1/2) | x^(3/2)\n6x^(1/2) | 4x^(3/2)\n-x^(-2) | x^(-1)\n2x^(-2) | -2x^(-1)\n1/x | ln|x|\n2/x | 2ln|x|\n-1/x^2 | x^(-1)\n2/x^2 | -2x^(-1)\nx^n (n != -1) | x^(n+1)/(n+1)\nx^(-1) | ln|x|"
+            },
+            "latex": {
+              "question": "Find a particular antiderivative for each function in the table.",
+              "answer": "\\begin{tabular}{|c|c||c|c|}\\hline \\textbf{Function} & \\textbf{Particular antiderivative} & \\textbf{Function} & \\textbf{Particular antiderivative}\\\\\\hline $2x$ & $x^2$ & $6x$ & $3x^2$\\\\\\hline $3x^2$ & $x^3$ & $x^2$ & $\\dfrac{x^3}{3}$\\\\\\hline $\\dfrac{3}{2}x^{1/2}$ & $x^{3/2}$ & $6x^{1/2}$ & $4x^{3/2}$\\\\\\hline $-x^{-2}$ & $x^{-1}$ & $2x^{-2}$ & $-2x^{-1}$\\\\\\hline $\\dfrac{1}{x}$ & $\\ln|x|$ & $\\dfrac{2}{x}$ & $2\\ln|x|$\\\\\\hline $-\\dfrac{1}{x^2}$ & $x^{-1}$ & $\\dfrac{2}{x^2}$ & $-2x^{-1}$\\\\\\hline $x^n$ ($n \\neq -1$) & $\\dfrac{x^{n+1}}{n+1}$ & $x^{-1}$ & $\\ln|x|$\\\\\\hline \\end{tabular}"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Find a particular antiderivative of f(x)=6x - x^(-2) + 6x^(1/2) + 2/x - 1/x^2.",
+              "answer": "F(x) = 3x^2 + x^(-1) + 4x^(3/2) + 2ln|x| + x^(-1)"
+            },
+            "latex": {
+              "question": "Find a particular antiderivative of $f(x)=6x-x^{-2}+6x^{1/2}+\\frac2x-\\frac1{x^2}$.",
+              "answer": "$F(x) = 3x^2 + x^{-1} + 4x^{3/2} + 2\\ln|x| + x^{-1}$"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Find a particular antiderivative of g(x)=x + x^(-3) + 7x^(1/3) - x^(-1) + 1/(cube root of x).",
+              "answer": "G(x) = x^2/2 - (1/2)x^(-2) + (21/4)x^(4/3) - ln|x| + (3/2)x^(2/3)"
+            },
+            "latex": {
+              "question": "Find a particular antiderivative of $g(x)=x + x^{-3} + 7x^{1/3} - x^{-1} + \\frac{1}{\\sqrt[3]{x}}$.",
+              "answer": "$G(x) = \\frac{x^2}{2} - \\frac{1}{2} x^{-2} + \\frac{21}{4}x^{4/3} - \\ln|x| + \\frac{3}{2}x^{2/3}$"
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "Based on your work above, fill in the following indefinite integral formulas: integral of x^n dx = ? and integral of 1/x dx = ?",
+              "answer": "integral of x^n dx = x^(n+1)/(n+1) + C, integral of 1/x dx = ln|x| + C"
+            },
+            "latex": {
+              "question": "Based on your work above, fill in the following indefinite integral formulas: $\\int x^n\\,dx = $ and $\\int \\frac1x\\,dx = $",
+              "answer": "$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1} + C$, $\\int \\frac1x\\,dx = \\ln|x| + C$"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Indefinite integrals with algebraic simplification",
+        "learning_tag": 2,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["indefinite integral", "algebraic simplification", "power rule for antiderivatives", "rewriting before integrating"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "integral of sqrt(2) dx =",
+              "answer": "sqrt(2) x + C"
+            },
+            "latex": {
+              "question": "$\\int \\sqrt2 \\, dx =$",
+              "answer": "$\\sqrt2 x + C$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "integral of (cube root of u + 4u^(-1) + u^(-2)) du =",
+              "answer": "(3/4)u^(4/3) + 4ln|u| - u^(-1) + C"
+            },
+            "latex": {
+              "question": "$\\int (\\sqrt[3]{u}+4u^{-1}+u^{-2}) \\, du =$",
+              "answer": "$\\frac{3}{4} u^{4/3} + 4 \\ln|u| - u^{-1} + C$"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "integral of (y^4-1)/y^2 dy =",
+              "answer": "integral of (y^4-1)/y^2 dy = integral of (y^4/y^2 - 1/y^2) dy = integral of (y^2 - 1/y^2) dy = y^3/3 + y^(-1) + C"
+            },
+            "latex": {
+              "question": "$\\int \\frac{y^4-1}{y^2} \\, dy =$",
+              "answer": "\\begin{align*}\\int \\frac{y^4-1}{y^2} \\, dy &= \\int \\frac{y^4}{y^2} -\\frac{1}{y^2} \\, dy\\\\&= \\int y^2 -\\frac{1}{y^2} \\, dy\\\\&= \\frac{y^3}{3} + y^{-1} + C\\end{align*}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 1: Indefinite integrals",
+        "learning_tag": 2,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["indefinite integral", "algebraic simplification", "power rule for antiderivatives", "exponential function"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "integral of (2 - 6t^3 + 3/t^2 - e^t) dt =",
+              "answer": "2t - (3/2)t^4 - 3t^(-1) - e^t + C"
+            },
+            "latex": {
+              "question": "$\\int \\left(2 - 6t^3 + \\frac{3}{t^2} - e^t \\right) \\, dt =$",
+              "answer": "$2t - \\frac{3}{2} t^4 - 3 t^{-1} - e^t + C$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "integral of (x^3+x^2-x+1)/(2x^2) dx =",
+              "answer": "integral of (x^3+x^2-x+1)/(2x^2) dx = integral of (x/2 + 1/2 - 1/(2x) + 1/(2x^2)) dx = x^2/4 + x/2 - (1/2)ln|x| - (1/2)x^(-1) + C"
+            },
+            "latex": {
+              "question": "$\\int \\frac{x^3+x^2-x+1}{2x^2} \\, dx =$",
+              "answer": "\\begin{align*}\\int \\frac{x^3+x^2-x+1}{2x^2} \\, dx &= \\int \\frac{x^3}{2x^2} + \\frac{x^2}{2x^2} - \\frac{x}{2x^2} + \\frac{1}{2x^2} \\, dx\\\\&= \\int \\frac{x}{2} + \\frac{1}{2} - \\frac{1}{2x} + \\frac{1}{2x^2} \\, dx\\\\&= \\frac{x^2}{4} + \\frac{x}{2} - \\frac{1}{2} \\ln|x| - \\frac{1}{2}x^{-1} + C\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "integral of (z^2 + 1/z^2)(z - 1/z) dz =",
+              "answer": "integral of (z^2 + 1/z^2)(z - 1/z) dz = integral of (z^3 - z + 1/z - 1/z^3) dz = z^4/4 - (1/2)z^2 + ln|z| + 1/(2z^2) + C"
+            },
+            "latex": {
+              "question": "$\\int \\left(z^2 + \\frac1{z^2}\\right) \\left( z - \\frac1{z} \\right) \\, dz =$",
+              "answer": "\\begin{align*}\\int \\left(z^2 + \\frac1{z^2}\\right) \\left( z - \\frac1{z} \\right) \\, dz &= \\int \\left(z^3 - z + \\frac{1}{z} - \\frac{1}{z^3}\\right) \\, dz\\\\&= \\frac{z^4}{4} - \\frac{1}{2}z^{2} + \\ln|z| + \\frac{1}{2z^2} + C\\end{align*}"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": []
+}
