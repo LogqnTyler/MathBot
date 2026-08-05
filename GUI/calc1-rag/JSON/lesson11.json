@@ -1,0 +1,239 @@
+{
+    "name": "Local Extrema & First Derivative Test",
+    "week": 7,
+    "learning_objectives": [
+        {"tag": 1, "description": "Identify increasing/decreasing intervals and critical numbers of a function from given graph or formula; represent concepts such as derivatives, local extrema, and critical number graphically."},
+        {"tag": 2, "description": "Apply the First Derivative Test to determine the local extrema of a function graphically and algebraically."}
+    ],
+    "contents": {
+        "definitions": [
+            {
+                "term": "Critical Number",
+                "definition_plain": "A critical number is a number c in the domain of f where either f'(c) = 0 or f'(c) DNE.",
+                "definition_latex": "A \\textbf{critical number} is a number $c$ in the domain of $f$ where either $f'(c)=0$ or $f'(c)$ DNE."
+            }
+        ],
+        "other_material": [
+            {
+                "type": "discussion",
+                "content_plain": "In this activity, we establish a means of finding local extreme values (also called relative extreme values) of a function using properties of the derivative.",
+                "content_latex": "In this activity, we establish a means of finding local extreme values (also called relative extreme values) of a function using properties of the derivative."
+            },
+            {
+                "type": "theorem",
+                "content_plain": "First Derivative Test: Suppose that c is a critical number of a continuous function f. If f' changes from (+) to (-) at c, then f has a local maximum. If f' changes from (-) to (+) at c, then f has a local minimum. If f' does not change sign at c, then f has neither local maximum nor minimum.",
+                "content_latex": "\\textbf{First Derivative Test.} Suppose that $c$ is a critical number of a continuous function $f$. If $f'$ changes from $(+)$ to $(-)$ at $c$, then $f$ has a local maximum. If $f'$ changes from $(-)$ to $(+)$ at $c$, then $f$ has a local minimum. If $f'$ does not change sign at $c$, then $f$ has neither local maximum nor minimum."
+            }
+        ],
+        "problems": [
+            {
+                "name": "Warm-up Exercise 1: Critical Number",
+                "learning_tag": 1,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["critical numbers", "derivative", "domain"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "TRUE or FALSE? f(x)=1/x has exactly 1 critical number. Explain your decision.",
+                            "answer": "False. f'(x)=-x^(-2)=-1/x^2, so f'(x)=0 has no solution and f'(x) DNE when x=0. However f(0) is not defined, so x=0 is not a critical number of f(x)."
+                        },
+                        "latex": {
+                            "question": "\\textbf{TRUE or FALSE?} $\\displaystyle f(x)=\\frac{1}{x}$ has exactly 1 critical number. Explain your decision.",
+                            "answer": "False. $f'(x)=-x^{-2}=-\\frac{1}{x^2}$, so $f'(x)=0$ has no solution and $f'(x)$ DNE when $x=0$. However $f(0)$ is not defined, so $x=0$ is not a critical number of $f(x)$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Example: Critical Numbers and First Derivative Test",
+                "learning_tag": 2,
+                "context_plain": "Let g(x)=x-ln(x^2+1).",
+                "context_latex": "Let $g(x)=x-\\ln(x^2+1)$.",
+                "keywords": ["critical numbers", "increasing intervals", "decreasing intervals", "first derivative test"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the critical numbers of g.",
+                            "answer": "g'(x)=1-(1/(x^2+1))*2x=1-(2x)/(x^2+1)=(x^2-2x+1)/(x^2+1)=(x-1)^2/(x^2+1).\n\nIf g'(x)=0, we get (x-1)^2=0, or x=1.\n\nIf g'(x) DNE, we get x^2+1=0, which has no solution.\n\ng(1)=1-ln(2) is defined, so g(x) is continuous at x=1, which means x=1 is a critical number of g(x)."
+                        },
+                        "latex": {
+                            "question": "Find the critical numbers of $g$.",
+                            "answer": "$g'(x)=1-\\frac{1}{x^2+1}\\cdot 2x=1-\\frac{2x}{x^2+1}=\\frac{x^2-2x+1}{x^2+1}=\\frac{(x-1)^2}{x^2+1}$. If $g'(x)=0$, we get $(x-1)^2=0$, or $x=1$. If $g'(x)$ DNE, we get $x^2+1=0$, which has no solution. $g(1)=1-\\ln(2)$ is defined, so $g(x)$ is continuous at $x=1$, which means $x=1$ is a critical number of $g(x)$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Find the intervals where g is increasing or decreasing. Hint: Creating a sign line will probably be helpful.",
+                            "answer": "We can make a sign line to record the sign of g'(x). The critical number x=1 splits the number line into two intervals. For each interval, we can plug in a value to determine the sign of g'(x) on this interval.\n\ng'(0)=1-0=1>0\n\ng'(2)=1-(2*2)/(2^2+1)=1/5>0\n\nSince g'(x) is positive on the intervals (-infinity, 1) and (1, infinity), we get g(x) is increasing on the intervals (-infinity, 1) and (1, infinity). g(x) is never decreasing.\n\nNote: We can't say g(x) is increasing on (-infinity, infinity) because g(x) is not increasing at x=1."
+                        },
+                        "latex": {
+                            "question": "Find the intervals where $g$ is increasing or decreasing. \\emph{Hint:} Creating a sign line will probably be helpful.",
+                            "answer": "We can make a sign line to record the sign of $g'(x)$. The critical number $x=1$ splits the number line into two intervals. For each interval, we can plug in a value to determine the sign of $g'(x)$ on this interval. $g'(0)=1-0=1>0$. $g'(2)=1-\\frac{2\\cdot2}{2^2+1}=\\frac{1}{5}>0$. Since $g'(x)$ is positive on the intervals $(-\\infty,1)$ and $(1,\\infty)$, we get $g(x)$ is increasing on the intervals $(-\\infty,1)$ and $(1,\\infty)$. $g(x)$ is never decreasing. Note: We can't say $g(x)$ is increasing on $(-\\infty,\\infty)$ because $g(x)$ is not increasing at $x=1$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "At which critical number(s) does g attain a local extreme value(s)? Explicitly cite a relevant test in your response.",
+                            "answer": "The sign of g'(x) does not change at its critical number x=1, so by the First Derivative Test, g(x) has neither a local maximum nor a local minimum at x=1."
+                        },
+                        "latex": {
+                            "question": "At which critical number(s) does $g$ attain a local extreme value(s)? Explicitly cite a relevant test in your response.",
+                            "answer": "The sign of $g'(x)$ does not change at its critical number $x=1$, so by the First Derivative Test, $g(x)$ has neither a local maximum nor a local minimum at $x=1$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise: Increasing, Decreasing, and Local Extrema",
+                "learning_tag": 2,
+                "context_plain": "Let f(x)=x/(x^2+1).",
+                "context_latex": "Let $f(x)=\\frac{x}{x^2+1}$.",
+                "keywords": ["critical numbers", "increasing intervals", "decreasing intervals", "first derivative test"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the intervals where f is increasing or decreasing. Draw a number line to depict your answer, and record your final answer using interval notation.",
+                            "answer": "f'(x)=((x^2+1)-x(2x))/(x^2+1)^2=(1-x^2)/(x^2+1)^2.\n\nIf f'(x)=0, we get 1-x^2=0, or x=+-1.\n\nIf f'(x) DNE, we get (x^2+1)^2=0, which has no solution.\n\nBoth f(-1)=(-1)/(1+1)=-1/2 and f(1)=1/(1+1)=1/2 are defined, so both x=-1 and x=1 are critical numbers of f(x).\n\nThese two critical numbers split the number line into three parts. For each part, we plug in a number to determine the sign of f'(x) on it.\n\nf'(-2)=(1-4)/(4+1)=-3/5<0\n\nf'(0)=(1-0)/(0+1)=1>0\n\nf'(2)=(1-4)/(4+1)=-3/5<0\n\nTherefore, f(x) is increasing on the interval (-1, 1), and f(x) is decreasing on the intervals (-infinity, -1) and (1, infinity)."
+                        },
+                        "latex": {
+                            "question": "Find the intervals where $f$ is increasing or decreasing. Draw a number line to depict your answer, and record your final answer using interval notation.",
+                            "answer": "$f'(x)=\\frac{(x^2+1)-x(2x)}{(x^2+1)^2}=\\frac{1-x^2}{(x^2+1)^2}$. If $f'(x)=0$, we get $1-x^2=0$, or $x=\\pm1$. If $f'(x)$ DNE, we get $(x^2+1)^2=0$, which has no solution. Both $f(-1)=\\frac{-1}{1+1}=-\\frac{1}{2}$ and $f(1)=\\frac{1}{1+1}=\\frac{1}{2}$ are defined, so both $x=-1$ and $x=1$ are critical numbers of $f(x)$. These two critical numbers split the number line into three parts. For each part, we plug in a number to determine the sign of $f'(x)$ on it. $f'(-2)=\\frac{1-4}{4+1}=-\\frac{3}{5}<0$. $f'(0)=\\frac{1-0}{0+1}=1>0$. $f'(2)=\\frac{1-4}{4+1}=-\\frac{3}{5}<0$. Therefore, $f(x)$ is increasing on the interval $(-1,1)$, and $f(x)$ is decreasing on the intervals $(-\\infty,-1)$ and $(1,\\infty)$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Find the local maximum & local minimum points of f. Explicitly cite a relevant test in your response.",
+                            "answer": "f'(x) changes from negative to positive at x=-1, so by the First Derivative Test, f(x) has a local minimum at x=-1.\n\nf'(x) changes from positive to negative at x=1, so by the First Derivative Test, f(x) has a local maximum at x=1."
+                        },
+                        "latex": {
+                            "question": "Find the local maximum \\& local minimum points of $f$. Explicitly cite a relevant test in your response.",
+                            "answer": "$f'(x)$ changes from negative to positive at $x=-1$, so by the First Derivative Test, $f(x)$ has a local minimum at $x=-1$. $f'(x)$ changes from positive to negative at $x=1$, so by the First Derivative Test, $f(x)$ has a local maximum at $x=1$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 1: Critical Numbers with Chain Rule",
+                "learning_tag": 1,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["critical numbers", "chain rule", "derivative", "domain"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find all critical numbers of f(x)=cube root of (x^2-4x).",
+                            "answer": "f(x)=(x^2-4x)^(1/3).\n\nf'(x)=(1/3)(x^2-4x)^(-2/3)(2x-4)=(2x-4)/(3(x^2-4x)^(2/3)).\n\nIf f'(x)=0, we get 2x-4=0, or x=2.\n\nIf f'(x) DNE, we get x^2-4x=0, or x(x-4)=0. This gives x=0 and x=4.\n\nThe domain of f is all real numbers, so f is defined at x=0, 2, 4, which means these three numbers are the critical numbers of f."
+                        },
+                        "latex": {
+                            "question": "Find all critical numbers of $f(x)=\\sqrt[3]{x^2-4x}$.",
+                            "answer": "$f(x)=(x^2-4x)^{1/3}$. $f'(x)=\\frac{1}{3}(x^2-4x)^{-2/3}(2x-4)=\\frac{2x-4}{3(x^2-4x)^{2/3}}$. If $f'(x)=0$, we get $2x-4=0$, or $x=2$. If $f'(x)$ DNE, we get $x^2-4x=0$, or $x(x-4)=0$. This gives $x=0$ and $x=4$. The domain of $f$ is all real numbers, so $f$ is defined at $x=0,2,4$, which means these three numbers are the critical numbers of $f$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 2: Logarithmic Function",
+                "learning_tag": 2,
+                "context_plain": "Let f(x)=ln(x^2-2x+1).",
+                "context_latex": "Let $f(x)=\\ln(x^2-2x+1)$.",
+                "keywords": ["critical numbers", "increasing intervals", "decreasing intervals", "first derivative test"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find all critical numbers of f.",
+                            "answer": "f'(x)=(2x-2)/(x^2-2x+1)=2(x-1)/(x-1)^2=2/(x-1).\n\nIf f'(x)=0, we get 2=0, which is impossible.\n\nIf f'(x) DNE, we get x-1=0, or x=1.\n\nf(1)=ln(1-2+1)=ln(0), which is undefined. So f(x) has no critical number."
+                        },
+                        "latex": {
+                            "question": "Find all critical numbers of $f$.",
+                            "answer": "$f'(x)=\\frac{2x-2}{x^2-2x+1}=\\frac{2(x-1)}{(x-1)^2}=\\frac{2}{x-1}$. If $f'(x)=0$, we get $2=0$, which is impossible. If $f'(x)$ DNE, we get $x-1=0$, or $x=1$. $f(1)=\\ln(1-2+1)=\\ln(0)$, which is undefined. So $f(x)$ has no critical number."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Find the intervals on which f is increasing & the intervals on which f is decreasing.",
+                            "answer": "Even if x=1 is not a critical number, it is a point where f'(x) DNE, so we still use it to split the number line into two parts.\n\nf'(0)=2/(0-1)=-2<0\n\nf'(2)=2/(2-1)=2>0\n\nTherefore, f(x) is increasing on the interval (1, infinity), and f(x) is decreasing on the interval (-infinity, 1)."
+                        },
+                        "latex": {
+                            "question": "Find the intervals on which $f$ is increasing \\& the intervals on which $f$ is decreasing.",
+                            "answer": "Even if $x=1$ is not a critical number, it is a point where $f'(x)$ DNE, so we still use it to split the number line into two parts. $f'(0)=\\frac{2}{0-1}=-2<0$. $f'(2)=\\frac{2}{2-1}=2>0$. Therefore, $f(x)$ is increasing on the interval $(1,\\infty)$, and $f(x)$ is decreasing on the interval $(-\\infty,1)$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "At which x-values does f have local maximum values? At which x-values does f have local minimum values? Explain.",
+                            "answer": "f has no local extrema since f has no critical number."
+                        },
+                        "latex": {
+                            "question": "At which $x$-values does $f$ have local maximum values? At which $x$-values does $f$ have local minimum values? Explain.",
+                            "answer": "$f$ has no local extrema since $f$ has no critical number."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 3: Polynomial First Derivative Test",
+                "learning_tag": 2,
+                "context_plain": "Let f(x)=1/5 x^5 - 5/3 x^3 + 4x.",
+                "context_latex": "Let $f(x)=\\frac{1}{5}x^5-\\frac{5}{3}x^3+4x$.",
+                "keywords": ["critical numbers", "increasing intervals", "decreasing intervals", "first derivative test"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the critical numbers of f.",
+                            "answer": "f'(x)=x^4-5x^2+4=(x^2-4)(x^2-1)=(x-2)(x+2)(x-1)(x+1).\n\nIf f'(x)=0, we get x=-2, -1, 1, 2.\n\nThere's no x-values for which f'(x) DNE, since f'(x) is a polynomial defined for all real numbers.\n\nSo the critical numbers of f(x) are x=-2, -1, 1, 2."
+                        },
+                        "latex": {
+                            "question": "Find the critical numbers of $f$.",
+                            "answer": "$f'(x)=x^4-5x^2+4=(x^2-4)(x^2-1)=(x-2)(x+2)(x-1)(x+1)$. If $f'(x)=0$, we get $x=-2,-1,1,2$. There's no $x$-values for which $f'(x)$ DNE, since $f'(x)$ is a polynomial defined for all real numbers. So the critical numbers of $f(x)$ are $x=-2,-1,1,2$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Find the intervals where f is increasing or decreasing.",
+                            "answer": "The critical numbers split the number line into five intervals: (-infinity, -2), (-2, -1), (-1, 1), (1, 2), and (2, infinity).\n\nx              | x+2 | x+1 | x-1 | x-2 | f'(x)\n(-infinity,-2) | -   | -   | -   | -   | +\n(-2,-1)        | +   | -   | -   | -   | -\n(-1,1)         | +   | +   | -   | -   | +\n(1,2)          | +   | +   | +   | -   | -\n(2,infinity)   | +   | +   | +   | +   | +\n\nTherefore, f(x) is increasing on the intervals (-infinity, -2), (-1, 1), (2, infinity), and f(x) is decreasing on the intervals (-2, -1) and (1, 2)."
+                        },
+                        "latex": {
+                            "question": "Find the intervals where $f$ is increasing or decreasing.",
+                            "answer": "The critical numbers split the number line into five intervals: $(-\\infty,-2)$, $(-2,-1)$, $(-1,1)$, $(1,2)$, and $(2,\\infty)$. \\begin{tabular}{c|cccc|c}$x$ & $x+2$ & $x+1$ & $x-1$ & $x-2$ & $f'(x)$\\\\\\hline $(-\\infty,-2)$ & - & - & - & - & +\\\\ $(-2,-1)$ & + & - & - & - & -\\\\ $(-1,1)$ & + & + & - & - & +\\\\ $(1,2)$ & + & + & + & - & -\\\\ $(2,\\infty)$ & + & + & + & + & +\\end{tabular} Therefore, $f(x)$ is increasing on the intervals $(-\\infty,-2)$, $(-1,1)$, $(2,\\infty)$, and $f(x)$ is decreasing on the intervals $(-2,-1)$ and $(1,2)$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "At which critical number(s) does f attain local extrema? Explain.",
+                            "answer": "At x=-2 and x=1, f'(x) changes from positive to negative, so by the First Derivative Test, f has local maxima at these critical numbers.\n\nAt x=-1 and x=2, f'(x) changes from negative to positive, so by the First Derivative Test, f has local minima at these critical numbers."
+                        },
+                        "latex": {
+                            "question": "At which critical number(s) does $f$ attain local extrema? Explain.",
+                            "answer": "At $x=-2$ and $x=1$, $f'(x)$ changes from positive to negative, so by the First Derivative Test, $f$ has local maxima at these critical numbers. At $x=-1$ and $x=2$, $f'(x)$ changes from negative to positive, so by the First Derivative Test, $f$ has local minima at these critical numbers."
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "mini-lecture", "name": "Connecting the sign of f' to local extrema", "reason": "The mini-lecture includes a plotted graph of f with highlighted increasing/decreasing portions and blue critical-number points; those instructions rely on the tikzpicture graph.", "location": "lines 54-94"},
+        {"type": "theorem", "name": "First Derivative Test sign diagrams", "reason": "The First Derivative Test statement is kept in other_material, but the three accompanying sign-diagram tikzpictures for f' changing + to -, - to +, and no sign change were dropped.", "location": "lines 96-210"},
+        {"type": "problem", "name": "Warm-up Exercise 2: sketch a function from derivative/local-extrema conditions", "reason": "The prompt asks to sketch the graph of a function satisfying derivative and local-extrema conditions, and the solution is a plotted tikzpicture graph.", "location": "lines 214-263"},
+        {"type": "problem", "name": "Example g(x): sign-line diagram", "reason": "The algebraic solution is kept, but the solution includes a tikzpicture sign-line diagram for g'(x) at x=1; the figure was dropped.", "location": "lines 290-324"},
+        {"type": "problem", "name": "Exercise f(x)=x/(x^2+1): number-line diagram", "reason": "The algebraic solution is kept, but part (a) asks to draw a number line and the solution includes a tikzpicture sign-line diagram for f'(x) at x=-1 and x=1; the figure was dropped.", "location": "lines 342-397"},
+        {"type": "problem", "name": "Critical numbers from graphs of f and f'", "reason": "Both parts ask about a curve pictured to the right; the answers x=2,4,6 and x=2,5,7 require reading the plotted graphs of f and f' (tikzpictures).", "location": "lines 410-497"},
+        {"type": "problem", "name": "Decreasing intervals from graphs of f and f'", "reason": "Both parts ask about a curve pictured to the right; the decreasing intervals are read from highlighted plotted graphs of f and f' (tikzpictures).", "location": "lines 498-592"},
+        {"type": "problem", "name": "Extra Practice 2: sign-line diagram", "reason": "The algebraic solution is kept, but the solution includes a tikzpicture sign-line diagram for f'(x) around x=1; the figure was dropped.", "location": "lines 645-679"},
+        {"type": "example", "name": "Standalone graph after Extra Practice 3", "reason": "A standalone tikzpicture graph appears after Extra Practice 3 with no accompanying text prompt; it depends entirely on the plotted curve.", "location": "lines 744-768"}
+    ]
+}

@@ -18,6 +18,7 @@
       --text:      #e8e4dc;
       --muted:     #7a7060;
       --success:   #7ae8a8;
+      --error:     #e88a7a;
       --radius:    6px;
       --mono:      'DM Mono', monospace;
       --serif:     'DM Serif Display', serif;
@@ -381,6 +382,136 @@
       30% { transform: translateY(-5px); opacity: 1; }
     }
 
+    /* ── Picker card (topic + request-type selection) ── */
+    .picker-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .picker-card.disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .picker-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .picker-select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .picker-select:focus { border-color: var(--accent); }
+
+    .picker-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .type-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .type-btn:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+    }
+
+    .type-btn.selected {
+      border-color: var(--accent);
+      background: rgba(232,200,122,0.08);
+      color: var(--accent);
+    }
+
+    .type-icon {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .picker-details-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .picker-details-input:focus { border-color: var(--accent); }
+
+    .picker-char-count {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .picker-submit-btn {
+      align-self: flex-end;
+      background: var(--accent);
+      border: none;
+      border-radius: 5px;
+      padding: 9px 18px;
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .picker-submit-btn:hover { opacity: 0.85; }
+    .picker-submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .picker-error {
+      font-size: 12px;
+      color: var(--error);
+      font-family: var(--mono);
+    }
+
     /* ── Input area ── */
     .input-area {
       padding: 20px 40px 28px;
@@ -665,7 +796,7 @@
       <div class="welcome" id="welcome-screen">
         <h1 class="welcome-title">Ask anything about<br><em>1191 - 1210</em></h1>
         <p class="welcome-sub">
-          I'll search your course materials and explain concepts clearly.<br>
+          I'll ask which topic and what kind of help you want, then search your course materials.<br>
           Try a question below, or type your own.
         </p>
         <div class="starter-grid" role="list">
@@ -734,6 +865,32 @@
     const welcomeScreen = document.getElementById('welcome-screen');
     let messageCount = 0;
 
+    // Topics loaded from GET /topics (backed by JSON/lessonN.json files)
+    let TOPICS = [];
+
+    // Request types students can ask for. `subject` template mirrors
+    // REQUEST_TYPE_TEMPLATES on the backend, purely for display purposes here.
+    const REQUEST_TYPES = [
+      { id: 'practice_problems',      label: 'Practice Problems',       icon: '✎' },
+      { id: 'alternate_explanations', label: 'Alternate Explanations',  icon: '≈' },
+      { id: 'concept_summary',        label: 'Concept Summary',         icon: '§' },
+      { id: 'quiz_me',                label: 'Quiz Me',                 icon: '?' },
+    ];
+
+    const OTHER_DETAILS_MAX_LEN = 120; // matches backend GeneratePrompt.other_details
+
+    async function loadTopics() {
+      try {
+        const res = await fetch('/topics');
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        TOPICS = await res.json();
+      } catch (err) {
+        console.error('Failed to load topics:', err);
+        TOPICS = [];
+      }
+    }
+    loadTopics();
+
     // ── Input handling ──
     input.addEventListener('input', () => {
       sendBtn.disabled = input.value.trim().length === 0;
@@ -764,7 +921,7 @@
       // Wire to backend filter in real implementation
     }
 
-    // ── Submit ──
+    // ── Submit: initial free-text prompt → show topic/type picker ──
     async function submitQuestion() {
       const question = input.value.trim();
       if (!question) return;
@@ -778,15 +935,204 @@
       input.style.height = 'auto';
       sendBtn.disabled = true;
 
-      // Add typing indicator
-      const typingId = 'typing-' + Date.now();
-      appendTyping(typingId);
-
       // Add to history
       addHistory(question);
 
-      // Simulate API call — replace with real fetch to your FastAPI backend
-      await simulateResponse(question, typingId);
+      // Instead of answering directly, ask which topic + what kind of help
+      if (TOPICS.length === 0) await loadTopics(); // retry once in case first load raced the DB
+      appendPicker(question);
+    }
+
+    // ── Picker card: topic dropdown + request-type buttons + optional details ──
+    function appendPicker(initialPrompt) {
+      messageCount++;
+
+      const msg = document.createElement('div');
+      msg.className = 'message assistant';
+      msg.setAttribute('role', 'article');
+      msg.setAttribute('aria-label', 'Assistant: choose a topic and request type');
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = '∫';
+
+      const card = document.createElement('div');
+      card.className = 'picker-card';
+      card.setAttribute('role', 'form');
+      card.setAttribute('aria-label', 'Topic and request type selection');
+
+      // Topic dropdown
+      const topicLabel = document.createElement('label');
+      topicLabel.className = 'picker-label';
+      topicLabel.textContent = 'Which topic?';
+      topicLabel.htmlFor = `topic-select-${messageCount}`;
+
+      const topicSelect = document.createElement('select');
+      topicSelect.className = 'picker-select';
+      topicSelect.id = `topic-select-${messageCount}`;
+
+      if (TOPICS.length === 0) {
+        const opt = document.createElement('option');
+        opt.textContent = 'No topics available';
+        opt.disabled = true;
+        opt.selected = true;
+        topicSelect.appendChild(opt);
+        topicSelect.disabled = true;
+      } else {
+        const placeholder = document.createElement('option');
+        placeholder.textContent = 'Select a topic…';
+        placeholder.value = '';
+        placeholder.disabled = true;
+        placeholder.selected = true;
+        topicSelect.appendChild(placeholder);
+
+        TOPICS.forEach(topic => {
+          const opt = document.createElement('option');
+          opt.value = topic.name; // backend validates subject against KEYWORDS by name
+          opt.textContent = topic.week != null ? `Week ${topic.week} — ${topic.name}` : topic.name;
+          topicSelect.appendChild(opt);
+        });
+      }
+
+      // Request-type buttons
+      const typeLabel = document.createElement('div');
+      typeLabel.className = 'picker-label';
+      typeLabel.textContent = 'What would you like?';
+
+      const typeGrid = document.createElement('div');
+      typeGrid.className = 'picker-types';
+      typeGrid.setAttribute('role', 'radiogroup');
+      typeGrid.setAttribute('aria-label', 'Request type');
+
+      let selectedType = null;
+      const typeButtons = [];
+
+      REQUEST_TYPES.forEach(rt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'type-btn';
+        btn.setAttribute('role', 'radio');
+        btn.setAttribute('aria-checked', 'false');
+        btn.innerHTML = `<span class="type-icon" aria-hidden="true">${rt.icon}</span> ${rt.label}`;
+        btn.onclick = () => {
+          selectedType = rt.id;
+          typeButtons.forEach(b => {
+            b.el.classList.remove('selected');
+            b.el.setAttribute('aria-checked', 'false');
+          });
+          btn.classList.add('selected');
+          btn.setAttribute('aria-checked', 'true');
+          updateSubmitState();
+        };
+        typeButtons.push({ id: rt.id, el: btn });
+        typeGrid.appendChild(btn);
+      });
+
+      // Optional extra details
+      const detailsLabel = document.createElement('label');
+      detailsLabel.className = 'picker-label';
+      detailsLabel.textContent = 'Anything specific? (optional)';
+      detailsLabel.htmlFor = `details-input-${messageCount}`;
+
+      const detailsInput = document.createElement('input');
+      detailsInput.type = 'text';
+      detailsInput.className = 'picker-details-input';
+      detailsInput.id = `details-input-${messageCount}`;
+      detailsInput.placeholder = 'e.g. "focus on chain rule with trig functions"';
+      detailsInput.maxLength = OTHER_DETAILS_MAX_LEN;
+
+      const charCount = document.createElement('div');
+      charCount.className = 'picker-char-count';
+      charCount.textContent = `0 / ${OTHER_DETAILS_MAX_LEN}`;
+      detailsInput.addEventListener('input', () => {
+        charCount.textContent = `${detailsInput.value.length} / ${OTHER_DETAILS_MAX_LEN}`;
+      });
+
+      // Error message (shown on failed submit)
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'picker-error';
+      errorMsg.style.display = 'none';
+
+      // Submit
+      const submitBtn = document.createElement('button');
+      submitBtn.type = 'button';
+      submitBtn.className = 'picker-submit-btn';
+      submitBtn.textContent = 'Continue';
+      submitBtn.disabled = true;
+
+      function updateSubmitState() {
+        submitBtn.disabled = !(topicSelect.value && selectedType);
+      }
+      topicSelect.addEventListener('change', updateSubmitState);
+
+      submitBtn.onclick = async () => {
+        errorMsg.style.display = 'none';
+        card.classList.add('disabled');
+        submitBtn.textContent = 'Working…';
+
+        const typing = 'typing-' + Date.now();
+        appendTyping(typing);
+
+        try {
+          await requestGeneration({
+            subject: topicSelect.value,
+            requestType: selectedType,
+            initialPrompt,
+            details: detailsInput.value.trim(),
+            typingId: typing,
+          });
+        } catch (err) {
+          document.getElementById(typing)?.remove();
+          card.classList.remove('disabled');
+          submitBtn.textContent = 'Continue';
+          errorMsg.textContent = err.message || 'Something went wrong. Please try again.';
+          errorMsg.style.display = 'block';
+        }
+      };
+
+      card.appendChild(topicLabel);
+      card.appendChild(topicSelect);
+      card.appendChild(typeLabel);
+      card.appendChild(typeGrid);
+      card.appendChild(detailsLabel);
+      card.appendChild(detailsInput);
+      card.appendChild(charCount);
+      card.appendChild(errorMsg);
+      card.appendChild(submitBtn);
+
+      msg.appendChild(avatar);
+      msg.appendChild(card);
+      chatWindow.appendChild(msg);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    // ── Call backend /generate_prompt with the chosen topic + request type ──
+    async function requestGeneration({ subject, requestType, initialPrompt, details, typingId }) {
+      // Combine the student's original message with any extra details they
+      // typed, trimmed to the backend's 120-char limit on other_details.
+      const combinedDetails = [initialPrompt, details].filter(Boolean).join(' ').slice(0, 120);
+
+      const response = await fetch('/generate_prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject,
+          request_type: requestType,
+          other_details: combinedDetails,
+        }),
+      });
+
+      document.getElementById(typingId)?.remove();
+
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => ({}));
+        throw new Error(errBody.detail || `Request failed (${response.status})`);
+      }
+
+      const data = await response.json();
+      const typeLabel = REQUEST_TYPES.find(rt => rt.id === requestType)?.label || requestType;
+      appendMessage('assistant', `**${typeLabel} — ${subject}**\n\n${data.prompt}`);
     }
 
     function appendMessage(role, content, chunks = []) {
@@ -928,80 +1274,6 @@
         sourcesList.appendChild(card);
       });
     }
-
-    // ── Mock API — replace with real FastAPI call ──
-    async function simulateResponse(question, typingId) {
-      await new Promise(r => setTimeout(r, 1200 + Math.random() * 800));
-
-      document.getElementById(typingId)?.remove();
-
-      // Mock chunks from your PostgreSQL chunks table
-      const mockChunks = [
-        { id: '042', topic: 'Derivatives · Definition', score: 0.94, text: 'The derivative of a function f at a point x is defined as the limit of the difference quotient as h approaches zero...' },
-        { id: '017', topic: 'Limits · Formal Definition', score: 0.81, text: 'The epsilon-delta definition of a limit states that lim(x→a) f(x) = L if for every ε > 0 there exists δ > 0 such that...' },
-        { id: '088', topic: 'Continuity · Relationship', score: 0.73, text: 'Differentiability implies continuity: if f is differentiable at a, then f is also continuous at a. The converse is not always true...' },
-      ];
-
-      const mockAnswer = `The **derivative** measures the instantaneous rate of change of a function.
-
-$$f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$$
-
-Geometrically, $f'(a)$ gives the slope of the tangent line to the graph of $f$ at the point $(a, f(a))$.
-
-A few key things to remember:
-- Differentiability at a point implies continuity there
-- The derivative is itself a function — you can differentiate it again to get $f''(x)$
-- Common rules: power rule, product rule, chain rule`;
-
-      appendMessage('assistant', mockAnswer, mockChunks);
-      renderSources(mockChunks);
-    }
-</script>
+  </script>
 </body>
 </html>
-    /*
-    // ── Real FastAPI call (uncomment and configure) ──
-    async function callBackend(question) {
-      const response = await fetch('http://localhost:8000/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question, top_k: 3 })
-      });
-      return await response.json(); // { answer: string, chunks: Chunk[] }
-    }
-    */
-/*
-async function simulateResponse(question, typingId) {
-    try {
-        const response = await fetch('/query', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question, top_k: 5 })
-        });
-
-        const data = await response.json();
-        document.getElementById(typingId)?.remove();
-
-        if (data.chunks.length === 0) {
-            appendMessage('assistant', 
-                'I could not find anything in the course materials matching your question. Try rephrasing or using different keywords.');
-            return;
-        }
-
-        // Build answer from top chunks
-        const top = data.chunks[0];
-        let answer = '';
-
-        if (top.Q_plain) answer += `**Q:** ${top.Q_plain}\n\n`;
-        if (top.A_plain) answer += `**A:** ${top.A_plain}`;
-        if (top.content_plain) answer += top.content_plain;
-
-        appendMessage('assistant', answer, data.chunks);
-        renderSources(data.chunks);
-
-    } catch (err) {
-        document.getElementById(typingId)?.remove();
-        appendMessage('assistant', 'Something went wrong connecting to the server. Please try again.');
-        console.error(err);
-    }
-}

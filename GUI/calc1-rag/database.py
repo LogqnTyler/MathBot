@@ -37,12 +37,12 @@ CHUNKS_COLUMNS = """
 """
 
 
-def init_db():
+def _init_db_cloud_sql() -> None:
+    """Connect via the Cloud SQL Python Connector (used in production)."""
     global connector, engine, SessionLocal
 
     connector = Connector(refresh_strategy="LAZY")
 
-    """Initializes a sa connection pool for Cloud SQL Postgres."""
     instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
     db_user = os.environ["DB_USER"]
     db_pass = os.environ.get("DB_PASSWORD") or os.environ["DB_PASS"]
@@ -59,9 +59,41 @@ def init_db():
             ip_type=ip_type,
         )
 
-    # start sql orm
     engine = create_engine("postgresql+pg8000://", creator=getconn)
     SessionLocal = sessionmaker(bind=engine)
+
+
+def _init_db_local() -> None:
+    """
+    Connect directly to a local Postgres instance (e.g. the pgvector/pgvector
+    Docker container in compose.yaml). No Google auth involved. Defaults
+    below match compose.yaml's POSTGRES_USER/POSTGRES_PASSWORD/POSTGRES_DB,
+    override via env vars if you change those.
+    """
+    global engine, SessionLocal
+
+    db_host = os.environ.get("DB_HOST", "localhost")
+    db_port = os.environ.get("DB_PORT", "5432")
+    db_user = os.environ.get("DB_USER", "postgres")
+    db_pass = os.environ.get("DB_PASSWORD") or os.environ.get("DB_PASS", "postgres")
+    db_name = os.environ.get("DB_NAME", "postgres")
+
+    url = f"postgresql+pg8000://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
+    engine = create_engine(url)
+    SessionLocal = sessionmaker(bind=engine)
+
+
+def init_db():
+    """
+    Initializes a sa connection pool for Postgres. Uses Cloud SQL if
+    INSTANCE_CONNECTION_NAME is set (production), otherwise falls back to a
+    local Postgres connection (local dev with docker compose).
+    """
+    if os.environ.get("INSTANCE_CONNECTION_NAME"):
+        _init_db_cloud_sql()
+    else:
+        print("INSTANCE_CONNECTION_NAME not set — connecting to local Postgres instead.")
+        _init_db_local()
 
 
 def get_engine() -> sa.Engine:

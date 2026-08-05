@@ -3,6 +3,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 
+import json
+from pathlib import Path
 from typing import Any, Literal
 from pydantic import BaseModel, Field
 
@@ -22,12 +24,50 @@ from database import (
 )
 
 
+# ── Lesson topics (from JSON/lessonN.json) ──
+JSON_DIR = Path("JSON")
+
+
+def load_topics() -> list[dict[str, Any]]:
+    """
+    Scan JSON_DIR for lessonN.json files and return topic metadata
+    (id, name, week) sorted by week. `id` is the filename stem, e.g.
+    "lesson1", so the frontend can reference a topic unambiguously
+    even if two lessons ever share the same name.
+    """
+    topics: list[dict[str, Any]] = []
+    if not JSON_DIR.exists():
+        print(f"WARNING: JSON topic directory '{JSON_DIR}' does not exist.")
+        return topics
+
+    for file in sorted(JSON_DIR.glob("lesson*.json")):
+        try:
+            with open(file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"WARNING: could not read {file}: {e}")
+            continue
+
+        topics.append(
+            {
+                "id": file.stem,  # e.g. "lesson1"
+                "name": data.get("name", file.stem),
+                "week": data.get("week"),
+            }
+        )
+
+    topics.sort(key=lambda t: (t["week"] is None, t["week"]))
+    return topics
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global KEYWORDS
+    global KEYWORDS, TOPICS
 
     # ── Serve frontend ──
     app.mount("/static", StaticFiles(directory="static"), name="static")
+
+    TOPICS = load_topics()
 
     with db_lifespan():
         KEYWORDS = select_all_keywords()
@@ -39,7 +79,19 @@ app = FastAPI(lifespan=lifespan)
 
 CHUNK_TYPES = ("problem", "definition", "other_material")
 ChunkKind = Literal[*CHUNK_TYPES]
+
+REQUEST_TYPES = ("practice_problems", "alternate_explanations", "concept_summary", "quiz_me")
+RequestKind = Literal[*REQUEST_TYPES]
+
+REQUEST_TYPE_TEMPLATES: dict[str, str] = {
+    "practice_problems": "Generate a practice problem about {subject}.",
+    "alternate_explanations": "Give an alternate explanation of {subject}, using a different approach, framing, or analogy than a typical textbook.",
+    "concept_summary": "Provide a concise summary of the key concepts and definitions for {subject}.",
+    "quiz_me": "Quiz me with a short question about {subject} to check my understanding, then wait for my answer.",
+}
+
 KEYWORDS: list[str] = []
+TOPICS: list[dict[str, Any]] = []
 PROMPT_SIMILARITY_THRESHOLD = 0.25
 PROMPT_PROBLEM_COUNT = 3
 PROMPT_EXTRA_CONTENT_COUNT = 3
@@ -60,6 +112,7 @@ class KeywordQuery(BaseModel):
 
 class GeneratePrompt(BaseModel):
     subject: str
+    request_type: RequestKind = "practice_problems"
     other_details: str = Field(
         default="",
         min_length=0,
@@ -100,6 +153,12 @@ async def retrieve_similarity(request: SimilarityQuery) -> list[dict[str, Any]]:
     return chosen_chunks.tolist()
 
 
+@app.get("/topics")
+async def get_topics() -> list[dict[str, Any]]:
+    """Returns lesson topics (id, name, week) for the topic picker, sorted by week."""
+    return TOPICS
+
+
 @app.post("/generate_prompt")
 def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
     if request.subject not in KEYWORDS:
@@ -108,7 +167,8 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
             detail=f"Invalid subject '{request.subject}'. Must be one of: {KEYWORDS}",
         )
 
-    student_prompt = f"Generate a practice problem about {request.subject}."
+    template = REQUEST_TYPE_TEMPLATES[request.request_type]
+    student_prompt = template.format(subject=request.subject)
     if request.other_details:
         student_prompt = f"{student_prompt} {request.other_details}"
 

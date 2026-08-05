@@ -1,0 +1,443 @@
+{
+    "name": "Properties of Exponential & Logarithmic Functions",
+    "week": 6,
+    "learning_objectives": [
+        {"tag": 2, "description": "Apply the properties of exponents and logarithms to simplify an expression; find the values of logarithmic expressions; know properties of exponential and logarithmic functions to find their domain, range, and common limits; and solve equations involving exponential and logarithmic functions."}
+    ],
+    "contents": {
+        "other_material": [
+            {
+                "type": "summary",
+                "content_plain": "Properties of Exponents: a^x means x copies of a multiplied together; a^x a^y = a^(x+y); (a^x)^y = a^(xy); a^(x/y) = y-th root of a^x; a^(-x) = 1/a^x; a^x/a^y = a^(x-y) or 1/a^(y-x); (a/b)^z = a^z/b^z.",
+                "content_latex": "\\textbf{Properties of Exponents:} $a^x=\\underbrace{a\\cdot a\\cdot a\\cdots a}_{x\\text{ copies}}$; $a^x a^y=a^{x+y}$; $(a^x)^y=a^{xy}$; $a^{x/y}=\\sqrt[y]{a^x}$; $a^{-x}=\\frac{1}{a^x}$; $\\frac{a^x}{a^y}=a^{x-y}\\text{ or }\\frac{1}{a^{y-x}}$; $\\left(\\frac{a}{b}\\right)^z=\\frac{a^z}{b^z}$."
+            },
+            {
+                "type": "summary",
+                "content_plain": "Properties of Logarithms: log_a(x) = b means a^b = x; log_a(a^x) = x; a^(log_a(x)) = x; log_a(x) + log_a(y) = log_a(xy); log_a(x) - log_a(y) = log_a(x/y); p log_a(x) = log_a(x^p).",
+                "content_latex": "\\textbf{Properties of Logarithms:} $\\log_a(x)=b$ means $a^b=x$; $\\log_a(a^x)=x$; $a^{\\log_a(x)}=x$; $\\log_a(x)+\\log_a(y)=\\log_a(xy)$; $\\log_a(x)-\\log_a(y)=\\log_a\\left(\\frac{x}{y}\\right)$; $p\\log_a(x)=\\log_a(x^p)$."
+            },
+            {
+                "type": "summary",
+                "content_plain": "Exponential Functions: y = f(x) = a^x. Assume a > 0. Examples include 3^x, e^x, and (1/4)^x. Domain: (-infinity, infinity). Range: (0, infinity). If a > 1, then f'(x) > 0, lim as x -> infinity a^x = infinity, and lim as x -> -infinity a^x = 0. If 0 < a < 1, then f'(x) < 0, lim as x -> infinity a^x = 0, and lim as x -> -infinity a^x = infinity.",
+                "content_latex": "\\textbf{Exponential Functions:} $y=f(x)=a^x$. We assume $a>0$. For example, $3^x$, $e^x$, $\\left(\\frac{1}{4}\\right)^x$. Domain: $(-\\infty,\\infty)$. Range: $(0,\\infty)$. If $a>1$, then $f'(x)>0$, $\\displaystyle\\lim_{x\\to\\infty}a^x=\\infty$, and $\\displaystyle\\lim_{x\\to-\\infty}a^x=0$. If $0<a<1$, then $f'(x)<0$, $\\displaystyle\\lim_{x\\to\\infty}a^x=0$, and $\\displaystyle\\lim_{x\\to-\\infty}a^x=\\infty$."
+            },
+            {
+                "type": "summary",
+                "content_plain": "Power Functions: y = f(x) = x^a. Examples include x^2, x^5, and sqrt(x) = x^(1/2). Domain: if a is a non-negative integer, (-infinity, infinity). Range: if a is a negative odd integer, (-infinity, infinity); if a is a negative even integer, [0, infinity).",
+                "content_latex": "\\textbf{Power Functions:} $y=f(x)=x^a$. For example, $x^2$, $x^5$, $\\sqrt{x}=x^{1/2}$. Domain: if $a$ is a non-negative integer, $(-\\infty,\\infty)$. Range: if $a$ is a negative \\emph{odd} integer, $(-\\infty,\\infty)$; if $a$ is a negative \\emph{even} integer, $[0,\\infty)$."
+            },
+            {
+                "type": "summary",
+                "content_plain": "Logarithmic Functions: y = f(x) = log_a(x). Examples include log_2(x), ln(x) = log_e(x), and log_10(x). Domain: (0, infinity). Range: (-infinity, infinity). For f(x) = log_a(x), a > 1: f'(x) > 0, log_a(0) = DNE, lim as x -> infinity log_a(x) = infinity, log_a(-3) = DNE, and lim as x -> 0^+ log_a(x) = infinity.",
+                "content_latex": "\\textbf{Logarithmic Functions:} $y=f(x)=\\log_a(x)$. For example, $\\log_2(x)$, $\\ln(x)=\\log_e(x)$, $\\log_{10}(x)$. Domain: $(0,\\infty)$. Range: $(-\\infty,\\infty)$. For $f(x)=\\log_a(x)$, $a>1$: $f'(x)>0$, $\\log_a(0)=DNE$, $\\displaystyle\\lim_{x\\to\\infty}\\log_a(x)=\\infty$, $\\log_a(-3)=DNE$, and $\\displaystyle\\lim_{x\\to0^+}\\log_a(x)=\\infty$."
+            },
+            {
+                "type": "key-idea",
+                "content_plain": "Key Idea: Inverse. a^x and log_a(x) are inverse functions. This means they reverse the action of the other. Mathematically, a^(log_a(x)) = x and log_a(a^x) = x.",
+                "content_latex": "\\textbf{Key Idea: Inverse.} $a^x$ and $\\log_a(x)$ are inverse functions. This means they ``reverse'' the action of the other. Mathematically, $$a^{\\log_a(x)}=x\\text{ and }\\log_a(a^x)=x.$$"
+            }
+        ],
+        "problems": [
+            {
+                "name": "Example 1: Simplify Exponential Expression",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["exponent rules", "positive exponents", "exponential expressions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Simplify the expression by rewriting exponential expression to contain only positive exponents, expanding exponential expressions when possible, and using properties of multiplication and division: ((2^(-3)e^4)/(2e^3))^2",
+                            "answer": "((2^(-3)e^4)/(2e^3))^2 = (e^(4-3)/(2*2^3))^2 = (e/2^(1+3))^2 = (e/2^4)(e/2^4) = e^(1+1)/2^(4+4) = e^2/2^8"
+                        },
+                        "latex": {
+                            "question": "Simplify the expression by rewriting exponential expression to contain only positive exponents, expanding exponential expressions when possible, and using properties of multiplication and division: $\\left(\\frac{2^{-3}e^4}{2e^3}\\right)^2$",
+                            "answer": "$$\\left(\\frac{2^{-3}e^4}{2e^3}\\right)^2=\\left(\\frac{e^{4-3}}{2\\cdot2^3}\\right)^2=\\left(\\frac{e}{2^{1+3}}\\right)^2=\\left(\\frac{e}{2^4}\\right)\\left(\\frac{e}{2^4}\\right)=\\frac{e^{1+1}}{2^{4+4}}=\\frac{e^2}{2^8}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 2: Simplify Exponential Expressions",
+                "learning_tag": 2,
+                "context_plain": "Simplify each expression below by rewriting exponential expression to contain only positive exponents, expanding exponential expressions, and using properties of multiplication and division.",
+                "context_latex": "Simplify each expression below by rewriting exponential expression to contain only positive exponents, expanding exponential expressions, and using properties of multiplication and division.",
+                "keywords": ["exponent rules", "positive exponents", "radicals", "exponential expressions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "sqrt(e^7/e^11)",
+                            "answer": "sqrt(e^7/e^11) = (e^(7-11))^(1/2) = (e^(-4))^(1/2) = e^(-4*1/2) = e^(-2) = 1/e^2"
+                        },
+                        "latex": {
+                            "question": "$\\sqrt{\\frac{e^7}{e^{11}}}$",
+                            "answer": "$$\\sqrt{\\frac{e^7}{e^{11}}}=\\left(e^{7-11}\\right)^{1/2}=\\left(e^{-4}\\right)^{1/2}=e^{-4\\cdot\\frac{1}{2}}=e^{-2}=\\frac{1}{e^2}$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "(2x^(-4)sqrt(x^3))/(2^(-5)x^(1/2))",
+                            "answer": "(2x^(-4)sqrt(x^3))/(2^(-5)x^(1/2)) = (2^(1-(-5)) * x^(3/2))/(x^4 x^(1/2)) = 2^6/(x^(4+1/2)x^(-3/2)) = 64/x^3"
+                        },
+                        "latex": {
+                            "question": "$\\frac{2x^{-4}\\sqrt{x^3}}{2^{-5}x^{1/2}}$",
+                            "answer": "$$\\frac{2x^{-4}\\sqrt{x^3}}{2^{-5}x^{1/2}}=\\frac{2^{1-(-5)}\\cdot x^{3/2}}{x^4x^{1/2}}=\\frac{2^6}{x^{4+\\frac{1}{2}}x^{-3/2}}=\\frac{64}{x^3}$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "(a+b)^2",
+                            "answer": "(a+b)^2 = (a+b)(a+b) = a^2 + ab + ba + b^2 = a^2 + 2ab + b^2"
+                        },
+                        "latex": {
+                            "question": "$(a+b)^2$",
+                            "answer": "$$(a+b)^2=\\underbrace{(a+b)\\cdot(a+b)}_{2\\text{ copies}}=a^2+ab+ba+b^2=a^2+2ab+b^2$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Example and Exercise: Evaluate Logarithms",
+                "learning_tag": 2,
+                "context_plain": "Evaluate the following:",
+                "context_latex": "Evaluate the following:",
+                "keywords": ["logarithms", "natural logarithm", "inverse functions", "exponent rules"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "log_2(8)",
+                            "answer": "log_2(8) is the power to which we must raise 2 in order to get 8. Since 8 = 2^3, log_2(8) = 3."
+                        },
+                        "latex": {
+                            "question": "$\\log_2(8)$",
+                            "answer": "$\\log_2(8)$ is the power to which we must raise $2$ in order to get $8$. Since $8=2^3$, $\\log_2(8)=3$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "ln(1/sqrt(e))",
+                            "answer": "ln(1/sqrt(e)) is the power to which we must raise e in order to get 1/sqrt(e). Since 1/sqrt(e) = 1/e^(1/2) = e^(-1/2), ln(1/sqrt(e)) = -1/2."
+                        },
+                        "latex": {
+                            "question": "$\\ln\\left(\\frac{1}{\\sqrt{e}}\\right)$",
+                            "answer": "$\\ln\\left(\\frac{1}{\\sqrt{e}}\\right)$ is the power to which we must raise $e$ in order to get $\\frac{1}{\\sqrt{e}}$. Since $\\frac{1}{\\sqrt{e}}=\\frac{1}{e^{1/2}}=e^{-1/2}$, $\\ln\\left(\\frac{1}{\\sqrt{e}}\\right)=-\\frac{1}{2}$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "log_5(cube root of 25)",
+                            "answer": "log_5(cube root of 25) is the power to which we must raise 5 in order to get cube root of 25. Since cube root of 25 = 25^(1/3) = (5^2)^(1/3) = 5^(2/3), log_5(cube root of 25) = 2/3."
+                        },
+                        "latex": {
+                            "question": "$\\log_5\\left(\\sqrt[3]{25}\\right)$",
+                            "answer": "$\\log_5(\\sqrt[3]{25})$ is the power to which we must raise $5$ in order to get $\\sqrt[3]{25}$. Since $\\sqrt[3]{25}=25^{1/3}=(5^2)^{1/3}=5^{2/3}$, $\\log_5(\\sqrt[3]{25})=\\frac{2}{3}$."
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "ln(e^5/e^7)",
+                            "answer": "ln(e^5/e^7) is the power to which we must raise e in order to get e^5/e^7. Since e^5/e^7 = e^(5-7) = e^(-2), ln(e^5/e^7) = -2."
+                        },
+                        "latex": {
+                            "question": "$\\ln\\left(\\frac{e^5}{e^7}\\right)$",
+                            "answer": "$\\ln\\left(\\frac{e^5}{e^7}\\right)$ is the power to which we must raise $e$ in order to get $\\frac{e^5}{e^7}$. Since $\\frac{e^5}{e^7}=e^{5-7}=e^{-2}$, $\\ln\\left(\\frac{e^5}{e^7}\\right)=-2$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Example 3: Condense and Simplify Logarithms",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["logarithm properties", "condensing logarithms", "natural logarithm", "factoring"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Condense and simplify the logarithmic expression completely: ln(e-1) + ln(e^2+e) - ln(e^4-e^2)",
+                            "answer": "ln(e-1) + ln(e^2+e) - ln(e^4-e^2) = ln((e-1)(e^2+e)) - ln(e^4-e^2) = ln(((e-1)(e^2+e))/(e^4-e^2)) = ln(((e-1)e(e+1))/(e^2(e^2-1))) = ln((e(e-1)(e+1))/(e^2(e-1)(e+1))) = ln(e^(1-2)) = -1"
+                        },
+                        "latex": {
+                            "question": "Condense and simplify the logarithmic expression completely: $\\ln(e-1)+\\ln(e^2+e)-\\ln(e^4-e^2)$",
+                            "answer": "$$\\begin{aligned}\\ln(e-1)+\\ln(e^2+e)-\\ln(e^4-e^2)&=\\ln((e-1)(e^2+e))-\\ln(e^4-e^2)\\\\&=\\ln\\left(\\frac{(e-1)(e^2+e)}{e^4-e^2}\\right)\\\\&=\\ln\\left(\\frac{(e-1)\\cdot e(e+1)}{e^2(e^2-1)}\\right)\\\\&=\\ln\\left(\\frac{e^1(e-1)(e+1)}{e^2(e-1)(e+1)}\\right)\\\\&=\\ln(e^{1-2})=-1\\end{aligned}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise C: Condense and Simplify Logarithms",
+                "learning_tag": 2,
+                "context_plain": "Condense and simplify the following logarithmic expressions completely:",
+                "context_latex": "Condense and simplify the following logarithmic expressions completely:",
+                "keywords": ["logarithm properties", "condensing logarithms", "factoring"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "log_5 50 + log_5 7 - log_5 14",
+                            "answer": "log_5 50 + log_5 7 - log_5 14 = log_5(50*7) - log_5(14) = log_5((50*7)/14) = log_5(50/2) = log_5(25) = 2"
+                        },
+                        "latex": {
+                            "question": "$\\log_5 50+\\log_5 7-\\log_5 14$",
+                            "answer": "$$\\begin{aligned}\\log_5 50+\\log_5 7-\\log_5 14&=\\log_5(50\\cdot7)-\\log_5(14)\\\\&=\\log_5\\left(\\frac{50\\cdot7}{14}\\right)\\\\&=\\log_5\\left(\\frac{50}{2}\\right)\\\\&=\\log_5(25)=2\\end{aligned}$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "ln(e^2+e) - ln(e^2-1) + ln(e^2-e)",
+                            "answer": "ln(e^2+e) - ln(e^2-1) + ln(e^2-e) = ln((e^2+e)/(e^2-1)) + ln(e^2-e) = ln(((e^2+e)(e^2-e))/(e^2-1)) = ln((e(e+1)*e(e-1))/((e+1)(e-1))) = ln(e^2) = 2"
+                        },
+                        "latex": {
+                            "question": "$\\ln(e^2+e)-\\ln(e^2-1)+\\ln(e^2-e)$",
+                            "answer": "$$\\begin{aligned}\\ln(e^2+e)-\\ln(e^2-1)+\\ln(e^2-e)&=\\ln\\left(\\frac{e^2+e}{e^2-1}\\right)+\\ln(e^2-e)\\\\&=\\ln\\left(\\frac{(e^2+e)(e^2-e)}{e^2-1}\\right)\\\\&=\\ln\\left(\\frac{e(e+1)\\cdot e(e-1)}{(e+1)(e-1)}\\right)\\\\&=\\ln(e^2)=2\\end{aligned}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exponential Functions: Tables of Values",
+                "learning_tag": 2,
+                "context_plain": "Fill in the tables of values for f(x) = 2^x and g(x) = (1/2)^x.",
+                "context_latex": "Fill in the tables of values for $f(x)=2^x$ and $g(x)=\\left(\\frac{1}{2}\\right)^x$.",
+                "keywords": ["exponential functions", "table of values", "function behavior"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Complete the table for f(x) = 2^x for x = 3, 2, 1, 0, -1, -2, -3.",
+                            "answer": "x    | 3 | 2 | 1 | 0 | -1 | -2 | -3\nf(x) | 8 | 4 | 2 | 1 | 1/2 | 1/4 | 1/8"
+                        },
+                        "latex": {
+                            "question": "Complete the table for $f(x)=2^x$ for $x=3,2,1,0,-1,-2,-3$.",
+                            "answer": "\\begin{tabular}{c|c}$x$ & $f(x)=2^x$\\\\\\hline $3$ & $8$\\\\ $2$ & $4$\\\\ $1$ & $2$\\\\ $0$ & $1$\\\\ $-1$ & $\\frac{1}{2}$\\\\ $-2$ & $\\frac{1}{4}$\\\\ $-3$ & $\\frac{1}{8}$\\end{tabular}"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Complete the table for g(x) = (1/2)^x for x = 3, 2, 1, 0, -1, -2, -3.",
+                            "answer": "x    | 3 | 2 | 1 | 0 | -1 | -2 | -3\ng(x) | 1/8 | 1/4 | 1/2 | 1 | 2 | 4 | 8"
+                        },
+                        "latex": {
+                            "question": "Complete the table for $g(x)=\\left(\\frac{1}{2}\\right)^x$ for $x=3,2,1,0,-1,-2,-3$.",
+                            "answer": "\\begin{tabular}{c|c}$x$ & $g(x)=\\left(\\frac{1}{2}\\right)^x$\\\\\\hline $3$ & $\\frac{1}{8}$\\\\ $2$ & $\\frac{1}{4}$\\\\ $1$ & $\\frac{1}{2}$\\\\ $0$ & $1$\\\\ $-1$ & $2$\\\\ $-2$ & $4$\\\\ $-3$ & $8$\\end{tabular}"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Logarithmic Functions: Table of Values",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["logarithmic functions", "table of values", "inverse functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Fill in the table of values for f(x) = log_2(x) for x = 1/8, 1/4, 1/2, 1, 2, 4, 8.",
+                            "answer": "x    | 1/8 | 1/4 | 1/2 | 1 | 2 | 4 | 8\nf(x) | -3 | -2 | -1 | 0 | 1 | 2 | 3"
+                        },
+                        "latex": {
+                            "question": "Fill in the table of values for $f(x)=\\log_2(x)$ for $x=\\frac{1}{8},\\frac{1}{4},\\frac{1}{2},1,2,4,8$.",
+                            "answer": "\\begin{tabular}{c|c}$x$ & $f(x)=\\log_2(x)$\\\\\\hline $1/8$ & $-3$\\\\ $1/4$ & $-2$\\\\ $1/2$ & $-1$\\\\ $1$ & $0$\\\\ $2$ & $1$\\\\ $4$ & $2$\\\\ $8$ & $3$\\end{tabular}"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise D: Solve Exponential and Logarithmic Equations",
+                "learning_tag": 2,
+                "context_plain": "Solve the following equations for x.",
+                "context_latex": "Solve the following equations for $x$.",
+                "keywords": ["exponential equations", "logarithmic equations", "inverse functions", "domain restrictions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "2^(3-2x) = 10^x",
+                            "answer": "2^(3-2x) = 10^x => log_2(2^(3-2x)) = log_2(10^x) => 3 - 2x = x log_2(10) => 3 = x log_2(10) + 2x => 3 = x(log_2(10)+2) => x = 3/(log_2(10)+2)"
+                        },
+                        "latex": {
+                            "question": "$2^{3-2x}=10^x$",
+                            "answer": "$$\\begin{aligned}2^{3-2x}=10^x&\\implies \\log_2(2^{3-2x})=\\log_2(10^x)\\\\&\\implies 3-2x=x\\log_2(10)\\\\&\\implies 3=x\\log_2(10)+2x\\\\&\\implies 3=x(\\log_2(10)+2)\\\\&\\implies x=\\frac{3}{\\log_2(10)+2}\\end{aligned}$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "log_3(x+4) + log_3(x-2) = 3",
+                            "answer": "log_3(x+4) + log_3(x-2) = 3 => log_3((x+4)(x-2)) = 3 => (x+4)(x-2) = 27 => x^2 + 2x - 35 = 0 => (x+7)(x-5) = 0, so x = -7 or x = 5. Checking the original logarithms: x = -7 makes log_3(-3) + log_3(-9), which is undefined. x = 5 gives log_3(9) + log_3(3) = log_3(27) = 3. Thus x = 5 is the solution."
+                        },
+                        "latex": {
+                            "question": "$\\log_3(x+4)+\\log_3(x-2)=3$",
+                            "answer": "$$\\begin{aligned}\\log_3(x+4)+\\log_3(x-2)=3&\\implies \\log_3((x+4)(x-2))=3\\\\&\\implies 3^{\\log_3((x+4)(x-2))}=3^3\\\\&\\implies (x+4)(x-2)=27\\\\&\\implies x^2-2x+4x-8=27\\\\&\\implies x^2+2x-35=0\\\\&\\implies (x+7)(x-5)=0\\\\&\\implies x=-7,\\,5\\end{aligned}$$ Checking the original equation, $x=-7$ makes $\\log_3(-3)+\\log_3(-9)$, which is undefined. For $x=5$, $\\log_3(9)+\\log_3(3)=\\log_3(27)=3$. Thus $x=5$ is the solution."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exam Practice 1",
+                "learning_tag": 2,
+                "context_plain": "The following problem appeared on an assessment during the Fall 2023 semester. Respond to the following prompts.",
+                "context_latex": "The following problem appeared on an assessment during the Fall 2023 semester. Respond to the following prompts.",
+                "keywords": ["logarithms", "logarithm properties", "logarithmic equations", "domain restrictions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Evaluate: log_2(1/32)",
+                            "answer": "log_2(1/32) = log_2(1/2^5) = log_2(2^(-5)) = -5"
+                        },
+                        "latex": {
+                            "question": "Evaluate: $\\displaystyle\\log_2\\left(\\frac{1}{32}\\right)$",
+                            "answer": "$$\\log_2\\left(\\frac{1}{32}\\right)=\\log_2\\left(\\frac{1}{2^5}\\right)=\\log_2(2^{-5})=-5$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Simplify the expression completely: e^(3 ln(5)) - ln(e) + ln(e^3)/ln(e^5) - ln(e^3 e^5)",
+                            "answer": "e^(3 ln(5)) = e^(ln(5^3)) = 5^3 = 125; ln(e) = 1; ln(e^3)/ln(e^5) = (3 ln(e))/(5 ln(e)) = 3/5; ln(e^3 e^5) = ln(e^3) + ln(e^5) = 3 + 5 = 8. Therefore e^(3 ln(5)) - ln(e) + ln(e^3)/ln(e^5) - ln(e^3 e^5) = 125 - 1 + 3/5 - 8 = 116 3/5."
+                        },
+                        "latex": {
+                            "question": "Simplify the expression completely: $\\displaystyle e^{3\\ln(5)}-\\ln(e)+\\frac{\\ln(e^3)}{\\ln(e^5)}-\\ln(e^3e^5)$",
+                            "answer": "$e^{3\\ln(5)}=e^{\\ln(5^3)}=5^3=125$, $\\ln(e)=1$, $\\frac{\\ln(e^3)}{\\ln(e^5)}=\\frac{3\\ln(e)}{5\\ln(e)}=\\frac{3}{5}$, and $\\ln(e^3e^5)=\\ln(e^3)+\\ln(e^5)=3+5=8$. Thus $$e^{3\\ln(5)}-\\ln(e)+\\frac{\\ln(e^3)}{\\ln(e^5)}-\\ln(e^3e^5)=125-1+\\frac{3}{5}-8=116\\frac{3}{5}.$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "Solve the following equation for x: log_2(x - 3) + log_2(x + 1) = 5",
+                            "answer": "log_2(x - 3) + log_2(x + 1) = 5 => log_2((x-3)(x+1)) = 5 => (x-3)(x+1) = 32 => x^2 - 2x - 35 = 0 => (x-7)(x+5) = 0. Thus x = 7 or x = -5. x = 7 is in the domain, while x = -5 is not in the domain because log_2(-8) is not defined. Thus x = 7 is the only solution."
+                        },
+                        "latex": {
+                            "question": "Solve the following equation for $x$: $\\displaystyle\\log_2(x-3)+\\log_2(x+1)=5$",
+                            "answer": "$$\\begin{aligned}\\log_2(x-3)+\\log_2(x+1)&=5\\\\\\log_2((x-3)(x+1))&=5\\\\2^{\\log_2((x-3)(x+1))}&=2^5\\\\(x-3)(x+1)&=32\\\\x^2-2x-35&=0\\\\(x-7)(x+5)&=0\\end{aligned}$$ Thus $x=7$ or $x=-5$. The value $x=7$ is in the domain, while $x=-5$ is not because $\\log_2(-8)$ is not defined. Thus $x=7$ is the only solution."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 1: Exponential Equations",
+                "learning_tag": 2,
+                "context_plain": "Find all possible solutions to the following equations.",
+                "context_latex": "Find all possible solutions to the following equations.",
+                "keywords": ["exponential equations", "logarithms", "factoring", "inverse functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "5^x - 4 = 0",
+                            "answer": "5^x - 4 = 0 => 5^x = 4 => log_5(5^x) = log_5(4) => x = log_5(4) approx 0.86"
+                        },
+                        "latex": {
+                            "question": "$5^x-4=0$",
+                            "answer": "$$5^x-4=0\\implies 5^x=4\\implies \\log_5(5^x)=\\log_5(4)\\implies x=\\log_5(4)\\approx0.86$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "5^x + 5 = 0",
+                            "answer": "5^x + 5 = 0 => 5^x = -5. But 5^x can never be negative and thus 5^x != -5. This means there are not solutions."
+                        },
+                        "latex": {
+                            "question": "$5^x+5=0$",
+                            "answer": "$$5^x+5=0\\implies 5^x=-5.$$ But $5^x$ can never be negative and thus $5^x\\neq-5$. This means there are not solutions."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "5^(2x) + 5^x - 20 = 0",
+                            "answer": "5^(2x) + 5^x - 20 = 0 => (5^x)^2 + 5^x - 20 = 0 => (5^x + 5)(5^x - 4) = 0. Thus either 5^x + 5 = 0 or 5^x - 4 = 0. Part (b) shows 5^x + 5 = 0 has no solutions. Part (a) shows 5^x - 4 = 0 has solution x = log_5(4) approx 0.86."
+                        },
+                        "latex": {
+                            "question": "$5^{2x}+5^x-20=0$",
+                            "answer": "$$5^{2x}+5^x-20=0\\implies (5^x)^2+5^x-20=0\\implies (5^x+5)(5^x-4)=0.$$ Thus either $5^x+5=0$ or $5^x-4=0$. Part (b) shows $5^x+5=0$ has no solutions. Part (a) shows $5^x-4=0$ has solution $x=\\log_5(4)\\approx0.86$."
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "2e^(2x) - 5e^x + 2 = 0",
+                            "answer": "2e^(2x) - 5e^x + 2 = 0 => 2(e^x)^2 - 5e^x + 2 = 0 => (2e^x - 1)(e^x - 2) = 0. If 2e^x - 1 = 0, then e^x = 1/2 and x = ln(1/2) approx -0.69. If e^x - 2 = 0, then e^x = 2 and x = ln(2) approx 0.69."
+                        },
+                        "latex": {
+                            "question": "$2e^{2x}-5e^x+2=0$",
+                            "answer": "$$2e^{2x}-5e^x+2=0\\implies 2(e^x)^2-5e^x+2=0\\implies (2e^x-1)(e^x-2)=0.$$ If $2e^x-1=0$, then $e^x=\\frac{1}{2}$ and $x=\\ln\\left(\\frac{1}{2}\\right)\\approx-0.69$. If $e^x-2=0$, then $e^x=2$ and $x=\\ln(2)\\approx0.69$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 2: Logarithmic and Exponential Equations",
+                "learning_tag": 2,
+                "context_plain": "Find all possible solutions to the following equations.",
+                "context_latex": "Find all possible solutions to the following equations.",
+                "keywords": ["logarithmic equations", "exponential equations", "inverse functions", "domain restrictions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "log_5(x+2) - 2 = 0",
+                            "answer": "log_5(x+2) - 2 = 0 => log_5(x+2) = 2 => 5^(log_5(x+2)) = 5^2 => x + 2 = 25 => x = 23. x = 23 is in the domain since log_5(23+2) is defined."
+                        },
+                        "latex": {
+                            "question": "$\\log_5(x+2)-2=0$",
+                            "answer": "$$\\log_5(x+2)-2=0\\implies \\log_5(x+2)=2\\implies 5^{\\log_5(x+2)}=5^2\\implies x+2=25\\implies x=23.$$ The value $x=23$ is in the domain since $\\log_5(23+2)$ is defined."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "5^(x+2) - 2 = 0",
+                            "answer": "5^(x+2) - 2 = 0 => 5^(x+2) = 2 => log_5(5^(x+2)) = log_5(2) => x + 2 = log_5(2) => x = log_5(2) - 2"
+                        },
+                        "latex": {
+                            "question": "$5^{x+2}-2=0$",
+                            "answer": "$$5^{x+2}-2=0\\implies 5^{x+2}=2\\implies \\log_5(5^{x+2})=\\log_5(2)\\implies x+2=\\log_5(2)\\implies x=\\log_5(2)-2$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "log_5(x+2) - 2 = log_5(x)",
+                            "answer": "log_5(x+2) - 2 = log_5(x) => log_5(x+2) - log_5(x) = 2 => log_5((x+2)/x) = 2 => (x+2)/x = 25 => x + 2 = 25x => 2 = 24x => x = 1/12"
+                        },
+                        "latex": {
+                            "question": "$\\log_5(x+2)-2=\\log_5(x)$",
+                            "answer": "$$\\begin{aligned}\\log_5(x+2)-2&=\\log_5(x)\\\\\\log_5(x+2)-\\log_5(x)&=2\\\\\\log_5\\left(\\frac{x+2}{x}\\right)&=2\\\\5^{\\log_5\\left(\\frac{x+2}{x}\\right)}&=5^2\\\\\\frac{x+2}{x}&=25\\\\x+2&=25x\\\\2&=24x\\\\x&=\\frac{1}{12}\\end{aligned}$$"
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "5^(x+2) - 2 = 5^x",
+                            "answer": "5^(x+2) - 2 = 5^x => 5^(x+2) - 5^x = 2 => 5^x * 5^2 - 5^x = 2 => 5^x(5^2 - 1) = 2 => 5^x = 1/(5^2 - 1) = 1/24 => x = log_5(1/24) approx -1.97"
+                        },
+                        "latex": {
+                            "question": "$5^{x+2}-2=5^x$",
+                            "answer": "$$\\begin{aligned}5^{x+2}-2&=5^x\\\\5^{x+2}-5^x&=2\\\\5^x\\cdot5^2-5^x&=2\\\\5^x(5^2-1)&=2\\\\5^x&=\\frac{1}{5^2-1}\\\\5^x&=\\frac{1}{24}\\\\\\log_5(5^x)&=\\log_5\\left(\\frac{1}{24}\\right)\\\\x&=\\log_5\\left(\\frac{1}{24}\\right)\\approx-1.97\\end{aligned}$$"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "problem", "name": "Exponential functions graph sketch and conjecture", "reason": "Contains a tikzpicture/axis plotting f(x)=2^x and g(x)=(1/2)^x and asks students to sketch the graphs; the graph-based conjecture prompts rely on the plotted curves. The table values and textual function summaries are kept.", "location": "lines 232-356"},
+        {"type": "problem", "name": "Logarithmic function graph sketch and conjecture", "reason": "Contains a tikzpicture/axis plotting f(x)=log_2(x) and asks students to sketch the graph; the graph-based conjecture prompts rely on the plotted curve. The table values and textual function summaries are kept.", "location": "lines 359-447"}
+    ]
+}

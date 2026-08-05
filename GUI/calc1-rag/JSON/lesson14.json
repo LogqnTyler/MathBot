@@ -1,0 +1,359 @@
+{
+  "name": "Applied Optimization",
+  "week": 14,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Translate an applied optimization word problem into a mathematical model: identify the quantity to optimize, define variables, write objective and constraint equations, reduce the objective to a function of one variable, and identify an appropriate domain."
+    },
+    {
+      "tag": 2,
+      "description": "Apply calculus (find critical numbers; use the First Derivative Test for Absolute Extrema or the Closed Interval Method) to locate the absolute extremum of the model function and interpret the result in the context of the original problem."
+    }
+  ],
+  "contents": {
+    "definitions": [
+      {
+        "term": "Unit Selling Price",
+        "definition_plain": "The unit selling price is the sales price of a unit of a commodity. The unit selling price of the x-th unit of the commodity can be regarded as a function of x, the number of units sold: p = f(x). The relationship between p and x is called a demand equation, whose graph is called a demand curve.",
+        "definition_latex": "The \\textbf{unit selling price} is the sales price of a unit of a commodity. The unit selling price of the $x^{th}$ unit of the commodity can be regarded as a function of $x$, the number of units sold: \\[p=f(x)\\] The relationship between $p$ and $x$ is called a \\textit{demand equation}, the graph of which is called a \\textit{demand curve}."
+      },
+      {
+        "term": "Revenue",
+        "definition_plain": "Revenue is the income from the sales of a commodity. If p(x) is the unit selling price of the x-th unit, then revenue from the sale of x units is R(x) = x * p.",
+        "definition_latex": "\\textbf{Revenue} is the income from the sales of a commodity. If $p(x)$ is the unit selling price of the $x^{th}$ unit of the commodity, then revenue from the sale of $x$ units of the commodity is: \\[R(x)=x\\cdot p\\]"
+      },
+      {
+        "term": "Total Cost",
+        "definition_plain": "Total cost is the amount of money that must be spent to produce a commodity. We denote the total cost of producing x units of a commodity by C(x).",
+        "definition_latex": "\\textbf{Total cost} is the amount of money that must be spent to produce a commodity. We'll denote the total cost of producing $x$ units of a commodity by $C(x)$."
+      },
+      {
+        "term": "Profit",
+        "definition_plain": "Profit is the difference between revenue and total cost: P(x) = R(x) - C(x).",
+        "definition_latex": "\\textbf{Profit} is the difference between revenue and total cost: \\[P(x) = R(x) - C(x)\\]"
+      },
+      {
+        "term": "Marginal Cost",
+        "definition_plain": "The actual cost incurred in producing an additional unit of a certain commodity at a certain level of operation is called the marginal cost. Economists often define the marginal cost function to be the derivative of total cost: MC(x) = C'(x).",
+        "definition_latex": "The actual cost incurred in producing an additional unit of a certain commodity at a certain level of operation is called the \\textbf{marginal cost}. Economists often define the marginal cost function to be the derivative of total cost: $MC(x)=C'(x)$."
+      }
+    ],
+    "other_material": [
+      {
+        "type": "discussion",
+        "content_plain": "Optimization problems are solved in two phases: the modeling phase and the calculus phase. In the modeling phase we identify the quantity to be optimized, define variables, write the objective equation (and any constraints), use a constraint to reduce the objective to a function of one variable, and identify the domain. In the calculus phase we find critical numbers of the one-variable objective and apply the First Derivative Test for Absolute Extrema (or the Closed Interval Method) to identify the absolute extremum, then interpret the result in context.",
+        "content_latex": "Optimization problems are solved in two phases: the \\textbf{modeling phase} and the \\textbf{calculus phase}. In the modeling phase we identify the quantity to be optimized, define variables, write the objective equation (and any constraints), use a constraint to reduce the objective to a function of one variable, and identify the domain. In the calculus phase we find critical numbers of the one-variable objective and apply the First Derivative Test for Absolute Extrema (or the Closed Interval Method) to identify the absolute extremum, then interpret the result in context."
+      },
+      {
+        "type": "discussion",
+        "content_plain": "Reflection: Modeling Phase. Steps commonly taken during the Modeling Phase include:\n- Identify the quantity to be optimized (e.g. Surface Area) and whether it is to be minimized or maximized.\n- Identify variables and use them to create an equation for the objective.\n- Use given information (e.g. volume of the box) to create a constraint equation.\n- Make assumptions about the domain based on what is realistic for the model.\n- Use the constraint equation to rewrite the objective as a function of one variable.",
+        "content_latex": "\\textbf{Reflection: Modeling Phase.} Steps commonly taken during the Modeling Phase include:\n\\begin{itemize}\n\\item Identified the quantity to be optimized (e.g. Surface Area) and that we hoped to minimize this quantity.\n\\item Identified variables and used them to create an equation for Surface Area.\n\\item Used given information about the volume of the box to create an equation for volume.\n\\item Made an assumption about the domain based on what would be realistic for the model.\n\\item Used the Volume equation to change the Surface Area equation into a function of one variable instead of two.\n\\end{itemize}"
+      },
+      {
+        "type": "discussion",
+        "content_plain": "Reflection: Calculus Phase. Steps commonly taken during the Calculus Phase include:\n- Find critical numbers for the objective equation by asking when the derivative equals 0 and when it does not exist.\n- When there is only one critical number in the domain, the First Derivative Test for Absolute Extrema may be helpful to decide if it is an absolute minimum (or maximum).\n- Create a sign line to verify a local minimum/maximum and then use the First Derivative Test for Absolute Extrema to verify an absolute minimum/maximum.\n- Use the constraint equation to find the remaining dimensions of the object being optimized.",
+        "content_latex": "\\textbf{Reflection: Calculus Phase.} Steps commonly taken during the Calculus Phase include:\n\\begin{itemize}\n\\item Found critical numbers for the Surface Area equation by asking when $SA'(x)=0$ and when $SA'(x)=DNE$.\n\\item When there was only one critical number in the domain, realized that the First Derivative Test for Absolute Extrema might be helpful to decide if there was an absolute minimum.\n\\item Created a sign line to verify a local minimum and then used the First Derivative Test for Absolute Extrema to verify an absolute minimum.\n\\item Used the volume equation to find the remaining dimensions of the box.\n\\end{itemize}"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Warm-up Exercise 1: Open Box with Square Base",
+        "learning_tag": 1,
+        "context_plain": "We want to build an open box (four side walls and a bottom but no top) with a square base. The volume of the box must be 256 cm^3. We should build the box to spend as little on the materials as possible. Let x be the side length of the square base and y be the height of the box.",
+        "context_latex": "We want to build an open box (four side walls and a bottom but no top) with a square base. The volume of the box must be $256$ cm$^3$. We should build the box to spend as little on the materials as possible. Let $x$ be the side length of the square base and $y$ be the height of the box.",
+        "keywords": ["applied optimization", "surface area", "volume constraint", "first derivative test for absolute extrema", "critical numbers"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Modeling phase: write an equation for the surface area SA of the box in terms of x and y, write the volume constraint, reduce SA to a function of one variable, and identify the domain.",
+              "answer": "Surface area: Bottom_area = side * side = x * x = x^2. There are 4 rectangular sides, so Sides_area = 4 * width * height = 4 * x * y. Thus SA = Bottom_area + Sides_area = x^2 + 4xy.\n\nVolume constraint: V = Length * Width * Height. Base is square so Length = Width = x and Height = y. Given V = 256:\n  V = x * x * y\n  256 = x^2 * y\n\nReduce to one variable: solve 256 = x^2 y for y to get y = 256/x^2, then substitute into SA:\n  SA = x^2 + 4x * (256/x^2)\n  SA = x^2 + 4 * (256/x)\n  SA = x^2 + 1024 x^(-1)\n\nDomain: x is a length so x > 0, i.e. (0, infinity)."
+            },
+            "latex": {
+              "question": "\\textbf{Modeling Phase:} Write an equation for the surface area $SA$ in terms of $x$ and $y$, write the volume constraint, reduce $SA$ to a function of one variable, and identify the domain.",
+              "answer": "Surface area: $Bottom_{area}=side\\times side=x\\cdot x=x^2$. There are $4$ rectangular sides, so $Sides_{area}=4\\times width\\times height = 4\\cdot x\\cdot y$. Thus $$SA=Bottom_{area}+Sides_{area}=x^2+4xy.$$\n\nVolume constraint: $V=Length \\times Width \\times Height$. Base is square so $L=W=x$, Height $=y$, and $V=256$:\n\\begin{align*}\nV&=L\\times W\\times H\\\\\n256&= x\\cdot x\\cdot y\\\\\n256&=x^2y\n\\end{align*}\n\nReduce to one variable: $256=x^2y \\Rightarrow y=\\frac{256}{x^2}$, so\n\\begin{align*}\nSA&=x^2+4xy\\\\\n&=x^2+4x\\left( \\frac{256}{x^2}\\right)\\\\\n&=x^2+\\frac{1024}{x}\\\\\n&=x^2+1024x^{-1}\n\\end{align*}\nDomain: $x>0$ or $(0,\\infty)$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Calculus phase: find the critical numbers of SA(x), use the First Derivative Test for Absolute Extrema to find the absolute minimum, and determine the dimensions of the box.",
+              "answer": "Compute the derivative:\n  SA(x) = x^2 + 1024 x^(-1)\n  SA'(x) = 2x - 1024 x^(-2) = 2x - 1024/x^2\n\nSet SA'(x) = 0:\n  2x = 1024/x^2\n  2 x^3 = 1024\n  x^3 = 512\n  x = cube root of 512 = 8\n\nSA'(x) DNE when x = 0 (division by 0), but x = 0 is not in the domain (0, infinity), so the only critical number in the domain is x = 8.\n\nSign line for SA'(x):\n- Test x = 1 in (0, 8): SA'(1) = 2(1) - 1024/1 = -1022 < 0\n- Test x = 10 in (8, infinity): SA'(10) = 2(10) - 1024/100 = 20 - 10.24 = 9.76 > 0\n\nSA' goes from (-) to (+) at x = 8, so SA has a local minimum at x = 8. Since x = 8 is the only critical number in the domain and SA' changes sign there, the First Derivative Test for Absolute Extrema gives an absolute minimum at x = 8.\n\nFind y from the volume constraint:\n  256 = x^2 y = 64 y => y = 256/64 = 4\n\nDimensions: 8 cm x 8 cm x 4 cm."
+            },
+            "latex": {
+              "question": "\\textbf{Calculus Phase:} Find the critical numbers of $SA(x)$, use the First Derivative Test for Absolute Extrema to find the absolute minimum, and determine the dimensions of the box.",
+              "answer": "Compute the derivative:\n\\begin{align*}\nSA(x)&=x^2+1024x^{-1}\\\\\nSA'(x)&=2x-1024x^{-2}=2x-\\frac{1024}{x^2}\n\\end{align*}\nSet $SA'(x)=0$:\n\\begin{align*}\n0&=2x-\\frac{1024}{x^2}\\\\\n\\frac{1024}{x^2}&=2x\\\\\n\\frac{1024}{2}&=x^3\\\\\n512&=x^3\\\\\n\\sqrt[3]{512}&=x\\\\\n8&=x\n\\end{align*}\n$SA'(x)$ DNE when $x=0$ (division by $0$), but $x=0$ is not in the domain $(0,\\infty)$. Thus the only critical number in the domain is $x=8$.\n\n\\textit{Sign line for $SA'(x)$:}\n\\begin{itemize}\n\\item Choose $x=1\\in(0,8)$: $SA'(1)=2(1)-\\frac{1024}{1^2}=-1022<0$.\n\\item Choose $x=10\\in(8,\\infty)$: $SA'(10)=2(10)-\\frac{1024}{10^2}=9.76>0$.\n\\end{itemize}\n$SA'$ goes $(-)\\to(+)$ at $x=8$, so $SA$ has a local minimum at $x=8$. Since $x=8$ is the only critical number in the domain and $SA'$ changes sign there, the First Derivative Test for Absolute Extrema gives an absolute minimum at $x=8$.\n\nFrom the volume constraint:\n\\begin{align*}\n256&=x^2\\,y\\\\\n256&=8^2\\,y\\\\\n\\frac{256}{64}&=y\\\\\n4&=y\n\\end{align*}\nDimensions: $8\\text{ cm}\\times 8\\text{ cm}\\times 4\\text{ cm}$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Closed Box with Square Base and Face-Dependent Costs",
+        "learning_tag": 1,
+        "context_plain": "We want to build a closed box with a square base. The volume of the box must be 256 cm^3. The top of the box costs $1 per cm^2 of material, the sides of the box cost $0.50 per cm^2 of material, and the bottom of the box costs $3 per cm^2 of material. Let x be the side length of the square base and y be the height of the box. We want to choose dimensions to minimize the cost.",
+        "context_latex": "We want to build a closed box with a square base. The volume of the box must be $256$ cm$^3$. The top of the box costs $\\$1$ per cm$^2$ of material, the sides of the box cost $\\$0.50$ per cm$^2$ of material, and the bottom of the box costs $\\$3$ per cm$^2$ of material. Let $x$ be the side length of the square base and $y$ be the height of the box. We want to choose dimensions to minimize the cost.",
+        "keywords": ["applied optimization", "cost minimization", "volume constraint", "first derivative test for absolute extrema", "closed box"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Using the variables provided, what is an equation for the area of the bottom of the box?",
+              "answer": "Area_B = x * x = x^2"
+            },
+            "latex": {
+              "question": "Using the variables provided in the picture, what is an equation for the \\textit{area} of \\textbf{the bottom} of the box?",
+              "answer": "$Area_{B}=x\\cdot x=x^2$"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "What is the cost to build the bottom of the box? Use the equation from (a).",
+              "answer": "Cost_B(x) = $3 * Area_B = 3 x^2"
+            },
+            "latex": {
+              "question": "What is the \\textit{cost} to build \\textbf{the bottom} of the box? You will need to use the equation from (a) in your answer.",
+              "answer": "\\begin{align*}\nCost_{B}(x)&=\\$3\\cdot Area_{B}\\\\\n&=3x^2\n\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Using the variables provided, what is the cost of one side of the box?",
+              "answer": "Area_S = x * y\nCost_S(x) = $0.50 * Area_S = 0.5 x y"
+            },
+            "latex": {
+              "question": "Using the variables provided in the picture, what is the \\textit{cost} of \\textbf{one side} of the box? Consider the approach you used in (a) and (b).",
+              "answer": "\\begin{align*}\nArea_S&=x\\cdot y\\\\\nCost_{S}(x)&=\\$0.50\\cdot Area_{S}\\\\\n&=0.5 \\cdot x y\n\\end{align*}"
+            }
+          },
+          {
+            "part": "d",
+            "plain_text": {
+              "question": "What is the cost to build the top of the box?",
+              "answer": "Area_T = x * x = x^2\nCost_T(x) = $1 * Area_T = x^2"
+            },
+            "latex": {
+              "question": "What is the \\textit{cost} to build \\textbf{the top} of the box?",
+              "answer": "\\begin{align*}\nArea_T&=x\\cdot x=x^2\\\\\nCost_{T}(x)&=\\$1\\cdot Area_{T}\\\\\n&=x^2\n\\end{align*}"
+            }
+          },
+          {
+            "part": "e",
+            "plain_text": {
+              "question": "Use your work in parts (a)-(d) to find a function representing the total cost to build the entire box.",
+              "answer": "Cost(x) = Cost_B(x) + 4 * Cost_S(x) + Cost_T(x)\n        = 3 x^2 + 4 * (0.5 x y) + x^2\n        = 4 x^2 + 2 x y"
+            },
+            "latex": {
+              "question": "Use your work in parts (a)--(d) to find a function representing the \\textit{total cost} to build \\textbf{the entire box}.",
+              "answer": "\\begin{align*}\nCost(x)&=Cost_B(x)+4\\,Cost_S(x)+Cost_T(x)\\\\\n&=3x^2 +4\\cdot( 0.5x y)+x^2\\\\\n&=4x^2+2xy\n\\end{align*}"
+            }
+          },
+          {
+            "part": "f",
+            "plain_text": {
+              "question": "Find an equation for the volume of the box using the variables provided and the information in the problem statement.",
+              "answer": "V = x * x * y\n256 = x^2 y"
+            },
+            "latex": {
+              "question": "Find an equation that uses the variable provided in the picture and information provided in the statement of the problem to find an equation for \\textit{the volume} of \\textbf{the box}.",
+              "answer": "\\begin{align*}\nV&=x\\cdot x\\cdot y\\\\\n256&=x^2y\n\\end{align*}"
+            }
+          },
+          {
+            "part": "g",
+            "plain_text": {
+              "question": "Use your answers from (e) and (f) to find an equation for total cost that involves only one variable. What might be an appropriate domain for this function?",
+              "answer": "Solve constraint for y: y = 256/x^2. Substitute into the cost:\n  Cost(x) = 4 x^2 + 2 x y\n         = 4 x^2 + 2 x * (256/x^2)\n         = 4 x^2 + 512/x\n\nA reasonable domain requires x > 0 since x is a length. Domain: (0, infinity)."
+            },
+            "latex": {
+              "question": "Use your answers from (e) and (f) to find an equation for \\textit{total cost} that involves only one variable. What might be an appropriate domain for this function?",
+              "answer": "\\begin{align*}\n256&=x^2y\\\\\n\\frac{256}{x^2}&=y\\\\\nCost(x)&=4x^2+2xy\\\\\n&=4x^2+2x\\cdot\\left(\\frac{256}{x^2}\\right)\\\\\nCost(x)&=4x^2+\\frac{512}{x}\n\\end{align*}\nA reasonable domain would be to require $x$ be positive since it represents the length of a side. Domain: $x>0$ or $(0,\\infty)$."
+            }
+          },
+          {
+            "part": "h",
+            "plain_text": {
+              "question": "Calculus phase: find the critical numbers of Cost(x), use the First Derivative Test for Absolute Extrema to find the absolute minimum, and determine the dimensions of the box.",
+              "answer": "Compute the derivative:\n  Cost(x) = 4 x^2 + 512 x^(-1)\n  Cost'(x) = 8 x - 512 x^(-2) = 8x - 512/x^2\n\nSet Cost'(x) = 0:\n  8x = 512/x^2\n  8 x^3 = 512\n  x^3 = 64\n  x = 4\n\nCost'(x) DNE when x = 0 (division by 0), but x = 0 is not in the domain (0, infinity). The only critical number in the domain is x = 4.\n\nSign line for Cost'(x):\n- Test x = 1 in (0, 4): Cost'(1) = 8(1) - 512/1 = -504 < 0\n- Test x = 8 in (4, infinity): Cost'(8) = 8(8) - 512/64 = 64 - 8 = 56 > 0\n\nCost' goes from (-) to (+) at x = 4, so Cost has a local minimum at x = 4. Since x = 4 is the only critical number in the domain and Cost' changes sign there, the First Derivative Test for Absolute Extrema gives an absolute minimum at x = 4.\n\nFind y from the volume constraint:\n  256 = x^2 y = 16 y => y = 256/16 = 16\n\nDimensions: 4 cm x 4 cm x 16 cm."
+            },
+            "latex": {
+              "question": "\\textbf{Calculus Phase:} Find the critical numbers of $Cost(x)$, use the First Derivative Test for Absolute Extrema to find the absolute minimum, and determine the dimensions of the box.",
+              "answer": "\\begin{align*}\nCost(x)&=4x^2+512x^{-1}\\\\\nCost'(x)&=8x-512x^{-2}=8x-\\frac{512}{x^2}\\\\\n0&=8x-\\frac{512}{x^2}\\\\\n\\frac{512}{x^2}&=8x\\\\\n\\frac{512}{8}&=x^3\\\\\n64&=x^3\\\\\n4&=x\n\\end{align*}\n$Cost'(x)$ DNE when $x=0$ (division by $0$), but $x=0$ is not in the domain $(0,\\infty)$. The only critical number in the domain is $x=4$.\n\n\\textit{Sign line for $Cost'(x)$:}\n\\begin{itemize}\n\\item Choose $x=1\\in(0,4)$: $Cost'(1)=8-\\frac{512}{1^2}=-504<0$.\n\\item Choose $x=8\\in(4,\\infty)$: $Cost'(8)=8(8)-\\frac{512}{8^2}=64-8=56>0$.\n\\end{itemize}\nThe sign line shows $Cost'$ goes $(-)\\to(+)$ at $x=4$, so $Cost$ has a local minimum at $x=4$. Since this is the only critical number in the domain and $Cost'$ changes sign, the First Derivative Test for Absolute Extrema gives an absolute minimum at $x=4$.\n\nFrom the volume constraint:\n\\begin{align*}\n256&=x^2y\\\\\n\\frac{256}{x^2}&=y\\\\\n\\frac{256}{4^2}&=y\\\\\n16&=y\n\\end{align*}\nDimensions: $4\\text{ cm}\\times 4\\text{ cm}\\times 16\\text{ cm}$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Profit Maximization with Linear Demand and Quadratic Cost",
+        "learning_tag": 2,
+        "context_plain": "Suppose the unit selling price of a commodity is p = 4 - (1/100) x and the total cost of producing the commodity is C(x) = (3/100) x^2 - 6x + 400, with 0 <= x <= 200 for both.",
+        "context_latex": "Suppose the unit selling price of a commodity is $p=4-\\dfrac{1}{100}x$ and the total cost of producing a commodity is $C(x)=\\dfrac{3}{100}x^2-6x+400$, with $0\\leq x\\leq 200$ for both.",
+        "keywords": ["applied optimization", "revenue function", "profit function", "closed interval method", "first derivative test for absolute extrema"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find and simplify a revenue function.",
+              "answer": "R(x) = x * p = x * (4 - x/100) = 4x - x^2/100"
+            },
+            "latex": {
+              "question": "Find \\& simplify a revenue function.",
+              "answer": "\\begin{align*}\nR(x)&=x\\cdot p\\\\\n&=x\\cdot\\left(4-\\frac{1}{100}x\\right)\\\\\n&=4x-\\frac{x^2}{100}\n\\end{align*}"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Find and simplify a profit function.",
+              "answer": "P(x) = R(x) - C(x)\n     = (4x - x^2/100) - ((3/100) x^2 - 6x + 400)\n     = 4x + 6x - x^2/100 - 3 x^2/100 - 400\n     = 10x - 4 x^2/100 - 400"
+            },
+            "latex": {
+              "question": "Find \\& simplify a profit function.",
+              "answer": "\\begin{align*}\nP(x)&=R(x)-C(x)\\\\\n&=\\left( 4x-\\frac{x^2}{100}\\right)-\\left( \\frac{3}{100}x^2-6x+400 \\right)\\\\\n&=4x+6x-\\frac{x^2}{100}-\\frac{3x^2}{100}-400\\\\\n&=10x-\\frac{4x^2}{100}-400\n\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "How many units of the commodity should be sold to maximize profit?",
+              "answer": "Compute the derivative:\n  P'(x) = 10 - (2 * 4 x)/100 = 10 - 8x/100\n\nP'(x) is a continuous function for all x (no division by 0, square root of a negative number, or log issues), so P'(x) is defined everywhere. Set P'(x) = 0:\n  10 = 8x/100\n  8x = 1000\n  x = 125\n\nThe only critical number in [0, 200] is x = 125.\n\nApproach 1 (Closed Interval Method): evaluate P at endpoints and the critical number:\n- P(0) = 10(0) - 4(0)^2/100 - 400 = -400\n- P(125) = 10(125) - 4(125)^2/100 - 400 = 225\n- P(200) = 10(200) - 4(200)^2/100 - 400 = 0\nMaximum value is at x = 125.\n\nApproach 2 (First Derivative Test for Absolute Extrema):\n- Test x = 0 in [0, 125): P'(0) = 10 > 0\n- Test x = 200 in (125, 200]: P'(200) = 10 - 8(200)/100 = 10 - 16 = -6 < 0\nP' goes from (+) to (-) at x = 125, so P has a local maximum at x = 125. Since this is the only critical number in the domain and P' changes sign, the local maximum is the absolute maximum.\n\nSelling x = 125 units maximizes profit."
+            },
+            "latex": {
+              "question": "How many units of the commodity should be sold to maximize profit?",
+              "answer": "\\begin{align*}\nP'(x)&=10-\\frac{2\\cdot 4x}{100}-0\\\\\n&=10-\\frac{8x}{100}\n\\end{align*}\nWe check for critical numbers by determining when $P'(x)=0$:\n\\begin{align*}\n0&=10-\\frac{8x}{100}\\\\\n\\frac{8x}{100}&=10\\\\\n8x&=1000\\\\\nx&=\\frac{1000}{8}=125\n\\end{align*}\n$P'(x)=10-\\frac{8x}{100}$ is continuous for all $x$, so $P'$ never DNE. The only critical number in our domain is $x=125$.\n\nThere are two ways to check whether $x=125$ is the location of an Absolute Maximum.\n\n\\textbf{Approach 1 (Closed Interval Method).} Since the domain is the closed interval $[0,200]$, evaluate $P(x)$ at the endpoints and the critical number:\n\\begin{itemize}\n\\item $P(0)=10\\cdot 0-\\frac{4\\cdot 0^2}{100}-400=-400$\n\\item $P(125)=10\\cdot 125-\\frac{4\\cdot (125)^2}{100}-400=225$\n\\item $P(200)=10\\cdot 200-\\frac{4\\cdot (200)^2}{100}-400=0$\n\\end{itemize}\nSo we have an Absolute Maximum at $x=125$ units.\n\n\\textbf{Approach 2 (First Derivative Test for Absolute Extrema).} Build a sign line for $P'$:\n\\begin{itemize}\n\\item Choose $x=0\\in[0,125)$: $P'(0)=10-\\frac{8\\cdot 0}{100}=10>0$.\n\\item Choose $x=200\\in(125,200]$: $P'(200)=10-\\frac{8\\cdot 200}{100}=10-16=-6<0$.\n\\end{itemize}\n$P'$ goes $(+)\\to(-)$ at $x=125$, so $P$ has a local maximum at $x=125$. Since $x=125$ is the only critical number in the domain and $P'$ changes sign, the local maximum is the absolute maximum. Selling $x=125$ units maximizes profit."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 1: Minimizing the Marginal Cost Function",
+        "learning_tag": 2,
+        "context_plain": "In economics, the marginal cost function is defined as the derivative of total cost. If the total cost of producing x units of a product is C(x) = x^2 - 4 x^(3/2) + 30, find the number of units to produce to minimize the marginal cost function.",
+        "context_latex": "In economics, the actual cost incurred in producing an additional unit of a certain commodity at a certain level of operation is called the \\textbf{marginal cost}. Economists often define the marginal cost function to be the derivative of total cost. If the total cost of producing $x$ units of a product is $C(x)=x^2-4x^{3/2}+30$, find the number of units to produce to minimize the marginal cost function.",
+        "keywords": ["marginal cost", "applied optimization", "first derivative test for absolute extrema", "critical numbers", "domain"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the number of units to produce to minimize the marginal cost function.",
+              "answer": "The Marginal Cost function is\n  MC(x) = C'(x) = 2x - (3/2)(4) x^(1/2) + 0 = 2x - 6 x^(1/2)\n\nx is the number of units, so the domain is x >= 0, i.e. [0, infinity).\n\nFind critical numbers of MC(x). Compute the derivative:\n  MC'(x) = 2 - (1/2)(6) x^(-1/2) = 2 - 3/x^(1/2)\n\nSet MC'(x) = 0:\n  2 = 3/x^(1/2)\n  3/2 = x^(1/2)\n  (3/2)^2 = x\n  x = 9/4\n\nMC'(x) DNE when x = 0 (since 3/0^(1/2) is undefined). So the critical numbers are x = 0 and x = 9/4.\n\nx = 0 is the left boundary of the domain [0, infinity). Set up a sign line for MC'(x):\n- Test x = 1 in [0, 9/4): MC'(1) = 2 - 3/1 = -1 < 0\n- Test x = 4 in (9/4, infinity): MC'(4) = 2 - 3/2 = 1/2 > 0\n\nMC' goes from (-) to (+) at x = 9/4, so MC has a local minimum there. Since x = 9/4 is the only place where MC' changes sign on the domain (MC' is undefined at x = 0 and therefore has no sign there), the First Derivative Test for Absolute Extrema gives an absolute minimum at x = 9/4.\n\nMarginal Cost is minimized when x = 9/4 = 2.25 units are produced."
+            },
+            "latex": {
+              "question": "Find the number of units to produce to minimize the marginal cost function.",
+              "answer": "The Marginal Cost function is\n$$MC(x)=C'(x)=2x-\\frac{3}{2}\\cdot 4x^{1/2}+0=2x-6x^{1/2}.$$\n$x$ is the number of units produced so the domain is $x\\geq0$ or $[0,\\infty)$. Find critical numbers of $MC(x)$:\n\\begin{align*}\nMC(x)&=2x-6x^{1/2}\\\\\nMC'(x)&=2-\\frac{1}{2}\\cdot 6x^{-1/2}\\\\\n&=2-\\frac{3}{x^{1/2}}\n\\end{align*}\nSet $MC'(x)=0$:\n\\begin{align*}\n0&=2-\\frac{3}{x^{1/2}}\\\\\n\\frac{3}{x^{1/2}}&=2\\\\\n\\frac{3}{2}&=x^{1/2}\\\\\n\\left(\\frac{3}{2}\\right)^2&=x\\\\\n\\frac{9}{4}&=x\n\\end{align*}\n$MC'(x)$ DNE at $x=0$ (since $3/0^{1/2}$ is undefined). Critical numbers: $x=0$ and $x=9/4$.\n\n$x=0$ is the left boundary of the domain $[0,\\infty)$. Set up a sign line for $MC'(x)$:\n\\begin{itemize}\n\\item Choose $x=1\\in[0,9/4)$: $MC'(1)=2-\\frac{3}{1^{1/2}}=-1<0$.\n\\item Choose $x=4\\in(9/4,\\infty)$: $MC'(4)=2-\\frac{3}{4^{1/2}}=2-\\frac{3}{2}=\\frac{1}{2}>0$.\n\\end{itemize}\n$MC'$ goes $(-)\\to(+)$ at $x=9/4$, so $MC$ has a local minimum there. Since $x=9/4$ is the only place where $MC'$ changes sign on the domain ($MC'$ is undefined at $x=0$ and so has no sign there), the First Derivative Test for Absolute Extrema gives an absolute minimum at $x=9/4$.\n\nMarginal Cost is minimized when $x=\\frac{9}{4}=2.25$ units are produced."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 2: Partitioned Rectangular Sheep Pen",
+        "learning_tag": 1,
+        "context_plain": "A sheep farmer wishes to construct a rectangular pen enclosing 500 square feet partitioned into two pens using a fence parallel to one of the sides. The fencing for the four outer sides of the pen must be heavy-duty (to keep out predators) and costs $2 per foot. The interior (subdividing) fence costs $1 per foot. Let x be the width of the rectangular pen (parallel to the interior fence) and y be the length. What are the dimensions of the pen minimizing the cost?",
+        "context_latex": "A sheep farmer wishes to construct a rectangular pen enclosing $500$ square feet partitioned into two pens using a fence parallel to one of the sides. The fencing for the four outer sides of the pen must be heavy-duty (to keep out predators) and costs $\\$2$ per foot. The interior (subdividing) fence costs $\\$1$ per foot. Let $x$ be the width of the rectangular pen (parallel to the interior fence) and $y$ be the length. What are the dimensions of the pen minimizing the cost?",
+        "keywords": ["applied optimization", "cost minimization", "area constraint", "fencing problem", "first derivative test for absolute extrema"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Modeling phase: identify the quantity to optimize, define variables, write a cost function and area constraint, reduce the cost to a function of one variable, and identify a reasonable domain.",
+              "answer": "Quantity to optimize: minimize total cost of fencing.\n\nVariables: x = width of rectangular pen, y = length of rectangular pen.\n\nCost function:\n  Cost_Total = 2 * Cost_side + Cost_top + Cost_bottom + Cost_interior\n- One side (length y) at $2/ft: Cost_side = 2y; two of them gives 2 * Cost_side = 4y.\n- Top and bottom (width x) at $2/ft: Cost_top = 2x, Cost_bottom = 2x.\n- Interior (width x) at $1/ft: Cost_interior = x.\nThus Cost_Total = 4y + 2x + 2x + x = 4y + 5x.\n\nConstraint: Area = x * y = 500, so y = 500/x.\n\nReduce to one variable:\n  Cost_Total = 4y + 5x = 4 (500/x) + 5x = 2000/x + 5x\n  C(x) = 2000/x + 5x\n\nDomain: width is positive, so x > 0, i.e. (0, infinity)."
+            },
+            "latex": {
+              "question": "\\textbf{Modeling Phase:} Identify the quantity to optimize, define variables, write a cost function and area constraint, reduce the cost to a function of one variable, and identify a reasonable domain.",
+              "answer": "\\textit{Quantity to optimize:} minimize total cost of fencing.\n\n\\textit{Variables:} $x$ = width of rectangular pen, $y$ = length of rectangular pen.\n\n\\textit{Cost function:}\n$$Cost_{Total}=2\\cdot Cost_{side}+ Cost_{top}+Cost_{bottom} +Cost_{interior}.$$\n\\begin{itemize}\n\\item One side (length $y$) at $\\$2$/ft: $Cost_{side}=2y$; two of them gives $2\\cdot Cost_{side}=4y$.\n\\item Top and bottom (width $x$) at $\\$2$/ft: $Cost_{top}=2x$, $Cost_{bottom}=2x$.\n\\item Interior (width $x$) at $\\$1$/ft: $Cost_{interior}=x$.\n\\end{itemize}\nThus\n\\begin{align*}\nCost_{Total}&=2\\cdot(2y)+2x+2x+x\\\\\n&=4y+5x\n\\end{align*}\n\n\\textit{Constraint:} Area $=x\\cdot y=500$, so $y=\\frac{500}{x}$.\n\n\\textit{Reduce to one variable:}\n\\begin{align*}\nCost_{Total}&=4y+5x\\\\\n&=4\\left(\\frac{500}{x}\\right)+5x\\\\\nC(x)&=\\frac{2000}{x}+5x\n\\end{align*}\n\n\\textit{Domain:} Width is positive, so $x>0$ or $(0,\\infty)$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Calculus phase: find the critical numbers, apply the First Derivative Test for Absolute Extrema, and determine the dimensions of the pen that minimize cost.",
+              "answer": "Compute the derivative:\n  C(x) = 2000/x + 5x = 2000 x^(-1) + 5x\n  C'(x) = -2000 x^(-2) + 5 = -2000/x^2 + 5\n\nSet C'(x) = 0:\n  2000/x^2 = 5\n  x^2 = 2000/5 = 400\n  x = +-20\n\nC'(x) DNE at x = 0 (division by 0). Critical numbers: x = -20, 0, 20.\n\nDomain is (0, infinity), so the only critical number in the domain is x = 20.\n\nSign line for C'(x):\n- Test x = 1 in (0, 20): C'(1) = -2000/1 + 5 = -1995 < 0\n- Test x = 100 in (20, infinity): C'(100) = -2000/10000 + 5 = -0.2 + 5 = 4.8 > 0\n\nC' goes from (-) to (+) at x = 20, so C has a local minimum there. Since x = 20 is the only critical number in the domain and C' changes sign, the local minimum is the absolute minimum by the First Derivative Test for Absolute Extrema.\n\nWidth: x = 20 ft. Length: y = 500/20 = 25 ft."
+            },
+            "latex": {
+              "question": "\\textbf{Calculus Phase:} Find the critical numbers, apply the First Derivative Test for Absolute Extrema, and determine the dimensions of the pen that minimize cost.",
+              "answer": "\\begin{align*}\nC(x)&=\\frac{2000}{x}+5x=2000x^{-1}+5x\\\\\nC'(x)&=-2000x^{-2}+5=-\\frac{2000}{x^2}+5\\\\\n0&=-\\frac{2000}{x^2}+5\\\\\n\\frac{2000}{x^2}&=5\\\\\nx^2&=400\\\\\nx&=\\pm 20\n\\end{align*}\n$C'(x)$ DNE at $x=0$ (division by $0$). Critical numbers: $x=-20,\\;0,\\;20$. Domain is $(0,\\infty)$, so the only critical number in the domain is $x=20$.\n\n\\textit{Sign line for $C'(x)$:}\n\\begin{itemize}\n\\item Choose $x=1\\in(0,20)$: $C'(1)=-\\frac{2000}{1^2}+5=-1995<0$.\n\\item Choose $x=100\\in(20,\\infty)$: $C'(100)=-\\frac{2000}{(100)^2}+5=-0.2+5=4.8>0$.\n\\end{itemize}\n$C'$ goes $(-)\\to(+)$ at $x=20$, so $C$ has a local minimum there. Since $x=20$ is the only critical number in the domain and $C'$ changes sign, the First Derivative Test for Absolute Extrema gives an absolute minimum at $x=20$.\n\nWidth: $x=20$ ft. Length: $y=\\frac{500}{20}=25$ ft."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 3: Pager Manufacturer Profit Maximization",
+        "learning_tag": 2,
+        "context_plain": "A division of the Chapman Corporation manufactures a pager. The weekly fixed cost for the division is $20,000 and the variable cost for producing x pagers is V(x) = 0.000001 x^3 - 0.01 x^2 + 50 x dollars. The company realizes a revenue of R(x) = -0.02 x^2 + 150 x (0 <= x <= 7500) from the sale of x pagers per week. Find the level of production that will yield a maximum profit.",
+        "context_latex": "A division of the Chapman Corporation manufactures a pager. The weekly fixed cost for the division is $\\$20{,}000$ and the variable cost for producing $x$ pagers is $$V(x)=0.000001x^3-0.01x^2+50x$$ dollars. The company realizes a revenue of $$R(x)=-0.02x^2+150x \\qquad (0\\leq x \\leq 7500)$$ from the sale of $x$ pagers per week. Find the level of production that will yield a maximum profit for the manufacturer.",
+        "keywords": ["applied optimization", "profit function", "quadratic formula", "closed interval method", "first derivative test for absolute extrema"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the level of production that will yield a maximum profit.",
+              "answer": "Profit = Revenue - Cost. Cost includes fixed and variable costs:\n  C(x) = V(x) + 20000 = 0.000001 x^3 - 0.01 x^2 + 50 x + 20000\n\nProfit:\n  P(x) = R(x) - C(x)\n       = (-0.02 x^2 + 150 x) - (0.000001 x^3 - 0.01 x^2 + 50 x + 20000)\n       = -0.000001 x^3 - 0.01 x^2 + 100 x - 20000\n  P'(x) = -0.000003 x^2 - 0.02 x + 100\n\nP'(x) is a quadratic so it is defined everywhere; P'(x) never DNE.\nSet P'(x) = 0:\n  -0.000003 x^2 - 0.02 x + 100 = 0\n\nQuadratic formula with a = -0.000003, b = -0.02, c = 100:\n  x = (-(-0.02) +- sqrt((-0.02)^2 - 4(-0.000003)(100))) / (2(-0.000003))\n  x = -10000  or  x = 3333 1/3\n\nx = -10000 is not in the domain [0, 7500], so the only critical number in the domain is x = 3333 1/3.\n\nApproach 1 (Closed Interval Method): evaluate P at endpoints and the critical number:\n- P(0) = -20000\n- P(3333 1/3) = 165185\n- P(7500) = -254,375\nMaximum is at x = 3333 1/3 with profit about $165,185.\n\nApproach 2 (First Derivative Test for Absolute Extrema):\n- Test x = 0 (left of 3333 1/3): P'(0) = 100 > 0\n- Test x = 4000 (right of 3333 1/3): P'(4000) = -28 < 0\nP' goes from (+) to (-) at x = 3333 1/3, so P has a local maximum there. Since this is the only critical number in the domain where P' changes sign, the First Derivative Test for Absolute Extrema gives an absolute maximum at x = 3333 1/3."
+            },
+            "latex": {
+              "question": "Find the level of production that will yield a maximum profit for the manufacturer.",
+              "answer": "Profit $=$ Revenue $-$ Cost. Cost includes fixed and variable costs:\n$$C(x)=V(x)+20{,}000=0.000001x^3-0.01x^2+50x+20{,}000.$$\nProfit:\n\\begin{align*}\nP(x)&=R(x)-C(x)\\\\\n&=-0.02x^2+150x-\\left(0.000001x^3-0.01x^2+50x+20{,}000\\right)\\\\\n&=-0.000001x^3-0.01x^2+100x-20{,}000\\\\\nP'(x)&=-0.000003x^2-0.02x+100\n\\end{align*}\n$P'(x)$ is a quadratic, so it is defined for all $x$; $P'(x)$ never DNE. Set $P'(x)=0$:\n\\begin{align*}\n-0.000003x^2-0.02x+100&=0\\\\\nx&=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a},\\quad a=-0.000003,\\ b=-0.02,\\ c=100\\\\\nx&=\\frac{-(-0.02)\\pm\\sqrt{(-0.02)^2-4(-0.000003)(100)}}{2(-0.000003)}\\\\\nx&=-10{,}000\\ \\text{or}\\ 3{,}333\\tfrac{1}{3}\n\\end{align*}\n$x=-10{,}000$ is not in $[0,7500]$, so the only critical number in the domain is $x=3{,}333\\tfrac{1}{3}$.\n\n\\textbf{Approach 1 (Closed Interval Method).}\n\\begin{itemize}\n\\item $P(0)=-20{,}000$\n\\item $P(3{,}333\\tfrac{1}{3})=165{,}185$\n\\item $P(7500)=-254{,}375$\n\\end{itemize}\nAbsolute Max occurs at $x=3{,}333\\tfrac{1}{3}$ with profit $\\approx\\$165{,}185$.\n\n\\textbf{Approach 2 (First Derivative Test for Absolute Extrema).}\n\\begin{itemize}\n\\item Choose $x=0$ (left of $3{,}333\\tfrac{1}{3}$): $P'(0)=100>0$.\n\\item Choose $x=4{,}000$ (right of $3{,}333\\tfrac{1}{3}$): $P'(4000)=-28<0$.\n\\end{itemize}\n$P'$ goes $(+)\\to(-)$ at $x=3{,}333\\tfrac{1}{3}$, so $P$ has a local maximum there. Since this is the only critical number in the domain where $P'$ changes sign, the First Derivative Test for Absolute Extrema gives an absolute maximum at $x=3{,}333\\tfrac{1}{3}$."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 1: open-box illustration",
+      "reason": "References \\graphicsL{box}{2}, an external image of the open box with x and y labels. Problem is fully self-contained algebraically since the text defines x as base side and y as height.",
+      "location": "lines 34-36"
+    },
+    {
+      "type": "problem",
+      "name": "Warm-up Exercise 1: sign-line diagram for SA'(x)",
+      "reason": "Sign line for SA'(x) shown as a tikzpicture (sign (-)/(+) around the critical number x=8); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 102-134"
+    },
+    {
+      "type": "problem",
+      "name": "Closed-Box Exercise: box illustration",
+      "reason": "References \\graphicsL{boxTop}{2}, an external image of the closed box with x and y labels. Problem is fully self-contained algebraically since the text defines x as base side and y as height.",
+      "location": "lines 182-184"
+    },
+    {
+      "type": "problem",
+      "name": "Closed-Box Exercise: sign-line diagram for Cost'(x)",
+      "reason": "Sign line for Cost'(x) shown as a tikzpicture (sign (-)/(+) around the critical number x=4); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 292-323"
+    },
+    {
+      "type": "problem",
+      "name": "Profit Max Exercise: sign-line diagram for P'(x)",
+      "reason": "Sign line for P'(x) shown as a tikzpicture (sign (+)/(-) around the critical number x=125 on the closed interval [0,200]); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 405-437"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 1: sign-line diagram for MC'(x)",
+      "reason": "Sign line for MC'(x) shown as a tikzpicture (sign (-)/(+) around the critical number x=9/4); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 475-506"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 2: pen diagram (rectangular pen with interior fence)",
+      "reason": "References a tikzpicture showing the partitioned rectangular pen with width x (top, middle, bottom) and length y; the algebraic setup explicitly defines x as width and y as length, so the problem is solvable without the figure.",
+      "location": "lines 519-530"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 2: sign-line diagram for C'(x)",
+      "reason": "Sign line for C'(x) shown as a tikzpicture (sign (-)/(+) around the critical number x=20); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 597-629"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 3: sign-line diagram for P'(x)",
+      "reason": "Sign line for P'(x) shown as a tikzpicture (sign (+)/(-) around the critical number x=3333 1/3 on the closed interval [0,7500]); algebraic sign-test work is preserved in the kept problem.",
+      "location": "lines 667-700"
+    }
+  ]
+}

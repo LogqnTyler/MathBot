@@ -1,0 +1,413 @@
+{
+    "name": "Limits at Infinity",
+    "week": 3,
+    "learning_objectives": [
+        {"tag": 2, "description": "Identify the form of a limit; identify the method to use to evaluate a limit based on its form; evaluate a limit based on its form."}
+    ],
+    "contents": {
+        "other_material": [
+            {
+                "type": "mini-lecture",
+                "content_plain": "Exponentials; Examples: e^x, 2^x, 7^x. Exponentials are all of form a^x: a^x -> infinity when a>1. Power functions; Examples: x^2, x^(1/2), x^7, x^(1/3). Power functions of form x^n. x^n -> infinity when n>0. Logarithms; Examples: ln(x), log_10(x), log_2(x). Logarithms of form log_a(x): log_a(x) -> infinity when a>1.",
+                "content_latex": "Exponentials; Examples: $e^x$, $2^x$, $7^x$. Exponentials are all of form $a^x$: $$a^x\\rightarrow \\infty$$ when $a>1$. Power functions; Examples: $x^2$, $x^{1/2}$, $x^7$, $x^{1/3}$. Power functions of form $x^n$.$$x^n\\rightarrow \\infty$$ when $n>0$. Logarithms; Examples: $\\ln(x)$, $\\log_{10}(x)$, $\\log_2(x)$.Logarithms of form $\\log_a(x)$ $$\\log_a(x)\\rightarrow \\infty$$ when $a>1$."
+        }
+
+        ],
+        "problems": [
+            {
+                "name": "Warm-up: Positive Exponents",
+                "learning_tag": 2,
+                "context_plain": "Re-write each expression with only positive exponents. Note that e is a constant: e ~ 2.71828182846...",
+                "context_latex": "Re-write each expression with only positive exponents. Note that $e$ is a constant: $e\\approx2.71828182846\\dots$",
+                "keywords": ["exponent rules", "positive exponents", "negative exponents", "exponential expressions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "x^(-4)", "answer": "1/x^4"},
+                        "latex": {"question": "$x^{-4}$", "answer": "$\\frac{1}{x^4}$"}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "4/(7x^(-6))", "answer": "4x^6/7"},
+                        "latex": {"question": "$\\frac{4}{7x^{-6}}$", "answer": "$\\frac{4x^6}{7}$"}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "10x^(-3)/x^4", "answer": "10/x^7"},
+                        "latex": {"question": "$\\frac{10x^{-3}}{x^4}$", "answer": "$\\frac{10x^{-3}}{x^4}=\\frac{10}{x^4\\cdot x^3}=\\frac{10}{x^{4+3}}=\\frac{10}{x^7}$"}
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {"question": "3e^(-2x)/(5x^(-4))", "answer": "3x^4/(5e^(2x))"},
+                        "latex": {"question": "$\\frac{3e^{-2x}}{5x^{-4}}$", "answer": "$\\frac{3x^4}{5e^{2x}}$"}
+                    }
+                ]
+            },
+            {
+                "name": "Warm-up: Exponent Notation",
+                "learning_tag": 2,
+                "context_plain": "Re-write each expression using exponent notation. All terms with exponents should be in the numerator (negative exponents are ok).",
+                "context_latex": "Re-write each expression using exponent notation. All terms with exponents should be in the numerator (negative exponents are ok).",
+                "keywords": ["exponent notation", "radical notation", "fractional exponents", "negative exponents"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "fourth root of x", "answer": "x^(1/4)"},
+                        "latex": {"question": "$\\sqrt[4]{x}$", "answer": "$x^{\\frac{1}{4}}$"}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "fourth root of x^3", "answer": "(x^3)^(1/4) = x^(3/4)"},
+                        "latex": {"question": "$\\sqrt[4]{x^3}$", "answer": "$(x^3)^{\\frac{1}{4}}=x^{\\frac{3}{4}}$"}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "1/(fourth root of (x^3+1))", "answer": "(x^3+1)^(-1/4)"},
+                        "latex": {"question": "$\\frac{1}{\\sqrt[4]{x^3+1}}$", "answer": "$(x^3+1)^{-\\frac{1}{4}}$"}
+                    }
+                ]
+            },
+            {
+                "name": "Warm-up: Main Continuity Theorem",
+                "learning_tag": 2,
+                "context_plain": "Last time, we talked about evaluating limits using the Main Continuity Theorem. For each of the limits below, decide if it can be evaluated using the Main Continuity Theorem. If so, explain why and find the limit. If not, explain why not.",
+                "context_latex": "Last time, we talked about evaluating limits using the Main Continuity Theorem. For each of the limits below, decide if it can be evaluated using the Main Continuity Theorem. If so, explain why and find the limit. If not, explain why not.",
+                "keywords": ["limits", "continuity theorem", "domain", "limits at infinity"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> 1^- of 1/(x-1)", "answer": "x = 1 is not in the domain since we have a division by 0: 1/(1-1) = 1/0. Therefore we cannot use the Main Continuity Theorem to evaluate the limit."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to1^-}\\frac{1}{x-1}$", "answer": "$x=1$ is not in the domain since we have a division by $0$: $\\frac{1}{1-1}=\\frac{1}{0}$. Therefore we cannot use the M.C.T. to evaluate the limit."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> 2 of 1/(x-1)", "answer": "x = 2 is in the domain since we do not have a division by 0, square root of a negative number, nor log of 0 or a negative number. Therefore by the Main Continuity Theorem, lim as x -> 2 of 1/(x-1) = 1/(2-1) = 1/1 = 1."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to2}\\frac{1}{x-1}$", "answer": "$x=2$ is in the domain since we do not have a division by $0$, a square root of a negative number, nor a log of $0$ or a negative number. Therefore by the M.C.T., $\\lim_{x\\to2}\\frac{1}{x-1}=\\frac{1}{2-1}=\\frac{1}{1}=1$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of 1/(x-1)", "answer": "The Main Continuity Theorem assumes we are finding a limit to a finite number a: lim as x -> a of 1/(x-1). Since infinity is not a finite number, we cannot use the Main Continuity Theorem."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty}\\frac{1}{x-1}$", "answer": "The M.C.T. assumes we are finding a limit to a finite number $a$: $\\lim_{x\\to a}\\frac{1}{x-1}$. Since $\\infty$ is not a finite number, we cannot use the M.C.T."}
+                    }
+                ]
+            },
+            {
+                "name": "Form c/infinity: Concept",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "form c/infinity", "end behavior"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "When the denominator of a fraction grows ever larger without bound - all other things held constant - the value of the fraction...\n\nA. approaches 0.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach 0, or anything in between based on the given information.",
+                            "answer": "A. approaches 0."
+                        },
+                        "latex": {
+                            "question": "When the denominator of a fraction grows ever larger without bound -- all other things held constant -- the value of the fraction...\n\nA. approaches $0$.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach $0$, or anything in between based on the given information.",
+                            "answer": "A. approaches $0$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Form c/infinity: Example",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms:",
+                "context_latex": "Find the following limits using forms:",
+                "keywords": ["limits at infinity", "form c/infinity", "end behavior"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of 1/x^5", "answer": "0\n\nSince x^5 -> infinity, we have form 1/infinity. We know this approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty}\\frac{1}{x^5}$", "answer": "$0$. Since $x^5\\to\\infty$, we have Form $\\frac{1}{\\infty}$, which approaches $0$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of 10/(log_4(x)+sqrt(x-4))", "answer": "0\n\nSince log_4(x) -> infinity and (x-4)^(1/2) -> infinity, denominator approaches infinity. Form is 10/infinity which approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty}\\frac{10}{\\log_4(x)+\\sqrt{x-4}}$", "answer": "$0$. Since $\\log_4(x)\\to\\infty$ and $(x-4)^{1/2}\\to\\infty$, the denominator approaches $\\infty$. Form is $\\frac{10}{\\infty}$, which approaches $0$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of 6e^(-x)", "answer": "0\n\n6e^(-x) = 6/e^x. Since e^x -> infinity, form is 6/infinity which approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} 6e^{-x}$", "answer": "$0$. $6e^{-x}=\\frac{6}{e^x}$. Since $e^x\\to\\infty$, Form is $\\frac{6}{\\infty}$, which approaches $0$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form c/infinity: Exercise",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "context_latex": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "keywords": ["limits at infinity", "form c/infinity", "exponential functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of 5x^(-3)", "answer": "0\n\n5x^(-3) = 5/x^3. Since x^3 -> infinity, form is 5/infinity which approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} 5x^{-3}$", "answer": "$0$. $5x^{-3}=\\frac{5}{x^3}$. Since $x^3\\to\\infty$, Form is $\\frac{5}{\\infty}$, which approaches $0$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of -1/(e^x+x^1000)", "answer": "0\n\nBoth e^x -> infinity and x^1000 -> infinity, so e^x+x^1000 -> infinity. Form is 1/infinity which approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} -\\frac{1}{e^x+x^{1000}}$", "answer": "$0$. Both $e^x\\to\\infty$ and $x^{1000}\\to\\infty$, so $e^x+x^{1000}\\to\\infty$. Form is $\\frac{1}{\\infty}$, which approaches $0$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of e^(-x)/x^2", "answer": "0\n\ne^(-x)/x^2 = 1/(e^x · x^2). Both e^x -> infinity and x^2 -> infinity. Thus e^x · x^2 -> infinity and form is 1/infinity which approaches 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{e^{-x}}{x^2}$", "answer": "$0$. $\\frac{e^{-x}}{x^2}=\\frac{1}{e^x\\cdot x^2}$. Both $e^x\\to\\infty$ and $x^2\\to\\infty$, so $e^x\\cdot x^2\\to\\infty$ and Form is $\\frac{1}{\\infty}$, which approaches $0$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/c: Concept",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "form infinity/c", "unbounded growth"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "When the numerator of a fraction grows ever larger without bound - all other things held constant - the value of the fraction...\n\nA. approaches 0.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach 0, or anything in between based on the given information.",
+                            "answer": "C. becomes larger without bound. See pre-class work."
+                        },
+                        "latex": {
+                            "question": "When the numerator of a fraction grows ever larger without bound -- all other things held constant -- the value of the fraction...\n\nA. approaches $0$.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach $0$, or anything in between based on the given information.",
+                            "answer": "C. becomes larger without bound."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/c: Example",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms:",
+                "context_latex": "Find the following limits using forms:",
+                "keywords": ["limits at infinity", "form infinity/c", "unbounded growth"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of (e^x+1)/2", "answer": "infinity\n\ne^x+1 -> infinity, so form is infinity/2 which approaches infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{e^x+1}{2}$", "answer": "$\\infty$. $e^x+1\\to\\infty$, so Form is $\\frac{\\infty}{2}$, which approaches $\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of (-2x^2)/(3x^(1/4))", "answer": "-infinity\n\n(-2x^2)/(3x^(1/4)) = (-2x^2 · x^(-1/4))/3 = (-2x^(2-1/4))/3 = (-2x^(7/4))/3.\n\n-2x^(7/4) -> -infinity, so form is -infinity/3 which approaches -infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{-2x^2}{3\\sqrt[4]{x}}$", "answer": "$-\\infty$. $\\frac{-2x^2}{3\\sqrt[4]{x}}=\\frac{-2x^2}{3x^{1/4}}=\\frac{-2x^{2-1/4}}{3}=\\frac{-2x^{7/4}}{3}$. Since $-2x^{7/4}\\to-\\infty$, Form is $\\frac{-\\infty}{3}$, which approaches $-\\infty$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of (1-ln(x))/(-3)", "answer": "infinity\n\nln(x) -> infinity, so 1-ln(x) -> -infinity. Form is -infinity/-3 which approaches +infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{1-\\ln(x)}{-3}$", "answer": "$\\infty$. $\\ln(x)\\to\\infty$, so $1-\\ln(x)\\to-\\infty$. Form is $\\frac{-\\infty}{-3}$, which approaches $+\\infty$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/c: Exercise",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "context_latex": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "keywords": ["limits at infinity", "form infinity/c", "unbounded growth"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of -sqrt(x)/5", "answer": "-infinity\n\nsqrt(x) -> infinity, so form is -infinity/5 which approaches -infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} -\\frac{\\sqrt{x}}{5}$", "answer": "$-\\infty$. $\\sqrt{x}\\to\\infty$, so Form is $-\\frac{\\infty}{5}$, which approaches $-\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of x^5/(2x)", "answer": "infinity\n\nx^5/(2x) = x^4/2. Since x^4 -> infinity, form is infinity/2 which approaches infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{x^5}{2x}$", "answer": "$\\infty$. $\\frac{x^5}{2x}=\\frac{x^4}{2}$. Since $x^4\\to\\infty$, Form is $\\frac{\\infty}{2}$, which approaches $\\infty$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of 1/(2e^(-x))", "answer": "infinity\n\n1/(2e^(-x)) = e^x/2. Since e^x -> infinity, form is infinity/2 which approaches infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{1}{2e^{-x}}$", "answer": "$\\infty$. $\\frac{1}{2e^{-x}}=\\frac{e^x}{2}$. Since $e^x\\to\\infty$, Form is $\\frac{\\infty}{2}$, which approaches $\\infty$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/infinity: Concept",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "form infinity/infinity", "end behavior"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "When both the numerator and denominator grow ever larger without bound, the value of the fraction...\n\nA. approaches 0.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach 0, or anything in between based on the given information.",
+                            "answer": "D. could become larger, approach 0, or anything in between based on the given information."
+                        },
+                        "latex": {
+                            "question": "When both the numerator and denominator grow ever larger without bound, the value of the fraction...\n\nA. approaches $0$.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach $0$, or anything in between based on the given information.",
+                            "answer": "D. could become larger, approach $0$, or anything in between based on the given information."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/infinity: Example",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms:",
+                "context_latex": "Find the following limits using forms:",
+                "keywords": ["limits at infinity", "form infinity/infinity", "dominant terms"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of log_2(x)/(x^3+4x-1)", "answer": "0\n\nDominant term in numerator: log_2(x)\n\nDominant term in denominator: x^3.\n\nlim as x -> infinity of log_2(x)/(x^3+4x-1) ~ lim as x -> infinity of log_2(x)/x^3\n\nForm is infinity/infinity with slower/much faster -> 0.\n\nThus lim as x -> infinity of log_2(x)/x^3 = 0 => lim as x -> infinity of log_2(x)/(x^3+4x-1) = 0"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\log_2(x)}{x^3+4x-1}$", "answer": "$0$. Dominant term in numerator: $\\log_2(x)$; in denominator: $x^3$. So $\\lim\\frac{\\log_2(x)}{x^3+4x-1}\\sim\\lim\\frac{\\log_2(x)}{x^3}$. Form is $\\frac{\\infty}{\\infty}$ with $\\frac{\\text{slower}}{\\text{much faster}}\\to 0$. Thus the limit is $0$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of (4^x+ln(x))/(1-x^(1/3))", "answer": "-infinity\n\nDominant term in numerator: 4^x\n\nDominant term in denominator: -x^(1/3).\n\nlim as x -> infinity of (4^x+ln(x))/(1-x^(1/3)) ~ lim as x -> infinity of 4^x/(-x^(1/3))\n\nForm is infinity/-infinity with much faster/-slower -> -infinity.\n\nThus lim as x -> infinity of 4^x/(-x^(1/3)) = -infinity => lim as x -> infinity of (4^x+ln(x))/(1-x^(1/3)) = -infinity"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{4^x+\\ln(x)}{1-\\sqrt[3]{x}}$", "answer": "$-\\infty$. Dominant term in numerator: $4^x$; in denominator: $-\\sqrt[3]{x}=-x^{1/3}$. So $\\sim\\lim\\frac{4^x}{-x^{1/3}}$. Form is $\\frac{\\infty}{-\\infty}$ with $\\frac{\\text{much faster}}{-\\text{slower}}\\to-\\infty$. Thus $-\\infty$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4)", "answer": "-1/2\n\nDominant term in numerator: -sqrt(x)\n\nDominant term in denominator: 2sqrt(x). The +5 portion of 2sqrt(x+5) is not growing.\n\nlim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4) ~ lim as x -> infinity of -sqrt(x)/(2sqrt(x)) = lim as x -> infinity of -1/2 = -1/2\n\nThus lim as x -> infinity of -sqrt(x)/(2sqrt(x)) = -1/2 => lim as x -> infinity of (log_2(x)-sqrt(x))/(2sqrt(x+5)-4) = -1/2"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\log_2(x)-\\sqrt{x}}{2\\sqrt{x+5}-4}$", "answer": "$-\\frac{1}{2}$. Dominant term in numerator: $-\\sqrt{x}$; in denominator: $2\\sqrt{x}$ (the $+5$ in $2\\sqrt{x+5}$ is not growing). So $\\sim\\lim\\frac{-\\sqrt{x}}{2\\sqrt{x}}=\\lim\\frac{-1}{2}=-\\frac{1}{2}$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form infinity/infinity: Exercise",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "context_latex": "Find the following limits using forms. (Practice showing your work, even if you know the answer!)",
+                "keywords": ["limits at infinity", "form infinity/infinity", "dominant terms"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> infinity of (7^x-x)/x^7", "answer": "infinity\n\nDominant term in numerator: 7^x\n\nDominant term in denominator: x^7.\n\nlim as x -> infinity of (7^x-x)/x^7 ~ lim as x -> infinity of 7^x/x^7\n\nForm is infinity/infinity with much faster/slower -> infinity.\n\nThus lim as x -> infinity of 7^x/x^7 = infinity => lim as x -> infinity of (7^x-x)/x^7 = infinity"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{7^x-x}{x^7}$", "answer": "$\\infty$. Dominant term in numerator: $7^x$; in denominator: $x^7$. So $\\sim\\lim\\frac{7^x}{x^7}$. Form is $\\frac{\\infty}{\\infty}$ with $\\frac{\\text{much faster}}{\\text{slower}}\\to\\infty$. Thus $\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of sqrt(x+1)/(4-x-ln(x))", "answer": "0\n\nDominant term in numerator: sqrt(x). The +1 is not growing.\n\nDominant term in denominator: -x.\n\nlim as x -> infinity of sqrt(x+1)/(4-x-ln(x)) ~ lim as x -> infinity of sqrt(x)/(-x)\n\nThis simplifies further:\n\nlim as x -> infinity of x^(1/2)/(-x) = 1/(-x^(1/2))\n\nForm is 1/(-infinity) which approaches 0.\n\nlim as x -> infinity of sqrt(x)/(-x) = 0 => lim as x -> infinity of sqrt(x+1)/(4-x-ln(x)) = 0"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\sqrt{x+1}}{4-x-\\ln(x)}$", "answer": "$0$. Dominant term in numerator: $\\sqrt{x}$ (the $+1$ not growing); in denominator: $-x$. So $\\sim\\lim\\frac{\\sqrt{x}}{-x}=\\lim\\frac{1}{-x^{1/2}}$. Form $\\frac{1}{-\\infty}\\to 0$. Thus $0$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x))", "answer": "-1/3\n\nDominant term in numerator: sqrt(x^2). The +1 is not growing.\n\nDominant term in denominator: -3x.\n\nlim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x)) ~ lim as x -> infinity of sqrt(x^2)/(-3x)\n\nThis simplifies:\n\nlim as x -> infinity of sqrt(x^2)/(-3x) = lim as x -> infinity of x/(-3x) = lim as x -> infinity of 1/(-3) = -1/3\n\nsqrt(x^2) = x for x > 0\n\nlim as x -> infinity of sqrt(x^2)/(-3x) = -1/3 => lim as x -> infinity of sqrt(x^2+1)/(4-3x-ln(x)) = -1/3"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\sqrt{x^2+1}}{4-3x-\\ln(x)}$", "answer": "$-\\frac{1}{3}$. Dominant term in numerator: $\\sqrt{x^2}$ (the $+1$ not growing); in denominator: $-3x$. So $\\sim\\lim\\frac{\\sqrt{x^2}}{-3x}=\\lim\\frac{x}{-3x}=\\lim\\frac{1}{-3}=-\\frac{1}{3}$ (since $\\sqrt{x^2}=x$ for $x>0$)."}
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {"question": "lim as x -> infinity of (1000-x^1000)/(x^e-e^x)", "answer": "0\n\nDominant term in numerator: -x^1000.\n\nDominant term in denominator: -e^x.\n\nlim as x -> infinity of (1000-x^1000)/(x^e-e^x) ~ lim as x -> infinity of (-x^1000)/(-e^x)\n\nForm is infinity/infinity with slower/much faster -> 0.\n\nlim as x -> infinity of (-x^1000)/(-e^x) = 0 => lim as x -> infinity of (1000-x^1000)/(x^e-e^x) = 0"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{1000-x^{1000}}{x^e-e^x}$", "answer": "$0$. Dominant term in numerator: $-x^{1000}$; in denominator: $-e^x$. So $\\sim\\lim\\frac{-x^{1000}}{-e^x}$. Form $\\frac{\\infty}{\\infty}$ with $\\frac{\\text{slower}}{\\text{much faster}}\\to 0$. Thus $0$."}
+                    },
+                    {
+                        "part": "e",
+                        "plain_text": {"question": "lim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6)", "answer": "5\n\nDominant term in numerator: 5e^(2x).\n\nDominant term in denominator: e^(2x).\n\nlim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6) ~ lim as x -> infinity of 5e^(2x)/e^(2x)\n\nThis simplifies further:\n\nlim as x -> infinity of 5e^(2x)/e^(2x) = lim as x -> infinity of 5/1 = 5\n\nlim as x -> infinity of 5e^(2x)/e^(2x) = 5 => lim as x -> infinity of (5e^(2x)+3e^x+1)/(e^(2x)-5e^x+6) = 5"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{5e^{2x}+3e^x+1}{e^{2x}-5e^x+6}$", "answer": "$5$. Dominant term in numerator: $5e^{2x}$; in denominator: $e^{2x}$. So $\\sim\\lim\\frac{5e^{2x}}{e^{2x}}=\\lim\\frac{5}{1}=5$."}
+                    }
+                ]
+            },
+            {
+                "name": "Form c/0: Concept",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "form c/0", "infinite limits"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "When the denominator of a fraction grows ever smaller - approaching 0 - with all other things held constant, the value of the fraction...\n\nA. approaches 0.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach 0, or anything in between based on the given information.",
+                            "answer": "C. becomes larger without bound."
+                        },
+                        "latex": {
+                            "question": "When the denominator of a fraction grows ever smaller -- approaching $0$ -- with all other things held constant, the value of the fraction...\n\nA. approaches $0$.\nB. becomes larger.\nC. becomes larger without bound.\nD. could become larger, approach $0$, or anything in between based on the given information.",
+                            "answer": "C. becomes larger without bound."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Form c/0: Example",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms:",
+                "context_latex": "Find the following limits using forms:",
+                "keywords": ["limits", "form c/0", "one-sided limits", "infinite limits", "DNE"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> 1^- of (sqrt(x)+1)/(x-1)", "answer": "-infinity\n\nSince x -> 1^-, x-1 -> 0^-. Form is 2/0^- which approaches -infinity.\n\nThus lim as x -> 1^- of (sqrt(x)+1)/(x-1) = -infinity"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to1^-} \\frac{\\sqrt{x}+1}{x-1}$", "answer": "$-\\infty$. Since $x\\to1^-$, $x-1\\to0^-$. Form is $\\frac{\\sqrt{1}+1}{0^-}=\\frac{2}{0^-}$, which approaches $-\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> 3 of (x^2-2x)/(3-x)", "answer": "DNE\n\nSince x -> 3, we must consider the two-sided limit.\n\nlim as x -> 3^- of (x^2-2x)/(3-x) -> (3^2-2 · 3)/0^+\n\nForm is 3/0^+ which approaches infinity. Thus lim as x -> 3^- of (x^2-2x)/(3-x) = infinity.\n\nlim as x -> 3^+ of (x^2-2x)/(3-x) -> (3^2-2 · 3)/0^-\n\nForm is 3/0^- which approaches -infinity. Thus lim as x -> 3^+ of (x^2-2x)/(3-x) = -infinity.\n\nSince lim as x -> 3^- of (x^2-2x)/(3-x) = infinity does not equal lim as x -> 3^+ of (x^2-2x)/(3-x) = -infinity, lim as x -> 3 of (x^2-2x)/(3-x) DNE."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to3} \\frac{x^2-2x}{3-x}$", "answer": "DNE. Consider the two-sided limit. As $x\\to3^-$, $3-x\\to0^+$, so $\\frac{x^2-2x}{3-x}\\to\\frac{3^2-2\\cdot3}{0^+}=\\frac{3}{0^+}\\to\\infty$. As $x\\to3^+$, $3-x\\to0^-$, so $\\to\\frac{3}{0^-}\\to-\\infty$. Since the one-sided limits differ, $\\lim_{x\\to3}\\frac{x^2-2x}{3-x}$ DNE."}
+                    }
+                ]
+            },
+            {
+                "name": "Form c/0: Exercise",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using forms:",
+                "context_latex": "Find the following limits using forms:",
+                "keywords": ["limits", "form c/0", "one-sided limits", "infinite limits", "DNE"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> 0^+ of (1+x)/x^2", "answer": "infinity\n\nSince x -> 0^+, 1+x -> 1 and x^2 -> 0^+.\n\nForm is 1/0^+ which approaches infinity.\n\nThus lim as x -> 0^+ of (1+x)/x^2 = infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to0^+} \\frac{1+x}{x^2}$", "answer": "$\\infty$. As $x\\to0^+$, $1+x\\to1$ and $x^2\\to0^+$. Form is $\\frac{1}{0^+}$, which approaches $\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> 5 of (1+x)/(x^2-25)", "answer": "DNE\n\nWe must consider the two-sided limit.\n\nlim as x -> 5^- of (1+x)/(x^2-25). Since x -> 5^-, 1+x -> 6 and x^2-25 -> 0^-. Form is 6/0^- which approaches -infinity. That is lim as x -> 5^- of (1+x)/(x^2-25) = -infinity.\n\nlim as x -> 5^+ of (1+x)/(x^2-25). Since x -> 5^+, 1+x -> 6 and x^2-25 -> 0^+. Form is 6/0^+ which approaches +infinity. That is lim as x -> 5^+ of (1+x)/(x^2-25) = +infinity.\n\nSince lim as x -> 5^- of (1+x)/(x^2-25) does not equal lim as x -> 5^+ of (1+x)/(x^2-25), lim as x -> 5 of (1+x)/(x^2-25) = DNE."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to5} \\frac{1+x}{x^2-25}$", "answer": "DNE. Consider the two-sided limit. As $x\\to5^-$, $1+x\\to6$ and $x^2-25\\to0^-$, so Form $\\frac{6}{0^-}\\to-\\infty$. As $x\\to5^+$, $x^2-25\\to0^+$, so $\\frac{6}{0^+}\\to+\\infty$. Since the one-sided limits differ, the limit DNE."}
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice",
+                "learning_tag": 2,
+                "context_plain": "Find the following limits using either forms or continuity.",
+                "context_latex": "Find the following limits using either forms or continuity.",
+                "keywords": ["limits at infinity", "dominant terms", "forms", "continuity"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {"question": "lim as x -> 1^+ of (1-x)^(-3)", "answer": "-infinity\n\nlim as x -> 1^+ of (1-x)^(-3) = lim as x -> 1^+ of 1/(1-x)^3.\n\nAs x -> 1^+, (1-x)^3 -> (0^-)^3 = 0^-.\n\nForm is 1/0^- which approaches -infinity.\n\nThus lim as x -> 1^+ of (1-x)^(-3) = -infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to1^+} (1-x)^{-3}$", "answer": "$-\\infty$. $(1-x)^{-3}=\\frac{1}{(1-x)^3}$. As $x\\to1^+$, $(1-x)^3\\to(0^-)^3=0^-$. Form $\\frac{1}{0^-}\\to-\\infty$. Thus $-\\infty$."}
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {"question": "lim as x -> infinity of (1-x)^(-3)", "answer": "0\n\nAs x -> infinity, 1-x -> -infinity.\n\nThus lim as x -> infinity of (1-x)^(-3) = lim as x -> infinity of 1/(1-x)^3.\n\nThis is form 1/-infinity which approaches 0.\n\nThus lim as x -> infinity of (1-x)^(-3) = 0."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} (1-x)^{-3}$", "answer": "$0$. As $x\\to\\infty$, $1-x\\to-\\infty$, so $(1-x)^{-3}=\\frac{1}{(1-x)^3}$ is Form $\\frac{1}{-\\infty}\\to 0$. Thus $0$."}
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {"question": "lim as x -> infinity of (x^2-4x-sqrt(x))/(1-(x^2-2x)^(1/3))", "answer": "-infinity\n\nlim as x -> infinity of (x^2-4x-sqrt(x))/(1-(x^2-2x)^(1/3)) ~ lim as x -> infinity of x^2/(-(x^2)^(1/3))\n\nThis simplifies further:\n\nlim as x -> infinity of x^2/(-(x^2)^(1/3)) = lim as x -> infinity of x^2/(-x^(2/3)) = lim as x -> infinity of (x^2 · x^(-2/3))/(-1) = lim as x -> infinity of x^(4/3)/(-1)\n\nThis is form infinity/-1 which approaches -infinity.\n\nThus lim as x -> infinity of x^2/(-(x^2)^(1/3)) = -infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{x^2-4x-\\sqrt{x}}{1-\\sqrt[3]{x^2-2x}}$", "answer": "$-\\infty$. $\\sim\\lim\\frac{x^2}{-\\sqrt[3]{x^2}}=\\lim\\frac{x^2}{-x^{2/3}}=\\lim\\frac{x^2\\cdot x^{-2/3}}{-1}=\\lim\\frac{x^{4/3}}{-1}$. Form $\\frac{\\infty}{-1}\\to-\\infty$. Thus $-\\infty$."}
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {"question": "lim as x -> infinity of ((x^7+1)^(1/3)-x)/(ln(x)+x^2)", "answer": "infinity\n\nlim as x -> infinity of ((x^7+1)^(1/3)-x)/(ln(x)+x^2) ~ lim as x -> infinity of ((x^7)^(1/3)-x)/x^2\n\nThis simplifies further:\n\nlim as x -> infinity of ((x^7)^(1/3)-x)/x^2 = lim as x -> infinity of x^(7/3)/x^2 = lim as x -> infinity of x^(7/3 - 2) = lim as x -> infinity of x^(7/3 - 6/3) = lim as x -> infinity of x^(1/3) = infinity\n\nThus lim as x -> infinity of ((x^7+1)^(1/3)-x)/(ln(x)+x^2) = infinity."},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\sqrt[3]{x^7+1}-x}{\\ln(x)+x^2}$", "answer": "$\\infty$. $\\sim\\lim\\frac{\\sqrt[3]{x^7}-x}{x^2}=\\lim\\frac{x^{7/3}}{x^2}=\\lim x^{7/3-2}=\\lim x^{1/3}=\\infty$. Thus $\\infty$."}
+                    },
+                    {
+                        "part": "e",
+                        "plain_text": {"question": "lim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x)", "answer": "0\n\nlim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x) ~ lim as x -> infinity of x^2/((x^7+1)^(1/3))\n\nThis simplifies further:\n\nlim as x -> infinity of x^2/((x^7)^(1/3)-x) = lim as x -> infinity of x^2/x^(7/3) = lim as x -> infinity of 1/x^(7/3 - 2) = lim as x -> infinity of 1/x^(7/3 - 6/3) = lim as x -> infinity of 1/x^(1/3)\n\nThis is form 1/infinity.\n\nThus lim as x -> infinity of (ln(x)+x^2)/((x^7+1)^(1/3)-x) = 0"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{\\ln(x)+x^2}{\\sqrt[3]{x^7+1}-x}$", "answer": "$0$. $\\sim\\lim\\frac{x^2}{\\sqrt[3]{x^7}}=\\lim\\frac{x^2}{x^{7/3}}=\\lim\\frac{1}{x^{1/3}}$. Form $\\frac{1}{\\infty}\\to 0$. Thus $0$."}
+                    },
+                    {
+                        "part": "f",
+                        "plain_text": {"question": "lim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x))", "answer": "1\n\ne^x grows while e^(-x) decays as x -> infinity.\n\nlim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x)) ~ lim as x -> infinity of e^x/e^x\n\nlim as x -> infinity of e^x/e^x = lim as x -> infinity of 1 = 1\n\nThus lim as x -> infinity of (e^x+e^(-x))/(e^x-e^(-x)) = 1"},
+                        "latex": {"question": "$\\displaystyle\\lim_{x\\to\\infty} \\frac{e^x+e^{-x}}{e^x-e^{-x}}$", "answer": "$1$. $e^x$ grows while $e^{-x}$ decays as $x\\to\\infty$, so $\\sim\\lim\\frac{e^x}{e^x}=\\lim 1=1$. Thus $1$."}
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "problem", "name": "Warm-up Exercise 1: four graphs", "reason": "'Four graphs are given below'; parts a-c ask which plotted graphs satisfy limit-at-infinity statements (tikzpictures A-D).", "location": "lines 99-217"},
+        {"type": "mini-lecture", "name": "Growth-comparison figure (Infinite Limits at Infinity)", "reason": "The textual mini-lecture is captured in other_material; its accompanying growth graph of e^x, x^2, sqrt(x), ln(x) (tikzpicture) is omitted.", "location": "lines 244-273"},
+        {"type": "mini-lecture", "name": "Growth-comparison figure (Form infinity/infinity)", "reason": "Second growth graph of e^x, x^2, sqrt(x), ln(x) (tikzpicture) accompanying the dominant-term key idea.", "location": "lines 460-487"},
+        {"type": "problem", "name": "Extra Practice part (h): lim x->0^- (e^x+e^-x)/(e^x-e^-x)", "reason": "Solution reasons from the plotted graph of e^x ('see graph on left') to fix the sign of the denominator; figure at lines 856-880.", "location": "lines 882-898"}
+    ]
+}
