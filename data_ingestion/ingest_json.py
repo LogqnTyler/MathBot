@@ -1,7 +1,6 @@
 import json
 import os
 from pathlib import Path
-
 from dotenv import load_dotenv
 from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
@@ -9,13 +8,12 @@ import sqlalchemy
 
 load_dotenv()
 
-connector = Connector(refresh_strategy="LAZY")
-
+connector: Connector | None = None
 database_url = os.environ.get("DATABASE_URL")
 
 if database_url:
 
-    def create_engine():
+    def create_engine() -> sqlalchemy.engine.base.Engine:
         return sqlalchemy.create_engine(database_url)
 
 else:
@@ -23,14 +21,15 @@ else:
     def create_engine() -> sqlalchemy.engine.base.Engine:
         """
         Initializes a connection pool for a Cloud SQL instance of Postgres.
-
         Uses the Cloud SQL Python Connector package.
         """
+        global connector
+        connector = Connector(refresh_strategy="LAZY")
+
         instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
         db_user = os.environ["DB_USER"]
         db_pass = os.environ["DB_PASS"]
         db_name = os.environ["DB_NAME"]
-
         ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 
         def getconn() -> pg8000.dbapi.Connection:
@@ -53,16 +52,13 @@ else:
 def main() -> None:
     json_dir = Path(__file__).resolve().parents[1] / "JSON"
     lesson_files = sorted(json_dir.glob("lesson*.json"))
-
     if not lesson_files:
         print(f"No lesson*.json files found in {json_dir}")
         return
-
     engine = create_engine()
     try:
         inserted = 0
         skipped = 0
-
         with engine.begin() as conn:
             for lesson_file in lesson_files:
                 lesson_data = json.loads(lesson_file.read_text(encoding="utf-8"))
@@ -83,17 +79,16 @@ def main() -> None:
                         "data": json.dumps(lesson_data),
                     },
                 )
-
                 if result.fetchone() is None:
                     skipped += 1
                 else:
                     inserted += 1
-
         print(f"Imported {inserted} lesson file(s).")
         print(f"Skipped {skipped} existing lesson file(s).")
     finally:
         engine.dispose()
-        connector.close()
+        if connector is not None:
+            connector.close()
 
 
 if __name__ == "__main__":

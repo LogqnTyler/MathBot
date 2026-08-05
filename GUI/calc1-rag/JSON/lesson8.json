@@ -1,0 +1,291 @@
+{
+    "name": "Chain Rule",
+    "week": 5,
+    "learning_objectives": [
+        {"tag": 2, "description": "Apply the chain rule to take the derivative; determine the order of applying differentiation rules when multiple rules are to be applied."}
+    ],
+    "contents": {
+        "other_material": [
+            {
+                "type": "key-idea",
+                "content_plain": "The Chain Rule gives a way to compute derivatives of compositions of functions. Key Idea: Look for a function 'inside' another function to use this technique.",
+                "content_latex": "The {\\bf Chain Rule} gives a way to compute derivatives of compositions of functions. {\\em Key Idea:} Look for a function ``inside'' another function to use this technique."
+            },
+            {
+                "type": "theorem",
+                "content_plain": "Chain Rule (prime / Lagrange notation): If g is differentiable at x and f is differentiable at g(x), then the composite function f o g defined by (f o g)(x) = f(g(x)) is differentiable at x and (f o g)' is given by d/dx[(f o g)(x)] = d/dx f(g(x)) = (deriv of outer) x (deriv of inner) = f'(g(x))·g'(x).",
+                "content_latex": "{\\bf Chain Rule:} If $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$, then the composite function $f \\circ g$ defined by $(f \\circ g)(x)=f(g(x))$ is differentiable at $x$ and $(f \\circ g)'$ is given by $$\\frac{d}{dx}\\left[(f\\circ g)(x)\\right]=\\frac{d}{dx} f(g(x))=\\text{deriv of ``outer''}\\times\\text{deriv of ``inner''}=f^{\\prime}(g(x))\\cdot g^{\\prime}(x).$$"
+            },
+            {
+                "type": "discussion",
+                "content_plain": "GOAL: The chain-rule exercises build skills needed in learning target D2, an important learning target in MATH 1190 & 1210. D2 prompts typically involve functions represented algebraically, graphically, or tabularly, and using all three of the product, quotient, and chain rules.",
+                "content_latex": "{\\bf GOAL:} The following exercises build skills needed in learning target {\\bf D2}, an important learning target in MATH 1190 \\& 1210. {\\bf D2} prompts typically involve functions represented algebraically, graphically, or tabularly, and using all three of the product, quotient, and chain rules."
+            },
+            {
+                "type": "theorem",
+                "content_plain": "Chain Rule (Leibniz notation): If y is a differentiable function of u and u is a differentiable function of x, then dy/dx = (dy/du)·(du/dx).",
+                "content_latex": "{\\bf Leibniz notation:} If $y$ is a differentiable function of $u$ and $u$ is a differentiable function of $x$, then $$\\frac{dy}{dx}=\\frac{dy}{du}\\cdot\\frac{du}{dx}.$$"
+            },
+            {
+                "type": "discussion",
+                "content_plain": "This makes sense if we abuse notation a bit: (dy/du)·(du/dx) = (dy/du)·(du/dx) with the du's cancelling = dy/dx. Technically this cancellation should be done before taking a limit and only when each function fulfills certain technical requirements, so the above is not a proof but more of 'here's why Leibniz notation is reasonable.'",
+                "content_latex": "This makes sense if we abuse notation just a bit. $$\\frac{dy}{du}\\cdot\\frac{du}{dx}=\\frac{dy}{\\cancel{du}}\\cdot\\frac{\\cancel{du}}{dx}=\\frac{dy}{dx}$$ Technically, this cancellation process should be done before taking a limit and only when each function fulfills certain technical requirements. So what is above is something that is not a proof but more of ``here's why Leibniz notation is reasonable.''"
+            }
+        ],
+        "problems": [
+            {
+                "name": "Warm-up Exercise 1: Composite Functions",
+                "learning_tag": 2,
+                "context_plain": "Suppose h(x) = x^(3/2) and j(x) = x^2 - x + 1.",
+                "context_latex": "Suppose $h(x) = x^{\\frac{3}{2}}$ and $j(x) = x^2 - x+1$.",
+                "keywords": ["composite functions", "function composition", "chain rule"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Define (h o j)(x) = h(j(x)). Note that (h o j)(x) is a composite function, where h is the 'outer' function and j is the 'inner' function. Write a formula for (h o j)(x).",
+                            "answer": "(h o j)(x) = h(j(x)) = h(x^2-x+1) = (x^2-x+1)^(3/2)"
+                        },
+                        "latex": {
+                            "question": "Define $(h\\circ j)(x) = h(j(x))$. Note that $(h\\circ j)(x)$ is a \\textit{composite function}, where $h$ is the ``outer'' function and $j$ is the ``inner'' function. Write a formula for $(h\\circ j)(x)$.",
+                            "answer": "$(h\\circ j)(x) = h(j(x))=h(x^2-x+1)=(x^2-x+1)^{3/2}$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Define (j o h)(x) = j(h(x)). Now (j o h) is also a composite function; this time j is the 'outer' function and h is the 'inner' function. Write a formula for (j o h)(x).",
+                            "answer": "(j o h)(x) = j(h(x)) = j(x^(3/2)) = (x^(3/2))^2 - x^(3/2) + 1 = x^3 - x^(3/2) + 1"
+                        },
+                        "latex": {
+                            "question": "Define $(j\\circ h)(x) = j(h(x))$. Now $(j \\circ h)$ is also a \\textit{composite function}. This time, $j$ is the ``outer'' function and $h$ is the ``inner'' function. Write a formula for $(j\\circ h)(x)$.",
+                            "answer": "$(j\\circ h)(x) = j(h(x))= j(x^{3/2})=(x^{3/2})^2-x^{3/2}+1=x^3-x^{3/2}+1$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Warm-up Exercise 2: Outer & Inner Functions",
+                "learning_tag": 2,
+                "context_plain": "The following are compositions of functions. Decide what the outer function f and inner function g are, testing your choices by finding (f o g)(x) = f(g(x)).",
+                "context_latex": "The following are compositions of functions. Decide what the outer function $f$ and inner function $g$ are, testing your choices by finding $(f\\circ g)(x)=f(g(x))$ in the space provided.",
+                "keywords": ["composite functions", "outer function", "inner function", "function composition"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "(x^2+2x-1)^4. Find outer f(x) and inner g(x).",
+                            "answer": "outer f(x) = x^4, inner g(x) = x^2+2x-1. Check: f(g(x)) = f(x^2+2x-1) = (x^2+2x-1)^4"
+                        },
+                        "latex": {
+                            "question": "$(x^2+2x-1)^4$. Find outer $f(x)$ and inner $g(x)$.",
+                            "answer": "outer $f(x)=x^4$, inner $g(x)=x^2+2x-1$. Check: $f(g(x))=f(x^2+2x-1)=(x^2+2x-1)^4$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "sqrt(e^x+1). Find outer f(x) and inner g(x).",
+                            "answer": "outer f(x) = sqrt(x), inner g(x) = e^x+1. Check: f(g(x)) = f(e^x+1) = sqrt(e^x+1)"
+                        },
+                        "latex": {
+                            "question": "$\\sqrt{e^x+1}$. Find outer $f(x)$ and inner $g(x)$.",
+                            "answer": "outer $f(x)=\\sqrt{x}$, inner $g(x)=e^x+1$. Check: $f(g(x))=f(e^x+1)=\\sqrt{e^x+1}$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "e^(sqrt(x))+1. Find outer f(x) and inner g(x).",
+                            "answer": "outer f(x) = e^x+1, inner g(x) = sqrt(x). Check: f(g(x)) = f(sqrt(x)) = e^(sqrt(x))+1"
+                        },
+                        "latex": {
+                            "question": "$e^{\\sqrt{x}}+1$. Find outer $f(x)$ and inner $g(x)$.",
+                            "answer": "outer $f(x)=e^x+1$, inner $g(x)=\\sqrt{x}$. Check: $f(g(x))=f(\\sqrt{x})=e^{\\sqrt{x}}+1$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 1: Chain Rule (Prime Notation)",
+                "learning_tag": 2,
+                "context_plain": "Use the chain rule to find the following derivatives:",
+                "context_latex": "Use the derivative rules to find the following derivatives:",
+                "keywords": ["chain rule", "derivative", "composite functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "d/dx[(x^2+2x-1)^4]",
+                            "answer": "Outer: f(x)=x^4; Inner: g(x)=x^2+2x-1; f'(x)=4x^3; f'(g(x))=4(x^2+2x-1)^3; g'(x)=2x+2. So d/dx[(x^2+2x-1)^4] = f'(g(x))·g'(x) = 4(x^2+2x-1)^3·(2x+2)."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\frac{d}{dx}\\left[ (x^2+2x-1)^4 \\right]$",
+                            "answer": "Outer: $f(x)=x^4$; Inner: $g(x)=x^2+2x-1$; $f^{\\prime}(x)=4x^3$; $f^{\\prime}(g(x))=4(x^2+2x-1)^3$; $g^{\\prime}(x)=2x+2$. $$\\frac{d}{dx}\\left[ (x^2+2x-1)^4 \\right]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)=4(x^2+2x-1)^3\\cdot (2x+2)$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "d/dx[sqrt(e^x+1)]",
+                            "answer": "Outer: f(x)=sqrt(x)=x^(1/2); Inner: g(x)=e^x+1; f'(x)=(1/2)x^(-1/2); f'(g(x))=(1/2)(e^x+1)^(-1/2); g'(x)=e^x. So d/dx[sqrt(e^x+1)] = f'(g(x))·g'(x) = (1/2)(e^x+1)^(-1/2)·e^x."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle \\frac{d}{dx}\\left[ \\sqrt{e^x+1} \\right]$",
+                            "answer": "Outer: $f(x)=\\sqrt{x}=x^{1/2}$; Inner: $g(x)=e^x+1$; $f^{\\prime}(x)=\\frac{1}{2}x^{-1/2}$; $f^{\\prime}(g(x))=\\frac{1}{2}(e^x+1)^{-1/2}$; $g^{\\prime}(x)=e^x$. $$\\frac{d}{dx}\\left[ \\sqrt{e^x+1} \\right]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)=\\frac{1}{2}(e^x+1)^{-1/2}\\cdot e^x$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "d/dx[e^(sqrt(x))+1]",
+                            "answer": "Outer: f(x)=e^x+1; Inner: g(x)=sqrt(x)=x^(1/2); f'(x)=e^x; f'(g(x))=e^(sqrt(x)); g'(x)=(1/2)x^(-1/2). So d/dx[e^(sqrt(x))+1] = f'(g(x))·g'(x) = e^(sqrt(x))·(1/2)x^(-1/2)."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle \\frac{d}{dx}\\left[ e^{\\sqrt{x}}+1 \\right]$",
+                            "answer": "Outer: $f(x)=e^x+1$; Inner: $g(x)=\\sqrt{x}=x^{1/2}$; $f^{\\prime}(x)=e^x$; $f^{\\prime}(g(x))=e^{\\sqrt{x}}$; $g^{\\prime}(x)=\\frac{1}{2}x^{-1/2}$. $$\\frac{d}{dx}\\left[ e^{\\sqrt{x}}+1 \\right]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)=e^{\\sqrt{x}}\\cdot \\frac{1}{2}x^{-1/2}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 2: Combining Differentiation Rules",
+                "learning_tag": 2,
+                "context_plain": "Find the following derivatives:",
+                "context_latex": "Find the following derivatives:",
+                "keywords": ["chain rule", "product rule", "quotient rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "d/dy[(y^2-1)^(3/2)]",
+                            "answer": "Outer: f(y)=y^(3/2); Inner: g(y)=y^2-1; f'(y)=(3/2)y^(1/2); f'(g(y))=(3/2)(y^2-1)^(1/2); g'(y)=2y. So d/dy[(y^2-1)^(3/2)] = f'(g(y))·g'(y) = (3/2)(y^2-1)^(1/2)·2y."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle \\frac{d}{dy}\\left[ (y^2-1)^{3/2} \\right]$",
+                            "answer": "Outer: $f(y)=y^{3/2}$; Inner: $g(y)=y^2-1$; $f^{\\prime}(y)=\\frac{3}{2}y^{1/2}$; $f^{\\prime}(g(y))=\\frac{3}{2}(y^2-1)^{1/2}$; $g^{\\prime}(y)=2y$. $$\\frac{d}{dy}\\left[ (y^2-1)^{3/2} \\right]=f^{\\prime}(g(y))\\cdot g^{\\prime}(y)=\\frac{3}{2}(y^2-1)^{1/2}\\cdot 2y$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "d/dy[y(y^2-1)^(3/2)] = d/dy[f(y)·g(y)] where f(y)=y and g(y)=(y^2-1)^(3/2).",
+                            "answer": "Two functions multiplied, so start with the product rule: d/dy[f(y)·g(y)] = f'(y)·g(y) + f(y)·g'(y). Here f(y)=y => f'(y)=1, and g(y)=(y^2-1)^(3/2) => g'(y)=(3/2)(y^2-1)^(1/2)·2y (from part a). So = 1·(y^2-1)^(3/2) + y·(3/2)(y^2-1)^(1/2)·2y."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\frac{d}{dy}\\left[ y(y^2-1)^{3/2} \\right] = \\frac{d}{dy}\\left[f(y)\\cdot g(y)\\right]$ where $f(y)=y$ and $g(y)=(y^2-1)^{3/2}$.",
+                            "answer": "Two functions multiplied, so start with the {\\em product rule}: $$\\frac{d}{dy}\\left[f(y)\\cdot g(y)\\right]=f^{\\prime}(y)\\cdot g(y)+f(y)\\cdot g^{\\prime}(y).$$ Here $f(y)=y \\Rightarrow f^{\\prime}(y)=1$ and $g(y)=(y^2-1)^{3/2}\\Rightarrow g^{\\prime}(y)=\\frac{3}{2}(y^2-1)^{1/2}\\cdot 2y$ (from part a). $$=1\\cdot (y^2-1)^{3/2}+y\\cdot \\frac{3}{2}(y^2-1)^{1/2}\\cdot 2y$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "d/dy[ y(y^2-1)^(3/2) / (5y+1) ] = d/dy[f(y)/g(y)] where f(y)=y(y^2-1)^(3/2) and g(y)=5y+1.",
+                            "answer": "Two functions divided, so start with the quotient rule: d/dy[f(y)/g(y)] = (f'(y)g(y) - f(y)g'(y))/[g(y)]^2. Here f(y)=y(y^2-1)^(3/2) is the function from part b, with f'(y) = 1·(y^2-1)^(3/2) + y·(3/2)(y^2-1)^(1/2)·2y, and g(y)=5y+1 => g'(y)=5. So = [ (1·(y^2-1)^(3/2) + y·(3/2)(y^2-1)^(1/2)·2y)(5y+1) - y(y^2-1)^(3/2)(5) ] / (5y+1)^2."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\frac{d}{dy}\\left[ \\frac{y(y^2-1)^{3/2}}{5y+1} \\right]=\\frac{d}{dy}\\left[\\frac{f(y)}{g(y)}\\right]$ where $f(y)=y(y^2-1)^{3/2}$ and $g(y)=5y+1$.",
+                            "answer": "Two functions divided, so start with the {\\em quotient rule}: $$\\frac{d}{dy}\\left[\\frac{f(y)}{g(y)}\\right]=\\frac{f^{\\prime}(y)g(y)-f(y)g^{\\prime}(y)}{[g(y)]^2}.$$ Here $f(y)=y(y^2-1)^{3/2}$ is the function from part b, so $f^{\\prime}(y)=1\\cdot (y^2-1)^{3/2}+y\\cdot \\frac{3}{2}(y^2-1)^{1/2}\\cdot 2y$, and $g(y)=5y+1\\Rightarrow g^{\\prime}(y)=5$. $$=\\frac{\\left(1\\cdot (y^2-1)^{3/2}+y\\cdot \\frac{3}{2}(y^2-1)^{1/2}\\cdot 2y \\right)(5y+1)-y(y^2-1)^{3/2}(5)}{(5y+1)^2}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 3: Chain Rule (Leibniz Notation) - Infant Growth",
+                "learning_tag": 2,
+                "context_plain": "Let w represent the weight (in pounds) of an average infant. The weight of an infant can be regarded as a function of the height h (in inches) of the infant, and height can further be regarded as a function of age t (in months): w = w(h(t)).",
+                "context_latex": "Let $w$ represent the weight (in pounds) of an average infant. The weight of an infant can be regarded as a function of the height $h$ (in inches) of the infant, and height can further be regarded as a function of age $t$ (in months): $$w=w(h(t)).$$",
+                "keywords": ["chain rule", "Leibniz notation", "units of derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "What are the units of measurement of dw/dt, dh/dt, and dw/dh?",
+                            "answer": "dw/dt: pounds/month; dh/dt: inches/month; dw/dh: pounds/inch."
+                        },
+                        "latex": {
+                            "question": "What are the units of measurement of $\\frac{dw}{dt}$, $\\frac{dh}{dt}$, and $\\frac{dw}{dh}$?",
+                            "answer": "$\\frac{dw}{dt}:\\ \\frac{\\text{pounds}}{\\text{month}}$;\\quad $\\frac{dh}{dt}:\\ \\frac{\\text{inches}}{\\text{month}}$;\\quad $\\frac{dw}{dh}:\\ \\frac{\\text{pounds}}{\\text{inch}}$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "Given w = w(h(t)), use Leibniz notation to write down the derivative of w with respect to t. Your answer should involve dw/dt, dh/dt, and dw/dh.",
+                            "answer": "dw/dt = (dw/dh)·(dh/dt)"
+                        },
+                        "latex": {
+                            "question": "Given $w=w(h(t))$, use Leibniz notation to write down the derivative of $w$ with respect to $t$. Your answer should involve $\\frac{dw}{dt}$, $\\frac{dh}{dt}$, and $\\frac{dw}{dh}$.",
+                            "answer": "$$\\frac{dw}{dt}=\\frac{dw}{dh}\\cdot\\frac{dh}{dt}$$"
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "Is dw/dh positive, negative, or zero? Give a description of the relationship and a mathematical justification incorporating the context of this problem.",
+                            "answer": "Positive. We expect an infant to gain weight over time, so dw/dt = (+). We also expect an infant to gain height over time, so dh/dt = (+). By the Leibniz Chain Rule, dw/dt = (dw/dh)·(dh/dt), i.e. (+) = (dw/dh)·(+), so dw/dh = (+)/(+) = (+). Thus dw/dh = (+), which means the infant's weight increases as height increases."
+                        },
+                        "latex": {
+                            "question": "Is $\\frac{dw}{dh}$ positive, negative, or zero? Give a description of the relationship \\& a mathematical justification incorporating the context of this problem while explaining your answer.",
+                            "answer": "Positive. We expect an infant to gain weight over time, so $\\frac{dw}{dt}=(+)$. We also expect an infant to gain height over time, so $\\frac{dh}{dt}=(+)$. By the Leibniz Chain Rule, $$\\frac{dw}{dt}=\\frac{dw}{dh}\\cdot\\frac{dh}{dt}\\ \\Rightarrow\\ (+)=\\frac{dw}{dh}\\cdot(+)\\ \\Rightarrow\\ \\frac{dw}{dh}=\\frac{(+)}{(+)}=(+).$$ Thus $\\frac{dw}{dh}=(+)$, which means the infant's weight increases as height increases."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 2: Chain, Product & Quotient Rules",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["chain rule", "quotient rule", "product rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the following derivative: d/dx[ sqrt( (1+x^2 e^x)/(1-e^x) ) ]",
+                            "answer": "This is a function inside a function. Outer: f(x)=sqrt(x)=x^(1/2); inner: g(x)=(1+x^2 e^x)/(1-e^x). By the chain rule, d/dx[sqrt(g(x))] = f'(g(x))·g'(x) = (1/2)(g(x))^(-1/2)·g'(x) = (1/2)((1+x^2 e^x)/(1-e^x))^(-1/2)·g'(x). Find g'(x) by the quotient rule with hi = 1+x^2 e^x and lo = 1-e^x: lo' = -e^x, and hi' = 2x·e^x + x^2·e^x (product rule). So g'(x) = ( (2x·e^x + x^2·e^x)(1-e^x) - (1+x^2 e^x)(-e^x) ) / (1-e^x)^2. Therefore d/dx[ sqrt((1+x^2 e^x)/(1-e^x)) ] = (1/2)((1+x^2 e^x)/(1-e^x))^(-1/2) · ( (2x·e^x + x^2·e^x)(1-e^x) - (1+x^2 e^x)(-e^x) ) / (1-e^x)^2."
+                        },
+                        "latex": {
+                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dx}\\left[\\sqrt{\\frac{1+x^2e^x}{1-e^x}} \\right]$",
+                            "answer": "This is a ``function inside a function.'' The outer function is $f(x)=\\sqrt{x}=x^{1/2}$ and the inner function is $g(x)=\\frac{1+x^2e^x}{1-e^x}$. By the chain rule, $$\\frac{d}{dx}\\left[\\sqrt{g(x)}\\right]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)=\\frac{1}{2}(g(x))^{-1/2}\\cdot g^{\\prime}(x)=\\frac{1}{2}\\left(\\frac{1+x^2e^x}{1-e^x}\\right)^{-1/2}\\cdot g^{\\prime}(x).$$ Find $g^{\\prime}(x)$ by the {\\em quotient rule} with $hi=1+x^2e^x$ and $lo=1-e^x$: $lo^{\\prime}=-e^x$, and $hi^{\\prime}=2x\\cdot e^x+x^2\\cdot e^x$ (product rule). So $$g^{\\prime}(x)=\\frac{\\left(2x\\cdot e^x+x^2\\cdot e^x\\right)(1-e^x)-(1+x^2e^x)(-e^x)}{(1-e^x)^2}.$$ Therefore $$\\frac{d}{dx}\\left[\\sqrt{\\frac{1+x^2e^x}{1-e^x}} \\right]=\\frac{1}{2}\\left(\\frac{1+x^2e^x}{1-e^x}\\right)^{-1/2}\\cdot\\frac{\\left(2x\\cdot e^x+x^2\\cdot e^x\\right)(1-e^x)-(1+x^2e^x)(-e^x)}{(1-e^x)^2}.$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 3: Blood Flux",
+                "learning_tag": 2,
+                "context_plain": "The flux F of blood through a vessel -- that is, the volume of blood per unit time that flows past a given point -- can be regarded as a function of the radius R of the vessel. In particular, when R changes, so too does F.",
+                "context_latex": "The flux $F$ of blood through a vessel -- that is, the volume of blood per unit time that flows past a given point -- can be regarded as a function of the radius $R$ of the vessel. In particular, when $R$ changes, so too does $F$.",
+                "keywords": ["chain rule", "Leibniz notation", "units of derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Assuming F is measured in mm^3/sec, R is measured in mm, and t is measured in sec, what are the units of dF/dt, dF/dR, and dR/dt?",
+                            "answer": "dF/dt: (mm^3/sec)/sec = mm^3/sec^2; dF/dR: (mm^3/sec)/mm = mm^2/sec; dR/dt: mm/sec."
+                        },
+                        "latex": {
+                            "question": "Assuming $F$ is measured in $\\frac{mm^3}{sec}$, $R$ is measured in $mm$, and $t$ is measured in $sec$, what are the units of $\\frac{dF}{dt}$, $\\frac{dF}{dR}$, and $\\frac{dR}{dt}$?",
+                            "answer": "$\\frac{dF}{dt}:\\ \\frac{mm^3/sec}{sec}=\\frac{mm^3}{sec^2}$;\\quad $\\frac{dF}{dR}:\\ \\frac{mm^3/sec}{mm}=\\frac{mm^2}{sec}$;\\quad $\\frac{dR}{dt}:\\ \\frac{mm}{sec}$."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "When the human body experiences a drop in blood pressure, it creates and distributes a hormone called angiotensin to raise blood pressure by decreasing blood vessels' radii. How are dF/dt and dF/dR related once angiotensin has been created and distributed?\n\nA. They are the same.\nB. Both are positive.\nC. Both are negative.\nD. One is positive and one is negative.\nE. none of the other answers",
+                            "answer": "D. One is positive and one is negative. Angiotensin raises blood pressure by decreasing radii, so dR/dt = (-). By the Leibniz Chain Rule, dF/dt = (dF/dR)·(dR/dt) = (dF/dR)·(-). If dF/dR = (+) then dF/dt = (+)·(-) = (-), the opposite sign of dF/dR. Conversely, if dF/dt = (+) then (+) = (dF/dR)·(-) gives dF/dR = (+)/(-) = (-), again the opposite sign of dF/dt. Thus one is positive and one is negative."
+                        },
+                        "latex": {
+                            "question": "When the human body experiences a drop in blood pressure -- due to, for example, blood loss or dehydration -- it creates and distributes a hormone called angiotensin to raise blood pressure by decreasing blood vessels' radii. How are $\\frac{dF}{dt}$ and $\\frac{dF}{dR}$ related once angiotensin has been created and distributed?\n\nA. They are the same.\nB. Both are positive.\nC. Both are negative.\nD. One is positive and one is negative.\nE. none of the other answers",
+                            "answer": "{\\bf D. One is positive and one is negative.} Angiotensin raises blood pressure by decreasing radii, so $\\frac{dR}{dt}=(-)$. By the Leibniz Chain Rule, $\\frac{dF}{dt}=\\frac{dF}{dR}\\cdot\\frac{dR}{dt}=\\frac{dF}{dR}\\cdot(-)$. If $\\frac{dF}{dR}=(+)$ then $\\frac{dF}{dt}=(+)\\cdot(-)=(-)$, the opposite sign of $\\frac{dF}{dR}$. Conversely, if $\\frac{dF}{dt}=(+)$ then $(+)=\\frac{dF}{dR}\\cdot(-)$ gives $\\frac{dF}{dR}=\\frac{(+)}{(-)}=(-)$, again the opposite sign of $\\frac{dF}{dt}$. Thus one is positive and one is negative."
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "problem", "name": "Extra Practice 1: k'(5) from graphs of f and g", "reason": "States 'f and g are functions whose graphs are shown below'; the tikzpicture plots the piecewise lines f and g, and the solution reads g(5)=3, f'(3)=2/3, and g'(5)=-1/3 directly off the graph to compute k'(5)=-2/9.", "location": "lines 301-343 (Extra Practice 1, tikzpicture lines 308-328)"}
+    ]
+}

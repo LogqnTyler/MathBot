@@ -1,0 +1,326 @@
+{
+  "name": "Absolute Extreme Values",
+  "week": 13,
+  "learning_objectives": [
+    {
+      "tag": 2,
+      "description": "Define absolute extrema and describe its difference from local extrema. Apply the Closed Interval Method to find the absolute extrema of a function on a given closed interval. Apply the First Derivative Test for Absolute Extrema to find absolute extrema on non-closed intervals."
+    }
+  ],
+  "contents": {
+    "definitions": [
+      {
+        "term": "Local Maximum",
+        "definition_plain": "A local maximum occurs at a critical number c where f(x) <= f(c) for all x \"close\" to c.",
+        "definition_latex": "A \\textit{local maximum} occurs at a critical number $c$ where $f(x)\\leq f(c)$ for all $x$ ``close'' to $c$."
+      },
+      {
+        "term": "Local Minimum",
+        "definition_plain": "A local minimum occurs at a critical number c where f(x) >= f(c) for all x \"close\" to c.",
+        "definition_latex": "A \\textit{local minimum} occurs at a critical number $c$ where $f(x)\\geq f(c)$ for all $x$ ``close'' to $c$."
+      },
+      {
+        "term": "Absolute Maximum",
+        "definition_plain": "An absolute maximum occurs on an interval I = [a,b] when we can find a c in I so that f(x) <= f(c) for all x in I.",
+        "definition_latex": "An \\textit{absolute maximum} occurs on an interval $I=[a,b]$ when we can find a $c$ in $I$ so that $f(x)\\leq f(c)$ for all $x$ in $I$."
+      },
+      {
+        "term": "Absolute Minimum",
+        "definition_plain": "An absolute minimum occurs on an interval I = [a,b] when we can find a c in I so that f(x) >= f(c) for all x in I.",
+        "definition_latex": "An \\textit{absolute minimum} occurs on an interval $I=[a,b]$ when we can find a $c$ in $I$ so that $f(x)\\geq f(c)$ for all $x$ in $I$."
+      }
+    ],
+    "other_material": [
+      {
+        "type": "theorem",
+        "content_plain": "Extreme Value Theorem: If f is continuous on [a,b], then f attains an absolute maximum and minimum somewhere on [a,b].",
+        "content_latex": "(\\textbf{Extreme Value Theorem}) \\textbf{If} $f$ is \\textit{continuous} on $[a,b]$, \\textbf{then} $f$ attains an absolute maximum and minimum somewhere on $[a,b]$."
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Key Observations:\n- A function may have local extrema (local maxima or minima) inside an interval, even if they are not absolute extrema.\n- Absolute extrema (global max/min) must occur either at critical points (where f'(x) = 0 or f'(x) does not exist) or at the endpoints of the interval.\n- The Extreme Value Theorem (EVT) guarantees the existence of both an absolute maximum and minimum only if f is continuous on a closed interval [a,b].\n- If f is not continuous on [a,b], then absolute extrema might fail to exist, even if local extrema do.\n- Discontinuities, vertical asymptotes, or open endpoints can prevent the function from attaining its absolute maximum or minimum.\n- Local extrema depend on the shape of the graph (turning points), whereas absolute extrema depend on the overall range of function values on the interval.\n- At an endpoint, a one-sided comparison is used to determine if the endpoint is a local or absolute extremum.\n- Functions that grow without bound on [a,b] (e.g., f(x) -> +infinity near b) do not have an absolute maximum, even though they may have a finite absolute minimum.",
+        "content_latex": "\\textbf{Key Observations:}\n\\begin{itemize}\n\\item A function may have \\emph{local extrema} inside an interval, even if they are not absolute extrema.\n\\item Absolute extrema must occur either at \\emph{critical points} (where $f'(x)=0$ or $f'(x)$ does not exist) or at the \\emph{endpoints} of the interval.\n\\item The EVT guarantees both an absolute maximum and minimum \\textbf{only if $f$ is continuous on a closed interval $[a,b]$}.\n\\item If $f$ is not continuous on $[a,b]$, absolute extrema might fail to exist, even if local extrema do.\n\\item Discontinuities, vertical asymptotes, or open endpoints can prevent $f$ from attaining its absolute maximum or minimum.\n\\item Local extrema depend on the \\textit{shape} of the graph, whereas absolute extrema depend on the \\textit{overall range} of function values on the interval.\n\\item At an endpoint, a one-sided comparison is used to determine if the endpoint is a local or absolute extremum.\n\\item Functions that grow without bound on $[a,b]$ do \\textbf{not} have an absolute maximum, even though they may have a finite absolute minimum.\n\\end{itemize}"
+      },
+      {
+        "type": "mini-lecture",
+        "content_plain": "Closed Interval Method: To find the absolute maximum and minimum values of a continuous function f on the closed interval [a,b]:\n1. Find the critical numbers c_1, c_2, ..., c_n of f that lie in (a,b).\n2. Find the value of f at each critical number and at the endpoints a and b.\n3. The largest value from step 2 is the absolute maximum value of f on [a,b] and the smallest value is the absolute minimum value of f on [a,b].",
+        "content_latex": "\\textbf{Closed Interval Method.} To find the absolute maximum value and absolute minimum value of a continuous function $f$ on the closed interval $[a,b]$:\n\\begin{enumerate}\n\\item Find the critical numbers $c_1,c_2,\\ldots,c_n$ of $f$ that lie in $(a,b)$.\n\\item Find the value of $f$ at each critical number and at the endpoints $a$ and $b$.\n\\item The largest value from step 2 is the absolute maximum value of $f$ on $[a,b]$ and the smallest value is the absolute minimum value of $f$ on $[a,b]$.\n\\end{enumerate}"
+      },
+      {
+        "type": "mini-lecture",
+        "content_plain": "Non-closed intervals: The Extreme Value Theorem applies only to functions continuous on closed intervals. When the interval is not closed, it is possible the function has no absolute maximum or minimum. In such cases use limits to determine the behavior of the function at its excluded endpoint(s).",
+        "content_latex": "\\textbf{Non-closed intervals.} The Extreme Value Theorem applies only to functions that are continuous on closed intervals. So it is possible the function at hand might not have an absolute maximum or minimum. In such cases we may use limits to determine the behavior of the function at its excluded endpoint(s)."
+      },
+      {
+        "type": "mini-lecture",
+        "content_plain": "Process for Finding Absolute Extrema on Non-Closed Intervals:\n- Identify and evaluate all critical points of f that lie within the open or half-open interval.\n- Examine the behavior near excluded endpoints using limits (e.g., lim as x -> a+ of f(x)).\n- If the limit exists and is finite, it describes the trend of f near the endpoint but does not count as an attained absolute extremum since the endpoint is not included.\n- Compare function values at all included endpoints and at interior critical points to determine the largest or smallest attained values.\n- If f(x) grows without bound or approaches but never reaches a limiting value, the corresponding absolute maximum or minimum does not exist.\nIn summary, for non-closed intervals, use limits to describe boundary behavior, but only attained values at interior points or included endpoints can be considered absolute extrema.",
+        "content_latex": "\\textbf{Process for Finding Absolute Extrema on Non-Closed Intervals:}\n\\begin{itemize}\n\\item Identify and evaluate all \\emph{critical points} of $f$ that lie within the open or half-open interval.\n\\item Examine the \\emph{behavior near excluded endpoints} using limits. For example, if $a$ is excluded, consider $\\displaystyle\\lim_{x\\to a^{+}}f(x)$.\n\\item If the limit exists and is finite, it describes the \\emph{trend} of $f$ near the endpoint, but it does not count as an attained absolute extremum since the endpoint is not included.\n\\item Compare function values at all included endpoints (if any) and at interior critical points to determine which are the largest or smallest \\emph{attained} values.\n\\item If $f(x)$ grows without bound or approaches but never reaches a limiting value, then the corresponding absolute maximum or minimum \\textbf{does not exist}.\n\\end{itemize}"
+      },
+      {
+        "type": "theorem",
+        "content_plain": "First Derivative Test for Absolute Extrema: Suppose that c is a critical number of a continuous function f defined on an interval I.\n- If the sign of f' changes from positive (+) to negative (-) at c AND c is the only critical number where f' changes sign on I, then f(c) is the absolute maximum value of f on I.\n- If the sign of f' changes from negative (-) to positive (+) at c AND c is the only critical number where f' changes sign on I, then f(c) is the absolute minimum value of f on I.",
+        "content_latex": "\\textbf{First Derivative Test for Absolute Extrema}: Suppose that $c$ is a critical number of a continuous function $f$ defined on an interval $I$.\n\\begin{itemize}\n\\item \\textbf{If} the sign of $f'$ changes from positive $(+)$ to negative $(-)$ at $c$ \\textbf{and} $c$ is the only critical number where $f'$ changes sign on $I$, \\textbf{then} $f(c)$ is the absolute maximum value of $f$ on $I$.\n\\item \\textbf{If} the sign of $f'$ changes from negative $(-)$ to positive $(+)$ at $c$ \\textbf{and} $c$ is the only critical number where $f'$ changes sign on $I$, \\textbf{then} $f(c)$ is the absolute minimum value of $f$ on $I$.\n\\end{itemize}"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Example: absolute extrema of f(x) = (x^2-4x)^(1/3) on [-1,3]",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute maximum and absolute minimum values of f(x) = (x^2-4x)^(1/3), where x is in [-1,3].",
+        "context_latex": "Find the absolute maximum and absolute minimum values of $f(x)=\\sqrt[3]{x^2-4x}$, where $x$ is in $[-1,3]$.",
+        "keywords": ["absolute maximum", "absolute minimum", "closed interval method", "critical numbers", "endpoints"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute maximum and absolute minimum values of f(x) = (x^2-4x)^(1/3) on [-1,3] using the Closed Interval Method.",
+              "answer": "Let u(x) = x^2 - 4x. Then f'(x) = (1/3)(x^2-4x)^(-2/3) * (2x-4). Critical points in (-1,3): f'(x) = 0 when 2x-4 = 0, so x = 2; f' undefined when x^2-4x = 0, so x = 0 (note x = 4 is not in [-1,3]). Evaluate at critical points and endpoints: f(-1) = (5)^(1/3) = cbrt(5), f(0) = 0, f(2) = (-4)^(1/3) = -cbrt(4), f(3) = (-3)^(1/3) = -cbrt(3). Comparing: -cbrt(4) < -cbrt(3) < 0 < cbrt(5). Absolute minimum: f(2) = -cbrt(4) at x = 2. Absolute maximum: f(-1) = cbrt(5) at x = -1."
+            },
+            "latex": {
+              "question": "Find the absolute maximum and absolute minimum values of $f(x)=\\sqrt[3]{x^2-4x}$ on $[-1,3]$ using the Closed Interval Method.",
+              "answer": "Let $u(x)=x^2-4x$. Then $f'(x)=\\frac{1}{3}(x^2-4x)^{-2/3}(2x-4)$. Critical points in $(-1,3)$: $f'(x)=0$ when $2x-4=0\\Rightarrow x=2$; $f'$ undefined when $x^2-4x=0\\Rightarrow x=0$ (note $x=4\\notin[-1,3]$). Evaluate at critical points and endpoints:\n\\[\n\\begin{aligned}\nf(-1)&=\\sqrt[3]{5},\\\\\nf(0)&=0,\\\\\nf(2)&=\\sqrt[3]{-4}=-\\sqrt[3]{4},\\\\\nf(3)&=\\sqrt[3]{-3}=-\\sqrt[3]{3}.\n\\end{aligned}\n\\]\nComparing: $-\\sqrt[3]{4}<-\\sqrt[3]{3}<0<\\sqrt[3]{5}$. \\textbf{Absolute min:} $f(2)=-\\sqrt[3]{4}$ at $x=2$. \\textbf{Absolute max:} $f(-1)=\\sqrt[3]{5}$ at $x=-1$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise A: absolute extrema of f(x) = (1/3)x^3 - 2x^2 + 5/3 on [-1,1]",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute maximum and absolute minimum values of f(x) = (1/3)x^3 - 2x^2 + 5/3 on the interval [-1,1].",
+        "context_latex": "Find the absolute maximum and absolute minimum values of $\\displaystyle f(x)=\\frac{1}{3}x^3-2x^2+\\frac{5}{3}$ on the interval $[-1,1]$.",
+        "keywords": ["absolute maximum", "absolute minimum", "closed interval method", "critical numbers", "endpoints"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute maximum and absolute minimum values of f(x) = (1/3)x^3 - 2x^2 + 5/3 on [-1,1] using the Closed Interval Method.",
+              "answer": "f'(x) = x^2 - 4x = x(x-4). There are no x-values where f'(x) DNE. The only critical number in (-1,1) is x = 0. Evaluate at the critical number and endpoints: f(-1) = -1/3 - 2 + 5/3 = -2/3, f(0) = 5/3, f(1) = 1/3 - 2 + 5/3 = 0. Absolute maximum: f(0) = 5/3 at x = 0. Absolute minimum: f(-1) = -2/3 at x = -1."
+            },
+            "latex": {
+              "question": "Find the absolute maximum and absolute minimum values of $\\displaystyle f(x)=\\frac{1}{3}x^3-2x^2+\\frac{5}{3}$ on $[-1,1]$ using the Closed Interval Method.",
+              "answer": "$f'(x)=x^2-4x=x(x-4)$. No $x$-values where $f'(x)$ DNE. Only critical number in $(-1,1)$ is $x=0$. Evaluate:\n\\[\nf(-1)=-\\tfrac{1}{3}-2+\\tfrac{5}{3}=-\\tfrac{2}{3},\\quad f(0)=\\tfrac{5}{3},\\quad f(1)=\\tfrac{1}{3}-2+\\tfrac{5}{3}=0.\n\\]\n\\textbf{Absolute max:} $f(0)=\\tfrac{5}{3}$ at $x=0$. \\textbf{Absolute min:} $f(-1)=-\\tfrac{2}{3}$ at $x=-1$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise B: absolute extrema of g(x) = x^2 + 128/x on [1,8]",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute maximum and absolute minimum values of g(x) = x^2 + 128/x on the interval [1,8].",
+        "context_latex": "Find the absolute maximum and absolute minimum values of $\\displaystyle g(x)=x^2+\\frac{128}{x}$ on the interval $[1,8]$.",
+        "keywords": ["absolute maximum", "absolute minimum", "closed interval method", "critical numbers", "endpoints"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute maximum and absolute minimum values of g(x) = x^2 + 128/x on [1,8] using the Closed Interval Method.",
+              "answer": "g'(x) = 2x - 128/x^2. Set g'(x) = 0: 2x = 128/x^2, so 2x^3 = 128, x^3 = 64, x = 4. The point where g'(x) DNE is x = 0, which is not in the domain. Evaluate at the critical point and endpoints: g(1) = 1 + 128 = 129, g(4) = 16 + 32 = 48, g(8) = 64 + 16 = 80. Absolute minimum: g(4) = 48 at x = 4. Absolute maximum: g(1) = 129 at x = 1."
+            },
+            "latex": {
+              "question": "Find the absolute maximum and absolute minimum values of $\\displaystyle g(x)=x^2+\\frac{128}{x}$ on $[1,8]$ using the Closed Interval Method.",
+              "answer": "$g'(x)=2x-\\frac{128}{x^2}$. Set $g'(x)=0$: $2x^3=128\\Rightarrow x^3=64\\Rightarrow x=4$. The point where $g'(x)$ DNE is $x=0$, not in the domain. Evaluate: $g(1)=129$, $g(4)=16+32=48$, $g(8)=64+16=80$. \\textbf{Absolute min:} $g(4)=48$ at $x=4$. \\textbf{Absolute max:} $g(1)=129$ at $x=1$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Example/Exercise: non-closed intervals for Exercise A and B",
+        "learning_tag": 2,
+        "context_plain": "Consider what happens when the intervals from Exercise A (f(x) = (1/3)x^3 - 2x^2 + 5/3) and Exercise B (g(x) = x^2 + 128/x) are changed to non-closed intervals.",
+        "context_latex": "Consider what happens when the intervals from Exercise A ($f(x)=\\frac{1}{3}x^3-2x^2+\\frac{5}{3}$) and Exercise B ($g(x)=x^2+\\frac{128}{x}$) are changed to non-closed intervals.",
+        "keywords": ["absolute maximum", "absolute minimum", "non-closed interval", "limits", "open endpoint"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "How do the answers to Exercise A change if instead the interval is (-1,1]? (-1,0)?",
+              "answer": "On (-1,1]: Absolute maximum f(0) = 5/3 (included); absolute minimum does not exist (lim as x -> -1+ of f(x) = -2/3 is not attained, and there are values in the interval smaller than f(1)).\nOn (-1,0): Absolute maximum does not exist (lim as x -> 0- of f(x) = 5/3 is not attained); absolute minimum does not exist (lim as x -> -1+ of f(x) = -2/3 is not attained; there are no candidates for a largest or smallest value on the open interval)."
+            },
+            "latex": {
+              "question": "How do the answers to Exercise A change if instead the interval is $(-1,1]$? $(-1,0)$?",
+              "answer": "On $(-1,1]$: \\textbf{Abs.\\ max} $f(0)=\\frac{5}{3}$ (included); \\textbf{Abs.\\ min} does not exist ($\\displaystyle\\lim_{x\\to -1^{+}}f(x)=-\\frac{2}{3}$ is not attained and there are values in the interval smaller than $f(1)$).\\\\\nOn $(-1,0)$: \\textbf{Abs.\\ max} does not exist ($\\displaystyle\\lim_{x\\to 0^{-}}f(x)=\\frac{5}{3}$ is not attained); \\textbf{Abs.\\ min} does not exist ($\\displaystyle\\lim_{x\\to -1^{+}}f(x)=-\\frac{2}{3}$ is not attained)."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "How do the answers to Exercise B change if instead the interval is [1,infinity)? (6,10]?",
+              "answer": "On [1,infinity): Absolute minimum g(4) = 48; absolute maximum does not exist (g(x) -> infinity as x -> infinity).\nOn (6,10]: g'(x) > 0 so g is increasing; absolute maximum = g(10) = 112.8; absolute minimum does not exist (lim as x -> 6+ of g(x) = 57 1/3 is excluded)."
+            },
+            "latex": {
+              "question": "How do the answers to Exercise B change if instead the interval is $[1,\\infty)$? $(6,10]$?",
+              "answer": "On $[1,\\infty)$: \\textbf{Abs.\\ min} $g(4)=48$; \\textbf{Abs.\\ max} does not exist ($g(x)\\to\\infty$ as $x\\to\\infty$).\\\\\nOn $(6,10]$: $g'(x)>0$ so $g$ is increasing; \\textbf{Abs.\\ max} $=g(10)=112.8$; \\textbf{Abs.\\ min} does not exist ($\\displaystyle\\lim_{x\\to 6^{+}}g(x)=57\\tfrac{1}{3}$ is excluded)."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: First Derivative Test for Absolute Extrema, f(x) = (1/3)x^3 - 2x^2 + 5/3 on (0,9)",
+        "learning_tag": 2,
+        "context_plain": "In Exercise A we examined f(x) = (1/3)x^3 - 2x^2 + 5/3 and found f'(x) = x^2 - 4x = x(x-4) with critical numbers at x = 0, 4. We are going to utilize the First Derivative Test for Absolute Extrema to determine if f has absolute max/mins on the interval (0,9).",
+        "context_latex": "In Exercise A we examined $f(x)=\\frac{1}{3}x^3-2x^2+\\frac{5}{3}$ and found $f'(x)=x^2-4x=x(x-4)$ with critical numbers at $x=0,4$. We are going to utilize the First Derivative Test for Absolute Extrema to determine if $f$ has absolute max/mins on the interval $(0,9)$.",
+        "keywords": ["First Derivative Test for Absolute Extrema", "sign line", "absolute minimum", "absolute maximum", "open interval"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Create a sign line for f' for the given interval and critical number(s) in that interval.",
+              "answer": "For (0,9) the only sign change occurs at x = 4 (since x = 0 is not in the interval). Test signs: f'(1) = 1 - 4 = -3 < 0; f'(5) = 25 - 20 = 5 > 0. Thus f' changes from (-) to (+) at x = 4. Sign line: (-) on (0,4), (+) on (4,9)."
+            },
+            "latex": {
+              "question": "Create a sign line for $f'$ for the given interval and critical number(s) in that interval.",
+              "answer": "For $(0,9)$ the only sign change occurs at $x=4$ (since $x=0$ is not in the interval). Test signs: $f'(1)=1-4<0$; $f'(5)=25-20>0$. Thus $f'$ changes from $(-)$ to $(+)$ at $x=4$. Sign line: $(-)$ on $(0,4)$, $(+)$ on $(4,9)$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "What, if anything, can we conclude from the First Derivative Test for Absolute Extrema? Do we have both an Absolute Max and an Absolute Min?",
+              "answer": "By the First Derivative Test for Absolute Extrema (and uniqueness of the sign change in (0,9)), f(4) is the absolute minimum on (0,9). Compute f(4) = (1/3)*64 - 2*16 + 5/3 = (64+5)/3 - 32 = 69/3 - 32 = 23 - 32 = -9. There is no absolute maximum on (0,9): f decreases on (0,4] and increases on [4,9). Since x = 0 is excluded, the local max at 0 from [-1,1] is not available."
+            },
+            "latex": {
+              "question": "What, if anything, can we conclude from the First Derivative Test for Absolute Extrema? Do we have both an Absolute Max and an Absolute Min?",
+              "answer": "By the First Derivative Test for Absolute Extrema (uniqueness of sign change in $(0,9)$), $f(4)$ is the \\textbf{absolute minimum} on $(0,9)$. Compute $f(4)=\\frac{1}{3}\\cdot 64-2\\cdot 16+\\frac{5}{3}=\\frac{64+5}{3}-32=23-32=-9$. There is \\textbf{no absolute maximum} on $(0,9)$: $f$ decreases on $(0,4]$ and increases on $[4,9)$, and $x=0$ is excluded so the local max at $0$ is not available."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 1: absolute extrema of M(x) = 2x - 6*sqrt(x) on [0,infinity)",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute extrema of M(x) = 2x - 6*sqrt(x) on the interval [0,infinity).",
+        "context_latex": "Find the absolute extrema of $M(x)=2x-6\\sqrt{x}$ on the interval $[0,\\infty)$.",
+        "keywords": ["absolute minimum", "absolute maximum", "non-closed interval", "critical numbers", "sign line"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute extrema of M(x) = 2x - 6*sqrt(x) on [0,infinity).",
+              "answer": "M'(x) = 2 - 6/(2*sqrt(x)) = 2 - 3/sqrt(x). Set M'(x) = 0: sqrt(x) = 3/2, so x = 9/4. M'(x) DNE at x = 0, but since this is an endpoint, we test using M(x). Evaluate: M(0) = 0, M(9/4) = 2*(9/4) - 6*(3/2) = 9/2 - 9 = -9/2. Sign line: M'(1) = -1 < 0, M'(9) = 1 > 0. As x -> infinity, M(x) ~ 2x -> infinity. Absolute minimum: M(9/4) = -9/2 at x = 9/4. No absolute maximum (unbounded above)."
+            },
+            "latex": {
+              "question": "Find the absolute extrema of $M(x)=2x-6\\sqrt{x}$ on the interval $[0,\\infty)$.",
+              "answer": "$M'(x)=2-\\frac{3}{\\sqrt{x}}$. Set $M'(x)=0\\Rightarrow\\sqrt{x}=\\frac{3}{2}\\Rightarrow x=\\frac{9}{4}$. $M'(x)$ DNE at $x=0$ (endpoint). Evaluate: $M(0)=0$, $M\\!\\left(\\frac{9}{4}\\right)=\\frac{9}{2}-9=-\\frac{9}{2}$. Sign line: $M'(1)=-1<0$, $M'(9)=1>0$. As $x\\to\\infty$, $M(x)\\to\\infty$. \\textbf{Absolute min:} $M\\!\\left(\\frac{9}{4}\\right)=-\\frac{9}{2}$; \\textbf{no absolute max} (unbounded above)."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 2: absolute extrema of f(x) = x + 16/x on (0,infinity)",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute extrema of f(x) = x + 16/x on the interval (0,infinity).",
+        "context_latex": "Find the absolute extrema of $f(x)=x+\\dfrac{16}{x}$ on the interval $(0,\\infty)$.",
+        "keywords": ["absolute minimum", "absolute maximum", "non-closed interval", "critical numbers", "sign line"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute extrema of f(x) = x + 16/x on (0,infinity).",
+              "answer": "f'(x) = 1 - 16/x^2. Set f'(x) = 0: x^2 = 16, so x = 4 (only positive root). f'(x) DNE at x = 0, but that point is not in the domain of f. Sign line: f'(1) = 1 - 16 = -15 < 0, f'(5) = 1 - 16/25 = 9/25 > 0. f changes from decreasing to increasing at x = 4. Evaluate: f(4) = 4 + 4 = 8. Also f(x) -> infinity as x -> 0+ or x -> infinity. Absolute minimum: f(4) = 8 at x = 4. No absolute maximum."
+            },
+            "latex": {
+              "question": "Find the absolute extrema of $f(x)=x+\\dfrac{16}{x}$ on the interval $(0,\\infty)$.",
+              "answer": "$f'(x)=1-\\frac{16}{x^2}$. Set $f'(x)=0\\Rightarrow x^2=16\\Rightarrow x=4$ (only positive root). $f'$ DNE at $x=0$ not in domain. Sign line: $f'(1)=-15<0$, $f'(5)=\\frac{9}{25}>0$. Evaluate: $f(4)=4+4=8$; $f(x)\\to\\infty$ as $x\\to 0^+$ or $x\\to\\infty$. \\textbf{Absolute minimum:} $f(4)=8$; \\textbf{no absolute maximum}."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 3: absolute extrema of f(x) = 1/(x^2-2x+2) on four intervals",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute extrema of f(x) = 1/(x^2-2x+2) on the intervals [-1,2], [-1,2), (-1,2], and (-1,2).",
+        "context_latex": "Find the absolute extrema of $f(x)=\\dfrac{1}{x^2-2x+2}$ on the intervals $[-1,2]$, $[-1,2)$, $(-1,2]$, and $(-1,2)$.",
+        "keywords": ["absolute maximum", "absolute minimum", "closed interval", "open interval", "critical numbers", "Extreme Value Theorem"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute extrema of f(x) = 1/(x^2-2x+2) = 1/((x-1)^2+1) on [-1,2], [-1,2), (-1,2], and (-1,2).",
+              "answer": "Note f(x) = 1/((x-1)^2+1) and f'(x) = -2(x-1)/((x-1)^2+1)^2. The only critical number is x = 1 (f'(1) = 0). Evaluate: f(-1) = 1/(4+1) = 1/5, f(1) = 1, f(2) = 1/(1+1) = 1/2. Order: 1/5 < 1/2 < 1.\n\n[-1,2] (closed): EVT applies. Max = 1 at x = 1; min = 1/5 at x = -1.\n[-1,2) (half-open, right excluded): x = 1 is interior, so max = 1 at x = 1. The value 1/2 is not attained; 1/5 < 1/2 and x = -1 is included, so min = 1/5 at x = -1.\n(-1,2] (half-open, left excluded): x = 1 is interior, so max = 1 at x = 1. As x -> -1+, f(x) -> 1/5, which is not attained; f(2) = 1/2 > 1/5; no attained minimum, so min does not exist.\n(-1,2) (open): x = 1 is interior, so max = 1 at x = 1. As x -> -1+, f(x) -> 1/5 (not attained); min does not exist."
+            },
+            "latex": {
+              "question": "Find the absolute extrema of $f(x)=\\dfrac{1}{x^2-2x+2}=\\dfrac{1}{(x-1)^2+1}$ on $[-1,2]$, $[-1,2)$, $(-1,2]$, and $(-1,2)$.",
+              "answer": "$f'(x)=-\\frac{2(x-1)}{\\big((x-1)^2+1\\big)^2}$; only critical number is $x=1$. Evaluate: $f(-1)=\\frac{1}{5}$, $f(1)=1$, $f(2)=\\frac{1}{2}$. Ordering: $\\frac{1}{5}<\\frac{1}{2}<1$.\n\\begin{itemize}\n\\item $[-1,2]$: EVT applies. $\\max=1$ at $x=1$; $\\min=\\frac{1}{5}$ at $x=-1$.\n\\item $[-1,2)$: $\\max=1$ at $x=1$; $\\min=\\frac{1}{5}$ at $x=-1$ (still included).\n\\item $(-1,2]$: $\\max=1$ at $x=1$; $\\min$ does not exist ($\\displaystyle\\lim_{x\\to -1^+}f(x)=\\frac{1}{5}$ not attained).\n\\item $(-1,2)$: $\\max=1$ at $x=1$; $\\min$ does not exist.\n\\end{itemize}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extra Practice 4: absolute extrema of f(x) = 24*ln(x) + x^3 on (0,3]",
+        "learning_tag": 2,
+        "context_plain": "Find the absolute extrema of f(x) = 24*ln(x) + x^3 over (0,3]. (Hint: recall what happens to the graph of the natural logarithmic function as its input approaches 0 from the right.)",
+        "context_latex": "Find the absolute extrema of $f(x)=24\\ln(x)+x^3$ over $(0,3]$. (\\textbf{Hint:} recall what happens to the graph of the natural logarithmic function as its input approaches $0$ from the right.)",
+        "keywords": ["absolute maximum", "absolute minimum", "non-closed interval", "natural logarithm", "critical numbers"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Find the absolute extrema of f(x) = 24*ln(x) + x^3 over (0,3].",
+              "answer": "f'(x) = 24/x + 3x^2. Set f'(x) = 0 for x > 0: 24/x = -3x^2, but 24/x > 0 and -3x^2 <= 0 for x > 0, so there is no solution. Thus no critical numbers in (0,3]. For every x > 0, f'(x) = 24/x + 3x^2 > 0, so f is strictly increasing on (0,3]. As x -> 0+, ln(x) -> -infinity, so lim as x->0+ of f(x) = -infinity; f is unbounded below, so there is no absolute minimum. Since f is strictly increasing and x = 3 is included, the absolute maximum is attained at x = 3: f(3) = 24*ln(3) + 27. Absolute maximum: f(3) = 24*ln(3) + 27 at x = 3. No absolute minimum on (0,3]."
+            },
+            "latex": {
+              "question": "Find the absolute extrema of $f(x)=24\\ln(x)+x^3$ over $(0,3]$.",
+              "answer": "$f'(x)=\\frac{24}{x}+3x^2$. For $x>0$, $\\frac{24}{x}>0$ and $3x^2\\geq 0$, so $f'(x)>0$ everywhere on $(0,3]$; there are no critical numbers. As $x\\to 0^+$, $\\ln x\\to -\\infty$, so $\\displaystyle\\lim_{x\\to 0^+}f(x)=-\\infty$; $f$ is unbounded below, so \\textbf{no absolute minimum}. Since $f$ is strictly increasing and $x=3$ is included, the absolute maximum is at $x=3$: $f(3)=24\\ln 3+27$. \\textbf{Absolute maximum:} $f(3)=24\\ln 3+27$ at $x=3$."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": [
+    {
+      "type": "problem",
+      "name": "Warmup Example/Exercise: graph 1 (polynomial-like curve on [1,4])",
+      "reason": "Requires reading local and absolute extrema from a tikzpicture graph of f on [1,4].",
+      "location": "Lines 51-91 (first mpageTfour block, first graph)"
+    },
+    {
+      "type": "problem",
+      "name": "Warmup Example/Exercise: graph 2 (x/(4-x)^(1/3) on [1,4])",
+      "reason": "Requires reading local and absolute extrema from a tikzpicture graph of f on [1,4] with vertical asymptote.",
+      "location": "Lines 92-133 (first mpageTfour block, second graph)"
+    },
+    {
+      "type": "problem",
+      "name": "Warmup Example/Exercise: graph 3 (x/(4-x)^(1/3)+(x-3)^2 on [1,4])",
+      "reason": "Requires reading local and absolute extrema from a tikzpicture graph of f on [1,4].",
+      "location": "Lines 135-175 (second mpageTfour block, first graph)"
+    },
+    {
+      "type": "problem",
+      "name": "Warmup Example/Exercise: graph 4 (piecewise with logarithm on [1,4])",
+      "reason": "Requires reading local and absolute extrema from a tikzpicture graph of f on [1,4] with discontinuity.",
+      "location": "Lines 176-220 (second mpageTfour block, second graph)"
+    },
+    {
+      "type": "mini-lecture",
+      "name": "Non-closed intervals discussion: graphs of f and g",
+      "reason": "The non-closed-interval example/exercise block includes tikzpicture graphs of f(x) = (1/3)x^3 - 2x^2 + 5/3 and g(x) = x^2 + 128/x used to explore behavior on non-closed intervals. The textual solutions have been captured in the non-closed intervals problem entry.",
+      "location": "Lines 370-441"
+    },
+    {
+      "type": "problem",
+      "name": "Exercise: sign line diagram for First Derivative Test (tikzpicture)",
+      "reason": "Part a of the First Derivative Test exercise includes a tikzpicture sign line diagram as the answer scaffold.",
+      "location": "Lines 491-525 (sign line tikzpicture inside exercise)"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 1: sign line tikzpicture for M(x)",
+      "reason": "The solution to Extra Practice 1 includes a standalone tikzpicture sign line diagram for M'(x).",
+      "location": "Lines 601-627"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 2: sign line tikzpicture for f(x) = x + 16/x",
+      "reason": "The solution to Extra Practice 2 includes a standalone tikzpicture sign line diagram for f'(x).",
+      "location": "Lines 636-662"
+    },
+    {
+      "type": "problem",
+      "name": "Extra Practice 3: sign line tikzpicture for f(x) = 1/(x^2-2x+2)",
+      "reason": "The solution to Extra Practice 3 includes a tikzpicture sign line diagram for f'(x).",
+      "location": "Lines 776-796"
+    }
+  ]
+}

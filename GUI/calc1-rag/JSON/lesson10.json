@@ -1,0 +1,254 @@
+{
+    "name": "Derivatives of Exponential & Logarithmic Functions",
+    "week": 6,
+    "learning_objectives": [
+        {"tag": 3, "description": "Take the derivatives of general exponential and logarithmic functions."},
+        {"tag": 2, "description": "Use the derivatives of exponential and logarithmic functions in combinations of differentiation rules, such as the product rule, the quotient rule, and the chain rule."}
+    ],
+    "contents": {
+        "other_material": [
+            {
+                "type": "mini-lecture",
+                "content_plain": "Derivative of the General Exponential Function: The derivative of the general exponential function f(x)=a^x, with a > 0 and a != 1, is very closely related to the derivative of the natural exponential function. Use d/dx[e^x] = e^x, e^(ln(a)) = a, and d/dx[f(g(x))] = f'(g(x))*g'(x). Then d/dx[a^x] = d/dx[(e^(ln(a)))^x] = d/dx[e^(x ln(a))] = e^(x ln(a))*ln(a) = a^x*ln(a). Conclusion: d/dx[a^x] = a^x*ln(a), and d/dx[e^x] = e^x*ln(e) = e^x.",
+                "content_latex": "\\textbf{Derivative of the General Exponential Function.} The derivative of the general exponential function $f(x)=a^x$, with $a>0$ and $a\\neq1$, is very closely related to the derivative of the natural exponential function. Use $\\frac{d}{dx}[e^x]=e^x$, $e^{\\ln(a)}=a$, and $\\frac{d}{dx}[f(g(x))]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)$. Then $$\\begin{aligned}\\frac{d}{dx}\\left[a^x\\right]&=\\frac{d}{dx}\\left[\\left(e^{\\ln(a)}\\right)^x\\right]\\\\&=\\frac{d}{dx}\\left[e^{x\\ln(a)}\\right]\\\\&=e^{x\\ln(a)}\\cdot \\ln(a)\\\\&=a^x\\cdot\\ln(a).\\end{aligned}$$ Conclusion: $\\frac{d}{dx}[a^x]=a^x\\cdot\\ln(a)$ and $\\frac{d}{dx}[e^x]=e^x\\cdot\\ln(e)=e^x$."
+            },
+            {
+                "type": "mini-lecture",
+                "content_plain": "Derivative of the General Logarithmic Function: The derivative of the general logarithmic function f(x)=log_a(x), with a > 0 and a != 1, is very closely related to the derivative of the general exponential function. Use d/dx[a^x] = a^x*ln(a), a^(log_a(x)) = x, and d/dx[f(g(x))] = f'(g(x))*g'(x). Starting with a^(log_a(x)) = x, differentiate both sides to get a^(log_a(x))*ln(a)*d/dx[log_a(x)] = 1. Therefore d/dx[log_a(x)] = 1/(a^(log_a(x))*ln(a)) = 1/(x ln(a)). Conclusion: d/dx[log_a(x)] = 1/(x ln(a)), and d/dx[ln(x)] = 1/x.",
+                "content_latex": "\\textbf{Derivative of the General Logarithmic Function.} The derivative of the general logarithmic function $f(x)=\\log_a(x)$, with $a>0$ and $a\\neq1$, is very closely related to the derivative of the general exponential function. Use $\\frac{d}{dx}[a^x]=a^x\\cdot\\ln(a)$, $a^{\\log_a(x)}=x$, and $\\frac{d}{dx}[f(g(x))]=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)$. Starting with $a^{\\log_a(x)}=x$, $$\\begin{aligned}a^{\\log_a(x)}&=x\\\\\\frac{d}{dx}\\left[a^{\\log_a(x)}\\right]&=\\frac{d}{dx}[x]\\\\a^{\\log_a(x)}\\cdot\\ln(a)\\cdot\\frac{d}{dx}\\left[\\log_a(x)\\right]&=1\\\\\\frac{d}{dx}\\left[\\log_a(x)\\right]&=\\frac{1}{a^{\\log_a(x)}\\cdot\\ln(a)}\\\\&=\\frac{1}{x\\,\\ln(a)}.\\end{aligned}$$ Conclusion: $\\frac{d}{dx}[\\log_a(x)]=\\frac{1}{x\\,\\ln(a)}$ and $\\frac{d}{dx}[\\ln(x)]=\\frac{1}{x}$."
+            },
+            {
+                "type": "summary",
+                "content_plain": "Summary of Exponential and Logarithmic Derivative Rules: d/dx[e^x] = e^x; d/dx[a^x] = a^x ln(a); d/dx[ln(x)] = 1/x; d/dx[log_a(x)] = 1/(x ln(a)).",
+                "content_latex": "\\textbf{Summary of Exponential and Logarithmic Derivative Rules:} $\\frac{d}{dx}[e^x]=e^x$; $\\frac{d}{dx}[a^x]=a^x\\ln(a)$; $\\frac{d}{dx}[\\ln(x)]=\\frac{1}{x}$; $\\frac{d}{dx}[\\log_a(x)]=\\frac{1}{x\\ln(a)}$."
+            }
+        ],
+        "problems": [
+            {
+                "name": "Example 1: General Exponential Derivative",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["exponential derivative", "chain rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find d/dy[2^(y^2/7)].",
+                            "answer": "Outer: f(y)=2^y => f'(y)=2^y*ln(2). Inner: g(y)=y^2/7 => g'(y)=2y/7. d/dy[2^(y^2/7)] = 2^(y^2/7)*ln(2)*(2y/7)."
+                        },
+                        "latex": {
+                            "question": "Find $\\displaystyle\\frac{d}{dy}\\left[2^{y^2/7}\\right]$.",
+                            "answer": "Outer: $f(y)=2^y \\Rightarrow f^{\\prime}(y)=2^y\\cdot \\ln(2)$. Inner: $g(y)=y^2/7 \\Rightarrow g^{\\prime}(y)=2y/7$. $$\\frac{d}{dy}\\left[2^{y^2/7}\\right]=2^{y^2/7}\\cdot\\ln(2)\\cdot\\frac{2y}{7}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise A: General Exponential Derivative",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["exponential derivative", "chain rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find h'(t) given h(t)=(2/3)^(1-t^2), where t > 0.",
+                            "answer": "Outer: f(t)=(2/3)^t => f'(t)=(2/3)^t*ln(2/3). Inner: g(t)=1-t^2 => g'(t)=-2t. h'(t) = (2/3)^(1-t^2)*ln(2/3)*(-2t)."
+                        },
+                        "latex": {
+                            "question": "Find $h'(t)$ given $h(t)=\\left(\\frac{2}{3}\\right)^{1-t^2}$, where $t>0$.",
+                            "answer": "Outer: $f(t)=\\left(\\frac{2}{3}\\right)^t \\Rightarrow f^{\\prime}(t)=\\left(\\frac{2}{3}\\right)^t\\cdot \\ln(2/3)$. Inner: $g(t)=1-t^2 \\Rightarrow g^{\\prime}(t)=-2t$. $$h^{\\prime}(t)=\\left(\\frac{2}{3}\\right)^{1-t^2}\\cdot\\ln(2/3)\\cdot(-2t)$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise B: Americium-241 Decay",
+                "learning_tag": 2,
+                "context_plain": "The half-life formula N(t) = N_0(1/2)^(t/h) gives the amount N(t) of a decaying, radioactive quantity at a time t in terms of the initial amount N_0 of the radioactive quantity and the half-life h of the decaying quantity. You will need this formula to address the following prompt. You may find a calculator useful when doing so.\n\nMany smoke detectors function by using a radioisotope, typically americium-241, to ionize air; an alarm sounds when a difference due to smoke is detected. Thus, the rate at which americium-241 decays is of critical importance in the function of a smoke detector. Given americium-241 has a half-life of approximately 432.2 years, at what rate does a 10 gram sample placed in a smoke detector decay 1 year after the smoke detector is manufactured? Round your answers to 3 decimal places, and include the units of measurement.",
+                "context_latex": "The half-life formula $\\displaystyle N(t)=N_0\\left(\\frac{1}{2}\\right)^{t/h}$ gives the amount $N(t)$ of a decaying, radioactive quantity at a time $t$ in terms of the initial amount $N_0$ of the radioactive quantity and the half-life $h$ of the decaying quantity. You will need this formula to address the following prompt. You may find a calculator useful when doing so.\n\nMany smoke detectors function by using a radioisotope, typically americium-241, to ionize air; an alarm sounds when a difference due to smoke is detected. Thus, the rate at which americium-241 decays is of critical importance in the function of a smoke detector. Given americium-241 has a half-life of approximately $432.2$ years, at what rate does a $10$ gram sample placed in a smoke detector decay $1$ year after the smoke detector is manufactured? Round your answers to 3 decimal places, and include the units of measurement.",
+                "keywords": ["exponential derivative", "chain rule", "half-life", "rate of change"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "What are we asked to find?",
+                            "answer": "The rate of decay of a 10 gram sample of americium-241. N'(t) represents this quantity."
+                        },
+                        "latex": {
+                            "question": "What are we asked to find?",
+                            "answer": "The rate of decay of a $10$ gram sample of americium-241. $N^{\\prime}(t)$ represents this quantity."
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "At what time are we asked to find this quantity?",
+                            "answer": "1 year after the smoke detector is manufactured, i.e. t = 1."
+                        },
+                        "latex": {
+                            "question": "At what \\emph{time} are we asked to find this quantity?",
+                            "answer": "$1$ year after the smoke detector is manufactured, i.e. $t=1$."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "What's N_0?",
+                            "answer": "N_0 = 10 grams."
+                        },
+                        "latex": {
+                            "question": "What's $N_0$?",
+                            "answer": "$N_0=10$ grams."
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "What's h?",
+                            "answer": "h = 432.2."
+                        },
+                        "latex": {
+                            "question": "What's $h$?",
+                            "answer": "$h=432.2$."
+                        }
+                    },
+                    {
+                        "part": "e",
+                        "plain_text": {
+                            "question": "Put everything together to answer the prompt above.",
+                            "answer": "N(t)=10(1/2)^(t/432.2). N'(t)=10(1/2)^(t/432.2)*ln(1/2)*(1/432.2). N'(1)=10(1/2)^(1/432.2)*ln(1/2)*(1/432.2) ~ -0.016 g/year."
+                        },
+                        "latex": {
+                            "question": "Put everything together to answer the prompt above.",
+                            "answer": "$N(t)=10\\left(\\frac{1}{2}\\right)^{t/432.2}$. $N^{\\prime}(t)=10\\left(\\frac{1}{2}\\right)^{t/432.2}\\cdot\\ln(1/2)\\cdot\\frac{1}{432.2}$. $N^{\\prime}(1)=10\\left(\\frac{1}{2}\\right)^{1/432.2}\\cdot\\ln(1/2)\\cdot\\frac{1}{432.2}\\approx -0.016\\;g/year$."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise C: General Logarithmic Derivative",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["logarithmic derivative", "chain rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the following derivative: d/dx[log_7(x^9+e^x)].",
+                            "answer": "The function can be written as a function-within-a-function. Outer: f(x)=log_7(x) and Inner: g(x)=x^9+e^x. Use the Chain Rule. Since f'(x)=1/(x ln(7)) and g'(x)=9x^8+e^x, d/dx[log_7(x^9+e^x)] = 1/((x^9+e^x) ln(7))*(9x^8+e^x)."
+                        },
+                        "latex": {
+                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dx}\\left[\\log_7(x^9+e^x)\\right]$.",
+                            "answer": "The function can be written as a function-within-a-function. Outer: $f(x)=\\log_7(x)$ and Inner: $g(x)=x^9+e^x$. We're going to use the Chain Rule. Since $f(x)=\\log_7(x)$, $f^{\\prime}(x)=\\frac{1}{x\\,\\ln(7)}$, and since $g(x)=x^9+e^x$, $g^{\\prime}(x)=9x^8+e^x$. $$\\frac{d}{dx}\\left[\\log_7(x^9+e^x)\\right]=\\frac{1}{(x^9+e^x)\\,\\ln(7)}\\cdot(9x^8+e^x)$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise D: Product with Exponential and Logarithmic Functions",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["product rule", "exponential derivative", "logarithmic derivative", "chain rule"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the following derivative: d/dx[2^(3x+2)*log_7(x^9+e^x)]. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "We have two functions multiplied together, so use the Product Rule. First: f(x)=2^(3x+2). Second: g(x)=log_7(x^9+e^x). Since f'(x)=2^(3x+2)*ln(2)*3 and g'(x)=(9x^8+e^x)/((x^9+e^x) ln(7)), d/dx[2^(3x+2)*log_7(x^9+e^x)] = 2^(3x+2)*ln(2)*3*log_7(x^9+e^x) + 2^(3x+2)*(9x^8+e^x)/((x^9+e^x) ln(7))."
+                        },
+                        "latex": {
+                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dx}\\left[2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "We have two functions multiplied together which means we will use the Product Rule. First: $f(x)=2^{3x+2}$. Second: $g(x)=\\log_7(x^9+e^x)$. Since $f(x)=2^{3x+2}$, $f^{\\prime}(x)=2^{3x+2}\\cdot\\ln(2)\\cdot(3+0)$. Since $g(x)=\\log_7(x^9+e^x)$ is the function from the previous problem, $g^{\\prime}(x)=\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$. $$\\frac{d}{dx}\\left[2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]=2^{3x+2}\\cdot\\ln(2)\\cdot3\\cdot\\log_7(x^9+e^x)+2^{3x+2}\\cdot\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Discussion: Derivative of ln(f(x))",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["logarithmic derivative", "chain rule", "derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Ari, a former Math 1210 LA, makes the following claim. Do you agree or disagree with Ari? Why or why not?\n\nThe derivative of ln(f(x)) is always 1/f(x).",
+                            "answer": "I disagree. We would need to use the Chain Rule and would get d/dx ln(f(x)) = (1/f(x))*f'(x)."
+                        },
+                        "latex": {
+                            "question": "Ari, a former Math 1210 LA, makes the following claim. Do you agree or disagree with Ari? Why or why not?\n\nThe derivative of $\\ln(f(x))$ is always $\\frac{1}{f(x)}$.",
+                            "answer": "I disagree! We would need to use the Chain Rule and would get $$\\frac{d}{dx}\\ln(f(x))=\\frac{1}{f(x)}\\cdot f^{\\prime}(x)$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 1: Quotient with Exponential and Logarithmic Functions",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["quotient rule", "product rule", "chain rule", "logarithmic derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Find the following derivative: d/dt[(3^t ln(1-t^2))/(fourth root of (t^5+1))]. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "Quotient Rule since the function can be described as hi(t)/lo(t) with hi(t)=3^t ln(1-t^2) and lo(t)=fourth root of (t^5+1). Since hi(t)=3^t ln(1-t^2), hi'(t)=3^t*ln(3)*ln(1-t^2)+3^t*(-2t)/(1-t^2). Since lo(t)=fourth root of (t^5+1)=(t^5+1)^(1/4), lo'(t)=(1/4)(t^5+1)^(-3/4)*(5t^4)=(5t^4/4)(t^5+1)^(-3/4). Finally, d/dt[(3^t ln(1-t^2))/(fourth root of (t^5+1))] = ((3^t*ln(3)*ln(1-t^2)+3^t*(-2t)/(1-t^2))*(fourth root of (t^5+1))-3^t ln(1-t^2)*(5t^4/4)(t^5+1)^(-3/4))/(fourth root of (t^5+1))^2."
+                        },
+                        "latex": {
+                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dt}\\left[\\frac{3^t\\ln(1-t^2)}{\\sqrt[4]{t^5+1}}\\right]$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "Quotient Rule since the function can be described as $\\frac{hi(t)}{lo(t)}$ with $hi(t)=3^t\\ln(1-t^2)$ and $lo(t)=\\sqrt[4]{t^5+1}$. Since $hi(t)=3^t\\ln(1-t^2)$, $$hi^{\\prime}(t)=3^t\\cdot\\ln(3)\\cdot\\ln(1-t^2)+3^t\\cdot\\frac{-2t}{1-t^2}.$$ Since $lo(t)=\\sqrt[4]{t^5+1}=(t^5+1)^{1/4}$, $$lo^{\\prime}(t)=\\frac{1}{4}(t^5+1)^{-3/4}\\cdot(5t^4)=\\frac{5t^4}{4}(t^5+1)^{-3/4}.$$ Finally, $$\\frac{d}{dt}\\left[\\frac{3^t\\ln(1-t^2)}{\\sqrt[4]{t^5+1}}\\right]=\\frac{\\left(3^t\\cdot\\ln(3)\\cdot\\ln(1-t^2)+3^t\\cdot\\frac{-2t}{1-t^2}\\right)\\cdot\\sqrt[4]{t^5+1}-3^t\\ln(1-t^2)\\cdot\\frac{5t^4}{4}(t^5+1)^{-3/4}}{(\\sqrt[4]{t^5+1})^2}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 2: Product with Square Root of a Logarithmic Quotient",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["product rule", "chain rule", "quotient rule", "logarithmic derivative"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Let h(t)=2^t sqrt(log_3(t)/(t^4+1)). Find h'(t). Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "Start with Product Rule first since h can be thought of as a product of two functions: h(t)=f(t)g(t) with f(t)=2^t and g(t)=sqrt(log_3(t)/(t^4+1)). Since f'(t)=2^t*ln(2), and using the Chain Rule and Quotient Rule for g'(t), At long last: h'(t)=2^t*ln(2)*sqrt(log_3(t)/(t^4+1))+2^t*(1/2)*(log_3(t)/(t^4+1))^(-1/2)*((1/(t*ln(3))*(t^4+1)-log_3(t)*4t^3)/(t^4+1)^2)."
+                        },
+                        "latex": {
+                            "question": "Let $h(t)=2^t\\sqrt{\\frac{\\log_3(t)}{t^4+1}}$. Find $h^{\\prime}(t)$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "Start with Product Rule first since $h$ can be thought of as product of two functions: $h(t)=f(t)g(t)$ with $f(t)=2^t$ and $g(t)=\\sqrt{\\frac{\\log_3(t)}{t^4+1}}$. Since $f(t)=2^t$, $f^{\\prime}(t)=2^t\\cdot\\ln(2)$. At long last: $$h^{\\prime}(t)=2^t\\cdot\\ln(2)\\sqrt{\\frac{\\log_3(t)}{t^4+1}}+2^t\\cdot\\frac{1}{2}\\left(\\frac{\\log_3(t)}{t^4+1}\\right)^{-1/2}\\cdot\\frac{\\frac{1}{t\\cdot\\ln(3)}\\cdot(t^4+1)-\\log_3(t)\\cdot4t^3}{(t^4+1)^2}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Extra Practice 3: Continuously Compounded Interest",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["exponential derivative", "chain rule", "rate of change", "units"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "If you deposit $1000 in a bank account earning 5% annual interest compounded continuously, then the amount A(t) of money in the account after t years is A(t)=1000e^(0.05t), assuming that you make no withdrawals and no additional deposits. How quickly is the account balance growing initially? Include units in your final answer.",
+                            "answer": "The phrase \"How quickly is the account balance growing initially?\" means we are looking for A'(t) when t=0. A(t)=1000e^(0.05t), so A'(t)=1000e^(0.05t)*0.05=50e^(0.05t). A'(0)=50e^(0.05*0)=50e^0=50*1=50. Units are $/yr, so the balance is initially growing at $50/yr."
+                        },
+                        "latex": {
+                            "question": "If you deposit \\$1000 in a bank account earning $5\\%$ annual interest compounded continuously, then the amount $A(t)$ of money in the account after $t$ years is $A(t)=1000e^{0.05t}$, assuming that you make no withdrawals and no additional deposits. How quickly is the account balance growing initially? Include units in your final answer.",
+                            "answer": "The phrase ``How quickly is the account balance growing initially?'' means we are looking for $A^{\\prime}(t)$ when $t=0$. $$\\begin{aligned}A(t)&=1000e^{0.05t}\\\\A^{\\prime}(t)&=1000e^{0.05t}\\cdot0.05\\\\&=50e^{0.05t}\\\\A^{\\prime}(0)&=50e^{0.05\\cdot0}\\\\&=50e^0\\\\&=50\\cdot1\\\\&=50\\end{aligned}$$ Units are $\\$/yr$, so the balance is initially growing at $\\$50/yr$."
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": []
+}

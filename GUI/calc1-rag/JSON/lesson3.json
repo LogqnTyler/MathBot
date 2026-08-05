@@ -1,0 +1,207 @@
+{
+    "name": "Limits and Continuity",
+    "week": 2,
+    "learning_objectives": [
+        {"tag": 1, "description": "State and give graphical/formulaic examples of the three continuity conditions; identify and classify types of discontinuity (removable, jump, infinite) based on the definition of continuity."},
+        {"tag": 2, "description": "Evaluate limits using continuity."}
+    ],
+    "contents": {
+        "definitions": [
+            {
+                "term": "Continuity Theorem",
+                "definition_plain": "Any function that is some combination, using addition, subtraction, multiplication, division, powers, or compositions, of other continuous functions is continuous on its domain.\n\nExamples of continuous functions include polynomials, roots, trigonometric functions, exponentials, logarithms, and absolute value functions.\n\nExamples include:\n\nx^7 - 1, 6x + 2x^2, square root of x, cube root of x, sin(x), cos(x), 2^x, e^x, ln(x), log base 10 of x, and |x|.",
+                "definition_latex": "Any function that is some combination ($+$, $-$, $\\times$, $\\div$, powers or compositions) of other continuous functions (polynomials, roots, trigonometric functions, exponentials, logarithms, or absolute value) -- $x^7-1$, $6x+2x^2$, $\\sqrt{x}$, $\\sqrt[3]{x}$, $\\sin(x)$, $\\cos(x)$, $2^x$, $e^x$, $\\ln(x)$, $\\log_{10}(x)$, $|x|$, etc. -- is continuous on its domain."
+            },
+            {
+                "term": "Continuity",
+                "definition_plain": "The function f is continuous at the number a provided the limit as x approaches a of f(x) equals f(a).\nThis short definition can be broken up into three continuity conditions. The function f is continuous at a provided:\n\n1. f(a) is defined.\n\n2. The limit as x approaches a of f(x) exists.\n\n3. The two values are equal. In other words, the limit as x approaches a of f(x) equals f(a).",
+                "definition_latex": "The function $f$ is continuous at the number $a$ provided $\\displaystyle\\lim_{x\\to a} f(x)=f(a)$. This short definition can be broken up into three continuity conditions. The function $f$ is continuous at $a$ provided: (1) $f(a)$ is defined; (2) $\\displaystyle\\lim_{x\\to a}f(x)$ exists; (3) the two values are equal, i.e. $\\displaystyle\\lim_{x\\to a}f(x)=f(a)$."
+            }
+        ],
+        "problems": [
+            {
+                "name": "Exercise 1",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "continuity", "direct substitution", "rational functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "f(x) = (x^2+1)/(x-2) is continuous at x = 3. Find lim_{x -> 3} (x^2+1)/(x-2).",
+                            "answer": "We are told that f(x) = (x^2+1)/(x-2) is continuous at x = 3. Thus, lim_{x -> 3} f(x) = f(3) = (3^2+1)/(3-2) = 10/1 = 10"
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle f(x)=\\frac{x^2+1}{x-2}$ is continuous at $x=3$. Find $\\displaystyle \\lim_{x\\to3} \\frac{x^2+1}{x-2}$.",
+                            "answer": "We are told that $\\displaystyle f(x)=\\frac{x^2+1}{x-2}$ is continuous at $x=3$. Thus, $$\\lim_{x\\to3} f(x)=f(3)=\\frac{3^2+1}{3-2}=\\frac{10}{1}=10$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 2",
+                "learning_tag": 2,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["limits", "continuity", "direct substitution", "square root functions"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "f(x) = sqrt(x+5)/(x+2) is continuous at x = 4. Find lim_{x -> 4} sqrt(x+5)/(x+2).",
+                            "answer": "We are told that f(x) = sqrt(x+5)/(x+2) is continuous at x = 4. Thus, lim_{x -> 4} f(x) = f(4) = sqrt(4+5)/(4+2) = 3/6 = 1/2"
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle f(x)=\\frac{\\sqrt{x+5}}{x+2}$ is continuous at $x=4$. Find $\\displaystyle \\lim_{x\\to4} \\frac{\\sqrt{x+5}}{x+2}$.",
+                            "answer": "We are told that $\\displaystyle f(x)=\\frac{\\sqrt{x+5}}{x+2}$ is continuous at $x=4$. Thus, $$\\lim_{x\\to4} f(x)=f(4)=\\frac{\\sqrt{4+5}}{4+2}=\\frac{3}{6}=\\frac{1}{2}$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 3",
+                "learning_tag": 2,
+                "context_plain": "For each of the following limits, decide whether the Main Continuity Theorem applies. If the theorem applies, then find the limit. If the theorem does not apply, then explain why.",
+                "context_latex": "For each of the following limits, decide whether the Main Continuity Theorem applies. If the theorem applies, then find the limit. If the theorem does not apply, then explain why.",
+                "keywords": ["limits", "continuity theorem", "domain", "direct substitution", "division by zero", "square roots"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "lim as x -> -1 of (x+1)/(x-1)",
+                            "answer": "All components of function are continuous: x, 1, and -1. x = -1 is in domain, so lim as x -> -1 f(x) = f(-1) = (-1+1)/(-1-1) = 0/(-2) = 0"
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to-1}\\frac{x+1}{x-1}$",
+                            "answer": "All components of the function are continuous: $x$, $1$, and $-1$. $x=-1$ is in the domain, so $$\\lim_{x\\to-1} f(x)=f(-1)=\\frac{-1+1}{-1-1}=\\frac{0}{-2}=0$$"
+                        }
+                    },
+                    {
+                        "part": "b",
+                        "plain_text": {
+                            "question": "lim as x -> 1 of 1/sqrt(x-1)",
+                            "answer": "When x = 1, we have a division by 0. 1/sqrt(1-1) = 1/0. Thus x = 1 is not in the domain and theorem cannot be used."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to1}\\frac{1}{\\sqrt{x-1}}$",
+                            "answer": "When $x=1$, we have a division by $0$: $$\\frac{1}{\\sqrt{1-1}}=\\frac{1}{0}$$ Thus $x=1$ is not in the domain and the theorem cannot be used."
+                        }
+                    },
+                    {
+                        "part": "c",
+                        "plain_text": {
+                            "question": "lim as x -> 1 of (x+1)/(x-1)",
+                            "answer": "We have division by 0 when x = 1. (1+1)/(1-1) = 2/0. Thus x = 1 is not in the domain and Continuity Theorem does not apply."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to1}\\frac{x+1}{x-1}$",
+                            "answer": "We have division by $0$ when $x=1$: $$\\frac{1+1}{1-1}=\\frac{2}{0}$$ Thus $x=1$ is not in the domain and the Continuity Theorem does not apply."
+                        }
+                    },
+                    {
+                        "part": "d",
+                        "plain_text": {
+                            "question": "lim as x -> 3 of (x^3+1)/(x-3)",
+                            "answer": "When x = 3 we have division by 0. Thus x = 3 is not in the domain and the Continuity Theorem does not apply."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to3}\\frac{x^3+1}{x-3}$",
+                            "answer": "When $x=3$ we have division by $0$. Thus $x=3$ is not in the domain and the Continuity Theorem does not apply."
+                        }
+                    },
+                    {
+                        "part": "e",
+                        "plain_text": {
+                            "question": "lim as x -> 0 of 1/sqrt(x-1)",
+                            "answer": "We have square root of a negative number when x = 0. 1/sqrt(0-1) = 1/sqrt(-1). Thus x = 0 is not in the domain and theorem cannot be used."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to0}\\frac{1}{\\sqrt{x-1}}$",
+                            "answer": "We have a square root of a negative number when $x=0$: $$\\frac{1}{\\sqrt{0-1}}=\\frac{1}{\\sqrt{-1}}$$ Thus $x=0$ is not in the domain and the theorem cannot be used."
+                        }
+                    },
+                    {
+                        "part": "f",
+                        "plain_text": {
+                            "question": "lim as x -> 4 of (sqrt(x^2-4)+1)/(x-7)",
+                            "answer": "All components are continuous: x^2-4, sqrt(x^2-4), 1, x, 7. x = 4 is in the domain, so lim as x -> 4 f(x) = f(4) = (sqrt(4^2-4)+1)/(4-7) = (sqrt(12)+1)/(-3)"
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to4}\\frac{\\sqrt{x^2-4}+1}{x-7}$",
+                            "answer": "All components are continuous: $x^2-4$, $\\sqrt{x^2-4}$, $1$, $x$, $7$. $x=4$ is in the domain, so $$\\lim_{x\\to4} f(x)=f(4)=\\frac{\\sqrt{4^2-4}+1}{4-7}=\\frac{\\sqrt{12}+1}{-3}$$"
+                        }
+                    },
+                    {
+                        "part": "g",
+                        "plain_text": {
+                            "question": "lim as x -> 0 of (x-2)/(e^x-1)",
+                            "answer": "We have division by 0 when x = 0. (0-2)/(e^0-1) = -2/(1-1) = -2/0. Thus x = 0 is not in the domain and theorem cannot be used."
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to0}\\frac{x-2}{e^x-1}$",
+                            "answer": "We have division by $0$ when $x=0$: $$\\frac{0-2}{e^0-1}=\\frac{-2}{1-1}=\\frac{-2}{0}$$ Thus $x=0$ is not in the domain and the theorem cannot be used."
+                        }
+                    },
+                    {
+                        "part": "h",
+                        "plain_text": {
+                            "question": "lim as x -> 2 of (x-2)/(e^x-1)",
+                            "answer": "All components are continuous: x, 2, e^x, 1. x = 2 is in the domain. Thus lim as x -> 2 f(x) = f(2) = (2-2)/(e^2-1) = 0/(e^2-1) = 0"
+                        },
+                        "latex": {
+                            "question": "$\\displaystyle\\lim_{x\\to2}\\frac{x-2}{e^x-1}$",
+                            "answer": "All components are continuous: $x$, $2$, $e^x$, $1$. $x=2$ is in the domain. Thus $$\\lim_{x\\to2} f(x)=f(2)=\\frac{2-2}{e^2-1}=\\frac{0}{e^2-1}=0$$"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 4",
+                "learning_tag": 1,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["continuity", "intervals", "domain", "logarithms", "division by zero"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "On which of the following intervals is f(x) = ln(x)/(x-4) continuous? Circle all that apply, and explain below.\n\n1. [5,8]\n\n2. [0,2]\n\n3. [1,5]\n\n4. [-7,-1]",
+                            "answer": "We note that when x = 4, we have a division by 0: ln(4)/(4-4) = ln(4)/0. So x = 4 is not in the domain. This is the only one of our 3 Practical Rues for determining what is not in the domain that is relevant.\n\nWe eliminate any interval above that contains 4. That leaves us with three intervals that do not contain x = 4:\n\n[5,8], [0,2], and [-7,-1]\n\nln(x) is not continuous for x <= 0 so we eliminate any interval that contains 0 or a negative value. This leaves the interval [5,8] as the only option where f(x) is continuous."
+                        },
+                        "latex": {
+                            "question": "On which of the following intervals is $f(x)=\\frac{\\ln(x)}{x-4}$ continuous? Circle all that apply, and explain below.\n\n1. $[5,8]$\n\n2. $[0,2]$\n\n3. $[1,5]$\n\n4. $[-7,-1]$",
+                            "answer": "We note that when $x=4$, we have a division by $0$: $\\frac{\\ln(4)}{4-4}=\\frac{\\ln(4)}{0}$. So $x=4$ is not in the domain. This is the only one of our 3 Practical Rules for determining what is not in the domain that is relevant. We eliminate any interval that contains $x=4$, leaving $[5,8]$, $[0,2]$, and $[-7,-1]$. Since $\\ln(x)$ is not continuous for $x\\leq 0$, we eliminate any interval that contains $0$ or a negative value. This leaves the interval $[5,8]$ as the only option where $f(x)$ is continuous."
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Exercise 5",
+                "learning_tag": 1,
+                "context_plain": "",
+                "context_latex": "",
+                "keywords": ["continuity", "intervals", "domain", "square roots", "division by zero"],
+                "subproblems": [
+                    {
+                        "part": "a",
+                        "plain_text": {
+                            "question": "Give 1 example of an interval on which g(x) = 1/sqrt(x-1) is continuous, and 1 example of an interval where g is not continuous. Explain why your examples are correct.",
+                            "answer": "There are many reasonable answers to this question. We go back to our 3 Practical Rules on previous page and note that we have two potential issues:\n\n1. Division by 0 when x = 1: 1/sqrt(1-1) = 1/0. In order to be continuous, our domain must be at least x != 1.\n\n2. Square root of a negative number. In particular the x values that cause problems are x - 1 < 0 => x < 1. We must avoid these problems so for our function to be continuous our domain is at least x >= 1.\n\nCombining these, g is continuous on any interval contained in x > 1 (e.g. [2,3] or (1, infinity)), and not continuous on any interval containing x = 1 or where x < 1 (e.g. [-2,3] or (0,1))."
+                        },
+                        "latex": {
+                            "question": "Give 1 example of an interval on which $g(x)=\\frac{1}{\\sqrt{x-1}}$ is continuous, and 1 example of an interval where $g$ is not continuous. Explain why your examples are correct.",
+                            "answer": "There are many reasonable answers. We have two potential issues: (1) Division by $0$ when $x=1$: $\\frac{1}{\\sqrt{1-1}}=\\frac{1}{0}$, so for continuity our domain must have at least $x\\neq 1$. (2) Square root of a negative number: the values that cause problems are $x-1<0\\Rightarrow x<1$, so for continuity our domain is at least $x\\geq 1$. Combining these, $g$ is continuous on any interval contained in $x>1$ (e.g. $[2,3]$ or $(1,\\infty)$), and not continuous on any interval containing $x=1$ or where $x<1$ (e.g. $[-2,3]$ or $(0,1)$)."
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "graph_dependent_excluded": [
+        {"type": "mini-lecture", "name": "Limits recap (continuity intro)", "reason": "Two graphs of f(x) approaching 4 (hole vs filled point) drive the discussion (tikzpictures).", "location": "lines 43-163"},
+        {"type": "problem", "name": "Key Question 1: classify discontinuities", "reason": "'Given below are graphs of functions discontinuous at a'; six graphs (tikzpictures) labeled RD/JD/ID and matched to the violated continuity conditions.", "location": "lines 182-371"},
+        {"type": "discussion", "name": "Practical Rules for domains", "reason": "Each of Rules #1-3 is illustrated by a graph (1/(x-2), sqrt(x), ln(x)) referenced as 'see graph on right'.", "location": "lines 408-515"},
+        {"type": "problem", "name": "Exam Practice 1: draw functions", "reason": "'On each set of axes below, draw an example of a function...'; answers are sketched on four provided axes (tikzpictures).", "location": "lines 619-752"}
+    ]
+}

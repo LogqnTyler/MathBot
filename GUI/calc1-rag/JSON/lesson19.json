@@ -1,0 +1,175 @@
+{
+  "name": "Summations",
+  "week": 12,
+  "learning_objectives": [
+    {
+      "tag": 1,
+      "description": "Compute expressions involving summation notation."
+    },
+    {
+      "tag": 2,
+      "description": "Write sums concisely using summation notation."
+    },
+    {
+      "tag": 3,
+      "description": "Understand and apply the linearity properties of summation."
+    }
+  ],
+  "contents": {
+    "other_material": [
+      {
+        "type": "discussion",
+        "content_plain": "In this class, we'll practice using notation for expressing sums using summation so that we will be able to use it in our upcoming probability lessons.",
+        "content_latex": "In this class, we'll practice using notation for expressing sums using summation so that we will be able to use it in our upcoming probability lessons."
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Anatomy of a Summation: in the expression sum from i=1 to n of a_i, the sigma symbol means \"add up\", i is the index of summation (the variable that changes), 1 is the starting value (first i used), n is the ending value (last i used), and a_i is the summand (the expression being added).",
+        "content_latex": "Anatomy of a Summation: \\[\\sum_{i=1}^{n} a_i\\] \\begin{tabular}{ll}$\\sum$ & Summation symbol (means ``add up'')\\\\ $i$ & Index of summation (variable that changes)\\\\ $1$ & Starting value (first $i$ used)\\\\ $n$ & Ending value (last $i$ used)\\\\ $a_i$ & Summand (expression being added)\\end{tabular}"
+      },
+      {
+        "type": "key-idea",
+        "content_plain": "Summation Properties: let c be any constant, and let m and n be whole numbers with m < n. (1) Linearity property #1: sum from i=m to n of (a_i + b_i) = sum from i=m to n of a_i + sum from i=m to n of b_i. (2) Linearity property #2: sum from i=m to n of c*a_i = c * sum from i=m to n of a_i. (3) sum from i=1 to n of c = cn.",
+        "content_latex": "Let $c$ be any constant, and let $m$ and $n$ be whole numbers with $m<n$. \\begin{itemize}\\item $\\sum_{i=m}^n(a_i+b_i) = \\sum_{i=m}^n a_i + \\sum_{i=m}^n b_i$ (linearity property \\#1)\\item $\\sum_{i=m}^n ca_i = c\\sum_{i=m}^n a_i$ (linearity property \\#2)\\item $\\sum_{i=1}^n c = cn$\\end{itemize}"
+      }
+    ],
+    "problems": [
+      {
+        "name": "Example / Exercise: Expand and compute sums",
+        "learning_tag": 1,
+        "context_plain": "Expand and compute the following sums:",
+        "context_latex": "Expand and compute the following sums:",
+        "keywords": ["summation notation", "sigma notation", "expanding sums", "logarithm", "evaluating sums"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Expand and compute sum from i=0 to 2 of (2i+1)/(i+1).",
+              "answer": "Evaluate termwise: for i=0,1,2 we get 1, 3/2, 5/3. Thus sum from i=0 to 2 of (2i+1)/(i+1) = 1 + 3/2 + 5/3 = 25/6."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\sum_{i=0}^2 \\frac{2i+1}{i+1}$",
+              "answer": "Evaluate termwise: for $i=0,1,2$ we get $1,\\;3/2,\\;5/3$. Thus \\[\\sum_{i=0}^2 \\frac{2i+1}{i+1}=1+\\frac32+\\frac53=\\frac{25}{6}.\\]"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Expand and compute sum from j=1 to 4 of log_2(2j).",
+              "answer": "For j=1,2,3,4:\nlog_2(2*1) = log_2(2) = 1 (j=1)\nlog_2(2*2) = log_2(4) = 2 (j=2)\nlog_2(2*3) = log_2(2) + log_2(3) = 1 + log_2(3) (j=3)\nlog_2(2*4) = log_2(2) + log_2(4) = 1 + 2 (j=4)\n\nPutting these all together: sum from j=1 to 4 of log_2(2j) = 1 + 2 + (1 + log_2(3)) + (1 + 2) = 7 + log_2(3).\n\nAlternatively: sum log_2(2j) = sum (log_2(2) + log_2(j)) = sum (1 + log_2(j)) = (1 + log_2(1)) + (1 + log_2(2)) + (1 + log_2(3)) + (1 + log_2(4)) = (1 + 0) + (1 + 1) + (1 + log_2(3)) + (1 + 2) = 7 + log_2(3)."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\sum_{j=1}^4 \\log_2\\left( 2j\\right)$",
+              "answer": "For $j = 1,2,3,4$ \\begin{align*}\\log_2(2\\cdot 1)&= \\log_2(2) = 1 \\text{ ($j = 1$)}\\\\\\log_2(2\\cdot 2) &= \\log_2(4) = 2 \\text{ ($j = 2$)}\\\\\\log_2(2\\cdot 3) &= \\log_2(2) + \\log_2(3) = 1 + \\log_2(3) \\text{ ($j = 3$)}\\\\\\log_2(2\\cdot 4) &= \\log_2(2) + \\log_2(4)= 1 + 2 \\text{ ($j = 4$)}\\end{align*} Putting these all together, $$\\sum_{j=1}^4 \\log_2\\left( 2j\\right) = 1 + 2 + (1 + \\log_2(3)) + (1 + 2) = 7 + \\log_2(3).$$ Alternatively, \\begin{align*}\\sum_{j=1}^4 \\log_2(2j)&= \\sum_{j=1}^4 (\\log_2 2 +\\log_2 j)\\\\&= \\sum_{j=1}^4 (1+\\log_2 j)\\\\&= (1+\\log_2 1) + (1 + \\log_2 2) + (1 + \\log_2 3) + (1 + \\log_2 4)\\\\&= (1 + 0) + (1 + 1) + (1 + \\log_2 3) + (1 + 2)\\\\&= 7+\\log_2 3\\end{align*}"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Expand and compute sum from k=0 to 3 of k(-1)^k.",
+              "answer": "Terms:\n0*(-1)^0 = 0 (k=0)\n1*(-1)^1 = -1 (k=1)\n2*(-1)^2 = 2 (k=2)\n3*(-1)^3 = -3 (k=3)\n\nSum: 0 - 1 + 2 - 3 = -2. So sum from k=0 to 3 of k(-1)^k = -2."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\sum_{k=0}^3 k(-1)^k$",
+              "answer": "Terms: \\begin{align*}0\\cdot (-1)^{0} &= 0 \\text{ $(k = 0)$}\\\\1\\cdot (-1)^{1} &= -1 \\text{ $(k = 1)$}\\\\2\\cdot (-1)^{2} &= 2 \\text{ $(k = 2)$}\\\\3\\cdot (-1)^{3} &= -3 \\text{ $(k = 3)$}\\end{align*} Sum $0-1+2-3=-2$. So, $\\displaystyle\\sum_{k=0}^3 k(-1)^k = -2$."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Example / Exercise: Write sums using summation notation",
+        "learning_tag": 2,
+        "context_plain": "Write - but don't compute - the following sums using summation notation:",
+        "context_latex": "Write - but don't compute - the following sums using summation notation:",
+        "keywords": ["summation notation", "sigma notation", "writing sums", "alternating series", "patterns"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Write - but don't compute - the sum 2+3+4+5+6 using summation notation.",
+              "answer": "sum from n=2 to 6 of n. Alternatively, sum from n=1 to 5 of (n+1)."
+            },
+            "latex": {
+              "question": "$2+3+4+5+6$",
+              "answer": "$\\displaystyle\\sum_{n=2}^{6} n$. Alternatively, $\\displaystyle\\sum_{n=1}^{5} (n+1)$."
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Write - but don't compute - the sum 1/2+1/4+1/6+1/8+1/10+1/12 using summation notation.",
+              "answer": "These are the reciprocals of the even integers 2,4,...,12, so one compact form is sum from k=1 to 6 of 1/(2k) (equivalently (1/2) sum from k=1 to 6 of 1/k)."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\frac12+\\frac14+\\frac16+\\frac18+\\frac1{10}+\\frac1{12}$",
+              "answer": "These are the reciprocals of the even integers $2,4,\\dots,12$, so one compact form is \\[\\sum_{k=1}^{6}\\frac{1}{2k} \\quad\\text{(equivalently }\\frac{1}{2}\\sum_{k=1}^{6}\\frac{1}{k}\\text{).}\\]"
+            }
+          },
+          {
+            "part": "c",
+            "plain_text": {
+              "question": "Write - but don't compute - the sum -1/5+2/25-3/125+4/625 using summation notation.",
+              "answer": "For k=1,...,4 the k-th term is (-1)^k * k/5^k, so -1/5+2/25-3/125+4/625 = sum from k=1 to 4 of (-1)^k * k/5^k.\n\nThink about these in terms of the patterns you see between the terms. In (b): the terms are always positive; there is always a 1 in the numerator; the denominator is always a multiple of 2. In (c): the signs of the terms are alternating (- to +); the natural numbers 1 to 4 occur in the numerator; powers of 5 appear in the denominator."
+            },
+            "latex": {
+              "question": "$\\displaystyle-\\frac15+\\frac2{25}-\\frac3{125}+\\frac4{625}$",
+              "answer": "For $k=1,\\dots,4$ the $k$-th term is $(-1)^k\\frac{k}{5^k}$, so \\[-\\frac15+\\frac{2}{25}-\\frac{3}{125}+\\frac{4}{625}=\\sum_{k=1}^4 (-1)^k\\frac{k}{5^k}.\\] Think about these in terms of the patterns you see between the terms. In (b): \\begin{itemize}\\item The terms are always positive\\item There is always a 1 in the numerator\\item The denominator is always a multiple of 2.\\end{itemize} In (c): \\begin{itemize}\\item The signs of the terms are alternating ($-$ to $+$)\\item The natural numbers 1 to 4 occur in the numerator.\\item Powers of 5 appear in the denominator.\\end{itemize}"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Example: Decompose a summation using properties",
+        "learning_tag": 3,
+        "context_plain": "",
+        "context_latex": "",
+        "keywords": ["summation properties", "linearity of summation", "decomposing sums"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Use the properties of summations exhaustively to decompose the summation sum from j=1 to n of (a_j - 3b_j + 7c_j - 4).",
+              "answer": "Apply linearity termwise:\nsum (a_j - 3b_j + 7c_j - 4) = sum a_j + sum(-3b_j) + sum(7c_j) + sum(-4) (by linearity property 1)\n= sum a_j - 3 sum b_j + 7 sum c_j - sum 4 (by linearity property 2)\nand sum from j=1 to n of 4 = 4n (by linearity property 3).\n\nSo sum from j=1 to n of (a_j - 3b_j + 7c_j - 4) = sum a_j - 3 sum b_j + 7 sum c_j - 4n."
+            },
+            "latex": {
+              "question": "Use the properties of summations exhaustively to decompose the following summation: $\\sum_{j=1}^n (a_j-3b_j+7c_j-4)$",
+              "answer": "Apply linearity termwise: \\begin{align*}\\sum_{j=1}^n (a_j-3b_j+7c_j-4) &=\\sum_{j=1}^n a_j + \\sum_{j=1}^n -3b_j +\\sum_{j=1}^n 7c_j + \\sum_{j=1}^n - 4 \\text{ (by linearity property 1)}\\\\&=\\sum_{j=1}^n a_j -3\\sum_{j=1}^n b_j +7\\sum_{j=1}^n c_j - \\sum_{j=1}^n 4 \\text{ (by linearity property 2)}\\\\\\text{ and } \\sum_{j=1}^n 4 &=4n \\text{ (by linearity property 3).}\\end{align*} So, \\[\\sum_{j=1}^n (a_j-3b_j+7c_j-4) =\\sum_{j=1}^n a_j -3\\sum_{j=1}^n b_j +7\\sum_{j=1}^n c_j -4n.\\]"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Exercise: Decompose summations using properties",
+        "learning_tag": 3,
+        "context_plain": "Use the properties of summations exhaustively to decompose the following summations:",
+        "context_latex": "Use the properties of summations exhaustively to decompose the following summations:",
+        "keywords": ["summation properties", "linearity of summation", "decomposing sums", "index dependence"],
+        "subproblems": [
+          {
+            "part": "a",
+            "plain_text": {
+              "question": "Decompose sum from i=1 to n of (2a_i + 3b_i - 1).",
+              "answer": "Linearity gives sum (2a_i + 3b_i - 1) = 2 sum a_i + 3 sum b_i - sum 1 = 2 sum a_i + 3 sum b_i - n."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\sum_{i=1}^n (2a_i+3b_i-1)$",
+              "answer": "Linearity gives \\[\\sum_{i=1}^n (2a_i+3b_i-1)=2\\sum_{i=1}^n a_i +3\\sum_{i=1}^n b_i -\\sum_{i=1}^n 1=2\\sum_{i=1}^n a_i +3\\sum_{i=1}^n b_i - n.\\]"
+            }
+          },
+          {
+            "part": "b",
+            "plain_text": {
+              "question": "Decompose sum from k=1 to n of (a_k*k/4 + 9b_k^2 - 2c_k*d_k). (Hint: be careful - this is a bit of a trap.)",
+              "answer": "Be careful: k is not a constant with respect to the summation index, so it cannot be pulled outside. Note: sums do NOT distribute across multiplication or division. Anything depending on the index cannot be factored out! Applying linearity termwise yields sum (k*a_k/4 + 9b_k^2 - 2c_k*d_k) = (1/4) sum (k*a_k) + 9 sum b_k^2 - 2 sum (c_k*d_k). Note the factor k stays inside the first sum."
+            },
+            "latex": {
+              "question": "$\\displaystyle\\sum_{k=1}^n \\left(\\frac{a_k\\cdot k}4+9b_k^2-2c_k\\cdot d_k\\right)$\\quad(\\emph{Hint:} be careful - this is a bit of a trap.)",
+              "answer": "Be careful: $k$ is not a constant with respect to the summation index, so it cannot be pulled outside. \\textbf{Note:} Sums do NOT distribute across multiplication or division. Anything depending on the index cannot be factored out! Applying linearity termwise yields \\[\\sum_{k=1}^n \\left(\\frac{k a_k}{4}+9b_k^2-2c_k d_k\\right)=\\frac{1}{4}\\sum_{k=1}^n k a_k \\;+\\;9\\sum_{k=1}^n b_k^2 \\;-\\;2\\sum_{k=1}^n c_k d_k.\\] Note the factor $k$ stays inside the first sum."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "graph_dependent_excluded": []
+}
