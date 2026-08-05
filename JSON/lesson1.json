@@ -16,7 +16,7 @@
                     {
                         "part": "a",
                         "plain_text": {
-                            "question": "What is the net change of the predator population as the prey population changes from 1000 to 300?",
+                            "question": "What is the net change of the prey population as the predator population changes from 100 to 300?",
                             "answer": "Delta P_2=300-1000=-700 when P_1 changes from 100 to 300"
                         },
                         "latex": {

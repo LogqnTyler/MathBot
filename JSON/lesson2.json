@@ -58,29 +58,29 @@
             {
                 "name": "Exercise 2",
                 "learning_tag": 1,
-                "context_plain": "x    | 1.9 | 1.99 | 1.999 | 2.001 | 2.01 | 2.1\ng(x) | 0.1 | 0.01 | 0.001 | 1.002 | 1.029 | 1.271\n\nWhich real value (if any) does f(x) appear to approach as...",
-                "context_latex": "\\begin{tabular}{| c || c c c c c c |}\\hline $x$ & $1.9$ & $1.99$ & $1.999$ & $2.001$ & $2.01$ & $2.1$ \\\\ \\hline $g(x)$ & $0.1$ & $0.01$ & $0.001$ & $1.002$ & $1.029$ & $1.271$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $f(x)$ appear to approach as...",
+                "context_plain": "x    | 1.9 | 1.99 | 1.999 | 2.001 | 2.01 | 2.1\ng(x) | 0.1 | 0.01 | 0.001 | 1.002 | 1.029 | 1.271\n\nWhich real value (if any) does g(x) appear to approach as...",
+                "context_latex": "\\begin{tabular}{| c || c c c c c c |}\\hline $x$ & $1.9$ & $1.99$ & $1.999$ & $2.001$ & $2.01$ & $2.1$ \\\\ \\hline $g(x)$ & $0.1$ & $0.01$ & $0.001$ & $1.002$ & $1.029$ & $1.271$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $g(x)$ appear to approach as...",
                 "keywords": ["limits", "one-sided limits", "DNE"],
                 "subproblems": [
                     {
                         "part": "a",
                         "plain_text": {
-                            "question": "x approaches 2 through values strictly less than 0?",
+                            "question": "x approaches 2 through values strictly less than 2?",
                             "answer": "0"
                         },
                         "latex": {
-                            "question": "$x$ approaches $2$ through values strictly less than $0$?",
+                            "question": "$x$ approaches $2$ through values strictly less than $2$?",
                             "answer": "\\unline{.5}{\\blue{$0$} }"
                         }
                     },
                     {
                         "part": "b",
                         "plain_text": {
-                            "question": "x approaches 2 through values strictly greater than 0?",
+                            "question": "x approaches 2 through values strictly greater than 2?",
                             "answer": "1"
                         },
                         "latex": {
-                            "question": "$x$ approaches $2$ through values strictly greater than $0$?",
+                            "question": "$x$ approaches $2$ through values strictly greater than $2$?",
                             "answer": "\\unline{.5}{\\blue{$1$}}"
                         }
                     },
@@ -100,29 +100,29 @@
             {
                 "name": "Exercise 3",
                 "learning_tag": 1,
-                "context_plain": "x    | 1.9 | 1.99 | 1.999 | 2 | 2.001 | 2.01 | 2.1\ng(x) | 0.1 | 0.01 | 0.001 | 0 | 1.002 | 1.029 | 1.271\n\nBased on the table, which real value (if any) does f(x) appear to approach as...",
-                "context_latex": "The table from the previous problem has been updated below to include the value of $f(x)$ when $x=2$.\n\n\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $1.9$ & $1.99$ & $1.999$ & $2$ & $2.001$ & $2.01$ & $2.1$ \\\\ \\hline $g(x)$ & $0.1$ & $0.01$ & $0.001$ & $0$ & $1.002$ & $1.029$ & $1.271$ \\\\ \\hline \\end{tabular}\n\nBased on the updated table, which real value (if any) does $f(x)$ appear to approach as...",
+                "context_plain": "x    | 1.9 | 1.99 | 1.999 | 2 | 2.001 | 2.01 | 2.1\ng(x) | 0.1 | 0.01 | 0.001 | 0 | 1.002 | 1.029 | 1.271\n\nBased on the table, which real value (if any) does g(x) appear to approach as...",
+                "context_latex": "The table from the previous problem has been updated below to include the value of $g(x)$ when $x=2$.\n\n\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $1.9$ & $1.99$ & $1.999$ & $2$ & $2.001$ & $2.01$ & $2.1$ \\\\ \\hline $g(x)$ & $0.1$ & $0.01$ & $0.001$ & $0$ & $1.002$ & $1.029$ & $1.271$ \\\\ \\hline \\end{tabular}\n\nBased on the updated table, which real value (if any) does $g(x)$ appear to approach as...",
                 "keywords": ["limits", "one-sided limits", "DNE"],
                 "subproblems": [
                     {
                         "part": "a",
                         "plain_text": {
-                            "question": "x approaches 2 through values strictly less than 0?",
+                            "question": "x approaches 2 through values strictly less than 2?",
                             "answer": "0"
                         },
                         "latex": {
-                            "question": "$x$ approaches $2$ through values strictly less than $0$?",
+                            "question": "$x$ approaches $2$ through values strictly less than $2$?",
                             "answer": "\\unline{.5}{\\blue{$0$}}"
                         }
                     },
                     {
                         "part": "b",
                         "plain_text": {
-                            "question": "x approaches 2 through values strictly greater than 0?",
+                            "question": "x approaches 2 through values strictly greater than 2?",
                             "answer": "1"
                         },
                         "latex": {
-                            "question": "$x$ approaches $2$ through values strictly greater than $0$?",
+                            "question": "$x$ approaches $2$ through values strictly greater than $2$?",
                             "answer": "\\unline{.5}{\\blue{$1$}}"
                         }
                     },
@@ -142,8 +142,8 @@
             {
                 "name": "Exercise 4",
                 "learning_tag": 1,
-                "context_plain": "x    | 3.9 | 3.99 | 3.999 | 4 | 4.001 | 4.01 | 4.1\nf(x) | 4.89 | 198.99 | 25,147.13 | 2 | -1,000,000 | -10,000 | -100\n\nWhich real value (if any) does h(x) appear to approach as...",
-                "context_latex": "\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $3.9$ & $3.99$ & $3.999$ & $4$ & $4.001$ & $4.01$ & $4.1$ \\\\ \\hline $f(x)$ & $4.89$ & $198.99$ & $25,147.13$ & $2$ & $-1,000,000$ & $-10,000$ & $-100$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $h(x)$ appear to approach as...",
+                "context_plain": "x    | 3.9 | 3.99 | 3.999 | 4 | 4.001 | 4.01 | 4.1\nf(x) | 4.89 | 198.99 | 25,147.13 | 2 | -1,000,000 | -10,000 | -100\n\nWhich real value (if any) does f(x) appear to approach as...",
+                "context_latex": "\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $3.9$ & $3.99$ & $3.999$ & $4$ & $4.001$ & $4.01$ & $4.1$ \\\\ \\hline $f(x)$ & $4.89$ & $198.99$ & $25,147.13$ & $2$ & $-1,000,000$ & $-10,000$ & $-100$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $f(x)$ appear to approach as...",
                 "keywords": ["limits", "one-sided limits", "infinite limits", "DNE"],
                 "subproblems": [
                     {
@@ -184,8 +184,8 @@
             {
                 "name": "Exercise 5",
                 "learning_tag": 1,
-                "context_plain": "x    | 3.9 | 3.99 | 3.999 | 4 | 4.001 | 4.01 | 4.1\nf(x) | 4.89 | 198.99 | 25,147.13 | 2 | 1,000,000 | 10,000 | 100\n\nWhich real value (if any) does h(x) appear to approach as...",
-                "context_latex": "The table from the previous problem has been updated below to correct some typos made in the first table.\n\n\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $3.9$ & $3.99$ & $3.999$ & $4$ & $4.001$ & $4.01$ & $4.1$ \\\\ \\hline $f(x)$ & $4.89$ & $198.99$ & $25,147.13$ & $2$ & $1,000,000$ & $10,000$ & $100$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $h(x)$ appear to approach as...",
+                "context_plain": "x    | 3.9 | 3.99 | 3.999 | 4 | 4.001 | 4.01 | 4.1\nf(x) | 4.89 | 198.99 | 25,147.13 | 2 | 1,000,000 | 10,000 | 100\n\nWhich real value (if any) does f(x) appear to approach as...",
+                "context_latex": "The table from the previous problem has been updated below to correct some typos made in the first table.\n\n\\begin{tabular}{| c || c c c c c c c |}\\hline $x$ & $3.9$ & $3.99$ & $3.999$ & $4$ & $4.001$ & $4.01$ & $4.1$ \\\\ \\hline $f(x)$ & $4.89$ & $198.99$ & $25,147.13$ & $2$ & $1,000,000$ & $10,000$ & $100$ \\\\ \\hline \\end{tabular}\n\nWhich real value (if any) does $f(x)$ appear to approach as...",
                 "keywords": ["limits", "one-sided limits", "infinite limits", "DNE"],
                 "subproblems": [
                     {

@@ -145,7 +145,7 @@
             "part": "b",
             "plain_text": {
               "question": "How do the answers to Exercise B change if instead the interval is [1,infinity)? (6,10]?",
-              "answer": "On [1,infinity): Absolute minimum g(4) = 48; absolute maximum does not exist (g(x) -> infinity as x -> infinity and also as x -> 1 from the right, wait - x=1 is included so g(1)=129, but the function grows without bound as x -> infinity).\nOn (6,10]: g'(x) > 0 so g is increasing; absolute maximum = g(10) = 112.8; absolute minimum does not exist (lim as x -> 6+ of g(x) = 57 1/3 is excluded)."
+              "answer": "On [1,infinity): Absolute minimum g(4) = 48; absolute maximum does not exist (g(x) -> infinity as x -> infinity).\nOn (6,10]: g'(x) > 0 so g is increasing; absolute maximum = g(10) = 112.8; absolute minimum does not exist (lim as x -> 6+ of g(x) = 57 1/3 is excluded)."
             },
             "latex": {
               "question": "How do the answers to Exercise B change if instead the interval is $[1,\\infty)$? $(6,10]$?",

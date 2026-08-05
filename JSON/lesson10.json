@@ -158,12 +158,12 @@
                     {
                         "part": "a",
                         "plain_text": {
-                            "question": "Find the following derivative: d/dx[(2^(3x+2)*log_7(x^9+e^x)]. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
-                            "answer": "We have two functions multiplied together, so use the Product Rule. First: f(x)=2^(3x+2). Second: g(x)=log_7(x^9+e^x). Since f'(x)=2^(3x+2)*ln(2)*3 and g'(x)=(9x^8+e^x)/((x^9+e^x) ln(7)), d/dx[(2^(3x+2)*log_7(x^9+e^x)] = 2^(3x+2)*ln(2)*3*log_7(x^9+e^x) + 2^(3x+2)*(9x^8+e^x)/((x^9+e^x) ln(7))."
+                            "question": "Find the following derivative: d/dx[2^(3x+2)*log_7(x^9+e^x)]. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "We have two functions multiplied together, so use the Product Rule. First: f(x)=2^(3x+2). Second: g(x)=log_7(x^9+e^x). Since f'(x)=2^(3x+2)*ln(2)*3 and g'(x)=(9x^8+e^x)/((x^9+e^x) ln(7)), d/dx[2^(3x+2)*log_7(x^9+e^x)] = 2^(3x+2)*ln(2)*3*log_7(x^9+e^x) + 2^(3x+2)*(9x^8+e^x)/((x^9+e^x) ln(7))."
                         },
                         "latex": {
-                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dx}\\left[\\Big(2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
-                            "answer": "We have two functions multiplied together which means we will use the Product Rule. First: $f(x)=2^{3x+2}$. Second: $g(x)=\\log_7(x^9+e^x)$. Since $f(x)=2^{3x+2}$, $f^{\\prime}(x)=2^{3x+2}\\cdot\\ln(2)\\cdot(3+0)$. Since $g(x)=\\log_7(x^9+e^x)$ is the function from the previous problem, $g^{\\prime}(x)=\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$. $$\\frac{d}{dx}\\left[\\Big(2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]=2^{3x+2}\\cdot\\ln(2)\\cdot3\\cdot\\log_7(x^9+e^x)+2^{3x+2}\\cdot\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$$"
+                            "question": "Find the following derivative: $\\displaystyle\\frac{d}{dx}\\left[2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
+                            "answer": "We have two functions multiplied together which means we will use the Product Rule. First: $f(x)=2^{3x+2}$. Second: $g(x)=\\log_7(x^9+e^x)$. Since $f(x)=2^{3x+2}$, $f^{\\prime}(x)=2^{3x+2}\\cdot\\ln(2)\\cdot(3+0)$. Since $g(x)=\\log_7(x^9+e^x)$ is the function from the previous problem, $g^{\\prime}(x)=\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$. $$\\frac{d}{dx}\\left[2^{3x+2}\\cdot\\log_7(x^9+e^x)\\right]=2^{3x+2}\\cdot\\ln(2)\\cdot3\\cdot\\log_7(x^9+e^x)+2^{3x+2}\\cdot\\frac{9x^8+e^x}{(x^9+e^x)\\,\\ln(7)}$$"
                         }
                     }
                 ]
@@ -219,11 +219,11 @@
                         "part": "a",
                         "plain_text": {
                             "question": "Let h(t)=2^t sqrt(log_3(t)/(t^4+1)). Find h'(t). Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
-                            "answer": "Start with Product Rule first since h can be thought of as a product of two functions: h(t)=f(t)g(t) with f(t)=2^t and g(t)=sqrt(log_3(t)/(t^4+1)). Since f'(t)=2^t*ln(2), and using the Chain Rule and Quotient Rule for g'(t), At long last: h'(t)=2^t*ln(2)*sqrt(log_2(t)/(t^2+1))+2^t*(1/2)*(log_2(t)/(t^2+1))^(-1/2)*((1/(t*ln(3))*(t^4+1)-log_3(t)*4t^3)/(t^4+1)^2)."
+                            "answer": "Start with Product Rule first since h can be thought of as a product of two functions: h(t)=f(t)g(t) with f(t)=2^t and g(t)=sqrt(log_3(t)/(t^4+1)). Since f'(t)=2^t*ln(2), and using the Chain Rule and Quotient Rule for g'(t), At long last: h'(t)=2^t*ln(2)*sqrt(log_3(t)/(t^4+1))+2^t*(1/2)*(log_3(t)/(t^4+1))^(-1/2)*((1/(t*ln(3))*(t^4+1)-log_3(t)*4t^3)/(t^4+1)^2)."
                         },
                         "latex": {
                             "question": "Let $h(t)=2^t\\sqrt{\\frac{\\log_3(t)}{t^4+1}}$. Find $h^{\\prime}(t)$. Where to start? Chain Rule? Quotient Rule? Product Rule? Something else?",
-                            "answer": "Start with Product Rule first since $h$ can be thought of as product of two functions: $h(t)=f(t)g(t)$ with $f(t)=2^t$ and $g(t)=\\sqrt{\\frac{\\log_3(t)}{t^4+1}}$. Since $f(t)=2^t$, $f^{\\prime}(t)=2^t\\cdot\\ln(2)$. At long last: $$h^{\\prime}(t)=2^t\\cdot\\ln(2)\\sqrt{\\frac{\\log_2(t)}{t^2+1}}+2^t\\cdot\\frac{1}{2}\\left(\\frac{\\log_2(t)}{t^2+1}\\right)^{-1/2}\\cdot\\frac{\\frac{1}{t\\cdot\\ln(3)}\\cdot(t^4+1)-\\log_3(t)\\cdot4t^3}{(t^4+1)^2}$$"
+                            "answer": "Start with Product Rule first since $h$ can be thought of as product of two functions: $h(t)=f(t)g(t)$ with $f(t)=2^t$ and $g(t)=\\sqrt{\\frac{\\log_3(t)}{t^4+1}}$. Since $f(t)=2^t$, $f^{\\prime}(t)=2^t\\cdot\\ln(2)$. At long last: $$h^{\\prime}(t)=2^t\\cdot\\ln(2)\\sqrt{\\frac{\\log_3(t)}{t^4+1}}+2^t\\cdot\\frac{1}{2}\\left(\\frac{\\log_3(t)}{t^4+1}\\right)^{-1/2}\\cdot\\frac{\\frac{1}{t\\cdot\\ln(3)}\\cdot(t^4+1)-\\log_3(t)\\cdot4t^3}{(t^4+1)^2}$$"
                         }
                     }
                 ]
