@@ -1,7 +1,12 @@
+from __future__ import annotations
+
+import os
+import threading
 from typing import Any, Mapping, Sequence
 
 from sentence_transformers import SentenceTransformer
 
+# ── Embedding model (used for RAG retrieval) ──
 model = SentenceTransformer("BAAI/bge-m3")
 
 
@@ -11,6 +16,18 @@ def embed_query(text: str | list[str]) -> list[float]:
     return model.encode_query(text).tolist()
 
 
+# ── Generation model (Qwen2.5-Math, used to actually generate responses) ──
+QWEN_MODEL_NAME = os.getenv("QWEN_MODEL_NAME", "Qwen/Qwen2.5-Math-1.5B-Instruct")
+
+# 128 tokens is enough for a short answer, but not a full problem + step-by-step
+# solution. Bump this up; override via env var if generations run too slow.
+QWEN_MAX_NEW_TOKENS = int(os.getenv("QWEN_MAX_NEW_TOKENS", "128"))
+
+
+
+
+
+# ── Prompt assembly (RAG context -> a single prompt string for the model) ──
 def generate_prompt_internal(
     student_prompt: str,
     *,

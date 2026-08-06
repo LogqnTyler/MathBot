@@ -188,6 +188,40 @@ def select_chunks_by_keyword(keyword: str, kind: str | None = None) -> list[dict
     return [dict(row) for row in rows]
 
 
+def select_chunks_by_keywords(keywords: list[str], kind: str | None = None) -> list[dict[str, Any]]:
+    """
+    Like select_chunks_by_keyword, but matches any chunk whose keywords array
+    overlaps with the given list (case-insensitive). Used when a topic maps
+    to several underlying keywords rather than a single exact one.
+    """
+    if not keywords:
+        return []
+
+    kind_filter = "AND kind = :kind" if kind is not None else ""
+    stmt = sa.text(f"""
+        SELECT
+            {CHUNKS_COLUMNS}
+        FROM chunks
+        WHERE keywords IS NOT NULL
+          {kind_filter}
+          AND EXISTS (
+              SELECT 1
+              FROM unnest(keywords) AS chunk_keyword(value)
+              WHERE lower(chunk_keyword.value) = ANY(:keyword_list)
+          )
+        ORDER BY id
+        """)
+
+    params: dict[str, Any] = {"keyword_list": [kw.lower() for kw in keywords]}
+    if kind is not None:
+        params["kind"] = kind
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(stmt, params).mappings().all()
+
+    return [dict(row) for row in rows]
+
+
 def close_db() -> None:
     global connector, engine, SessionLocal
 

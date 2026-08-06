@@ -9,5 +9,6 @@ sentence_transformers
 transformers
 accelerate
 torch
+mlx-lm
 safetensors
 sentencepiece

@@ -877,7 +877,7 @@
       { id: 'quiz_me',                label: 'Quiz Me',                 icon: '?' },
     ];
 
-    const OTHER_DETAILS_MAX_LEN = 120; // matches backend GeneratePrompt.other_details
+    const OTHER_DETAILS_MAX_LEN = 500; // matches backend GeneratePrompt.other_details
 
     async function loadTopics() {
       try {
@@ -1111,7 +1111,7 @@
     async function requestGeneration({ subject, requestType, initialPrompt, details, typingId }) {
       // Combine the student's original message with any extra details they
       // typed, trimmed to the backend's 120-char limit on other_details.
-      const combinedDetails = [initialPrompt, details].filter(Boolean).join(' ').slice(0, 120);
+      const combinedDetails = [initialPrompt, details].filter(Boolean).join('\n\n').slice(0, OTHER_DETAILS_MAX_LEN);
 
       const response = await fetch('/generate_prompt', {
         method: 'POST',
@@ -1132,7 +1132,7 @@
 
       const data = await response.json();
       const typeLabel = REQUEST_TYPES.find(rt => rt.id === requestType)?.label || requestType;
-      appendMessage('assistant', `**${typeLabel} — ${subject}**\n\n${data.prompt}`);
+      appendMessage('assistant', `**${typeLabel} — ${subject}**\n\n${data.response}`);
     }
 
     function appendMessage(role, content, chunks = []) {

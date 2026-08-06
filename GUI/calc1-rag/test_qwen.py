@@ -1,34 +1,24 @@
+from time import perf_counter
+
 from qwen_model import load_qwen_model, generate_qwen_response
 
 
-def main() -> None:
-    print("Loading Qwen model...")
-    load_qwen_model()
-    print("Model loaded successfully.")
+print("Loading model...")
 
-    while True:
-        try:
-            prompt = input("\nPrompt> ").strip()
-        except (KeyboardInterrupt, EOFError):
-            print("\nExiting.")
-            break
+start = perf_counter()
+load_qwen_model()
+print(f"Model loaded in {perf_counter() - start:.1f}s")
 
-        if prompt.lower() in {"quit", "exit"}:
-            print("Exiting.")
-            break
+prompt = "What is the difference between a local minimum and an absolute minimum?"
 
-        if not prompt:
-            continue
+print("\nGenerating...")
 
-        try:
-            response = generate_qwen_response(prompt)
-        except Exception as exc:
-            print(f"\nGeneration failed: {exc}")
-            continue
+start = perf_counter()
+response = generate_qwen_response(
+    prompt,
+    max_new_tokens=64,
+)
 
-        print("\nResponse:\n")
-        print(response)
-
-
-if __name__ == "__main__":
-    main()
+print(f"\nGenerated in {perf_counter() - start:.1f}s")
+print("\nResponse:\n")
+print(response)
