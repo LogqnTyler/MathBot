@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pg8000
+python-dotenv
+numpy
+scipy
+requests
+sentence-transformers

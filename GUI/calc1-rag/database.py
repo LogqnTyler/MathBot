@@ -5,7 +5,6 @@ from typing import Any
 import sqlalchemy as sa
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from google.cloud.sql.connector import Connector, IPTypes
 
 # load secrets
 from dotenv import load_dotenv
@@ -13,7 +12,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-connector: Connector | None = None
 engine: sa.Engine | None = None
 SessionLocal: sessionmaker | None = None
 Base = declarative_base()
@@ -37,62 +35,59 @@ CHUNKS_COLUMNS = """
 """
 
 
-def _init_db_cloud_sql() -> None:
-    """Connect via the Cloud SQL Python Connector (used in production)."""
-    global connector, engine, SessionLocal
+def _init_db_hosted(database_url: str) -> None:
+    """
+    Connect to a hosted Postgres database such as Supabase.
+    """
+    global engine, SessionLocal
 
-    connector = Connector(refresh_strategy="LAZY")
-
-    instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
-    db_user = os.environ["DB_USER"]
-    db_pass = os.environ.get("DB_PASSWORD") or os.environ["DB_PASS"]
-    db_name = os.environ["DB_NAME"]
-    ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-
-    def getconn():
-        return connector.connect(
-            instance_connection_name,
-            "pg8000",
-            user=db_user,
-            password=db_pass,
-            db=db_name,
-            ip_type=ip_type,
-        )
-
-    engine = create_engine("postgresql+pg8000://", creator=getconn)
+    engine = create_engine(
+        database_url,
+        pool_pre_ping=True,
+        pool_recycle=300,
+    )
     SessionLocal = sessionmaker(bind=engine)
 
 
 def _init_db_local() -> None:
     """
-    Connect directly to a local Postgres instance (e.g. the pgvector/pgvector
-    Docker container in compose.yaml). No Google auth involved. Defaults
-    below match compose.yaml's POSTGRES_USER/POSTGRES_PASSWORD/POSTGRES_DB,
-    override via env vars if you change those.
+    Connect directly to the local Docker Postgres instance.
     """
     global engine, SessionLocal
 
     db_host = os.environ.get("DB_HOST", "localhost")
     db_port = os.environ.get("DB_PORT", "5432")
     db_user = os.environ.get("DB_USER", "postgres")
-    db_pass = os.environ.get("DB_PASSWORD") or os.environ.get("DB_PASS", "postgres")
+    db_pass = os.environ.get("DB_PASSWORD") or os.environ.get(
+        "DB_PASS",
+        "postgres",
+    )
     db_name = os.environ.get("DB_NAME", "postgres")
 
-    url = f"postgresql+pg8000://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
-    engine = create_engine(url)
+    url = (
+        f"postgresql+pg8000://"
+        f"{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
+    )
+
+    engine = create_engine(
+        url,
+        pool_pre_ping=True,
+    )
     SessionLocal = sessionmaker(bind=engine)
 
 
-def init_db():
+def init_db() -> None:
     """
-    Initializes a sa connection pool for Postgres. Uses Cloud SQL if
-    INSTANCE_CONNECTION_NAME is set (production), otherwise falls back to a
-    local Postgres connection (local dev with docker compose).
+    Use DATABASE_URL for hosted Postgres/Supabase.
+    Otherwise fall back to local Docker Postgres.
     """
-    if os.environ.get("INSTANCE_CONNECTION_NAME"):
-        _init_db_cloud_sql()
+    database_url = os.environ.get("DATABASE_URL")
+
+    if database_url:
+        print("DATABASE_URL set — connecting to hosted Postgres.")
+        _init_db_hosted(database_url)
     else:
-        print("INSTANCE_CONNECTION_NAME not set — connecting to local Postgres instead.")
+        print("DATABASE_URL not set — connecting to local Postgres instead.")
         _init_db_local()
 
 
@@ -223,16 +218,12 @@ def select_chunks_by_keywords(keywords: list[str], kind: str | None = None) -> l
 
 
 def close_db() -> None:
-    global connector, engine, SessionLocal
+    global engine, SessionLocal
 
     if engine is not None:
         engine.dispose()
         engine = None
         SessionLocal = None
-
-    if connector is not None:
-        connector.close()
-        connector = None
 
 
 @contextmanager
