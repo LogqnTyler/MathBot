@@ -22,6 +22,7 @@ from database import (
 )
 from language_processing import (
     embed_query,
+    generate_follow_up_prompt,
     generate_prompt_internal,
 )
 from qwen_model import (
@@ -112,8 +113,7 @@ RequestKind = Literal[*REQUEST_TYPES]
 REQUEST_TYPE_TEMPLATES: dict[str, str] = {
     "practice_problems": (
         "Generate one complete practice problem about {subject}. "
-        "Follow any requested real-world context exactly. "
-        "Include a complete problem statement and a concise worked solution."
+        "Follow any requested real-world context exactly."
     ),
     "alternate_explanations": (
         "Give an alternate explanation of {subject}. "
@@ -388,9 +388,17 @@ class KeywordQuery(BaseModel):
     kind: ChunkKind = "definition"
 
 
+class ConversationMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str = Field(min_length=1, max_length=6000)
+
+
 class GeneratePrompt(BaseModel):
     subject: str
     request_type: RequestKind = "practice_problems"
+    include_solution: bool = True
+    follow_up: bool = False
+    conversation: list[ConversationMessage] = Field(default_factory=list, max_length=8)
     other_details: str = Field(
         default="",
         min_length=0,
@@ -454,6 +462,13 @@ def _format_model_output(text: str) -> str:
     text = text.strip()
 
     text = re.sub(
+        r"(?im)^\s*(?:\[\[\s*FINAL ANSWER\s*\]\]:?|"
+        r"#{1,6}\s*FINAL ANSWER:?|\*\*FINAL ANSWER:?\*\*|FINAL ANSWER:)\s*",
+        "**Final Answer:**\n",
+        text,
+    )
+
+    text = re.sub(
         r"#\s*Problem:\s*",
         "**Problem:**\n\n",
         text,
@@ -468,6 +483,52 @@ def _format_model_output(text: str) -> str:
     )
 
     return text.strip()
+
+
+def _source_names(*chunk_groups: list[dict[str, Any]]) -> list[str]:
+    sources: list[str] = []
+    for chunk in (chunk for group in chunk_groups for chunk in group):
+        material_name = chunk.get("material_name")
+        if not material_name:
+            continue
+
+        lesson_id = Path(material_name).stem
+        topic = next((topic for topic in TOPICS if topic["id"] == lesson_id), None)
+        if topic is None:
+            label = material_name
+        else:
+            lesson_label = lesson_id.removeprefix("lesson")
+            if lesson_label.endswith("extrapractice"):
+                lesson_label = lesson_label.removesuffix("extrapractice") + " Extra Practice"
+            label = f"Lesson {lesson_label}: {topic['name']}"
+
+        if label not in sources:
+            sources.append(label)
+
+    return sources
+
+
+def _split_problem_solution(text: str) -> tuple[str, str]:
+    solution_heading = re.search(
+        r"(?im)^\s*(?:\[\[SOLUTION\]\]|#{1,6}\s*(?:worked\s+)?solution:?|"
+        r"\*\*(?:worked\s+)?solution:?\*\*)\s*$",
+        text,
+    )
+    if solution_heading is None:
+        return _format_model_output(text), ""
+
+    problem = text[: solution_heading.start()]
+    solution = text[solution_heading.end() :]
+    problem = re.sub(
+        r"(?im)^\s*(?:\[\[PROBLEM\]\]|#{1,6}\s*(?:practice\s+)?problem:?|"
+        r"\*\*(?:practice\s+)?problem(?:\s+statement)?:?\*\*)\s*$",
+        "",
+        problem,
+        count=1,
+    )
+    problem = re.sub(r"\s*(?:---\s*)*$", "", problem)
+    solution = re.sub(r"^\s*(?:---\s*)*", "", solution)
+    return _format_model_output(problem), _format_model_output(solution)
 
 
 def _requested_context(request: GeneratePrompt) -> str | None:
@@ -533,6 +594,15 @@ def _build_student_prompt(request: GeneratePrompt) -> str:
         subject=request.subject
     )
 
+    if request.request_type == "practice_problems":
+        if request.include_solution:
+            base_request += " Include a concise worked solution and final answer."
+        else:
+            base_request += (
+                " Return only the problem statement. Do not include a solution, "
+                "answer, hint, or setup."
+            )
+
     details = request.other_details.strip()
 
     if not details:
@@ -556,6 +626,20 @@ def _build_context_directive(
     qwen_model.py uses left-side truncation, so the final directive is the
     portion most likely to survive when the prompt exceeds the token limit.
     """
+    if request.include_solution:
+        output_requirements = """Provide:
+1. The full problem statement.
+2. A concise worked solution.
+3. A clear final answer.
+Start the problem with [[PROBLEM]].
+Start the worked solution with [[SOLUTION]].
+End the solution with the heading **Final Answer:** followed by the answer.
+Never write [[FINAL ANSWER]] or place brackets around that heading."""
+    else:
+        output_requirements = """Provide only the full problem statement.
+Do not include a solution, answer, hint, setup, or answer key.
+End immediately after the problem statement."""
+
     if requested_context == "chemistry":
         return f"""
 MANDATORY FINAL TASK
@@ -585,11 +669,7 @@ Possible chemistry settings include:
 Student's exact request:
 {request.other_details.strip()}
 
-Provide:
-1. A complete chemistry problem statement.
-2. The function and its physically meaningful domain.
-3. A concise worked calculus solution.
-4. A clear interpretation of the optimum in the chemistry setting.
+{output_requirements}
 
 Use LaTeX delimiters around every mathematical expression.
 """.strip()
@@ -609,7 +689,8 @@ Student's exact request:
 Use calculus appropriate for MATH 1191–1210.
 Do not replace the requested context with an unrelated generic example.
 
-Answer completely and use LaTeX delimiters around mathematical expressions.
+{output_requirements}
+Use LaTeX delimiters around mathematical expressions.
 """.strip()
 
     if request.request_type == "practice_problems":
@@ -620,10 +701,7 @@ MANDATORY FINAL TASK
 
 Create one complete, original practice problem.
 
-Provide:
-1. The full problem statement.
-2. A concise worked solution.
-3. A clear final answer.
+{output_requirements}
 
 Use single-variable calculus appropriate for MATH 1191–1210.
 Do not use linear programming unless the student explicitly asks for it.
@@ -667,6 +745,43 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
             ),
         )
 
+    selected_topic = next(topic for topic in TOPICS if topic["name"] == request.subject)
+    material_name = f"{selected_topic['id']}.json"
+
+    if request.follow_up:
+        follow_up_text = request.other_details.strip()
+        if not follow_up_text:
+            raise HTTPException(status_code=400, detail="Follow-up message cannot be empty")
+
+        embedding = embed_query(f"{request.subject}\n{follow_up_text}")
+        related_chunks = query_similar_chunks(
+            embedding,
+            min_score=PROMPT_SIMILARITY_THRESHOLD,
+            material_name=material_name,
+        )[:3]
+        definitions = select_chunks_by_keywords(
+            TOPIC_KEYWORDS.get(request.subject, []),
+            kind="definition",
+        )[:PROMPT_DEFINITION_COUNT]
+        prompt_text = generate_follow_up_prompt(
+            student_prompt=follow_up_text,
+            conversation=[message.model_dump() for message in request.conversation],
+            related_chunks=related_chunks,
+            definitions=definitions,
+        )
+        print(
+            f"Follow-up retrieved {len(related_chunks)} related chunk(s) and "
+            f"{len(definitions)} definition chunk(s)."
+        )
+        raw_response = generate_qwen_response(prompt_text)
+        return {
+            "prompt": prompt_text,
+            "response": _format_model_output(raw_response),
+            "problem": None,
+            "solution": None,
+            "sources": _source_names(related_chunks, definitions),
+        }
+
     student_prompt = _build_student_prompt(request)
     requested_context = _requested_context(request)
 
@@ -685,12 +800,14 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
             embedding,
             kind="problem",
             min_score=PROMPT_SIMILARITY_THRESHOLD,
+            material_name=material_name,
         )[:PROMPT_PROBLEM_COUNT]
 
         extra_contents = query_similar_chunks(
             embedding,
             kind="other_material",
             min_score=PROMPT_SIMILARITY_THRESHOLD,
+            material_name=material_name,
         )[:PROMPT_EXTRA_CONTENT_COUNT]
 
     definitions = select_chunks_by_keywords(
@@ -707,6 +824,7 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
 
     rag_prompt = generate_prompt_internal(
         student_prompt=student_prompt,
+        include_solution=request.include_solution,
         practice_problems=practice_problems,
         extra_contents=extra_contents,
         definitions=definitions,
@@ -729,6 +847,7 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
     print("Starting Qwen generation...")
 
     raw_response = generate_qwen_response(prompt_text)
+    problem, solution = _split_problem_solution(raw_response)
 
     print("Qwen generation complete.")
 
@@ -737,6 +856,9 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
         # prompt exposes instructor-only course materials.
         "prompt": prompt_text,
         "response": _format_model_output(raw_response),
+        "problem": problem,
+        "solution": solution,
+        "sources": _source_names(practice_problems, extra_contents, definitions),
     }
 
 

@@ -33,7 +33,12 @@ CHUNKS_COLUMNS = """
     "Q_latex",
     "A_plain",
     "A_latex",
-    keywords
+    keywords,
+    (
+        SELECT materials.name
+        FROM materials
+        WHERE materials.id = chunks.mat_id
+    ) AS material_name
 """
 
 
@@ -85,14 +90,19 @@ def _init_db_local() -> None:
 
 def init_db():
     """
-    Initializes a sa connection pool for Postgres. Uses Cloud SQL if
-    INSTANCE_CONNECTION_NAME is set (production), otherwise falls back to a
-    local Postgres connection (local dev with docker compose).
+    Initialize a Postgres connection pool. DATABASE_URL takes precedence,
+    followed by Cloud SQL configuration and then local connection settings.
     """
-    if os.environ.get("INSTANCE_CONNECTION_NAME"):
+    global engine, SessionLocal
+
+    database_url = os.environ.get("DATABASE_URL")
+    if database_url:
+        engine = create_engine(database_url)
+        SessionLocal = sessionmaker(bind=engine)
+    elif os.environ.get("INSTANCE_CONNECTION_NAME"):
         _init_db_cloud_sql()
     else:
-        print("INSTANCE_CONNECTION_NAME not set — connecting to local Postgres instead.")
+        print("INSTANCE_CONNECTION_NAME not set; connecting to local Postgres.")
         _init_db_local()
 
 
@@ -119,9 +129,18 @@ def query_similar_chunks(
     *,
     kind: str | None = None,
     min_score: float = 0.0,
+    material_name: str | None = None,
 ) -> list[dict[str, Any]]:
     """Return chunks with cosine similarity to query_embedding greater than min_score."""
     kind_filter = "AND kind = :kind" if kind is not None else ""
+    material_filter = """
+        AND EXISTS (
+            SELECT 1
+            FROM materials
+            WHERE materials.id = chunks.mat_id
+              AND materials.name = :material_name
+        )
+        """ if material_name is not None else ""
     stmt = sa.text(f"""
         SELECT
             {CHUNKS_COLUMNS},
@@ -129,6 +148,7 @@ def query_similar_chunks(
         FROM chunks
         WHERE embedding IS NOT NULL
           {kind_filter}
+          {material_filter}
           AND 1 - (embedding <=> CAST(:embedding AS vector)) > :min_score
         ORDER BY embedding <=> CAST(:embedding AS vector)
         """)
@@ -139,6 +159,8 @@ def query_similar_chunks(
     }
     if kind is not None:
         params["kind"] = kind
+    if material_name is not None:
+        params["material_name"] = material_name
 
     with get_engine().connect() as conn:
         rows = conn.execute(stmt, params).mappings().all()

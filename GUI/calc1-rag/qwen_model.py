@@ -11,15 +11,15 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL_NAME = os.getenv(
     "QWEN_MODEL_NAME",
-    "Qwen/Qwen2.5-Math-1.5B-Instruct",
+    "Qwen/Qwen3-8B-AWQ",
 )
 
 MAX_NEW_TOKENS = int(
-    os.getenv("QWEN_MAX_NEW_TOKENS", "256")
+    os.getenv("QWEN_MAX_NEW_TOKENS", "512")
 )
 
 MAX_INPUT_TOKENS = int(
-    os.getenv("QWEN_MAX_INPUT_TOKENS", "160")
+    os.getenv("QWEN_MAX_INPUT_TOKENS", "2048")
 )
 
 _tokenizer = None
@@ -31,26 +31,17 @@ def load_qwen_model() -> None:
     """
     Load the tokenizer and model once when FastAPI starts.
 
-    Uses Apple Metal (MPS) on Apple Silicon when available,
-    CUDA when available, and CPU otherwise.
+    AWQ inference uses CUDA while the embedding model remains on CPU.
     """
     global _tokenizer, _model
 
     if _model is not None:
         return
 
-    if torch.backends.mps.is_available():
-        device = torch.device("mps")
-        dtype = torch.float16
-        print("Using Apple Metal (MPS)")
-    elif torch.cuda.is_available():
-        device = torch.device("cuda")
-        dtype = torch.float16
-        print("Using CUDA")
-    else:
-        device = torch.device("cpu")
-        dtype = torch.float32
-        print("Using CPU")
+    if not torch.cuda.is_available():
+        raise RuntimeError(f"{MODEL_NAME} requires a CUDA-capable GPU")
+
+    print("Using CUDA for Qwen; embeddings use CPU")
 
     _tokenizer = AutoTokenizer.from_pretrained(
         MODEL_NAME,
@@ -61,11 +52,11 @@ def load_qwen_model() -> None:
 
     _model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        dtype=dtype,
+        torch_dtype=torch.float16,
+        device_map="auto",
         trust_remote_code=True,
     )
 
-    _model = _model.to(device)
     _model.eval()
 
     first_parameter = next(_model.parameters())
@@ -79,14 +70,13 @@ def generate_qwen_response(
     *,
     max_new_tokens: int = MAX_NEW_TOKENS,
     max_input_tokens: int = MAX_INPUT_TOKENS,
-    temperature: float = 0.0,
-    top_p: float = 0.9,
+    temperature: float = 0.7,
+    top_p: float = 0.8,
 ) -> str:
     """
     Generate a response using Qwen2.5-Math-Instruct.
 
-    The input prompt is truncated to a fixed token limit to reduce
-    memory use and slow prompt processing on an 8 GB Apple Silicon Mac.
+    Input is truncated to a configurable token limit to bound memory use.
     """
     if _model is None or _tokenizer is None:
         raise RuntimeError(
@@ -118,6 +108,7 @@ def generate_qwen_response(
         messages,
         tokenize=False,
         add_generation_prompt=True,
+        enable_thinking=False,
     )
 
     model_inputs = _tokenizer(
@@ -147,6 +138,7 @@ def generate_qwen_response(
                 "do_sample": True,
                 "temperature": temperature,
                 "top_p": top_p,
+                "top_k": 20,
             }
         )
 

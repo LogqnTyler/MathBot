@@ -5,9 +5,22 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "dotenv>=0.9.9",
+    "accelerate>=1.14.0",
+    "autoawq>=0.2.9",
+    "cloud-sql-python-connector[pg8000]>=1.22.0",
+    "fastapi>=0.141.1",
     "git-filter-repo>=2.47.0",
+    "numpy>=2.5.1",
+    "pgvector>=0.5.0",
+    "psycopg2-binary>=2.9.12",
+    "python-dotenv>=1.2.3",
+    "safetensors>=0.8.0",
     "scikit-learn>=1.9.0",
+    "scipy>=1.18.0",
     "sentence-transformers>=5.6.0",
+    "sentencepiece>=0.2.2",
     "sqlalchemy>=2.0.51",
+    "torch>=2.13.0",
+    "transformers==4.51.3",
+    "uvicorn>=0.52.4",
 ]

@@ -60,6 +60,14 @@ def main() -> None:
         inserted = 0
         skipped = 0
         with engine.begin() as conn:
+            conn.execute(sqlalchemy.text("""
+                CREATE TABLE IF NOT EXISTS materials (
+                    id SERIAL PRIMARY KEY,
+                    type VARCHAR,
+                    name VARCHAR,
+                    data JSONB
+                )
+                """))
             for lesson_file in lesson_files:
                 lesson_data = json.loads(lesson_file.read_text(encoding="utf-8"))
                 result = conn.execute(

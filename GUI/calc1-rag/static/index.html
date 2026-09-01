@@ -1,1180 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MATH 1191 - 1210 — Study Assistant</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathBot: Calculus Tutor for MATH 1191/1210</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
   <style>
     :root {
-      --bg:        #0f0e0c;
-      --surface:   #1a1916;
-      --border:    #2e2c28;
-      --accent:    #e8c87a;
-      --accent2:   #7abfe8;
-      --text:      #e8e4dc;
-      --muted:     #7a7060;
-      --success:   #7ae8a8;
-      --error:     #e88a7a;
-      --radius:    6px;
-      --mono:      'DM Mono', monospace;
-      --serif:     'DM Serif Display', serif;
-      --sans:      'DM Sans', sans-serif;
+      color-scheme: light;
+      --ink: #171717;
+      --muted: #6b6b6b;
+      --line: #dedede;
+      --soft: #f6f6f4;
+      --accent: #2455d6;
+      --accent-dark: #173da5;
+      --error: #b42318;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.6;
+      margin: 0;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 260px 1fr 280px;
-      grid-template-rows: 56px 1fr;
-      grid-template-areas:
-        "header header header"
-        "sidebar main sources";
+      background: #fff;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
     }
 
-    /* ── Header ── */
+    button,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(100% - 40px, 760px);
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
     header {
-      grid-area: header;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .logo {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      color: var(--accent);
-      letter-spacing: 0.01em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-symbol {
-      font-style: italic;
-      font-size: 1.5rem;
-      opacity: 0.85;
-    }
-
-    .header-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .status-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 6px var(--success);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .status-label {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-
-    /* ── Sidebar ── */
-    nav {
-      grid-area: sidebar;
-      border-right: 1px solid var(--border);
-      background: var(--surface);
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      padding: 20px 0;
-    }
-
-    .nav-section-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0 20px 8px;
-      margin-top: 16px;
-    }
-
-    .nav-section-label:first-child { margin-top: 0; }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 20px;
-      color: var(--muted);
+    .brand {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 400;
-      border-left: 2px solid transparent;
-      transition: all 0.15s;
-      cursor: pointer;
-      background: none;
-      border-top: none;
-      border-right: none;
-      border-bottom: none;
-      width: 100%;
-      text-align: left;
     }
 
-    .nav-item:hover {
-      color: var(--text);
-      background: rgba(232,200,122,0.05);
-    }
-
-    .nav-item.active {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      background: rgba(232,200,122,0.08);
-    }
-
-    .nav-icon {
-      font-size: 15px;
-      width: 18px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .topic-chip {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 3px;
-      background: rgba(122,191,232,0.12);
-      color: var(--accent2);
-      margin-left: auto;
-    }
-
-    /* ── Main ── */
     main {
-      grid-area: main;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      padding-top: 40px;
     }
 
-    .chat-window {
-      flex: 1;
-      overflow-y: auto;
-      padding: 32px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      scroll-behavior: smooth;
-    }
-
-    .chat-window::-webkit-scrollbar { width: 4px; }
-    .chat-window::-webkit-scrollbar-track { background: transparent; }
-    .chat-window::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-    /* Welcome state */
-    .welcome {
-      margin: auto;
-      text-align: center;
-      max-width: 520px;
-      animation: fadeUp 0.5s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .welcome-title {
-      font-family: var(--serif);
-      font-size: 2.4rem;
-      color: var(--accent);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .welcome-title em {
-      color: var(--text);
-      font-style: italic;
-    }
-
-    .welcome-sub {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 32px;
-      line-height: 1.7;
-    }
-
-    .starter-grid {
+    #practice-form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      text-align: left;
+      gap: 18px;
+      margin-top: 18px;
     }
 
-    .starter-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      color: var(--text);
-      font-size: 13px;
-      font-family: var(--sans);
+    .field {
+      display: grid;
+      gap: 9px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .field-note {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    select {
+      height: 48px;
+      padding: 0 42px 0 14px;
       cursor: pointer;
-      transition: all 0.15s;
-      line-height: 1.4;
-      text-align: left;
     }
 
-    .starter-btn:hover {
+    textarea {
+      min-height: 132px;
+      padding: 13px 14px;
+      resize: vertical;
+    }
+
+    select:focus,
+    textarea:focus {
       border-color: var(--accent);
-      background: rgba(232,200,122,0.06);
-      color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(36, 85, 214, 0.12);
     }
 
-    .starter-btn .starter-icon {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 6px;
+    textarea::placeholder {
+      color: #999;
     }
 
-    /* Messages */
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .char-count {
+      color: var(--muted);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .submit-button {
+      min-width: 164px;
+      height: 46px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 650;
+      transition: background 140ms ease, transform 100ms ease;
+    }
+
+    .submit-button:hover:not(:disabled) {
+      background: var(--accent-dark);
+    }
+
+    .submit-button:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    .submit-button:disabled {
+      background: #b9c3dc;
+      cursor: not-allowed;
+    }
+
+    .error {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--error);
+      background: #fff5f4;
+      color: var(--error);
+      font-size: 14px;
+    }
+
+    .chat {
+      display: grid;
+      gap: 26px;
+    }
+
     .message {
       display: flex;
-      gap: 14px;
-      animation: fadeUp 0.3s ease both;
-      max-width: 720px;
-    }
-
-    .message.user { align-self: flex-end; flex-direction: row-reverse; }
-    .message.assistant { align-self: flex-start; }
-
-    .avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-family: var(--mono);
-      font-weight: 500;
-    }
-
-    .message.user .avatar {
-      background: rgba(122,191,232,0.15);
-      color: var(--accent2);
-      border: 1px solid rgba(122,191,232,0.3);
-    }
-
-    .message.assistant .avatar {
-      background: rgba(232,200,122,0.12);
-      color: var(--accent);
-      border: 1px solid rgba(232,200,122,0.25);
-      font-family: var(--serif);
-      font-style: italic;
-    }
-
-    .bubble {
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      font-size: 14px;
-      line-height: 1.7;
-      max-width: 580px;
-    }
-
-    .message.user .bubble {
-      background: rgba(122,191,232,0.1);
-      border: 1px solid rgba(122,191,232,0.2);
-      color: var(--text);
-    }
-
-    .message.assistant .bubble {
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-
-    .bubble code {
-      font-family: var(--mono);
-      background: rgba(255,255,255,0.06);
-      padding: 1px 5px;
-      border-radius: 3px;
-      font-size: 13px;
-      color: var(--accent);
-    }
-
-    .bubble .katex-display,
-    .source-card .katex-display {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 10px 14px;
-      margin: 10px 0;
-      background: rgba(232,200,122,0.06);
-      border-left: 2px solid var(--accent);
-      border-radius: 0 var(--radius) var(--radius) 0;
-    }
-
-    .bubble .katex,
-    .source-card .katex { color: var(--accent); }
-
-    .chunk-refs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .chunk-ref {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 3px;
-      background: rgba(122,191,232,0.08);
-      color: var(--accent2);
-      border: 1px solid rgba(122,191,232,0.2);
-      cursor: pointer;
-      transition: all 0.12s;
-    }
-
-    .chunk-ref:hover {
-      background: rgba(122,191,232,0.16);
-    }
-
-    /* Typing indicator */
-    .typing {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-      padding: 14px 18px;
-    }
-
-    .typing span {
-      width: 7px; height: 7px;
-      background: var(--muted);
-      border-radius: 50%;
-      animation: bounce 1.2s ease infinite;
-    }
-
-    .typing span:nth-child(2) { animation-delay: 0.2s; }
-    .typing span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes bounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    /* ── Picker card (topic + request-type selection) ── */
-    .picker-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      max-width: 580px;
-      display: flex;
       flex-direction: column;
-      gap: 14px;
+      align-items: flex-start;
+      gap: 7px;
     }
 
-    .picker-card.disabled {
-      opacity: 0.55;
-      pointer-events: none;
+    .message.user {
+      align-items: flex-end;
     }
 
-    .picker-label {
-      font-family: var(--mono);
+    .message-label {
+      color: var(--muted);
       font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .message-bubble {
+      max-width: min(88%, 660px);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 14px;
+    }
+
+    .message.user .message-bubble {
+      border-color: #dbe3f7;
+      background: #f3f6fd;
+    }
+
+    .message.assistant .message-bubble {
+      width: min(100%, 700px);
+      background: #fff;
+    }
+
+    .onboarding-copy {
+      margin: 0;
       color: var(--muted);
-      margin-bottom: 8px;
+    }
+
+    .onboarding-complete {
+      display: none;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    #practice-form.submitted {
+      display: none;
+    }
+
+    #practice-form.submitted + .onboarding-complete {
       display: block;
     }
 
-    .picker-select {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 9px 12px;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .picker-select:focus { border-color: var(--accent); }
-
-    .picker-types {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .type-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 10px 12px;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 13px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.15s;
+    .message.loading .message-bubble {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .type-btn:hover {
-      border-color: var(--accent2);
-      color: var(--accent2);
-    }
-
-    .type-btn.selected {
-      border-color: var(--accent);
-      background: rgba(232,200,122,0.08);
-      color: var(--accent);
-    }
-
-    .type-icon {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 15px;
-      width: 16px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .picker-details-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 9px 12px;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .picker-details-input:focus { border-color: var(--accent); }
-
-    .picker-char-count {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      text-align: right;
-      margin-top: 4px;
-    }
-
-    .picker-submit-btn {
-      align-self: flex-end;
-      background: var(--accent);
-      border: none;
-      border-radius: 5px;
-      padding: 9px 18px;
-      color: var(--bg);
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: opacity 0.15s;
-    }
-
-    .picker-submit-btn:hover { opacity: 0.85; }
-    .picker-submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-    .picker-error {
-      font-size: 12px;
-      color: var(--error);
-      font-family: var(--mono);
-    }
-
-    /* ── Input area ── */
-    .input-area {
-      padding: 20px 40px 28px;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-    }
-
-    .input-row {
-      display: flex;
       gap: 10px;
-      align-items: flex-end;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      transition: border-color 0.15s;
+      color: var(--muted);
     }
 
-    .input-row:focus-within {
-      border-color: var(--accent);
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--line);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 700ms linear infinite;
     }
 
-    #question-input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 14px;
-      resize: none;
-      line-height: 1.6;
-      max-height: 160px;
-      min-height: 24px;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    #question-input::placeholder { color: var(--muted); }
-
-    .send-btn {
-      background: var(--accent);
-      border: none;
-      border-radius: 5px;
-      width: 36px; height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: opacity 0.15s, transform 0.1s;
-      color: var(--bg);
+    .answer {
       font-size: 16px;
     }
 
-    .send-btn:hover { opacity: 0.85; }
-    .send-btn:active { transform: scale(0.94); }
-    .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-    .input-hint {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 8px;
-      font-family: var(--mono);
-      text-align: right;
-    }
-
-    /* ── Sources panel ── */
-    aside {
-      grid-area: sources;
-      border-left: 1px solid var(--border);
-      background: var(--surface);
+    .source-list {
       display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .aside-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    .source-list-label {
       color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .source-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #4f4f4f;
+      font-size: 12px;
+    }
+
+    .answer strong {
+      font-weight: 700;
+    }
+
+    .answer h3 {
+      margin: 30px 0 8px;
+      font-size: 16px;
+    }
+
+    .answer hr {
+      margin: 28px 0;
+      border: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .answer code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--soft);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    .answer .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin: 24px 0;
+      padding: 18px;
+      background: var(--soft);
+      text-align: center;
+    }
+
+    .solution-reveal {
+      margin-top: 22px;
+      overflow: hidden;
+      border: 1px solid #dbe3f7;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .solution-reveal summary {
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .chunk-count {
-      background: rgba(232,200,122,0.12);
-      color: var(--accent);
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 3px;
-    }
-
-    .sources-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sources-list::-webkit-scrollbar { width: 3px; }
-    .sources-list::-webkit-scrollbar-thumb { background: var(--border); }
-
-    .source-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 14px;
+      gap: 18px;
+      padding: 15px 16px;
+      background: #f3f6fd;
+      color: var(--accent-dark);
       cursor: pointer;
-      transition: all 0.15s;
-      animation: fadeUp 0.3s ease both;
+      font-weight: 700;
+      list-style: none;
     }
 
-    .source-card:hover {
-      border-color: var(--accent2);
-      background: rgba(122,191,232,0.04);
+    .solution-reveal summary::-webkit-details-marker {
+      display: none;
     }
 
-    .source-card.highlighted {
-      border-color: var(--accent);
-      background: rgba(232,200,122,0.05);
+    .solution-reveal summary::after {
+      content: "+";
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
     }
 
-    .source-topic {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--accent2);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .solution-reveal[open] summary::after {
+      content: "−";
     }
 
-    .source-text {
+    .solution-prompt {
+      display: grid;
+      gap: 1px;
+    }
+
+    .solution-prompt small {
+      color: var(--muted);
       font-size: 12px;
-      color: var(--muted);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .source-score {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .score-bar {
-      flex: 1;
-      height: 3px;
-      background: var(--border);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .score-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.6s ease;
-    }
-
-    .score-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .sources-empty {
-      margin: auto;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 40px 20px;
-    }
-
-    .sources-empty .empty-icon {
-      font-size: 28px;
-      display: block;
-      margin-bottom: 10px;
-      opacity: 0.4;
-    }
-
-    /* History section in sidebar */
-    .history-item {
-      padding: 8px 20px;
-      font-size: 13px;
-      color: var(--muted);
-      cursor: pointer;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: color 0.12s;
-    }
-
-    .history-item:hover { color: var(--text); }
-
-    /* Skip link for accessibility */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 8px;
-      background: var(--accent);
-      color: var(--bg);
-      padding: 8px 12px;
-      border-radius: var(--radius);
-      font-size: 13px;
       font-weight: 500;
-      z-index: 100;
-      transition: top 0.15s;
-      text-decoration: none;
     }
 
-    .skip-link:focus { top: 8px; }
+    .solution-content {
+      padding: 18px;
+      border-top: 1px solid #dbe3f7;
+    }
+
+    .follow-up-form {
+      display: none;
+      align-items: flex-end;
+      gap: 10px;
+      position: sticky;
+      bottom: 0;
+      margin-top: 34px;
+      padding: 16px 0 6px;
+      background: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid var(--line);
+    }
+
+    .follow-up-form.active {
+      display: flex;
+    }
+
+    .follow-up-form textarea {
+      min-height: 48px;
+      max-height: 150px;
+      padding: 11px 13px;
+      resize: vertical;
+    }
+
+    .follow-up-form button {
+      flex: 0 0 auto;
+      min-width: 88px;
+    }
+
+    @media (max-width: 600px) {
+      .shell {
+        width: min(100% - 28px, 760px);
+        padding-top: 20px;
+      }
+
+      header {
+        padding-bottom: 18px;
+      }
+
+      main {
+        padding-top: 42px;
+      }
+
+      .form-footer {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .char-count {
+        align-self: flex-end;
+      }
+
+      .submit-button {
+        width: 100%;
+      }
+
+      .message-bubble,
+      .message.assistant .message-bubble {
+        max-width: 94%;
+        width: auto;
+      }
+
+      .follow-up-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .follow-up-form button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+
+      .spinner {
+        animation-duration: 1.4s;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="/">MathBot: Calculus Tutor for MATH 1191/1210</a>
+    </header>
 
-  <a href="#question-input" class="skip-link">Skip to input</a>
+    <main>
+      <section class="chat" id="chat" role="log" aria-live="polite" aria-label="Conversation with MathBot">
+        <article class="message assistant">
+          <div class="message-label">MathBot</div>
+          <div class="message-bubble">
+            <p class="onboarding-copy">Choose a course topic and tell me what kind of practice problem you want.</p>
+            <form id="practice-form">
+              <div class="field">
+                <label for="topic-select">Topic</label>
+                <select id="topic-select" name="topic" required disabled>
+                  <option value="">Loading topics...</option>
+                </select>
+              </div>
 
-  <!-- ── Header ── -->
-  <header role="banner">
-    <div class="logo" aria-label="1190 - 1210 Study Assistant">
-      <span class="logo-symbol" aria-hidden="true">∫</span>
-      MATH 1191 - 1210 — Study Assistant
-    </div>
-    <div class="header-meta" role="status" aria-live="polite">
-      <div class="status-dot" aria-hidden="true"></div>
-      <span class="status-label">RAG · Connected</span>
-    </div>
-  </header>
+              <div class="field">
+                <label for="practice-request">
+                  Practice problem details
+                  <span class="field-note">Add any functions, context, or difficulty you want.</span>
+                </label>
+                <textarea
+                  id="practice-request"
+                  name="practice-request"
+                  maxlength="500"
+                  required
+                  placeholder="For example: Find the limit of a sine or cosine function."
+                ></textarea>
+              </div>
 
-  <!-- ── Sidebar ── -->
-  <nav aria-label="Topics and history">
-    <span class="nav-section-label">Topics</span>
-    <button class="nav-item active" aria-current="page" onclick="filterTopic('all')">
-      <span class="nav-icon" aria-hidden="true">⊞</span> All Topics
-    </button>
-    <button class="nav-item" onclick="filterTopic('limits')">
-      <span class="nav-icon" aria-hidden="true">→</span> Limits
-      <span class="topic-chip">lim</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('derivatives')">
-      <span class="nav-icon" aria-hidden="true">′</span> Derivatives
-      <span class="topic-chip">d/dx</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('integrals')">
-      <span class="nav-icon" aria-hidden="true">∫</span> Integrals
-      <span class="topic-chip">∫dx</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('continuity')">
-      <span class="nav-icon" aria-hidden="true">∼</span> Continuity Conditions
-    </button>
-    <button class="nav-item" onclick="filterTopic('ftc')">
-      <span class="nav-icon" aria-hidden="true">⇔</span> Fund. Theorem
-      <span class="topic-chip">FTC</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('applications')">
-      <span class="nav-icon" aria-hidden="true">◈</span> Applications
-    </button>
+              <div class="form-footer">
+                <span class="char-count" id="char-count">0 / 500</span>
+                <button class="submit-button" id="submit-button" type="submit" disabled>
+                  Generate problem
+                </button>
+              </div>
+            </form>
+            <p class="onboarding-complete" id="onboarding-complete"></p>
+          </div>
+        </article>
+      </section>
 
-    <span class="nav-section-label">Recent</span>
-    <div id="history-list" aria-label="Conversation history">
-      <div class="history-item" tabindex="0">What is the chain rule?</div>
-      <div class="history-item" tabindex="0">Explain teh meaning of the derivative.</div>
-      <div class="history-item" tabindex="0">How do I find critical points?</div>
-    </div>
-  </nav>
+      <div class="error" id="error" role="alert"></div>
 
-  <!-- ── Main chat ── -->
-  <main id="main-content" aria-label="Chat">
-    <div class="chat-window" id="chat-window" role="log" aria-live="polite" aria-label="Conversation">
-
-      <!-- Welcome screen -->
-      <div class="welcome" id="welcome-screen">
-        <h1 class="welcome-title">Ask anything about<br><em>1191 - 1210</em></h1>
-        <p class="welcome-sub">
-          I'll ask which topic and what kind of help you want, then search your course materials.<br>
-          Try a question below, or type your own.
-        </p>
-        <div class="starter-grid" role="list">
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">′</span>
-            What is the definition of a derivative?
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">→</span>
-            How do I evaluate a limit at infinity?
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">∫</span>
-            Explain the Fundamental Theorem of Calculus
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">△</span>
-            When does a function have a local maximum?
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Input -->
-    <div class="input-area">
-      <div class="input-row">
+      <form class="follow-up-form" id="follow-up-form">
         <textarea
-          id="question-input"
-          rows="1"
-          placeholder="Ask a question about MATH 1191 - 1210"
-          aria-label="Your question"
-          aria-multiline="true"
-          onkeydown="handleKey(event)"
-          oninput="autoResize(this)"
+          id="follow-up-input"
+          maxlength="500"
+          aria-label="Ask MathBot for clarification"
+          placeholder="Ask for clarification about the problem or solution..."
         ></textarea>
-        <button class="send-btn" id="send-btn" onclick="submitQuestion()" aria-label="Send question" disabled>
-          ↑
-        </button>
-      </div>
-      <p class="input-hint" aria-hidden="true">Enter to send · Shift+Enter for new line</p>
-    </div>
-  </main>
-
-  <!-- ── Sources panel ── -->
-  <aside aria-label="Retrieved sources">
-    <div class="aside-header">
-      <span>Sources</span>
-      <span class="chunk-count" id="chunk-count" aria-live="polite">0 chunks</span>
-    </div>
-    <div class="sources-list" id="sources-list" role="list">
-      <div class="sources-empty" aria-label="No sources yet">
-        <span class="empty-icon" aria-hidden="true">◎</span>
-        Sources retrieved from your course materials will appear here.
-      </div>
-    </div>
-  </aside>
+        <button class="submit-button" id="follow-up-button" type="submit" disabled>Send</button>
+      </form>
+    </main>
+  </div>
 
   <script>
-    // ── State ──
-    const input = document.getElementById('question-input');
-    const sendBtn = document.getElementById('send-btn');
-    const chatWindow = document.getElementById('chat-window');
-    const sourcesList = document.getElementById('sources-list');
-    const chunkCount = document.getElementById('chunk-count');
-    const welcomeScreen = document.getElementById('welcome-screen');
-    let messageCount = 0;
-
-    // Topics loaded from GET /topics (backed by JSON/lessonN.json files)
-    let TOPICS = [];
-
-    // Request types students can ask for. `subject` template mirrors
-    // REQUEST_TYPE_TEMPLATES on the backend, purely for display purposes here.
-    const REQUEST_TYPES = [
-      { id: 'practice_problems',      label: 'Practice Problems',       icon: '✎' },
-      { id: 'alternate_explanations', label: 'Alternate Explanations',  icon: '≈' },
-      { id: 'concept_summary',        label: 'Concept Summary',         icon: '§' },
-      { id: 'quiz_me',                label: 'Quiz Me',                 icon: '?' },
-    ];
-
-    const OTHER_DETAILS_MAX_LEN = 500; // matches backend GeneratePrompt.other_details
+    const form = document.getElementById('practice-form');
+    const topicSelect = document.getElementById('topic-select');
+    const practiceRequest = document.getElementById('practice-request');
+    const charCount = document.getElementById('char-count');
+    const submitButton = document.getElementById('submit-button');
+    const errorBox = document.getElementById('error');
+    const chat = document.getElementById('chat');
+    const onboardingComplete = document.getElementById('onboarding-complete');
+    const followUpForm = document.getElementById('follow-up-form');
+    const followUpInput = document.getElementById('follow-up-input');
+    const followUpButton = document.getElementById('follow-up-button');
+    const conversation = [];
+    let selectedTopic = '';
 
     async function loadTopics() {
       try {
-        const res = await fetch('/topics');
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        TOPICS = await res.json();
-      } catch (err) {
-        console.error('Failed to load topics:', err);
-        TOPICS = [];
-      }
-    }
-    loadTopics();
+        const response = await fetch('/topics');
+        if (!response.ok) throw new Error(`Request failed (${response.status})`);
 
-    // ── Input handling ──
-    input.addEventListener('input', () => {
-      sendBtn.disabled = input.value.trim().length === 0;
-    });
+        const topics = await response.json();
+        topicSelect.innerHTML = '<option value="">Select a topic</option>';
 
-    function autoResize(el) {
-      el.style.height = 'auto';
-      el.style.height = Math.min(el.scrollHeight, 160) + 'px';
-    }
-
-    function handleKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        if (!sendBtn.disabled) submitQuestion();
-      }
-    }
-
-    function submitStarter(btn) {
-      const text = btn.innerText.replace(/^[^\w]+/, '').trim();
-      input.value = text;
-      sendBtn.disabled = false;
-      submitQuestion();
-    }
-
-    function filterTopic(topic) {
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      // Wire to backend filter in real implementation
-    }
-
-    // ── Submit: initial free-text prompt → show topic/type picker ──
-    async function submitQuestion() {
-      const question = input.value.trim();
-      if (!question) return;
-
-      // Hide welcome
-      if (welcomeScreen) welcomeScreen.remove();
-
-      // Add user message
-      appendMessage('user', question);
-      input.value = '';
-      input.style.height = 'auto';
-      sendBtn.disabled = true;
-
-      // Add to history
-      addHistory(question);
-
-      // Instead of answering directly, ask which topic + what kind of help
-      if (TOPICS.length === 0) await loadTopics(); // retry once in case first load raced the DB
-      appendPicker(question);
-    }
-
-    // ── Picker card: topic dropdown + request-type buttons + optional details ──
-    function appendPicker(initialPrompt) {
-      messageCount++;
-
-      const msg = document.createElement('div');
-      msg.className = 'message assistant';
-      msg.setAttribute('role', 'article');
-      msg.setAttribute('aria-label', 'Assistant: choose a topic and request type');
-
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.setAttribute('aria-hidden', 'true');
-      avatar.textContent = '∫';
-
-      const card = document.createElement('div');
-      card.className = 'picker-card';
-      card.setAttribute('role', 'form');
-      card.setAttribute('aria-label', 'Topic and request type selection');
-
-      // Topic dropdown
-      const topicLabel = document.createElement('label');
-      topicLabel.className = 'picker-label';
-      topicLabel.textContent = 'Which topic?';
-      topicLabel.htmlFor = `topic-select-${messageCount}`;
-
-      const topicSelect = document.createElement('select');
-      topicSelect.className = 'picker-select';
-      topicSelect.id = `topic-select-${messageCount}`;
-
-      if (TOPICS.length === 0) {
-        const opt = document.createElement('option');
-        opt.textContent = 'No topics available';
-        opt.disabled = true;
-        opt.selected = true;
-        topicSelect.appendChild(opt);
-        topicSelect.disabled = true;
-      } else {
-        const placeholder = document.createElement('option');
-        placeholder.textContent = 'Select a topic…';
-        placeholder.value = '';
-        placeholder.disabled = true;
-        placeholder.selected = true;
-        topicSelect.appendChild(placeholder);
-
-        TOPICS.forEach(topic => {
-          const opt = document.createElement('option');
-          opt.value = topic.name; // backend validates subject against KEYWORDS by name
-          opt.textContent = topic.week != null ? `Week ${topic.week} — ${topic.name}` : topic.name;
-          topicSelect.appendChild(opt);
+        topics.forEach((topic) => {
+          const option = document.createElement('option');
+          option.value = topic.name;
+          option.textContent = topic.week == null
+            ? topic.name
+            : `Week ${topic.week}: ${topic.name}`;
+          topicSelect.appendChild(option);
         });
+
+        topicSelect.disabled = topics.length === 0;
+        updateSubmitState();
+      } catch (error) {
+        topicSelect.innerHTML = '<option value="">Topics unavailable</option>';
+        showError('Could not load course topics. Refresh the page to try again.');
       }
-
-      // Request-type buttons
-      const typeLabel = document.createElement('div');
-      typeLabel.className = 'picker-label';
-      typeLabel.textContent = 'What would you like?';
-
-      const typeGrid = document.createElement('div');
-      typeGrid.className = 'picker-types';
-      typeGrid.setAttribute('role', 'radiogroup');
-      typeGrid.setAttribute('aria-label', 'Request type');
-
-      let selectedType = null;
-      const typeButtons = [];
-
-      REQUEST_TYPES.forEach(rt => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'type-btn';
-        btn.setAttribute('role', 'radio');
-        btn.setAttribute('aria-checked', 'false');
-        btn.innerHTML = `<span class="type-icon" aria-hidden="true">${rt.icon}</span> ${rt.label}`;
-        btn.onclick = () => {
-          selectedType = rt.id;
-          typeButtons.forEach(b => {
-            b.el.classList.remove('selected');
-            b.el.setAttribute('aria-checked', 'false');
-          });
-          btn.classList.add('selected');
-          btn.setAttribute('aria-checked', 'true');
-          updateSubmitState();
-        };
-        typeButtons.push({ id: rt.id, el: btn });
-        typeGrid.appendChild(btn);
-      });
-
-      // Optional extra details
-      const detailsLabel = document.createElement('label');
-      detailsLabel.className = 'picker-label';
-      detailsLabel.textContent = 'Anything specific? (optional)';
-      detailsLabel.htmlFor = `details-input-${messageCount}`;
-
-      const detailsInput = document.createElement('input');
-      detailsInput.type = 'text';
-      detailsInput.className = 'picker-details-input';
-      detailsInput.id = `details-input-${messageCount}`;
-      detailsInput.placeholder = 'e.g. "focus on chain rule with trig functions"';
-      detailsInput.maxLength = OTHER_DETAILS_MAX_LEN;
-
-      const charCount = document.createElement('div');
-      charCount.className = 'picker-char-count';
-      charCount.textContent = `0 / ${OTHER_DETAILS_MAX_LEN}`;
-      detailsInput.addEventListener('input', () => {
-        charCount.textContent = `${detailsInput.value.length} / ${OTHER_DETAILS_MAX_LEN}`;
-      });
-
-      // Error message (shown on failed submit)
-      const errorMsg = document.createElement('div');
-      errorMsg.className = 'picker-error';
-      errorMsg.style.display = 'none';
-
-      // Submit
-      const submitBtn = document.createElement('button');
-      submitBtn.type = 'button';
-      submitBtn.className = 'picker-submit-btn';
-      submitBtn.textContent = 'Continue';
-      submitBtn.disabled = true;
-
-      function updateSubmitState() {
-        submitBtn.disabled = !(topicSelect.value && selectedType);
-      }
-      topicSelect.addEventListener('change', updateSubmitState);
-
-      submitBtn.onclick = async () => {
-        errorMsg.style.display = 'none';
-        card.classList.add('disabled');
-        submitBtn.textContent = 'Working…';
-
-        const typing = 'typing-' + Date.now();
-        appendTyping(typing);
-
-        try {
-          await requestGeneration({
-            subject: topicSelect.value,
-            requestType: selectedType,
-            initialPrompt,
-            details: detailsInput.value.trim(),
-            typingId: typing,
-          });
-        } catch (err) {
-          document.getElementById(typing)?.remove();
-          card.classList.remove('disabled');
-          submitBtn.textContent = 'Continue';
-          errorMsg.textContent = err.message || 'Something went wrong. Please try again.';
-          errorMsg.style.display = 'block';
-        }
-      };
-
-      card.appendChild(topicLabel);
-      card.appendChild(topicSelect);
-      card.appendChild(typeLabel);
-      card.appendChild(typeGrid);
-      card.appendChild(detailsLabel);
-      card.appendChild(detailsInput);
-      card.appendChild(charCount);
-      card.appendChild(errorMsg);
-      card.appendChild(submitBtn);
-
-      msg.appendChild(avatar);
-      msg.appendChild(card);
-      chatWindow.appendChild(msg);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 
-    // ── Call backend /generate_prompt with the chosen topic + request type ──
-    async function requestGeneration({ subject, requestType, initialPrompt, details, typingId }) {
-      // Combine the student's original message with any extra details they
-      // typed, trimmed to the backend's 120-char limit on other_details.
-      const combinedDetails = [initialPrompt, details].filter(Boolean).join('\n\n').slice(0, OTHER_DETAILS_MAX_LEN);
-
-      const response = await fetch('/generate_prompt', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          subject,
-          request_type: requestType,
-          other_details: combinedDetails,
-        }),
-      });
-
-      document.getElementById(typingId)?.remove();
-
-      if (!response.ok) {
-        const errBody = await response.json().catch(() => ({}));
-        throw new Error(errBody.detail || `Request failed (${response.status})`);
-      }
-
-      const data = await response.json();
-      const typeLabel = REQUEST_TYPES.find(rt => rt.id === requestType)?.label || requestType;
-      appendMessage('assistant', `**${typeLabel} — ${subject}**\n\n${data.response}`);
+    function updateSubmitState() {
+      submitButton.disabled = !topicSelect.value || !practiceRequest.value.trim();
     }
 
-    function appendMessage(role, content, chunks = []) {
-      messageCount++;
-      const msg = document.createElement('div');
-      msg.className = `message ${role}`;
-      msg.setAttribute('role', 'article');
-      msg.setAttribute('aria-label', `${role === 'user' ? 'You' : 'Assistant'}: ${content.substring(0, 60)}`);
-
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.setAttribute('aria-hidden', 'true');
-      avatar.textContent = role === 'user' ? 'U' : '∫';
-
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = formatContent(content);
-      renderMath(bubble);
-
-      if (chunks.length > 0) {
-        const refs = document.createElement('div');
-        refs.className = 'chunk-refs';
-        refs.setAttribute('aria-label', 'Referenced chunks');
-        chunks.forEach((c, i) => {
-          const chip = document.createElement('button');
-          chip.className = 'chunk-ref';
-          chip.textContent = `chunk_${c.id}`;
-          chip.setAttribute('aria-label', `View source chunk ${c.id}`);
-          chip.onclick = () => highlightSource(c.id);
-          refs.appendChild(chip);
-        });
-        bubble.appendChild(refs);
-      }
-
-      msg.appendChild(avatar);
-      msg.appendChild(bubble);
-      chatWindow.appendChild(msg);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.style.display = 'block';
     }
 
-    function escapeHtml(text) {
-      return String(text ?? '')
+    function clearError() {
+      errorBox.textContent = '';
+      errorBox.style.display = 'none';
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -1182,11 +571,28 @@
         .replace(/'/g, '&#039;');
     }
 
-    function formatContent(text) {
-      return escapeHtml(text)
+    function formatResponse(value) {
+      const mathExpressions = [];
+      const protectedValue = String(value ?? '').replace(
+        /(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$[^$\n]+?\$)/g,
+        (expression) => {
+          const placeholder = `@@MATH_${mathExpressions.length}@@`;
+          mathExpressions.push(expression);
+          return placeholder;
+        }
+      );
+
+      const formatted = escapeHtml(protectedValue)
+        .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+        .replace(/^---$/gm, '<hr>')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/`(.+?)`/g, '<code>$1</code>')
+        .replace(/`([^`]+?)`/g, '<code>$1</code>')
         .replace(/\n/g, '<br>');
+
+      return formatted.replace(
+        /@@MATH_(\d+)@@/g,
+        (_, index) => escapeHtml(mathExpressions[Number(index)])
+      );
     }
 
     function renderMath(element) {
@@ -1204,76 +610,232 @@
       });
     }
 
-    function appendTyping(id) {
-      const msg = document.createElement('div');
-      msg.className = 'message assistant';
-      msg.id = id;
-      msg.setAttribute('aria-label', 'Assistant is typing');
-      msg.setAttribute('aria-live', 'polite');
+    function createSourceList(sources) {
+      if (!Array.isArray(sources) || sources.length === 0) return null;
 
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.setAttribute('aria-hidden', 'true');
-      avatar.textContent = '∫';
+      const sourceList = document.createElement('div');
+      sourceList.className = 'source-list';
+
+      const label = document.createElement('span');
+      label.className = 'source-list-label';
+      label.textContent = 'Materials used';
+      sourceList.appendChild(label);
+
+      sources.forEach((source) => {
+        const chip = document.createElement('span');
+        chip.className = 'source-chip';
+        chip.textContent = source;
+        sourceList.appendChild(chip);
+      });
+      return sourceList;
+    }
+
+    function appendMessage(role, content, topic, clarification = false, sources = []) {
+      const message = document.createElement('article');
+      message.className = `message ${role}`;
+
+      const label = document.createElement('div');
+      label.className = 'message-label';
+      label.textContent = role === 'user'
+        ? `You / ${topic}${clarification ? ' / Clarification' : ' / With solution'}`
+        : 'MathBot';
 
       const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = '<div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>';
+      bubble.className = 'message-bubble';
 
-      msg.appendChild(avatar);
-      msg.appendChild(bubble);
-      chatWindow.appendChild(msg);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
-    function addHistory(question) {
-      const historyList = document.getElementById('history-list');
-      const item = document.createElement('div');
-      item.className = 'history-item';
-      item.textContent = question.length > 36 ? question.substring(0, 36) + '…' : question;
-      item.tabIndex = 0;
-      item.setAttribute('role', 'button');
-      item.setAttribute('aria-label', `Revisit: ${question}`);
-      historyList.prepend(item);
-    }
-
-    function highlightSource(id) {
-      document.querySelectorAll('.source-card').forEach(c => c.classList.remove('highlighted'));
-      const card = document.getElementById(`source-${id}`);
-      if (card) {
-        card.classList.add('highlighted');
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (role === 'assistant') {
+        bubble.classList.add('answer');
+        const sourceList = createSourceList(sources);
+        if (sourceList) bubble.appendChild(sourceList);
+        const responseContent = document.createElement('div');
+        responseContent.innerHTML = formatResponse(content);
+        bubble.appendChild(responseContent);
+        renderMath(responseContent);
+      } else {
+        bubble.textContent = content;
       }
+
+      message.append(label, bubble);
+      chat.appendChild(message);
+      message.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return message;
     }
 
-    function renderSources(chunks) {
-      sourcesList.innerHTML = '';
-      chunkCount.textContent = `${chunks.length} chunk${chunks.length !== 1 ? 's' : ''}`;
+    function appendPracticeMessage(problem, solution, sources) {
+      const message = document.createElement('article');
+      message.className = 'message assistant';
 
-      chunks.forEach((chunk, i) => {
-        const card = document.createElement('div');
-        card.className = 'source-card';
-        card.id = `source-${chunk.id}`;
-        card.setAttribute('role', 'listitem');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Source chunk ${chunk.id}: ${chunk.topic}`);
-        card.style.animationDelay = `${i * 0.06}s`;
+      const label = document.createElement('div');
+      label.className = 'message-label';
+      label.textContent = 'MathBot';
 
-        card.innerHTML = `
-          <div class="source-topic">${escapeHtml(chunk.topic)}</div>
-          <div class="source-text">${formatContent(chunk.text)}</div>
-          <div class="source-score" aria-label="Relevance score ${Math.round(chunk.score * 100)}%">
-            <div class="score-bar" aria-hidden="true">
-              <div class="score-fill" style="width: ${chunk.score * 100}%"></div>
-            </div>
-            <span class="score-label">${Math.round(chunk.score * 100)}%</span>
-          </div>
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble answer';
+
+      const sourceList = createSourceList(sources);
+      if (sourceList) bubble.appendChild(sourceList);
+
+      const problemHeading = document.createElement('strong');
+      problemHeading.textContent = 'Practice Problem:';
+      const problemContent = document.createElement('div');
+      problemContent.innerHTML = formatResponse(problem);
+      bubble.append(problemHeading, document.createElement('br'), problemContent);
+      renderMath(problemContent);
+
+      if (solution) {
+        const details = document.createElement('details');
+        details.className = 'solution-reveal';
+
+        const summary = document.createElement('summary');
+        summary.innerHTML = `
+          <span class="solution-prompt">
+            Try solving it yourself first
+            <small>Reveal the complete worked solution when you are ready.</small>
+          </span>
         `;
-        renderMath(card);
 
-        sourcesList.appendChild(card);
-      });
+        const solutionContent = document.createElement('div');
+        solutionContent.className = 'solution-content';
+        solutionContent.innerHTML = formatResponse(solution);
+        renderMath(solutionContent);
+        details.append(summary, solutionContent);
+        bubble.appendChild(details);
+      }
+
+      message.append(label, bubble);
+      chat.appendChild(message);
+      message.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return message;
     }
+
+    function appendLoadingMessage(text = 'Building your practice problem...') {
+      const message = document.createElement('article');
+      message.className = 'message assistant loading';
+      message.setAttribute('role', 'status');
+      message.innerHTML = `
+        <div class="message-label">MathBot</div>
+        <div class="message-bubble">
+          <span class="spinner" aria-hidden="true"></span>
+          ${escapeHtml(text)}
+        </div>
+      `;
+      chat.appendChild(message);
+      message.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return message;
+    }
+
+    practiceRequest.addEventListener('input', () => {
+      charCount.textContent = `${practiceRequest.value.length} / 500`;
+      updateSubmitState();
+    });
+
+    topicSelect.addEventListener('change', updateSubmitState);
+
+    followUpInput.addEventListener('input', () => {
+      followUpButton.disabled = !followUpInput.value.trim();
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearError();
+
+      const topic = topicSelect.value;
+      const request = practiceRequest.value.trim();
+      appendMessage('user', request, topic);
+      const loadingMessage = appendLoadingMessage();
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'MathBot is working...';
+
+      try {
+        const response = await fetch('/generate_prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: topic,
+            request_type: 'practice_problems',
+            include_solution: true,
+            other_details: request
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data.detail || `Request failed (${response.status})`);
+        }
+
+        loadingMessage.remove();
+        appendPracticeMessage(data.problem || data.response, data.solution || '', data.sources || []);
+        selectedTopic = topic;
+        conversation.push(
+          { role: 'user', content: request },
+          {
+            role: 'assistant',
+            content: `Practice Problem:\n${data.problem || data.response}\n\nWorked Solution:\n${data.solution || ''}`
+          }
+        );
+        form.classList.add('submitted');
+        onboardingComplete.textContent = `Topic selected: ${topic}`;
+        followUpForm.classList.add('active');
+        followUpInput.focus();
+      } catch (error) {
+        loadingMessage.remove();
+        showError(error.message || 'Could not generate a problem. Please try again.');
+      } finally {
+        submitButton.textContent = 'Generate problem';
+        if (!form.classList.contains('submitted')) updateSubmitState();
+      }
+    });
+
+    followUpForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearError();
+
+      const request = followUpInput.value.trim();
+      if (!request || !selectedTopic) return;
+
+      appendMessage('user', request, selectedTopic, true);
+      const loadingMessage = appendLoadingMessage('Thinking about your question...');
+      followUpButton.disabled = true;
+      followUpButton.textContent = 'Thinking...';
+
+      try {
+        const response = await fetch('/generate_prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: selectedTopic,
+            request_type: 'practice_problems',
+            include_solution: true,
+            follow_up: true,
+            conversation: conversation.slice(-8),
+            other_details: request
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data.detail || `Request failed (${response.status})`);
+        }
+
+        loadingMessage.remove();
+        appendMessage('assistant', data.response, selectedTopic, true, data.sources || []);
+        conversation.push(
+          { role: 'user', content: request },
+          { role: 'assistant', content: data.response }
+        );
+        followUpInput.value = '';
+        followUpInput.focus();
+      } catch (error) {
+        loadingMessage.remove();
+        showError(error.message || 'Could not answer that question. Please try again.');
+      } finally {
+        followUpButton.textContent = 'Send';
+        followUpButton.disabled = !followUpInput.value.trim();
+      }
+    });
+
+    loadTopics();
   </script>
 </body>
 </html>
