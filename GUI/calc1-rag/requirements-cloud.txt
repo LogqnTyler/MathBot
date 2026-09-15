@@ -1,9 +1,10 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-pg8000
+psycopg[binary]
+pgvector
 python-dotenv
+google-auth
 numpy
 scipy
 requests
-sentence-transformers

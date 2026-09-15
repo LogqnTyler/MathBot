@@ -2,14 +2,13 @@ import json
 import os
 from pathlib import Path
 
-from google.cloud.sql.connector import Connector, IPTypes
-import pg8000
 import sqlalchemy
 from dataclasses import dataclass, asdict
 from dotenv import load_dotenv
 
 from sqlalchemy import (
     create_engine,
+    URL,
     String,
     Integer,
     Column,
@@ -110,28 +109,15 @@ def main():
     engine = None
     session = None
     try:
-        database_url = os.environ.get("DATABASE_URL")
-        if database_url:
-            engine = create_engine(database_url)
-        else:
-            connector = Connector(refresh_strategy="LAZY")
-            instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
-            db_user = os.environ["DB_USER"]
-            db_pass = os.environ["DB_PASS"]
-            db_name = os.environ["DB_NAME"]
-            ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-
-            def getconn() -> pg8000.dbapi.Connection:
-                return connector.connect(
-                    instance_connection_name,
-                    "pg8000",
-                    user=db_user,
-                    password=db_pass,
-                    db=db_name,
-                    ip_type=ip_type,
-                )
-
-            engine = create_engine("postgresql+pg8000://", creator=getconn)
+        database_url = URL.create(
+            "postgresql+psycopg",
+            username=os.getenv("SUPABASE_DB_USER", "postgres.vilsgxedlantniabkjkw"),
+            password=os.environ["SUPABASE_PASSWORD"],
+            host=os.getenv("SUPABASE_DB_HOST", "aws-0-us-east-1.pooler.supabase.com"),
+            port=int(os.getenv("SUPABASE_DB_PORT", "5432")),
+            database=os.getenv("SUPABASE_DB_NAME", "postgres"),
+        )
+        engine = create_engine(database_url)
 
         session = Session(engine)
 

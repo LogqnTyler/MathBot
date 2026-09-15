@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MATH 1191 - 1210 — Study Assistant</title>
+  <title>MathBot</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -512,11 +512,154 @@
       font-family: var(--mono);
     }
 
+
+    /* ── Multiple-choice quiz ── */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .quiz-option {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #ffffff;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--accent);
+      background: rgba(232, 200, 122, 0.08);
+    }
+
+    .quiz-option.correct {
+      border-color: #ffffff;
+    }
+
+    .quiz-option:disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .quiz-option-letter {
+      flex: 0 0 24px;
+      font-family: var(--mono);
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .quiz-option-text {
+      flex: 1;
+      color: #ffffff;
+    }
+
+    .quiz-feedback {
+      color: #ffffff;
+    }
+
+        /* ── Interactive three-attempt quiz ── */
+    .quiz-card {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .quiz-attempt-status {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .quiz-answer-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .quiz-answer-input {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .quiz-answer-input:focus {
+      border-color: var(--accent);
+    }
+
+    .quiz-submit-btn {
+      background: var(--accent);
+      border: none;
+      border-radius: 5px;
+      padding: 9px 16px;
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+
+    .quiz-submit-btn:hover { opacity: 0.85; }
+
+    .quiz-submit-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .quiz-feedback:empty {
+      display: none;
+    }
+
+    .quiz-complete {
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
     /* ── Input area ── */
     .input-area {
-      padding: 20px 40px 28px;
-      border-top: 1px solid var(--border);
+      padding: 40px;
       background: var(--bg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .input-row {
@@ -544,8 +687,9 @@
       font-size: 14px;
       resize: none;
       line-height: 1.6;
-      max-height: 160px;
-      min-height: 24px;
+      height: 95px;
+      min-height: 95px;
+      max-height: 300px;
     }
 
     #question-input::placeholder { color: var(--muted); }
@@ -741,9 +885,9 @@
 
   <!-- ── Header ── -->
   <header role="banner">
-    <div class="logo" aria-label="1190 - 1210 Study Assistant">
+    <div class="logo" aria-label="MathBot">
       <span class="logo-symbol" aria-hidden="true">∫</span>
-      MATH 1191 - 1210 — Study Assistant
+      MathBot
     </div>
     <div class="header-meta" role="status" aria-live="polite">
       <div class="status-dot" aria-hidden="true"></div>
@@ -754,80 +898,26 @@
   <!-- ── Sidebar ── -->
   <nav aria-label="Topics and history">
     <span class="nav-section-label">Topics</span>
-    <button class="nav-item active" aria-current="page" onclick="filterTopic('all')">
-      <span class="nav-icon" aria-hidden="true">⊞</span> All Topics
-    </button>
-    <button class="nav-item" onclick="filterTopic('limits')">
-      <span class="nav-icon" aria-hidden="true">→</span> Limits
-      <span class="topic-chip">lim</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('derivatives')">
-      <span class="nav-icon" aria-hidden="true">′</span> Derivatives
-      <span class="topic-chip">d/dx</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('integrals')">
-      <span class="nav-icon" aria-hidden="true">∫</span> Integrals
-      <span class="topic-chip">∫dx</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('continuity')">
-      <span class="nav-icon" aria-hidden="true">∼</span> Continuity Conditions
-    </button>
-    <button class="nav-item" onclick="filterTopic('ftc')">
-      <span class="nav-icon" aria-hidden="true">⇔</span> Fund. Theorem
-      <span class="topic-chip">FTC</span>
-    </button>
-    <button class="nav-item" onclick="filterTopic('applications')">
-      <span class="nav-icon" aria-hidden="true">◈</span> Applications
-    </button>
+    <div id="topics-nav" aria-label="Course topics">
+      <div class="history-item">Loading topics…</div>
+    </div>
 
     <span class="nav-section-label">Recent</span>
     <div id="history-list" aria-label="Conversation history">
-      <div class="history-item" tabindex="0">What is the chain rule?</div>
-      <div class="history-item" tabindex="0">Explain teh meaning of the derivative.</div>
-      <div class="history-item" tabindex="0">How do I find critical points?</div>
+      <div class="history-item" id="history-empty">No questions yet.</div>
     </div>
   </nav>
 
   <!-- ── Main chat ── -->
   <main id="main-content" aria-label="Chat">
     <div class="chat-window" id="chat-window" role="log" aria-live="polite" aria-label="Conversation">
-
-      <!-- Welcome screen -->
-      <div class="welcome" id="welcome-screen">
-        <h1 class="welcome-title">Ask anything about<br><em>1191 - 1210</em></h1>
-        <p class="welcome-sub">
-          I'll ask which topic and what kind of help you want, then search your course materials.<br>
-          Try a question below, or type your own.
-        </p>
-        <div class="starter-grid" role="list">
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">′</span>
-            What is the definition of a derivative?
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">→</span>
-            How do I evaluate a limit at infinity?
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">∫</span>
-            Explain the Fundamental Theorem of Calculus
-          </button>
-          <button class="starter-btn" role="listitem" onclick="submitStarter(this)">
-            <span class="starter-icon" aria-hidden="true">△</span>
-            When does a function have a local maximum?
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Input -->
+<!-- Input -->
     <div class="input-area">
       <div class="input-row">
         <textarea
           id="question-input"
           rows="1"
-          placeholder="Ask a question about MATH 1191 - 1210"
+          placeholder="Ask MathBot"
           aria-label="Your question"
           aria-multiline="true"
           onkeydown="handleKey(event)"
@@ -862,8 +952,15 @@
     const chatWindow = document.getElementById('chat-window');
     const sourcesList = document.getElementById('sources-list');
     const chunkCount = document.getElementById('chunk-count');
-    const welcomeScreen = document.getElementById('welcome-screen');
     let messageCount = 0;
+
+    // Pseudonymous research/session identifier. It contains no student name,
+    // email address, Canvas ID, or other direct identifier.
+    let sessionId = sessionStorage.getItem('mathbot-session-id');
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      sessionStorage.setItem('mathbot-session-id', sessionId);
+    }
 
     // Topics loaded from GET /topics (backed by JSON/lessonN.json files)
     let TOPICS = [];
@@ -884,11 +981,59 @@
         const res = await fetch('/topics');
         if (!res.ok) throw new Error(`Status ${res.status}`);
         TOPICS = await res.json();
+        renderTopicNav();
       } catch (err) {
         console.error('Failed to load topics:', err);
         TOPICS = [];
+        renderTopicNav();
       }
     }
+
+    function renderTopicNav(activeTopic = null) {
+      const nav = document.getElementById('topics-nav');
+      if (!nav) return;
+
+      nav.innerHTML = '';
+
+      if (TOPICS.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'history-item';
+        empty.textContent = 'No topics available.';
+        nav.appendChild(empty);
+        return;
+      }
+
+      TOPICS.forEach(topic => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'nav-item';
+
+        if (topic.name === activeTopic) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-current', 'page');
+        }
+
+        const icon = document.createElement('span');
+        icon.className = 'nav-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = '›';
+
+        const label = document.createElement('span');
+        label.textContent = topic.name;
+
+        btn.appendChild(icon);
+        btn.appendChild(label);
+
+        btn.addEventListener('click', () => {
+          renderTopicNav(topic.name);
+
+          appendPicker('', topic.name);
+        });
+
+        nav.appendChild(btn);
+      });
+    }
+
     loadTopics();
 
     // ── Input handling ──
@@ -908,12 +1053,6 @@
       }
     }
 
-    function submitStarter(btn) {
-      const text = btn.innerText.replace(/^[^\w]+/, '').trim();
-      input.value = text;
-      sendBtn.disabled = false;
-      submitQuestion();
-    }
 
     function filterTopic(topic) {
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -923,32 +1062,74 @@
 
     // ── Submit: initial free-text prompt → show topic/type picker ──
     async function submitQuestion() {
-      const question = input.value.trim();
+      // Keep the exact browser text for research logging.
+      const originalQuestion = input.value;
+      const question = originalQuestion.trim();
       if (!question) return;
 
-      // Hide welcome
-      if (welcomeScreen) welcomeScreen.remove();
-
-      // Add user message
       appendMessage('user', question);
       input.value = '';
-      input.style.height = 'auto';
+      input.style.height = '95px';
+      input.disabled = true;
       sendBtn.disabled = true;
 
-      // Add to history
       addHistory(question);
 
-      // Instead of answering directly, ask which topic + what kind of help
-      if (TOPICS.length === 0) await loadTopics(); // retry once in case first load raced the DB
-      appendPicker(question);
+      try {
+        const response = await fetch('/ask', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            question: originalQuestion,
+            session_id: sessionId,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`MathBot request failed: ${response.status} ${errorText}`);
+        }
+
+        const data = await response.json();
+
+        appendMessage(
+          'assistant',
+          data.response,
+          [],
+          'generated-response'
+        );
+
+        renderSources(data.sources || []);
+
+        if (data.subject && data.subject !== 'Unclassified') {
+          renderTopicNav(data.subject);
+        }
+      } catch (error) {
+        console.error(error);
+        appendMessage(
+          'assistant',
+          'MathBot could not generate a response. Please try again.'
+        );
+      } finally {
+        input.disabled = false;
+        sendBtn.disabled = input.value.trim().length === 0;
+        input.focus();
+      }
     }
 
-    // ── Picker card: topic dropdown + request-type buttons + optional details ──
-    function appendPicker(initialPrompt) {
+
+    function appendPicker(initialPrompt, preselectedTopic = null) {
+      // Only one active task should be visible at a time.
+      // Keep student messages, but remove the previous picker and generated response.
+      document.querySelectorAll('.message.active-picker, .message.generated-response')
+        .forEach(el => el.remove());
+
       messageCount++;
 
       const msg = document.createElement('div');
-      msg.className = 'message assistant';
+      msg.className = 'message assistant active-picker';
       msg.setAttribute('role', 'article');
       msg.setAttribute('aria-label', 'Assistant: choose a topic and request type');
 
@@ -991,6 +1172,12 @@
           const opt = document.createElement('option');
           opt.value = topic.name; // backend validates subject against KEYWORDS by name
           opt.textContent = topic.week != null ? `Week ${topic.week} — ${topic.name}` : topic.name;
+
+          if (topic.name === preselectedTopic) {
+            opt.selected = true;
+            placeholder.selected = false;
+          }
+
           topicSelect.appendChild(opt);
         });
       }
@@ -1039,7 +1226,7 @@
       detailsInput.type = 'text';
       detailsInput.className = 'picker-details-input';
       detailsInput.id = `details-input-${messageCount}`;
-      detailsInput.placeholder = 'e.g. "focus on chain rule with trig functions"';
+      detailsInput.placeholder = 'e.g. "use a biology application"';
       detailsInput.maxLength = OTHER_DETAILS_MAX_LEN;
 
       const charCount = document.createElement('div');
@@ -1064,7 +1251,14 @@
       function updateSubmitState() {
         submitBtn.disabled = !(topicSelect.value && selectedType);
       }
-      topicSelect.addEventListener('change', updateSubmitState);
+      topicSelect.addEventListener('change', () => {
+        updateSubmitState();
+        renderTopicNav(topicSelect.value || null);
+      });
+
+      if (preselectedTopic) {
+        renderTopicNav(preselectedTopic);
+      }
 
       submitBtn.onclick = async () => {
         errorMsg.style.display = 'none';
@@ -1120,6 +1314,7 @@
           subject,
           request_type: requestType,
           other_details: combinedDetails,
+          session_id: sessionId,
         }),
       });
 
@@ -1131,14 +1326,292 @@
       }
 
       const data = await response.json();
+
+      // Show the exact course chunks used to ground this response.
+      renderSources(data.sources || []);
+
+      // The main composer was disabled when the student's message was sent.
+      // Restore it after generation so another prompt can be entered without
+      // refreshing the page.
+      sendBtn.disabled = input.value.trim().length === 0;
+      input.disabled = false;
+
+      if (requestType === 'quiz_me') {
+        appendQuizMessage(subject, data.quiz);
+        return;
+      }
+
+      if (requestType === 'practice_problems' && data.problem) {
+        appendPracticeProblemMessage(subject, data.problem, data.solution || '');
+        return;
+      }
+
       const typeLabel = REQUEST_TYPES.find(rt => rt.id === requestType)?.label || requestType;
-      appendMessage('assistant', `**${typeLabel} — ${subject}**\n\n${data.response}`);
+      appendMessage(
+        'assistant',
+        `**${typeLabel} — ${subject}**\n\n${data.response}`,
+        [],
+        'generated-response'
+      );
     }
 
-    function appendMessage(role, content, chunks = []) {
+
+    function appendPracticeProblemMessage(subject, problem, solution) {
+      messageCount++;
+
+      const msg = document.createElement('div');
+      msg.className = 'message assistant generated-response';
+      msg.setAttribute('role', 'article');
+      msg.setAttribute('aria-label', `Practice problem about ${subject}`);
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = '∫';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+
+      const problemContent = document.createElement('div');
+      problemContent.innerHTML = formatContent(
+        `**Practice Problems — ${subject}**\n\n${problem}`
+      );
+      renderMath(problemContent);
+      bubble.appendChild(problemContent);
+
+      if (solution) {
+        const showSolution = document.createElement('button');
+        showSolution.type = 'button';
+        showSolution.className = 'quiz-submit-btn';
+        showSolution.textContent = 'Show Solution';
+        showSolution.setAttribute('aria-expanded', 'false');
+
+        const solutionContent = document.createElement('div');
+        solutionContent.className = 'quiz-feedback';
+        solutionContent.style.display = 'none';
+        solutionContent.innerHTML = formatContent(
+          `**Solution**\n\n${solution}`
+        );
+        renderMath(solutionContent);
+
+        showSolution.addEventListener('click', () => {
+          const hidden = solutionContent.style.display === 'none';
+
+          solutionContent.style.display = hidden ? 'block' : 'none';
+          showSolution.textContent = hidden ? 'Hide Solution' : 'Show Solution';
+          showSolution.setAttribute('aria-expanded', hidden ? 'true' : 'false');
+
+          if (hidden) {
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+          }
+        });
+
+        bubble.appendChild(showSolution);
+        bubble.appendChild(solutionContent);
+      }
+
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      chatWindow.appendChild(msg);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+
+    function appendQuizMessage(subject, quiz) {
+      messageCount++;
+
+      const msg = document.createElement('div');
+      msg.className = 'message assistant generated-response';
+      msg.setAttribute('role', 'article');
+      msg.setAttribute('aria-label', `Quiz question about ${subject}`);
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = '∫';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+
+      const heading = document.createElement('div');
+      heading.innerHTML = formatContent(
+        `**Quiz Me — ${subject}**\n\n${quiz.question}`
+      );
+      renderMath(heading);
+      bubble.appendChild(heading);
+
+      const quizCard = document.createElement('div');
+      quizCard.className = 'quiz-card';
+
+      const status = document.createElement('div');
+      status.className = 'quiz-attempt-status';
+      status.textContent = 'Attempt 1 of 3';
+
+      const optionsContainer = document.createElement('div');
+      optionsContainer.className = 'quiz-options';
+      optionsContainer.setAttribute('role', 'radiogroup');
+      optionsContainer.setAttribute('aria-label', 'Answer choices');
+
+      const feedback = document.createElement('div');
+      feedback.className = 'quiz-feedback';
+      feedback.setAttribute('aria-live', 'polite');
+
+      let selectedAnswer = null;
+      let attempt = 1;
+      let finished = false;
+
+      ['A', 'B', 'C', 'D'].forEach(letter => {
+        const option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'quiz-option';
+        option.setAttribute('role', 'radio');
+        option.setAttribute('aria-checked', 'false');
+
+        option.innerHTML = `
+          <span class="quiz-option-letter">${letter}</span>
+          <span class="quiz-option-text">${formatContent(quiz.options[letter])}</span>
+        `;
+
+        option.addEventListener('click', () => {
+          if (finished) return;
+
+          selectedAnswer = letter;
+
+          optionsContainer.querySelectorAll('.quiz-option').forEach(btn => {
+            btn.classList.remove('selected');
+            btn.setAttribute('aria-checked', 'false');
+          });
+
+          option.classList.add('selected');
+          option.setAttribute('aria-checked', 'true');
+          submit.disabled = false;
+        });
+
+        optionsContainer.appendChild(option);
+      });
+
+      const submit = document.createElement('button');
+      submit.className = 'quiz-submit-btn';
+      submit.type = 'button';
+      submit.textContent = 'Check Answer';
+      submit.disabled = true;
+
+      quizCard.appendChild(status);
+      quizCard.appendChild(optionsContainer);
+      quizCard.appendChild(submit);
+      quizCard.appendChild(feedback);
+      bubble.appendChild(quizCard);
+
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      chatWindow.appendChild(msg);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      renderMath(optionsContainer);
+
+      async function submitAnswer() {
+        if (!selectedAnswer || finished) return;
+
+        submit.disabled = true;
+        optionsContainer.querySelectorAll('.quiz-option').forEach(btn => {
+          btn.disabled = true;
+        });
+        submit.textContent = 'Checking...';
+        feedback.textContent = '';
+
+        try {
+          const response = await fetch('/check_answer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              subject,
+              question: quiz.question,
+              student_answer: selectedAnswer,
+              correct_answer: quiz.correct_answer,
+              hint_1: quiz.hint_1,
+              hint_2: quiz.hint_2,
+              solution: quiz.solution,
+              attempt,
+            }),
+          });
+
+          if (!response.ok) {
+            const errBody = await response.json().catch(() => ({}));
+            throw new Error(
+              errBody.detail || `Request failed (${response.status})`
+            );
+          }
+
+          const data = await response.json();
+
+          feedback.innerHTML = formatContent(data.feedback || '');
+          renderMath(feedback);
+
+          if (data.correct) {
+            finished = true;
+            status.textContent = 'Complete';
+
+            const selected = optionsContainer.querySelector(
+              `.quiz-option:nth-child(${['A', 'B', 'C', 'D'].indexOf(selectedAnswer) + 1})`
+            );
+
+            if (selected) selected.classList.add('correct');
+
+            submit.style.display = 'none';
+            return;
+          }
+
+          if (attempt >= 3) {
+            finished = true;
+            status.textContent = 'Complete';
+
+            if (data.solution) {
+              const solution = document.createElement('div');
+              solution.className = 'quiz-feedback';
+              solution.innerHTML = formatContent(
+                `**Solution**\n\n${data.solution}`
+              );
+              renderMath(solution);
+              quizCard.appendChild(solution);
+            }
+
+            submit.style.display = 'none';
+            return;
+          }
+
+          attempt += 1;
+          status.textContent = `Attempt ${attempt} of 3`;
+          submit.textContent = 'Try Again';
+
+          optionsContainer.querySelectorAll('.quiz-option').forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('selected');
+            btn.setAttribute('aria-checked', 'false');
+          });
+
+          selectedAnswer = null;
+          submit.disabled = true;
+
+        } catch (error) {
+          feedback.textContent = `Error: ${error.message}`;
+
+          optionsContainer.querySelectorAll('.quiz-option').forEach(btn => {
+            btn.disabled = false;
+          });
+
+          submit.disabled = !selectedAnswer;
+          submit.textContent = 'Check Answer';
+        }
+      }
+
+      submit.addEventListener('click', submitAnswer);
+    }
+
+
+    function appendMessage(role, content, chunks = [], extraClass = '') {
       messageCount++;
       const msg = document.createElement('div');
-      msg.className = `message ${role}`;
+      msg.className = `message ${role}${extraClass ? ' ' + extraClass : ''}`;
       msg.setAttribute('role', 'article');
       msg.setAttribute('aria-label', `${role === 'user' ? 'You' : 'Assistant'}: ${content.substring(0, 60)}`);
 
@@ -1183,10 +1656,48 @@
     }
 
     function formatContent(text) {
-      return escapeHtml(text)
+      let source = String(text ?? '');
+      const mathBlocks = [];
+
+      // Protect LaTeX before doing any Markdown/HTML formatting.
+      // This prevents <br> tags and Markdown replacements from being
+      // inserted inside cases, aligned, arrays, fractions, etc.
+      source = source.replace(
+        /\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)/g,
+        match => {
+          const token = `MATHBLOCKTOKEN${mathBlocks.length}ENDTOKEN`;
+          mathBlocks.push(match);
+          return token;
+        }
+      );
+
+      let formatted = escapeHtml(source);
+
+      // Gemini occasionally uses Markdown backticks for ordinary math.
+      // Convert math-like backtick content to KaTeX inline delimiters.
+      formatted = formatted.replace(/`([^`\n]+)`/g, (match, content) => {
+        const looksLikeMath =
+          /[=+\-*/^_{}\\]/.test(content) ||
+          /^[A-Za-z]\([^)]*\)$/.test(content) ||
+          /^[A-Za-z]\s*[<>≤≥]\s*/.test(content) ||
+          /^-?\d+(\.\d+)?$/.test(content);
+
+        return looksLikeMath
+          ? `\\(${content}\\)`
+          : `<code>${content}</code>`;
+      });
+
+      formatted = formatted
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/`(.+?)`/g, '<code>$1</code>')
         .replace(/\n/g, '<br>');
+
+      // Restore the protected LaTeX exactly as generated.
+      mathBlocks.forEach((math, index) => {
+        const token = `MATHBLOCKTOKEN${index}ENDTOKEN`;
+        formatted = formatted.replace(token, math);
+      });
+
+      return formatted;
     }
 
     function renderMath(element) {
@@ -1228,12 +1739,33 @@
 
     function addHistory(question) {
       const historyList = document.getElementById('history-list');
+
+      // Remove the initial empty-state message once a real question exists.
+      const empty = document.getElementById('history-empty');
+      if (empty) empty.remove();
+
       const item = document.createElement('div');
       item.className = 'history-item';
       item.textContent = question.length > 36 ? question.substring(0, 36) + '…' : question;
       item.tabIndex = 0;
       item.setAttribute('role', 'button');
       item.setAttribute('aria-label', `Revisit: ${question}`);
+
+      const revisit = () => {
+        input.value = question;
+        autoResize(input);
+        sendBtn.disabled = false;
+        input.focus();
+      };
+
+      item.addEventListener('click', revisit);
+      item.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          revisit();
+        }
+      });
+
       historyList.prepend(item);
     }
 
@@ -1262,12 +1794,18 @@
         card.innerHTML = `
           <div class="source-topic">${escapeHtml(chunk.topic)}</div>
           <div class="source-text">${formatContent(chunk.text)}</div>
-          <div class="source-score" aria-label="Relevance score ${Math.round(chunk.score * 100)}%">
-            <div class="score-bar" aria-hidden="true">
-              <div class="score-fill" style="width: ${chunk.score * 100}%"></div>
+          ${typeof chunk.score === 'number' ? `
+            <div class="source-score" aria-label="Relevance score ${Math.round(chunk.score * 100)}%">
+              <div class="score-bar" aria-hidden="true">
+                <div class="score-fill" style="width: ${chunk.score * 100}%"></div>
+              </div>
+              <span class="score-label">${Math.round(chunk.score * 100)}%</span>
             </div>
-            <span class="score-label">${Math.round(chunk.score * 100)}%</span>
-          </div>
+          ` : `
+            <div class="source-score">
+              <span class="score-label">Course topic match</span>
+            </div>
+          `}
         `;
         renderMath(card);
 

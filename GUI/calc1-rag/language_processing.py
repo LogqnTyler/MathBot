@@ -4,24 +4,143 @@ import os
 import threading
 from typing import Any, Mapping, Sequence
 
-from sentence_transformers import SentenceTransformer
-
-# ── Embedding model (used for RAG retrieval) ──
-model = SentenceTransformer("BAAI/bge-m3")
-
-
-def embed_query(text: str | list[str]) -> list[float]:
-    if isinstance(text, str):
-        text = text
-    return model.encode_query(text).tolist()
+# ── Embedding model (Gemini Embedding via Vertex AI) ──
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "gemini-embedding-001")
+EMBEDDING_DIMENSION = 1024
 
 
-# ── Generation model (Qwen2.5-Math, used to actually generate responses) ──
-QWEN_MODEL_NAME = os.getenv("QWEN_MODEL_NAME", "Qwen/Qwen2.5-Math-1.5B-Instruct")
+def embed_query(text: str) -> list[float]:
+    """Create a 1024-dimensional retrieval-query embedding using Vertex AI."""
 
-# 128 tokens is enough for a short answer, but not a full problem + step-by-step
-# solution. Bump this up; override via env var if generations run too slow.
-QWEN_MAX_NEW_TOKENS = int(os.getenv("QWEN_MAX_NEW_TOKENS", "128"))
+    import json
+    import urllib.request
+
+    import google.auth
+    from google.auth.transport.requests import Request
+
+    credentials, _ = google.auth.default(
+        scopes=["https://www.googleapis.com/auth/cloud-platform"]
+    )
+    credentials.refresh(Request())
+
+    project = os.getenv("GOOGLE_CLOUD_PROJECT", "as-math-rag-tool-9d28")
+    location = os.getenv("VERTEX_LOCATION", "us-east4")
+
+    url = (
+        f"https://{location}-aiplatform.googleapis.com/v1/"
+        f"projects/{project}/locations/{location}/publishers/google/"
+        f"models/{EMBEDDING_MODEL}:predict"
+    )
+
+    payload = {
+        "instances": [
+            {
+                "content": text,
+                "task_type": "RETRIEVAL_QUERY",
+            }
+        ],
+        "parameters": {
+            "outputDimensionality": EMBEDDING_DIMENSION,
+        },
+    }
+
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {credentials.token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(request, timeout=60) as response:
+        result = json.loads(response.read().decode("utf-8"))
+
+    try:
+        return result["predictions"][0]["embeddings"]["values"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError(
+            f"Vertex AI returned an invalid embedding response: {result}"
+        ) from exc
+
+
+# ── Generation model (Gemini 2.5 Flash-Lite via Vertex AI) ──
+GCP_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", "as-math-rag-tool-9d28")
+GCP_LOCATION = os.getenv("VERTEX_LOCATION", "us-east4")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
+GEMINI_MAX_OUTPUT_TOKENS = int(os.getenv("GEMINI_MAX_OUTPUT_TOKENS", "1024"))
+
+
+def generate_gemini_response(
+    prompt: str,
+    *,
+    response_schema: dict[str, Any] | None = None,
+) -> str:
+    """Generate a MathBot response using Gemini on Vertex AI.
+
+    When response_schema is supplied, require Gemini to return JSON
+    conforming to that schema.
+    """
+
+    import json
+    import urllib.request
+
+    import google.auth
+    from google.auth.transport.requests import Request
+
+    credentials, _ = google.auth.default(
+        scopes=["https://www.googleapis.com/auth/cloud-platform"]
+    )
+    credentials.refresh(Request())
+
+    url = (
+        f"https://{GCP_LOCATION}-aiplatform.googleapis.com/v1/"
+        f"projects/{GCP_PROJECT}/locations/{GCP_LOCATION}/publishers/google/"
+        f"models/{GEMINI_MODEL}:generateContent"
+    )
+
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": prompt}],
+            }
+        ],
+        "generationConfig": {
+            "temperature": 0.3,
+            "maxOutputTokens": GEMINI_MAX_OUTPUT_TOKENS,
+        },
+    }
+
+    if response_schema is not None:
+        payload["generationConfig"]["responseMimeType"] = "application/json"
+        payload["generationConfig"]["responseSchema"] = response_schema
+
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {credentials.token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(request, timeout=120) as response:
+        result = json.loads(response.read().decode("utf-8"))
+
+    candidates = result.get("candidates", [])
+    if not candidates:
+        raise RuntimeError(f"Gemini returned no candidates: {result}")
+
+    parts = candidates[0].get("content", {}).get("parts", [])
+    output = "".join(part.get("text", "") for part in parts).strip()
+
+    if not output:
+        raise RuntimeError(f"Gemini returned an empty response: {result}")
+
+    return output
 
 
 
@@ -36,7 +155,15 @@ def generate_prompt_internal(
     definitions: Sequence[Mapping[str, Any]] | None = None,
 ) -> str:
     parts = [
-        "You are a helpful chatbot that generates practice problems for an introductory level college calculus class. You make practice problems with step by step solutions. You will create a practice problem based on some example practice problems, other course content, and, if applicable, definitions."
+        "You are MathBot, a tutor for an introductory college single-variable calculus course. "
+        "Use the course material below only as mathematical and curricular context. "
+        "Follow the student's requested topic exactly. "
+        "IMPORTANT COURSE SCOPE: This course does not cover trigonometric functions. "
+        "Do not introduce sine, cosine, tangent, inverse trigonometric functions, "
+        "trigonometric identities, or trig-based examples, exercises, quiz questions, "
+        "applications, derivatives, or integrals. Use non-trigonometric functions instead. "
+        "Do not assume that the task is a practice problem or that a solution should be provided; "
+        "the final task instructions determine the required response."
     ]
 
     for index, problem in enumerate(practice_problems or [], start=1):
@@ -78,9 +205,12 @@ def generate_prompt_internal(
 
     parts.extend(
         [
-            'Now generate a practice problem as well as a step-by-step solution to the problem according to the following prompt from the student. Once you generate the problem, write the solution in a step by step format, correcting any mistakes you make along the way. When the correct solution is found, reply with "# Problem: {problem goes here} # Solution: {solution goes here}" and then immediately terminate your response.',
-            f"Student: {student_prompt}",
-            "Chatbot:",
+            "# Student Request",
+            student_prompt,
+            (
+                "Use the course material above as supporting context. "
+                "Follow the mandatory final task instructions that appear after this context."
+            ),
         ]
     )
 
