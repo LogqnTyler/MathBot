@@ -384,6 +384,86 @@ def log_interaction(
         )
 
 
+
+def ensure_quiz_attempts_table() -> None:
+    """Create the pseudonymous quiz-attempt research log if needed."""
+    stmt = sa.text("""
+        CREATE TABLE IF NOT EXISTS mathbot_quiz_attempts (
+            id UUID PRIMARY KEY,
+            session_id UUID NOT NULL,
+            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+            subject TEXT NOT NULL,
+            question TEXT NOT NULL,
+
+            student_answer TEXT NOT NULL,
+            correct_answer TEXT NOT NULL,
+            attempt INTEGER NOT NULL CHECK (attempt BETWEEN 1 AND 3),
+            correct BOOLEAN NOT NULL,
+
+            feedback_shown TEXT
+        )
+    """)
+
+    with get_engine().begin() as conn:
+        conn.execute(stmt)
+
+
+def log_quiz_attempt(
+    *,
+    attempt_id: str,
+    session_id: str,
+    subject: str,
+    question: str,
+    student_answer: str,
+    correct_answer: str,
+    attempt: int,
+    correct: bool,
+    feedback_shown: str | None,
+) -> None:
+    """Store one student's answer attempt on a generated quiz question."""
+    stmt = sa.text("""
+        INSERT INTO mathbot_quiz_attempts (
+            id,
+            session_id,
+            subject,
+            question,
+            student_answer,
+            correct_answer,
+            attempt,
+            correct,
+            feedback_shown
+        )
+        VALUES (
+            CAST(:attempt_id AS UUID),
+            CAST(:session_id AS UUID),
+            :subject,
+            :question,
+            :student_answer,
+            :correct_answer,
+            :attempt,
+            :correct,
+            :feedback_shown
+        )
+    """)
+
+    with get_engine().begin() as conn:
+        conn.execute(
+            stmt,
+            {
+                "attempt_id": attempt_id,
+                "session_id": session_id,
+                "subject": subject,
+                "question": question,
+                "student_answer": student_answer,
+                "correct_answer": correct_answer,
+                "attempt": attempt,
+                "correct": correct,
+                "feedback_shown": feedback_shown,
+            },
+        )
+
+
 def close_db() -> None:
     global engine, SessionLocal
 

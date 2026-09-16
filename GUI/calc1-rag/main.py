@@ -18,7 +18,9 @@ load_dotenv()
 from database import (
     db_lifespan,
     ensure_interactions_table,
+    ensure_quiz_attempts_table,
     log_interaction,
+    log_quiz_attempt,
     query_similar_chunks,
     query_similar_chunks_by_keywords,
     select_all_keywords,
@@ -69,6 +71,22 @@ def load_topics() -> list[dict[str, Any]]:
     return topics
 
 
+def _parse_quiz_json(raw_response: str) -> dict[str, Any]:
+    """Parse structured quiz JSON, tolerating harmless Markdown fences."""
+    cleaned = raw_response.strip()
+
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, count=1, flags=re.IGNORECASE)
+        cleaned = re.sub(r"\s*```$", "", cleaned, count=1)
+
+    quiz_data = json.loads(cleaned)
+
+    if not isinstance(quiz_data, dict):
+        raise ValueError("Quiz response is not a JSON object.")
+
+    return quiz_data
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global KEYWORDS, TOPICS
@@ -85,6 +103,7 @@ async def lifespan(app: FastAPI):
 
     with db_lifespan():
         ensure_interactions_table()
+        ensure_quiz_attempts_table()
         KEYWORDS = select_all_keywords()
         yield
 
@@ -983,12 +1002,30 @@ MATH 1210 does NOT cover trigonometric functions.
         print("Quiz generation complete.")
 
         try:
-            quiz_data = json.loads(raw_response)
-        except json.JSONDecodeError as exc:
-            raise HTTPException(
-                status_code=502,
-                detail="The quiz-generation model returned invalid structured output.",
-            ) from exc
+            quiz_data = _parse_quiz_json(raw_response)
+        except (json.JSONDecodeError, ValueError):
+            print(
+                "WARNING: Invalid quiz JSON on first attempt: "
+                f"{raw_response[:2000]!r}"
+            )
+            print("Retrying quiz generation once...")
+
+            raw_response = generate_gemini_response(
+                prompt_text,
+                response_schema=quiz_schema,
+            )
+
+            try:
+                quiz_data = _parse_quiz_json(raw_response)
+            except (json.JSONDecodeError, ValueError) as exc:
+                print(
+                    "ERROR: Invalid quiz JSON after retry: "
+                    f"{raw_response[:2000]!r}"
+                )
+                raise HTTPException(
+                    status_code=502,
+                    detail="The quiz-generation model returned invalid structured output.",
+                ) from exc
 
         if not isinstance(quiz_data, dict):
             raise HTTPException(
@@ -1323,6 +1360,7 @@ async def health():
 
 class CheckAnswerRequest(BaseModel):
     subject: str
+    session_id: str = Field(min_length=36, max_length=36)
     question: str = Field(min_length=1, max_length=5000)
     student_answer: str = Field(min_length=1, max_length=1)
     correct_answer: str = Field(min_length=1, max_length=1)
@@ -1360,10 +1398,25 @@ def check_answer(request: CheckAnswerRequest) -> dict[str, Any]:
     correct = student_answer == correct_answer
 
     if correct:
+        feedback = "Correct!"
+        solution = None
+
+        log_quiz_attempt(
+            attempt_id=str(uuid.uuid4()),
+            session_id=request.session_id,
+            subject=request.subject,
+            question=request.question,
+            student_answer=student_answer,
+            correct_answer=correct_answer,
+            attempt=request.attempt,
+            correct=True,
+            feedback_shown=feedback,
+        )
+
         return {
             "correct": True,
-            "feedback": "Correct!",
-            "solution": None,
+            "feedback": feedback,
+            "solution": solution,
             "attempt": request.attempt,
             "attempts_remaining": 0,
         }
@@ -1377,6 +1430,18 @@ def check_answer(request: CheckAnswerRequest) -> dict[str, Any]:
     else:
         feedback = "Let's work through it."
         solution = request.solution or "Review the question and the answer choices carefully."
+
+    log_quiz_attempt(
+        attempt_id=str(uuid.uuid4()),
+        session_id=request.session_id,
+        subject=request.subject,
+        question=request.question,
+        student_answer=student_answer,
+        correct_answer=correct_answer,
+        attempt=request.attempt,
+        correct=False,
+        feedback_shown=feedback,
+    )
 
     return {
         "correct": False,

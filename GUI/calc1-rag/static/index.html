@@ -1525,6 +1525,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               subject,
+              session_id: sessionId,
               question: quiz.question,
               student_answer: selectedAnswer,
               correct_answer: quiz.correct_answer,
