@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.*
+__pycache__
+*.pyc
+*.pyo
+*.backup
+*.backup2
+*.pre_*
+.venv
+venv
+supabase/
+mathbot.sql
+requirements.txt
+.DS_Store
