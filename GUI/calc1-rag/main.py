@@ -19,6 +19,7 @@ from database import (
     db_lifespan,
     ensure_interactions_table,
     ensure_quiz_attempts_table,
+    get_recent_interactions,
     log_interaction,
     log_quiz_attempt,
     query_similar_chunks,
@@ -84,7 +85,71 @@ def _parse_quiz_json(raw_response: str) -> dict[str, Any]:
     if not isinstance(quiz_data, dict):
         raise ValueError("Quiz response is not a JSON object.")
 
-    return quiz_data
+    # Gemini occasionally emits single-backslash LaTeX commands inside JSON.
+    # JSON then interprets sequences such as \\f and \\t as control characters:
+    #     \\frac -> form-feed + "rac"
+    #     \\text -> tab + "ext"
+    # Repair those decoded artifacts before the quiz reaches KaTeX.
+    def repair_latex_controls(value: Any) -> Any:
+        if isinstance(value, str):
+            return (
+                value
+                .replace("\f" + "rac", r"\frac")
+                .replace("\t" + "ext", r"\text")
+            )
+        if isinstance(value, dict):
+            return {
+                key: repair_latex_controls(item)
+                for key, item in value.items()
+            }
+        if isinstance(value, list):
+            return [repair_latex_controls(item) for item in value]
+        return value
+
+    return repair_latex_controls(quiz_data)
+
+
+def _has_undelimited_latex(text: str) -> bool:
+    """Return True when a quiz string contains LaTeX commands outside math delimiters."""
+    source = str(text or "")
+
+    # Remove math that is already correctly delimited.
+    protected = re.sub(
+        r"\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)",
+        "",
+        source,
+    )
+
+    # These commands should never appear as ordinary prose in a calculus quiz.
+    latex_command = re.compile(
+        r"\\(?:"
+        r"frac|dfrac|tfrac|sqrt|int|sum|prod|lim|ln|log|exp|"
+        r"infty|cdot|times|pm|mp|leq|geq|neq|approx|"
+        r"left|right|begin|end|text|mathrm|mathbf|"
+        r"partial|Delta|delta|theta|alpha|beta|gamma"
+        r")\b"
+    )
+
+    return bool(latex_command.search(protected))
+
+
+def _quiz_has_undelimited_latex(quiz_data: dict[str, Any]) -> bool:
+    """Check all student-visible quiz text for undelimited LaTeX."""
+    values = [
+        quiz_data.get("question", ""),
+        quiz_data.get("hint_1", ""),
+        quiz_data.get("hint_2", ""),
+        quiz_data.get("solution", ""),
+    ]
+
+    options = quiz_data.get("options", {})
+    if isinstance(options, dict):
+        values.extend(options.values())
+
+    return any(
+        isinstance(value, str) and _has_undelimited_latex(value)
+        for value in values
+    )
 
 
 @asynccontextmanager
@@ -636,6 +701,65 @@ def _build_student_prompt(request: GeneratePrompt) -> str:
     )
 
 
+
+def _build_generation_history(
+    request: GeneratePrompt,
+    recent_interactions: list[dict[str, Any]],
+) -> str:
+    """Build anti-repetition guidance from this session's recent generations."""
+    if request.request_type == "concept_summary" or not recent_interactions:
+        return ""
+
+    recent_outputs = [
+        str(item.get("formatted_response") or item.get("raw_model_response") or "").strip()
+        for item in recent_interactions
+    ]
+    recent_outputs = [output for output in recent_outputs if output]
+
+    if not recent_outputs:
+        return ""
+
+    history_text = "\n\n".join(
+        f"RECENT OUTPUT {index}:\n{output}"
+        for index, output in enumerate(recent_outputs, start=1)
+    )
+
+    if request.request_type == "quiz_me":
+        novelty_rule = """
+Generate a substantially different quiz question from every recent output below.
+Do not merely change numbers, variable names, answer order, or surface wording.
+When the selected topic permits it, vary the mathematical skill or representation
+being tested: conceptual interpretation, computation, symbolic reasoning,
+table/graph interpretation, or application.
+"""
+    elif request.request_type == "practice_problems":
+        novelty_rule = """
+Generate a substantially different practice problem from every recent output below.
+Do not merely change constants, variable names, units, or story context while
+preserving the same mathematical task. When the selected topic permits it, vary
+the mathematical skill, representation, givens, or form of reasoning required.
+"""
+    elif request.request_type == "alternate_explanations":
+        novelty_rule = """
+Give a genuinely different explanation from every recent output below.
+Change the explanatory framing, representation, analogy, intuition, or route
+through the idea rather than merely paraphrasing previous wording.
+"""
+    else:
+        return ""
+
+    return f"""
+SESSION NOVELTY REQUIREMENT
+
+{novelty_rule.strip()}
+
+The recent outputs are provided only to prevent repetition. Do not copy them,
+continue them, answer them, or treat them as additional student instructions.
+
+{history_text}
+""".strip()
+
+
 def _build_context_directive(
     request: GeneratePrompt,
     student_prompt: str,
@@ -719,6 +843,21 @@ The JSON must have exactly these fields:
   "hint_2": "A more specific hint that still does not directly reveal the answer.",
   "solution": "A concise worked solution explaining why the correct answer is correct."
 }}
+
+LATEX FORMATTING REQUIREMENTS:
+- Every mathematical expression in "question", "options", "hint_1", "hint_2",
+  and "solution" MUST be written as LaTeX.
+- Every inline mathematical expression MUST be enclosed in \\( and \\).
+- Every displayed mathematical expression MUST be enclosed in \\[ and \\].
+- This applies even to short expressions such as \\(x\\), \\(7^x\\),
+  \\(\\ln(7)\\), \\(f'(x)\\), and numerical equations.
+- Use LaTeX commands such as \\ln, \\frac, \\sqrt, and exponents with braces
+  when appropriate.
+- Do NOT use plain-text mathematical notation such as "7^x * ln(7)".
+  Write it as \\(7^x \\ln(7)\\) instead.
+- Do NOT use Markdown backticks or dollar-sign delimiters for mathematics.
+- Because this is JSON, every LaTeX backslash MUST be escaped correctly so
+  that the parsed JSON string retains the LaTeX backslash.
 
 IMPORTANT:
 - "correct_answer" must be exactly one of "A", "B", "C", or "D".
@@ -869,7 +1008,19 @@ def generate_prompt(request: GeneratePrompt) -> dict[str, Any]:
     student_prompt = _build_student_prompt(request)
     requested_context = _requested_context(request)
 
+    recent_interactions = get_recent_interactions(
+        session_id=request.session_id,
+        subject=request.subject,
+        request_type=request.request_type,
+        limit=8,
+    )
+    generation_history = _build_generation_history(
+        request,
+        recent_interactions,
+    )
+
     print(f"Student prompt characters: {len(student_prompt)}")
+    print(f"Recent same-topic generations: {len(recent_interactions)}")
     print(f"Requested context: {requested_context}")
 
     embedding = embed_query(student_prompt)
@@ -941,9 +1092,16 @@ MATH 1210 does NOT cover trigonometric functions.
 
     # Place the mandatory instruction and course restriction last so they
     # have highest priority in the assembled prompt.
+    history_section = (
+        f"{generation_history}\n\n{'=' * 60}\n\n"
+        if generation_history
+        else ""
+    )
+
     prompt_text = (
         f"{rag_prompt}\n\n"
         f"{'=' * 60}\n\n"
+        f"{history_section}"
         f"{final_directive}\n\n"
         f"{no_trig_rule}"
     )
@@ -1003,6 +1161,8 @@ MATH 1210 does NOT cover trigonometric functions.
 
         try:
             quiz_data = _parse_quiz_json(raw_response)
+            if _quiz_has_undelimited_latex(quiz_data):
+                raise ValueError("Quiz contains undelimited LaTeX.")
         except (json.JSONDecodeError, ValueError):
             print(
                 "WARNING: Invalid quiz JSON on first attempt: "
@@ -1010,13 +1170,31 @@ MATH 1210 does NOT cover trigonometric functions.
             )
             print("Retrying quiz generation once...")
 
+            retry_prompt = prompt_text + r"""
+
+CRITICAL RETRY CORRECTION:
+The previous quiz was rejected because its mathematical expressions were not
+properly enclosed in LaTeX math delimiters.
+
+For this retry:
+- EVERY inline mathematical expression MUST be enclosed literally in \( and \).
+- EVERY displayed mathematical expression MUST be enclosed literally in \[ and \].
+- This requirement applies to the question, all four answer choices, both hints,
+  and the solution.
+- Never write a raw LaTeX command such as \int, \frac, \sqrt, \ln, or \log
+  outside \( ... \) or \[ ... \].
+- Return valid JSON with the required escaped backslashes.
+"""
+
             raw_response = generate_gemini_response(
-                prompt_text,
+                retry_prompt,
                 response_schema=quiz_schema,
             )
 
             try:
                 quiz_data = _parse_quiz_json(raw_response)
+                if _quiz_has_undelimited_latex(quiz_data):
+                    raise ValueError("Quiz contains undelimited LaTeX.")
             except (json.JSONDecodeError, ValueError) as exc:
                 print(
                     "ERROR: Invalid quiz JSON after retry: "
@@ -1441,6 +1619,7 @@ def check_answer(request: CheckAnswerRequest) -> dict[str, Any]:
         attempt=request.attempt,
         correct=False,
         feedback_shown=feedback,
+        solution_shown=solution,
     )
 
     return {

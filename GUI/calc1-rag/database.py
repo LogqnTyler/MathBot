@@ -385,6 +385,68 @@ def log_interaction(
 
 
 
+def get_recent_quiz_responses(
+    *,
+    session_id: str,
+    subject: str,
+    limit: int = 8,
+) -> list[str]:
+    """Return recent raw Quiz Me responses for this session and topic."""
+    stmt = sa.text("""
+        SELECT raw_model_response
+        FROM mathbot_interactions
+        WHERE session_id = CAST(:session_id AS UUID)
+          AND subject = :subject
+          AND request_type = 'quiz_me'
+        ORDER BY created_at DESC
+        LIMIT :limit
+    """)
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(
+            stmt,
+            {
+                "session_id": session_id,
+                "subject": subject,
+                "limit": limit,
+            },
+        ).scalars().all()
+
+    return list(rows)
+
+
+def get_recent_interactions(
+    *,
+    session_id: str,
+    subject: str,
+    request_type: str,
+    limit: int = 8,
+) -> list[dict[str, Any]]:
+    """Return recent generations of one type for this session and topic."""
+    stmt = sa.text("""
+        SELECT id, created_at, raw_model_response, formatted_response
+        FROM mathbot_interactions
+        WHERE session_id = CAST(:session_id AS UUID)
+          AND subject = :subject
+          AND request_type = :request_type
+        ORDER BY created_at DESC
+        LIMIT :limit
+    """)
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(
+            stmt,
+            {
+                "session_id": session_id,
+                "subject": subject,
+                "request_type": request_type,
+                "limit": limit,
+            },
+        ).mappings().all()
+
+    return [dict(row) for row in rows]
+
+
 def ensure_quiz_attempts_table() -> None:
     """Create the pseudonymous quiz-attempt research log if needed."""
     stmt = sa.text("""
@@ -420,6 +482,7 @@ def log_quiz_attempt(
     attempt: int,
     correct: bool,
     feedback_shown: str | None,
+    solution_shown: str | None = None,
 ) -> None:
     """Store one student's answer attempt on a generated quiz question."""
     stmt = sa.text("""
@@ -432,7 +495,8 @@ def log_quiz_attempt(
             correct_answer,
             attempt,
             correct,
-            feedback_shown
+            feedback_shown,
+            solution_shown
         )
         VALUES (
             CAST(:attempt_id AS UUID),
@@ -443,7 +507,8 @@ def log_quiz_attempt(
             :correct_answer,
             :attempt,
             :correct,
-            :feedback_shown
+            :feedback_shown,
+            :solution_shown
         )
     """)
 
@@ -460,6 +525,7 @@ def log_quiz_attempt(
                 "attempt": attempt,
                 "correct": correct,
                 "feedback_shown": feedback_shown,
+                "solution_shown": solution_shown,
             },
         )
 

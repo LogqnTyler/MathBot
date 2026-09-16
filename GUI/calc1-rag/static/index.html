@@ -1067,6 +1067,14 @@
       const question = originalQuestion.trim();
       if (!question) return;
 
+      // Free-form chat becomes the active workspace.
+      // Remove previous conversation/task cards but preserve the persistent input.
+      chatWindow.querySelectorAll('.message').forEach(el => el.remove());
+
+      // Remove sources belonging to the previous task/response.
+      sourcesList.innerHTML = '';
+      chunkCount.textContent = '0 chunks';
+
       appendMessage('user', question);
       input.value = '';
       input.style.height = '95px';
