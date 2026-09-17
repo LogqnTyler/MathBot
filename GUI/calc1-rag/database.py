@@ -452,6 +452,7 @@ def ensure_quiz_attempts_table() -> None:
     stmt = sa.text("""
         CREATE TABLE IF NOT EXISTS mathbot_quiz_attempts (
             id UUID PRIMARY KEY,
+            interaction_id UUID,
             session_id UUID NOT NULL,
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
@@ -463,7 +464,8 @@ def ensure_quiz_attempts_table() -> None:
             attempt INTEGER NOT NULL CHECK (attempt BETWEEN 1 AND 3),
             correct BOOLEAN NOT NULL,
 
-            feedback_shown TEXT
+            feedback_shown TEXT,
+            solution_shown TEXT
         )
     """)
 
@@ -474,6 +476,7 @@ def ensure_quiz_attempts_table() -> None:
 def log_quiz_attempt(
     *,
     attempt_id: str,
+    interaction_id: str,
     session_id: str,
     subject: str,
     question: str,
@@ -488,6 +491,7 @@ def log_quiz_attempt(
     stmt = sa.text("""
         INSERT INTO mathbot_quiz_attempts (
             id,
+            interaction_id,
             session_id,
             subject,
             question,
@@ -500,6 +504,7 @@ def log_quiz_attempt(
         )
         VALUES (
             CAST(:attempt_id AS UUID),
+            CAST(:interaction_id AS UUID),
             CAST(:session_id AS UUID),
             :subject,
             :question,
@@ -517,6 +522,7 @@ def log_quiz_attempt(
             stmt,
             {
                 "attempt_id": attempt_id,
+                "interaction_id": interaction_id,
                 "session_id": session_id,
                 "subject": subject,
                 "question": question,

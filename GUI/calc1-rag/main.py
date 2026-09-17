@@ -1538,6 +1538,7 @@ async def health():
 
 class CheckAnswerRequest(BaseModel):
     subject: str
+    interaction_id: str = Field(min_length=36, max_length=36)
     session_id: str = Field(min_length=36, max_length=36)
     question: str = Field(min_length=1, max_length=5000)
     student_answer: str = Field(min_length=1, max_length=1)
@@ -1581,6 +1582,7 @@ def check_answer(request: CheckAnswerRequest) -> dict[str, Any]:
 
         log_quiz_attempt(
             attempt_id=str(uuid.uuid4()),
+            interaction_id=request.interaction_id,
             session_id=request.session_id,
             subject=request.subject,
             question=request.question,
@@ -1611,6 +1613,7 @@ def check_answer(request: CheckAnswerRequest) -> dict[str, Any]:
 
     log_quiz_attempt(
         attempt_id=str(uuid.uuid4()),
+        interaction_id=request.interaction_id,
         session_id=request.session_id,
         subject=request.subject,
         question=request.question,
