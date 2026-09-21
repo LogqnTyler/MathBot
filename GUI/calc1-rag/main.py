@@ -20,6 +20,7 @@ from database import (
     ensure_interactions_table,
     ensure_quiz_attempts_table,
     get_recent_interactions,
+    get_recent_session_context,
     log_interaction,
     log_quiz_attempt,
     query_similar_chunks,
@@ -1374,6 +1375,15 @@ def ask_mathbot(request: FreeformQuestion) -> dict[str, Any]:
     # Preserve exactly what arrived from the browser.
     original_prompt = request.question
 
+    # Retrieve a small amount of short-term conversation history for this
+    # browser session. This is kept separate from RAG retrieval so that the
+    # current student question alone determines which course material is
+    # retrieved.
+    recent_context = get_recent_session_context(
+        session_id=request.session_id,
+        limit=3,
+    )
+
     # Use the exact question for semantic retrieval.
     embedding = embed_query(original_prompt)
 
@@ -1408,6 +1418,32 @@ def ask_mathbot(request: FreeformQuestion) -> dict[str, Any]:
         extra_contents=extra_contents,
         definitions=definitions,
     )
+
+    if recent_context:
+        history_parts = [
+            "RECENT CONVERSATION CONTEXT:",
+            "Use this only to understand conversational references in the "
+            "student's current message, such as 'that', 'another one', "
+            "'what next?', or follow-up questions.",
+            "Do not answer an earlier message instead of the current one.",
+            "",
+        ]
+
+        for item in recent_context:
+            history_parts.append(
+                f"Student: {item.get('original_prompt') or ''}"
+            )
+            history_parts.append(
+                f"MathBot: {item.get('formatted_response') or ''}"
+            )
+            history_parts.append("")
+
+        conversation_context = "\n".join(history_parts).strip()
+    else:
+        conversation_context = (
+            "RECENT CONVERSATION CONTEXT:\n"
+            "No previous interaction is available for this session."
+        )
 
     final_directive = f"""
 MANDATORY FINAL TASK — DIRECT QUESTION MODE
@@ -1444,6 +1480,8 @@ MathBot's course does NOT cover trigonometric functions.
 
     prompt_text = (
         f"{rag_prompt}\n\n"
+        f"{'=' * 60}\n\n"
+        f"{conversation_context}\n\n"
         f"{'=' * 60}\n\n"
         f"{final_directive}\n\n"
         f"{no_trig_rule}"

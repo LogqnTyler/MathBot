@@ -447,6 +447,40 @@ def get_recent_interactions(
     return [dict(row) for row in rows]
 
 
+def get_recent_session_context(
+    *,
+    session_id: str,
+    limit: int = 3,
+) -> list[dict[str, Any]]:
+    """Return recent interactions for short-term conversational context."""
+    stmt = sa.text("""
+        SELECT
+            id,
+            created_at,
+            subject,
+            request_type,
+            original_prompt,
+            formatted_response
+        FROM mathbot_interactions
+        WHERE session_id = CAST(:session_id AS UUID)
+        ORDER BY created_at DESC
+        LIMIT :limit
+    """)
+
+    with get_engine().connect() as conn:
+        rows = conn.execute(
+            stmt,
+            {
+                "session_id": session_id,
+                "limit": limit,
+            },
+        ).mappings().all()
+
+    # The database query returns newest first, but conversational context
+    # should be presented to the model from oldest to newest.
+    return [dict(row) for row in reversed(rows)]
+
+
 def ensure_quiz_attempts_table() -> None:
     """Create the pseudonymous quiz-attempt research log if needed."""
     stmt = sa.text("""
